@@ -1,0 +1,11 @@
+{
+	"name": "dojo1-typings",
+	"version": "1.10.0",
+	"description": "A set of Dojo 1 Typings for TypeScript",
+	"license": "BSD-3-Clause",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/SitePen/dojo1-typings"
+	},
+	"homepage": "https://www.sitepne.com/"
+}

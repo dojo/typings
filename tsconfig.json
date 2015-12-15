@@ -1,0 +1,14 @@
+{
+	"version": "1.7.3",
+	"compilerOptions": {
+		"declaration": false,
+		"module": "umd",
+		"noImplicitAny": true,
+		"removeComments": false,
+		"target": "ES5"
+	},
+	"files": [
+		"./dojo/1.10/index.d.ts",
+		"./dojo/1.10/modules.d.ts"
+	]
+}
