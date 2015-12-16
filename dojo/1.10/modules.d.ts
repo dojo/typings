@@ -10,6 +10,11 @@ declare module 'dojo/_base/Color' {
 	export = Color;
 }
 
+declare module 'dojo/_base/config' {
+	const config: dojo._base.Config;
+	export = config;
+}
+
 declare module 'dojo/_base/declare' {
 	const dojoDeclare: dojo._base.Declare;
 	export = dojoDeclare;
