@@ -52,6 +52,114 @@ declare namespace dojo {
 			clearCache(): void;
 		}
 
+		/* dojo/_base/Color */
+		type ColorValue = [ number, number, number ];
+		type ColorValueAlpha = [number, number, number, number];
+
+		interface ColorObject {
+			r: number;
+			g: number;
+			b: number;
+			a?: number;
+		}
+
+		interface Color {
+			named: {
+				'black': ColorValue;
+				'silver': ColorValue;
+				'gray': ColorValue,
+				'white': ColorValue,
+				'maroon': ColorValue,
+				'red': ColorValue,
+				'purple': ColorValue,
+				'fuchsia': ColorValue,
+				'green': ColorValue,
+				'lime': ColorValue,
+				'olive': ColorValue,
+				'yellow': ColorValue,
+				'navy': ColorValue,
+				'blue':	ColorValue,
+				'teal': ColorValue,
+				'aqua': ColorValue,
+				'transparent': [ number, number, number, number ];
+			};
+			r: number;
+			g: number;
+			b: number;
+			a: number;
+			_set(r: number, g: number, b: number, a: number): void;
+
+			/** Takes a named string, hex string, array of rgb or rgba values,
+			 * an object with r, g, b, and a properties, or another `Color` object
+			 * and sets this color instance to that value.
+			 */
+			setColor(color: ColorValue | ColorValueAlpha | ColorObject | string): Color;
+
+			/**
+			 * Ensures the object has correct attributes
+			 */
+			sanatize(): Color;
+
+			/**
+			 * Returns 3 component array of rgb values
+			 */
+			toRgb(): ColorValue;
+
+			/**
+			 * Returns a 4 component array of rgba values from the color represented by
+			 * this object.
+			 */
+			toRgba(): ColorValueAlpha;
+
+			/**
+			 * Returns a CSS color string in hexadecimal representation
+			 */
+			toHex(): string;
+
+			/**
+			 * Returns a css color string in rgb(a) representation
+			 */
+			toCss(includeAlpha?: boolean): string;
+
+			/**
+			 * Returns a visual representation of the color
+			 */
+			toString(): string;
+
+			/**
+			 * Blend colors end and start with weight from 0 to 1, 0.5 being a 50/50 blend,
+			 * can reuse a previously allocated Color object for the result
+			 */
+			blendColors(start: Color, end: Color, weight: number, obj?: Color): Color;
+
+			/**
+			 * Returns a `Color` instance from a string of the form
+			 * "rgb(...)" or "rgba(...)". Optionally accepts a `Color`
+			 * object to update with the parsed value and return instead of
+			 * creating a new object.
+			 */
+			fromRgb(color: string, obj?: Color): Color;
+
+			/**
+			 * Converts a hex string with a '#' prefix to a color object.
+			 * Supports 12-bit #rgb shorthand. Optionally accepts a
+			 * `Color` object to update with the parsed value.
+			 */
+			fromHex(color: string, obj?: Color): Color;
+
+			/**
+			 * Builds a `Color` from a 3 or 4 element array, mapping each
+			 * element in sequence to the rgb(a) values of the color.
+			 */
+			fromArray(color: ColorValue | ColorValueAlpha, obj?: Color): Color;
+
+			/**
+			 * Parses `str` for a color value. Accepts hex, rgb, and rgba
+			 * style color values.
+			 */
+			fromString(str: string, obj?: Color): Color;
+		}
+
 		/* dojo/_base/declare */
 
 		/**
