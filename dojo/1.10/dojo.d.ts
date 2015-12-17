@@ -1,20 +1,8 @@
 /// <reference path="index.d.ts" />
 
 declare namespace dojo {
-	export interface Deferred<T> {
-		new <U>(canceler?: Function): Deferred<U>;
-		<U>(canceler?: Function): Deferred<U>;
-		promse: promise.Promise<T>;
-		isResolved(): boolean;
-		isRejected(): boolean;
-		isFulfilled(): boolean;
-		isCanceled(): boolean;
-		progress(update: any, strict?: boolean): promise.Promise<T>;
-		resolve(value: any, strict?: boolean): promise.Promise<T>;
-		reject(error: any, strict?: boolean): promise.Promise<T>;
-		then<U>(callback?: promise.PromiseCallback<T>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
-		cancel(reason: any, strict?: boolean): any;
-	}
+
+	/* general implied types */
 
 	export interface GenericConstructor<T> {
 		new (...args: any[]): T;
@@ -24,6 +12,68 @@ declare namespace dojo {
 		remove(): void;
 	}
 
+	/* dojo/Deferred */
+
+	/**
+	 * Creates a new deferred. This API is preferred over
+	 * `dojo/_base/Deferred`.
+	 */
+	export interface Deferred<T> {
+		new <U>(canceler?: Function): Deferred<U>;
+		<U>(canceler?: Function): Deferred<U>;
+
+		/**
+		 * The public promise object that clients can add callbacks to.
+		 */
+		promise: promise.Promise<T>;
+
+		/**
+		 * Checks whether the deferred has been resolved.
+		 */
+		isResolved(): boolean;
+
+		/**
+		 * Checks whether the deferred has been rejected.
+		 */
+		isRejected(): boolean;
+
+		/**
+		 * Checks whether the deferred has been resolved or rejected.
+		 */
+		isFulfilled(): boolean;
+
+		/**
+		 * Checks whether the deferred has been canceled.
+		 */
+		isCanceled(): boolean;
+
+		/**
+		 * Emit a progress update on the deferred.
+		 */
+		progress(update: any, strict?: boolean): promise.Promise<T>;
+
+		/**
+		 * Resolve the deferred.
+		 */
+		resolve(value: any, strict?: boolean): promise.Promise<T>;
+
+		/**
+		 * Reject the deferred.
+		 */
+		reject(error: any, strict?: boolean): promise.Promise<T>;
+
+		/**
+		 * Add new callbacks to the deferred.
+		 */
+		then<U>(callback?: promise.PromiseCallback<T>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
+
+		/**
+		 * Inform the deferred it may cancel its asynchronous operation.
+		 */
+		cancel(reason: any, strict?: boolean): any;
+	}
+
+	/* dojo/Stateful */
 	export interface WatchHandle extends Handle {
 		unwatch(): void;
 	}
