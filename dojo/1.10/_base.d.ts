@@ -280,6 +280,11 @@ declare namespace dojo {
 			deps: () => string[] | string[];
 
 			/**
+			 * Defines the cached has API variables
+			 */
+			hasCache: { [feature: string]: any };
+
+			/**
 			 * Defines a callback to be used when dependencies are defined before
 			 * the loader has been loaded. When provided, they cause the loader to
 			 * execute require(deps, callback) once it has finished loading.
