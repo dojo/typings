@@ -359,18 +359,46 @@ declare namespace dojo {
 
 		/* dojo/_base/declare */
 
+		interface DeclareConstructor<T> {
+			new (...args: any[]): T;
+
+			/**
+			 * Adds all properties and methods of source to constructor's
+			 * prototype, making them available to all instances created with
+			 * constructor. This method is specific to constructors created with
+			 * declare().
+			 */
+			extend<U>(source: U): DeclareConstructor<T & U>;
+
+			/**
+			 * Create a subclass of the declared class from a list of base classes.
+			 */
+			createSubclass<U, V, X>(mixins: [DeclareConstructor<U>, DeclareConstructor<V>], props: X): DeclareConstructor<T & U & V & X>;
+			createSubclass<U, V>(mixins: [DeclareConstructor<U>], props: V): DeclareConstructor<T & U & V>;
+			createSubclass<U, V>(mixins: DeclareConstructor<U>, props: V): DeclareConstructor<T & U & V>;
+			createSubclass<U>(mixins: [DeclareConstructor<U>]): DeclareConstructor<T & U>;
+			createSubclass<U>(mixins: DeclareConstructor<U>): DeclareConstructor<T & U>;
+			createSubclass<U>(mixins: any, props: U): DeclareConstructor<T & U>;
+		}
+
 		/**
 		 * Create a feature-rich constructor from compact notation.
 		 */
 		interface Declare {
-			<A, B, C>(className: string, superClass: [dojo.GenericConstructor<A>, dojo.GenericConstructor<B>], props: C): dojo.GenericConstructor<A & B & C>;
-			<A, B, C>(superClass: [dojo.GenericConstructor<A>, dojo.GenericConstructor<B>], props: C): dojo.GenericConstructor<A & B & C>;
-			<A, B>(className: string, superClass: dojo.GenericConstructor<A>, props: B): dojo.GenericConstructor<A & B>;
-			<A, B>(superClass: dojo.GenericConstructor<A>, props: B): dojo.GenericConstructor<A & B>;
-			<A>(className: string, superClass: dojo.GenericConstructor<any> | dojo.GenericConstructor<any>[], props: any): dojo.GenericConstructor<A>;
-			<A>(superClass: dojo.GenericConstructor<any> | dojo.GenericConstructor<any>[], props: any): dojo.GenericConstructor<A>;
-			(className: string, superClass: any[], props: any): dojo.GenericConstructor<any>;
-			(superClass: any[], props: any): dojo.GenericConstructor<any>;
+			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
+			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
+			<A, B>(className: string, superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
+			<A, B>(superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
+			<A>(className: string, superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: any): DeclareConstructor<A>;
+			<A>(superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: any): DeclareConstructor<A>;
+			(className: string, superClass: any[], props: any): DeclareConstructor<any>;
+			(superClass: any[], props: any): DeclareConstructor<any>;
+
+			/**
+			 * Mix in properties skipping a constructor and decorating functions
+			 * like it is done by declare().
+			 */
+			safeMixin<A, B>(target: A, source: B): A & B;
 		}
 	}
 }
