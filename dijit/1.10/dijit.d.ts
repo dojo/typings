@@ -1,10 +1,12 @@
+/// <reference path="../../dojo/1.10/index.d.ts" />
+
 declare namespace dijit {
 	/* dijit/a11yclick */
 	export interface A11yClick {
 		(node: HTMLElement, listener: Function): dojo.Handle;
-		press: dojo.SyntheticEvent;
-		release: dojo.SyntheticEvent;
-		move: dojo.SyntheticEvent;
+		press: dojo.ExtensionEvent;
+		release: dojo.ExtensionEvent;
+		move: dojo.ExtensionEvent;
 	}
 
 	/* dijit/Destroyable */
@@ -14,6 +16,7 @@ declare namespace dijit {
 	}
 
 	/* dijit/Dialog */
+	/* tslint:disable:class-name */
 	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStatefulMixin {
 		templateString: string;
 		baseClass: string;
@@ -132,7 +135,7 @@ declare namespace dijit {
 		onMouseEnter(event: DocumentEvent): void;
 		onMouseUp(event: DocumentEvent): void;
 		postCreate(): void;
-		on(type: string|dojo.SyntheticEvent, func: Function): dojo.WatchHandle;
+		on(type: string|dojo.ExtensionEvent, func: Function): dojo.WatchHandle;
 		setAttribute(attr: string, value: any): void;
 		attr(name: string|{ [attr: string]: any }, value?: any): any;
 		getDescendants(): _Widget[];

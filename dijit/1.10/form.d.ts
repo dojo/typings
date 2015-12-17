@@ -6,6 +6,7 @@ declare namespace dijit {
 			(isValid?: boolean): void;
 		}
 
+		/* tslint:disable:class-name */
 		export interface _FormMixin {
 			state: string;
 			reset(): void;
