@@ -53,7 +53,7 @@ declare namespace dojo {
 		}
 
 		/* dojo/_base/Color */
-		type ColorValue = [ number, number, number ];
+		type ColorValue = [number, number, number];
 		type ColorValueAlpha = [number, number, number, number];
 
 		interface ColorObject {
@@ -78,10 +78,10 @@ declare namespace dojo {
 				'olive': ColorValue,
 				'yellow': ColorValue,
 				'navy': ColorValue,
-				'blue':	ColorValue,
+				'blue': ColorValue,
 				'teal': ColorValue,
 				'aqua': ColorValue,
-				'transparent': [ number, number, number, number ];
+				'transparent': [number, number, number, number];
 			};
 			r: number;
 			g: number;
@@ -223,7 +223,7 @@ declare namespace dojo {
 			 * function reference use
 			 * `djConfig.addOnLoad = [myObject, function(){}];`
 			 */
-			addOnLoad: () => void | [ any, string ];
+			addOnLoad: () => void | [any, string];
 
 			/**
 			 * Run the parser after the page is loaded
@@ -307,18 +307,68 @@ declare namespace dojo {
 			useDeferredInstrumentation: string | boolean | number;
 		}
 
+		/* dojo/_base/connect */
+
+		interface Connect {
+			/**
+			 * TODO: Type this better
+			 */
+			_keypress(object: any, listener: EventListener): Handle;
+
+			/**
+			 * `dojo.connect` is a deprecated event handling and delegation method in
+			 * Dojo. It allows one function to "listen in" on the execution of
+			 * any other, triggering the second whenever the first is called. Many
+			 * listeners may be attached to a function, and source functions may
+			 * be either regular function calls or DOM events.
+			 */
+			connect(obj: any, event: string, context: any, method: EventListener | string, dontFix?: boolean): Handle;
+			connect(event: string, context: any, method: EventListener | string, dontFix?: boolean): Handle;
+
+			/**
+			 * Remove a link created by dojo.connect.
+			 */
+			disconnect(handle: Handle): void;
+
+			/**
+			 * Attach a listener to a named topic. The listener function is invoked whenever the
+			 * named topic is published (see: dojo.publish).
+			 * Returns a handle which is needed to unsubscribe this listener.
+			 */
+			subscribe(topic: string, context: any, method: EventListener): Handle;
+
+			/**
+			 * Invoke all listener method subscribed to topic.
+			 */
+			publish(topic: string, args: any[]): boolean;
+
+			/**
+			 * Ensure that every time obj.event() is called, a message is published
+			 * on the topic. Returns a handle which can be passed to
+			 * dojo.disconnect() to disable subsequent automatic publication on
+			 * the topic.
+			 */
+			connectPublisher(topic: string, obj: any, method: string): Handle;
+			connectPublisher(topic: string, method: EventListener): Handle;
+
+			/**
+			 * Checks an event for the copy key (meta on Mac, and ctrl anywhere else)
+			 */
+			isCopyKey(e: Event): boolean;
+		}
+
 		/* dojo/_base/declare */
 
 		/**
 		 * Create a feature-rich constructor from compact notation.
 		 */
 		interface Declare {
-			<A, B, C>(className: string, superClass: [ dojo.GenericConstructor<A>, dojo.GenericConstructor<B> ], props: C): dojo.GenericConstructor<A&B&C>;
-			<A, B, C>(superClass: [ dojo.GenericConstructor<A>, dojo.GenericConstructor<B> ], props: C): dojo.GenericConstructor<A&B&C>;
-			<A, B>(className: string, superClass: dojo.GenericConstructor<A>, props: B): dojo.GenericConstructor<A&B>;
-			<A, B>(superClass: dojo.GenericConstructor<A>, props: B): dojo.GenericConstructor<A&B>;
-			<A>(className: string, superClass: dojo.GenericConstructor<any>|dojo.GenericConstructor<any>[], props: any): dojo.GenericConstructor<A>;
-			<A>(superClass: dojo.GenericConstructor<any>|dojo.GenericConstructor<any>[], props: any): dojo.GenericConstructor<A>;
+			<A, B, C>(className: string, superClass: [dojo.GenericConstructor<A>, dojo.GenericConstructor<B>], props: C): dojo.GenericConstructor<A & B & C>;
+			<A, B, C>(superClass: [dojo.GenericConstructor<A>, dojo.GenericConstructor<B>], props: C): dojo.GenericConstructor<A & B & C>;
+			<A, B>(className: string, superClass: dojo.GenericConstructor<A>, props: B): dojo.GenericConstructor<A & B>;
+			<A, B>(superClass: dojo.GenericConstructor<A>, props: B): dojo.GenericConstructor<A & B>;
+			<A>(className: string, superClass: dojo.GenericConstructor<any> | dojo.GenericConstructor<any>[], props: any): dojo.GenericConstructor<A>;
+			<A>(superClass: dojo.GenericConstructor<any> | dojo.GenericConstructor<any>[], props: any): dojo.GenericConstructor<A>;
 			(className: string, superClass: any[], props: any): dojo.GenericConstructor<any>;
 			(superClass: any[], props: any): dojo.GenericConstructor<any>;
 		}
