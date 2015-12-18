@@ -35,6 +35,11 @@ declare module 'dojo/_base/Deferred' {
 	export = Deferred;
 }
 
+declare module 'dojo/_base/event' {
+	const event: dojo._base.EventModule;
+	export = event;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
