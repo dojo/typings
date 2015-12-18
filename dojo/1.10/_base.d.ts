@@ -485,5 +485,25 @@ declare namespace dojo {
 
 			when<U>(valueOrPromise: any, callback?: promise.PromiseCallback<U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): dojo.Deferred<U>;
 		}
+
+		/* dojo/_base/event */
+
+		/**
+		 * This module defines dojo DOM event API.   Usually you should use dojo/on, and evt.stopPropagation() +
+		 * evt.preventDefault(), rather than this module.
+		 */
+		interface EventModule {
+			/**
+			 * normalizes properties on the event object including event
+			 * bubbling methods, keystroke normalization, and x/y positions
+			 */
+			fix(evt: Event, sender: Element): Event;
+
+			/**
+			 * prevents propagation and clobbers the default action of the
+			 * passed event
+			 */
+			stop(evt: Event): void;
+		}
 	}
 }

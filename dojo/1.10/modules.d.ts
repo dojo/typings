@@ -25,10 +25,20 @@ declare module 'dojo/_base/declare' {
 	export = dojoDeclare;
 }
 
+declare module 'dojo/_base/Deferred' {
+	const Deferred: {
+		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;
+		<T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;
+
+		when<T>(valueOrPromise: any, callback?: dojo.promise.PromiseCallback<T>, errback?: dojo.promise.PromiseErrback, progback?: dojo.promise.PromiseProgback): dojo.Deferred<T>;
+	};
+	export = Deferred;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
-		new <T>(): dojo.Deferred<T>;
-		<T>(): dojo.Deferred<T>;
+		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
+		<T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
 	};
 	export = Deferred;
 }
