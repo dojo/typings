@@ -88,6 +88,47 @@ declare namespace dojo {
 		emit(type: string | ExtensionEvent, event: any): boolean;
 	}
 
+	/* dojo/has */
+
+	interface HasCache {
+		[feature: string]: any;
+	}
+
+	interface HasTestFunction {
+		/* TypeScript has no way of referring to the global scope see Microsoft/TypeScript#983 */
+		(global?: any, doc?: Document, element?: Element): any;
+	}
+
+	interface Has {
+		/**
+		 * Return the current value of the named feature.
+		 * @param {string | number} name The name (if a string) or identifier (if an integer) of the feature to test.
+		 */
+		(name: string | number): any;
+
+		cache: HasCache;
+
+		/**
+		 * Register a new feature test for some named feature.
+		 */
+		add(name: string | number, test: HasTestFunction, now?: boolean, force?: boolean): any;
+
+		/**
+		 * Deletes the contents of the element passed to test functions.
+		 */
+		clearElement(element: HTMLElement): HTMLElement;
+
+		/**
+		 * Resolves id into a module id based on possibly-nested tenary expression that branches on has feature test value(s).
+		 */
+		normalize(id: string, toAbsMid: Function): string; /* TODO: Align with loader api */
+
+		/**
+		 * Conditional loading of AMD modules based on a has feature test value.
+		 */
+		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+	}
+
 	/* dojo/on */
 
 	interface ExtensionEvent {

@@ -45,6 +45,13 @@ declare module 'dojo/_base/fx' {
 	export = fx;
 }
 
+declare module 'dojo/_base/html' {
+	const dojo: dojo._base.Dojo;
+	export = dojo;
+}
+
+/* TODO: dojo/_base/json */
+
 declare module 'dojo/_base/kernel' {
 	const dojo: dojo._base.Dojo;
 	export = dojo;
@@ -58,6 +65,15 @@ declare module 'dojo/_base/lang' {
 declare module 'dojo/_base/loader' {
 	const loader: dojo._base.Loader;
 	export = loader;
+}
+
+/* TODO: dojo/_base/NodeList */
+
+/* TODO: dojo/_base/query */
+
+declare module 'dojo/_base/sniff' {
+	const has: dojo.Has;
+	export = has;
 }
 
 declare module 'dojo/Deferred' {
