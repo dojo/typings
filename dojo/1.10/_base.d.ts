@@ -400,5 +400,90 @@ declare namespace dojo {
 			 */
 			safeMixin<A, B>(target: A, source: B): A & B;
 		}
+
+		/* dojo/_base/Deferred */
+
+		/**
+		 * Deprecated.   This module defines the legacy dojo/_base/Deferred API.
+		 * New code should use dojo/Deferred instead.
+		 */
+		interface Deferred<T> {
+			new <U>(canceller?: (reason: any) => void): Deferred<U>;
+			<U>(canceller?: (reason: any) => void): Deferred<U>;
+
+			/**
+			 * Checks whether the deferred has been resolved.
+			 */
+			isResolved(): boolean;
+
+			/**
+			 * Checks whether the deferred has been rejected.
+			 */
+			isRejected(): boolean;
+
+			/**
+			 * Checks whether the deferred has been resolved or rejected.
+			 */
+			isFulfilled(): boolean;
+
+			/**
+			 * Checks whether the deferred has been canceled.
+			 */
+			isCanceled(): boolean;
+
+			/**
+			 * Emit a progress update on the deferred.
+			 */
+			progress(update: any, strict?: boolean): promise.Promise<T>;
+
+			/**
+			 * Resolve the deferred.
+			 */
+			resolve(value: T): void;
+
+			/**
+			 * Reject the deferred.
+			 */
+			reject(error: any): void;
+
+			/**
+			 * The results of the Defereed
+			 */
+			results: [T, any];
+
+			/**
+			 * Adds callback and error callback for this deferred instance.
+			 */
+			addCallbacks(callback?: promise.PromiseCallback<T>, errback?: promise.PromiseErrback): Deferred<T>;
+
+			/**
+			 * Add new callbacks to the deferred.
+			 */
+			then<U>(callback?: promise.PromiseCallback<T>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
+
+			/**
+			 * Cancels the asynchronous operation
+			 */
+			cancel(): void;
+
+			/**
+			 * Adds successful callback for this deferred instance.
+			 */
+			addCallback(callback: promise.PromiseCallback<T>): Deferred<T>;
+
+			/**
+			 * Adds error callback for this deferred instance.
+			 */
+			addErrback(errback: promise.PromiseErrback): Deferred<T>;
+
+			/**
+			 * Add handler as both successful callback and error callback for this deferred instance.
+			 */
+			addBoth(callback?: promise.PromiseErrback): Deferred<T>;
+
+			fired: number;
+
+			when<U>(valueOrPromise: any, callback?: promise.PromiseCallback<U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): dojo.Deferred<U>;
+		}
 	}
 }

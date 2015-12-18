@@ -63,7 +63,7 @@ declare namespace dojo {
 		/**
 		 * Resolve the deferred.
 		 */
-		resolve(value: any, strict?: boolean): promise.Promise<T>;
+		resolve(value: T, strict?: boolean): promise.Promise<T>;
 
 		/**
 		 * Reject the deferred.
