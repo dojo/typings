@@ -505,5 +505,206 @@ declare namespace dojo {
 			 */
 			stop(evt: Event): void;
 		}
+
+		/* dojo/_base/fx */
+
+		interface Line {
+			/**
+			 * Returns the point on the line
+			 * @param {number} n a floating point number greater than 0 and less than 1
+			 */
+			getValue(n: number): number;
+		}
+
+		/**
+		 * Object used to generate values from a start value to an end value
+		 */
+		interface LineConstructor {
+			new (start: number, end: number): Line;
+		}
+
+		interface Animation extends Evented {
+			/**
+			 * The time in milliseconds the animation will take to run
+			 */
+			duration: number;
+
+			/**
+			 * A two element array of start and end values, or a `_Line` instance to be
+			 * used in the Animation.
+			 */
+			curve: Line | [number, number];
+
+			/**
+			 * A Function to adjust the acceleration (or deceleration) of the progress
+			 * across a _Line
+			 */
+			easing?: Function;
+
+			/**
+			 * The number of times to loop the animation
+			 */
+			repeat: number;
+
+			/**
+			 * the time in milliseconds to wait before advancing to next frame
+			 * (used as a fps timer: 1000/rate = fps)
+			 */
+			rate: number;
+
+			/**
+			 * The time in milliseconds to wait before starting animation after it
+			 * has been .play()'ed
+			 */
+			delay?: number;
+
+			/**
+			 * Synthetic event fired before a Animation begins playing (synchronous)
+			 */
+			beforeBegin?: Event;
+
+			/**
+			 * Synthetic event fired as a Animation begins playing (useful?)
+			 */
+			onBegin?: Event;
+
+			/**
+			 * Synthetic event fired at each interval of the Animation
+			 */
+			onAnimate?: Event;
+
+			/**
+			 * Synthetic event fired after the final frame of the Animation
+			 */
+			onEnd?: Event;
+
+			/**
+			 * Synthetic event fired any time the Animation is play()'ed
+			 */
+			onPlay?: Event;
+
+			/**
+			 * Synthetic event fired when the Animation is paused
+			 */
+			onPause?: Event;
+
+			/**
+			 * Synthetic event fires when the Animation is stopped
+			 */
+			onStop?: Event;
+
+			_precent: number;
+			_startRepeatCount: number;
+			_getStep(): number;
+
+			/**
+			 * Convenience function.  Fire event "evt" and pass it the
+			 * arguments specified in "args".
+			 */
+			_fire(evt: Event, args?: any[]): Animation;
+
+			/**
+			 * Start the animation.
+			 */
+			play(delay?: number, gotoStart?: boolean): Animation;
+
+			_play(gotoStart?: boolean): Animation;
+
+			/**
+			 * Pauses a running animation.
+			 */
+			pause(): Animation;
+
+			/**
+			 * Sets the progress of the animation.
+			 */
+			gotoPercent(precent: number, andPlay?: boolean): Animation;
+
+			/**
+			 * Stops a running animation.
+			 */
+			stop(gotoEnd?: boolean): Animation;
+
+			/**
+			 * cleanup the animation
+			 */
+			destroy(): void;
+
+			/**
+			 * Returns a string token representation of the status of
+			 * the animation, one of: "paused", "playing", "stopped"
+			 */
+			status(): string;
+
+			_cycle(): Animation;
+			_clearTimer(): void;
+			_startTimer(): void;
+			_stopTimer(): void;
+		}
+
+		/**
+		 * A generic animation class that fires callbacks into its handlers
+		 * object at various states.
+		 */
+		interface AnimationConstructor {
+			new (args: any): Animation;
+		}
+
+		interface AnimationCallback {
+			(node: HTMLElement): void;
+		}
+
+		interface FadeArguments {
+			node: HTMLElement | string;
+			duration?: number;
+			easing?: Function;
+		}
+
+		interface AnimationArguments extends FadeArguments {
+			properties: { [name: string]: any };
+			onEnd?: AnimationCallback;
+		}
+
+		interface Fx {
+			_Line: LineConstructor;
+
+			Animation: AnimationConstructor;
+
+			_fade(args: any): Animation;
+
+			/**
+			 * Returns an animation that will fade node defined in 'args' from
+			 * its current opacity to fully opaque.
+			 */
+			fadeIn(args: FadeArguments): Animation;
+
+			/**
+			 * Returns an animation that will fade node defined in 'args'
+			 * from its current opacity to fully transparent.
+			 */
+			fadeOut(args: FadeArguments): Animation;
+
+			_defaultEasing(n?: number): number;
+
+			/**
+			 * Returns an animation that will transition the properties of
+			 * node defined in `args` depending how they are defined in
+			 * `args.properties`
+			 */
+			animateProperty(args: AnimationArguments): Animation;
+
+			/**
+			 * A simpler interface to `animateProperty()`, also returns
+			 * an instance of `Animation` but begins the animation
+			 * immediately, unlike nearly every other Dojo animation API.
+			 */
+			anim(
+				node: HTMLElement | string,
+				properties: { [name: string]: any },
+				duration?: number,
+				easing?: Function,
+				onEnd?: AnimationCallback,
+				delay?: number): Animation;
+		}
 	}
 }

@@ -40,6 +40,11 @@ declare module 'dojo/_base/event' {
 	export = event;
 }
 
+declare module 'dojo/_base/fx' {
+	const fx: dojo._base.Fx;
+	export = fx;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
