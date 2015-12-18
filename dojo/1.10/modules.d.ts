@@ -50,6 +50,11 @@ declare module 'dojo/_base/kernel' {
 	export = dojo;
 }
 
+declare module 'dojo/_base/lang' {
+	const lang: dojo._base.Lang;
+	export = lang;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;

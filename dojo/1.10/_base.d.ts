@@ -770,5 +770,129 @@ declare namespace dojo {
 			 */
 			_hasResource: any;
 		}
+
+		/* dojo/_base/lang */
+
+		interface ReplaceCallback {
+			(match: string, name: string, offset: number, tmpl: string): string;
+		}
+
+		interface Lang {
+			/**
+			 * Lists property names that must be explicitly processed during for-in iteration
+			 * in environments that have has("bug-for-in-skips-shadowed") true.
+			 */
+			_extraNames: string[];
+
+			/**
+			 * Copies/adds all properties of one or more sources to dest; returns dest.
+			 */
+			_mixin<T, U>(dest: T, source: U, copyFunc?: (s: any) => any): T & U;
+
+			/**
+			 * Set a property from a dot-separated string, such as "A.B.C"
+			 */
+			setObject(name: string, value: any, context?: any): any;
+
+			/**
+			 * Get a property from a dot-separated string, such as "A.B.C"
+			 */
+			getObject<T>(name: string, create?: boolean, context?: any): T;
+
+			/**
+			 * determine if an object supports a given method
+			 */
+			exists(name: string, obj?: any): boolean;
+
+			/**
+			 * Return true if it is a String
+			 */
+			isString(it: any): it is string;
+
+			/**
+			 * Return true if it is an Array.
+			 */
+			isArray(it: any): it is any[];
+
+			/**
+			 * Return true if it is a Function
+			 */
+			isFunction(it: any): it is Function;
+
+			/**
+			 * Returns true if it is a JavaScript object (or an Array, a Function
+			 * or null)
+			 */
+			isObject(it: any): it is { [id: name]: any; };
+
+			/**
+			 * similar to isArray() but more permissive
+			 */
+			isArrayLike(it: any): boolean;
+
+			/**
+			 * Returns true if it is a built-in function or some other kind of
+			 * oddball that *should* report as a function but doesn't
+			 */
+			isAlien(it: any): boolean;
+
+			/**
+			 * Adds all properties and methods of props to constructor's
+			 * prototype, making them available to all instances created with
+			 * constructor.
+			 */
+			extend<T, U>(ctor: GenericConstructor<T>, props: U): GenericConstructor<T & U>;
+
+			_hitchArgs<T extends Function>(scope: any, method: T): T;
+
+			/**
+			 * Returns a function that will only ever execute in the given scope.
+			 * This allows for easy use of object member functions
+			 * in callbacks and other places in which the "this" keyword may
+			 * otherwise not reference the expected scope.
+			 * Any number of default positional arguments may be passed as parameters
+			 * beyond "method".
+			 * Each of these values will be used to "placehold" (similar to curry)
+			 * for the hitched function.
+			 */
+			hitch<T extends Function>(scope: any, method: T): T;
+			hitch<T extends Function>(scope: any, method: Function, ...args: any[]): T;
+
+			/**
+			 * Returns a new object which "looks" to obj for properties which it
+			 * does not have a value for. Optionally takes a bag of properties to
+			 * seed the returned object with initially.
+			 */
+			delegate<T, U>(obj: T, props?: U): T & U;
+
+			/**
+			 * Converts an array-like object (i.e. arguments, DOMCollection) to an
+			 * array. Returns a new Array with the elements of obj.
+			 */
+			_toArray(obj: any, offset?: number, startWith?: any[]): any[];
+
+			/**
+			 * similar to hitch() except that the scope object is left to be
+			 * whatever the execution context eventually becomes.
+			 */
+			partial<U extends Function>(method: Function | string, ...args: any[]): U;
+
+			/**
+			 * Clones objects (including DOM nodes) and all children.
+			 * Warning: do not clone cyclic structures.
+			 */
+			clone<T>(src: T): T;
+
+			/**
+			 * Trims whitespace from both sides of the string
+			 */
+			trim(str: string): string;
+
+			/**
+			 * Performs parameterized substitutions on a string. Throws an
+			 * exception if any parameter is unmatched.
+			 */
+			replace(tmpl: string, map: GenericObject | ReplaceCallback, pattern?: RegExp): string;
+		}
 	}
 }
