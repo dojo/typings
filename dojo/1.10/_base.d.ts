@@ -1012,5 +1012,25 @@ declare namespace dojo {
 			 */
 			addOnUnload(obj: GenericObject | Function, functionName?: string | Function): void;
 		}
+
+		/* dojo/_base/url */
+
+		interface Url {
+			uri: string;
+			scheme: string;
+			authority: string;
+			path: string;
+			query: string;
+			fragment: string;
+			user?: string;
+			password?: string;
+			host?: string;
+			port?: string;
+			toString(): string;
+		}
+
+		interface UrlConstructor {
+			new (...args: any[]): Url;
+		}
 	}
 }

@@ -81,6 +81,11 @@ declare module 'dojo/_base/unload' {
 	export = unload;
 }
 
+declare module 'dojo/_base/url' {
+	const url: dojo._base.Url;
+	export = url;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
