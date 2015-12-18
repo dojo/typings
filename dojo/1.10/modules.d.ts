@@ -76,12 +76,22 @@ declare module 'dojo/_base/sniff' {
 	export = has;
 }
 
+declare module 'dojo/_base/unload' {
+	const unload: dojo._base.Unload;
+	export = unload;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
 		<T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
 	};
 	export = Deferred;
+}
+
+declare module 'dojo/has' {
+	const has: dojo.Has;
+	export = has;
 }
 
 declare module 'dojo/on' {

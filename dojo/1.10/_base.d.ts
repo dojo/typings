@@ -285,7 +285,7 @@ declare namespace dojo {
 			/**
 			 * Defines the cached has API variables
 			 */
-			hasCache: { [feature: string]: any };
+			hasCache: dojo.HasCache;
 
 			/**
 			 * Defines a callback to be used when dependencies are defined before
@@ -995,6 +995,22 @@ declare namespace dojo {
 			 * True if client is Adobe Air
 			 */
 			isAir: boolean;
+		}
+
+		/* dojo/_base/unload */
+
+		interface Unload {
+			/**
+			 * Registers a function to be triggered when window.onunload fires.
+			 * Deprecated, use on(window, "unload", lang.hitch(obj, functionName)) instead.
+			 */
+			addOnWindowUnload(obj: GenericObject | Function, functionName?: string | Function): void;
+
+			/**
+			 * Registers a function to be triggered when the page unloads.
+			 * Deprecated, use on(window, "beforeunload", lang.hitch(obj, functionName))
+			 */
+			addOnUnload(obj: GenericObject | Function, functionName?: string | Function): void;
 		}
 	}
 }
