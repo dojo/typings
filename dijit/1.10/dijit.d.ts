@@ -1,6 +1,9 @@
 /// <reference path="../../dojo/1.10/index.d.ts" />
 
 declare namespace dijit {
+	/* Global Dijit Interface */
+	interface Dijit {}
+
 	/* dijit/a11yclick */
 	export interface A11yClick {
 		(node: HTMLElement, listener: Function): dojo.Handle;

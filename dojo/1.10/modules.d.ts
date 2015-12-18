@@ -45,6 +45,11 @@ declare module 'dojo/_base/fx' {
 	export = fx;
 }
 
+declare module 'dojo/_base/kernel' {
+	const dojo: dojo._base.Dojo;
+	export = dojo;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
