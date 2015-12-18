@@ -46,7 +46,7 @@ declare namespace dijit {
 
 	export interface Dialog extends DialogContentPane, _DialogBase {}
 
-	export interface DialogConstructor extends _WidgetBaseConstructor {
+	export interface DialogConstructor extends _WidgetBaseConstructor<Dialog> {
 		new (params: any[], srcNodeRef?: HTMLElement): Dialog;
 	}
 
@@ -184,7 +184,7 @@ declare namespace dijit {
 		defer(fcn: Function, delay?: number): dojo.Handle;
 	}
 
-	export interface _WidgetBaseConstructor {
-		new (params: any[], srcNodeRef: HTMLElement): _WidgetBase;
+	export interface _WidgetBaseConstructor<T> extends dojo._base.DeclareConstructor<T> {
+		new (params: any[], srcNodeRef: HTMLElement): T;
 	}
 }
