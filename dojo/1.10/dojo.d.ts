@@ -12,6 +12,10 @@ declare namespace dojo {
 		[id: string]: any;
 	}
 
+	interface GenericFunction<T> {
+		(...args: any[]): T;
+	}
+
 	interface Handle {
 		remove(): void;
 	}

@@ -1032,5 +1032,46 @@ declare namespace dojo {
 		interface UrlConstructor {
 			new (...args: any[]): Url;
 		}
+
+		/* dojo/_base/window */
+
+		interface Window {
+			/**
+			 * Alias for the current window. 'global' can be modified
+			 * for temporary context shifting. See also withGlobal().
+			 */
+			global: any;
+
+			/**
+			 * Alias for the current document. 'doc' can be modified
+			 * for temporary context shifting. See also withDoc().
+			 */
+			doc: Document;
+
+			/**
+			 * Return the body element of the specified document or of dojo/_base/window::doc.
+			 */
+			body(doc?: Document): HTMLBodyElement;
+
+			/**
+			 * changes the behavior of many core Dojo functions that deal with
+			 * namespace and DOM lookup, changing them to work in a new global
+			 * context (e.g., an iframe). The varibles dojo.global and dojo.doc
+			 * are modified as a result of calling this function and the result of
+			 * `dojo.body()` likewise differs.
+			 */
+			setContext(globalObject: GenericObject, globalDocument: Document): void;
+
+			/**
+			 * Invoke callback with globalObject as dojo.global and
+			 * globalObject.document as dojo.doc.
+			 */
+			withGlobal<T>(globalObject: GenericObject, callback: GenericFunction<T>, thisObject?: GenericObject, cbArguments?: any[]): T;
+
+			/**
+			 * Invoke callback with documentObject as dojo/_base/window::doc.
+			 */
+			withDoc<T>(documentObject: Document, callback: GenericFunction<T>, thisObject?: GenericObject, cbArguments?: any[]): T;
+		}
 	}
 }
