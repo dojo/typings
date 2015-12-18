@@ -55,6 +55,11 @@ declare module 'dojo/_base/lang' {
 	export = lang;
 }
 
+declare module 'dojo/_base/loader' {
+	const loader: dojo._base.Loader;
+	export = loader;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;

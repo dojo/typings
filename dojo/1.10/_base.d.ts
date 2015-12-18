@@ -894,5 +894,13 @@ declare namespace dojo {
 			 */
 			replace(tmpl: string, map: GenericObject | ReplaceCallback, pattern?: RegExp): string;
 		}
+
+		/* dojo/_base/loader */
+
+		interface Loader {
+			extractLegacyApiApplications(text: string, noCommentText?: string): any;
+			require(mid: string, require: any, loaded: (...modules: any[]) => void): void;
+			loadInit(mid: string, require: any, loaded: (...modules: any[]) => void): void;
+		}
 	}
 }
