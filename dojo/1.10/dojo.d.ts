@@ -85,6 +85,32 @@ declare namespace dojo {
 		cancel(reason: any, strict?: boolean): any;
 	}
 
+	/* dojo/dom-form */
+
+	interface DomForm {
+		/**
+		 * Serialize a form field to a JavaScript object.
+		 */
+		fieldToObject(inputNode: HTMLElement | string): GenericObject;
+
+		/**
+		 * Serialize a form node to a JavaScript object.
+		 */
+		toObject(fromNode: HTMLFormElement | string): GenericObject;
+
+		/**
+		 * Returns a URL-encoded string representing the form passed as either a
+		 * node or string ID identifying the form to serialize
+		 */
+		toQuery(fromNode: HTMLFormElement | string): string;
+
+		/**
+		 * Create a serialized JSON string from a form node or string
+		 * ID identifying the form to serialize
+		 */
+		toJson(formNode: HTMLFormElement | string): string;
+	}
+
 	/* dojo/Evented */
 
 	interface Evented {
@@ -131,6 +157,22 @@ declare namespace dojo {
 		 * Conditional loading of AMD modules based on a has feature test value.
 		 */
 		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+	}
+
+	/* dojo/io-query */
+
+	interface IoQuery {
+		/**
+		 * takes a name/value mapping object and returns a string representing
+		 * a URL-encoded version of that object.
+		 */
+		objectToQuery(map: GenericObject): string;
+
+		/**
+		 * Create an object representing a de-serialized query section of a
+		 * URL. Query keys with multiple values are returned in an array.
+		 */
+		queryToObject(str: string): GenericObject;
 	}
 
 	/* dojo/on */

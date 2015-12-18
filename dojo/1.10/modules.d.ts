@@ -91,6 +91,11 @@ declare module 'dojo/_base/window' {
 	export = window;
 }
 
+declare module 'dojo/_base/xhr' {
+	const xhr: dojo._base.Xhr;
+	export = xhr;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
@@ -99,14 +104,39 @@ declare module 'dojo/Deferred' {
 	export = Deferred;
 }
 
+declare module 'dojo/dom-form' {
+	const domForm: dojo.DomForm;
+	export = domForm;
+}
+
 declare module 'dojo/has' {
 	const has: dojo.Has;
 	export = has;
 }
 
+declare module 'dojo/io-query' {
+	const ioQuery: dojo.IoQuery;
+	export = ioQuery;
+}
+
 declare module 'dojo/on' {
 	const on: dojo.On;
 	export = on;
+}
+
+declare module 'dojo/request' {
+	const request: dojo.request.Request;
+	export = request;
+}
+
+declare module 'dojo/request/watch' {
+	const watch: dojo.request.Watch;
+	export = watch;
+}
+
+declare module 'dojo/request/xhr' {
+	const xhr: dojo.request.Xhr;
+	export = xhr;
 }
 
 declare module 'dojo/topic' {
