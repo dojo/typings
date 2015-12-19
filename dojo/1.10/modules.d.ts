@@ -25,26 +25,6 @@ declare module 'dojo/_base/declare' {
 	export = dojoDeclare;
 }
 
-declare module 'dojo/AdapterRegistry' {
-	const AdapterRegistry: dojo.AdapterRegistryConstructor;
-	export = AdapterRegistry;
-}
-
-declare module 'dojo/aspect' {
-	const aspect: dojo.Aspect;
-	export = aspect;
-}
-
-declare module 'dojo/back' {
-	const back: dojo.Back;
-	export = back;
-}
-
-declare module 'dojo/behavior' {
-	const behavior: dojo.Behavior;
-	export = behavior;
-}
-
 declare module 'dojo/_base/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;
@@ -116,6 +96,31 @@ declare module 'dojo/_base/xhr' {
 	export = xhr;
 }
 
+declare module 'dojo/AdapterRegistry' {
+	const AdapterRegistry: dojo.AdapterRegistryConstructor;
+	export = AdapterRegistry;
+}
+
+declare module 'dojo/aspect' {
+	const aspect: dojo.Aspect;
+	export = aspect;
+}
+
+declare module 'dojo/back' {
+	const back: dojo.Back;
+	export = back;
+}
+
+declare module 'dojo/behavior' {
+	const behavior: dojo.Behavior;
+	export = behavior;
+}
+
+declare module 'dojo/cache' {
+	const cache: dojo.Cache;
+	export = cache;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
@@ -157,6 +162,11 @@ declare module 'dojo/request/watch' {
 declare module 'dojo/request/xhr' {
 	const xhr: dojo.request.Xhr;
 	export = xhr;
+}
+
+declare module 'dojo/text' {
+	const text: dojo.Text;
+	export = text;
 }
 
 declare module 'dojo/topic' {

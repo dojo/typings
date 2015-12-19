@@ -397,6 +397,27 @@ declare namespace dojo {
 		watch(name: string, callback: (prop: string, oldValue: any, newValue: any) => void): WatchHandle;
 	}
 
+	/* dojo/text */
+
+	/**
+	 * A getter and setter for storing the string content associated with the
+	 * module and url arguments.
+	 */
+	interface Cache {
+		(module: string | GenericObject, url: string, value?: string | { value: string, sanitize?: boolean }): string;
+	}
+
+	interface Text {
+		/**
+		 * the dojo/text caches it's own resources because of dojo.cache
+		 */
+		dynamic: boolean;
+
+		normalize(id: string, toAbsMid: Function): string; /* TODO: Align with loader api */
+
+		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+	}
+
 	/* dojo/topic */
 
 	interface Topic {
