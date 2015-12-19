@@ -25,6 +25,11 @@ declare module 'dojo/_base/declare' {
 	export = dojoDeclare;
 }
 
+declare module 'dojo/AdapterRegistry' {
+	const AdapterRegistry: dojo.AdapterRegistryConstructor;
+	export = AdapterRegistry;
+}
+
 declare module 'dojo/_base/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;

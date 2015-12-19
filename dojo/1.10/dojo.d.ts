@@ -24,6 +24,33 @@ declare namespace dojo {
 		(evt: any): void;
 	}
 
+	/* dojo/AdapterRegistry */
+
+	interface AdapterRegistry {
+		/**
+		 * register a check function to determine if the wrap function or
+		 * object gets selected
+		 */
+		register(name: string, check: (...args: any[]) => boolean, wrap: Function, directReturn?: boolean, override?: boolean): void;
+
+		/**
+		 * Find an adapter for the given arguments. If no suitable adapter
+		 * is found, throws an exception. match() accepts any number of
+		 * arguments, all of which are passed to all matching functions
+		 * from the registered pairs.
+		 */
+		match(...args: any[]): any;
+
+		/**
+		 * Remove a named adapter from the registry
+		 */
+		unregister(name: string): boolean;
+	}
+
+	interface AdapterRegistryConstructor {
+		new (returnWrappers?: boolean): AdapterRegistry;
+	}
+
 	/* dojo/Deferred */
 
 	/**
