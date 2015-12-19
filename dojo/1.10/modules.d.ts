@@ -35,6 +35,11 @@ declare module 'dojo/aspect' {
 	export = aspect;
 }
 
+declare module 'dojo/back' {
+	const back: dojo.Back;
+	export = back;
+}
+
 declare module 'dojo/_base/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;
