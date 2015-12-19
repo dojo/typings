@@ -30,6 +30,11 @@ declare module 'dojo/AdapterRegistry' {
 	export = AdapterRegistry;
 }
 
+declare module 'dojo/aspect' {
+	const aspect: dojo.Aspect;
+	export = aspect;
+}
+
 declare module 'dojo/_base/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;

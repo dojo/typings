@@ -51,6 +51,56 @@ declare namespace dojo {
 		new (returnWrappers?: boolean): AdapterRegistry;
 	}
 
+	/* dojo/aspect */
+
+	interface AfterAdvice<T> {
+		(result: T, ...args: any[]): T;
+	}
+
+	interface AroundAdvice<T> {
+		(origFn: GenericFunction<T>): (...args: any[]) => T;
+	}
+
+	interface BeforeAdvice {
+		(...args: any[]): any[] | void;
+	}
+
+	interface Aspect {
+		/**
+		 * The "before" export of the aspect module is a function that can be used to attach
+		 * "before" advice to a method. This function will be executed before the original attach
+		 * is executed. This function will be called with the arguments used to call the mattach
+		 * This function may optionally return an array as the new arguments to use tattach
+		 * the original method (or the previous, next-to-execute before advice, if one exattach
+		 * If the before method doesn't return anything (returns undefined) the original argattach
+		 * will be presattach
+		 * If there are multiple "before" advisors, they are executed in the reverse order they were registered.
+		 */
+		before<T>(target: GenericObject, methodName: string, advice: BeforeAdvice): Handle;
+
+		/**
+		 * The "around" export of the aspect module is a function that can be used to attach
+		 * "around" advice to a method. The advisor function is immediately executeattach
+		 * the around() is called, is passed a single argument that is a function that attach
+		 * called to continue execution of the original method (or the next around advattach
+		 * The advisor function should return a function, and this function will be called whattach
+		 * the method is called. It will be called with the arguments used to call the mattach
+		 * Whatever this function returns will be returned as the result of the method call (unless after advise changes it).
+		 */
+		around<T>(target: GenericObject, methodName: string, advice: AroundAdvice<T>): Handle;
+
+		/**
+		 * The "after" export of the aspect module is a function that can be used to attach
+		 * "after" advice to a method. This function will be executed after the original method
+		 * is executed. By default the function will be called with a single argument, the return
+		 * value of the original method, or the the return value of the last executed advice (if a previous one exists).
+		 * The fourth (optional) argument can be set to true to so the function receives the original
+		 * arguments (from when the original method was called) rather than the return value.
+		 * If there are multiple "after" advisors, they are executed in the order they were registered.
+		 */
+		after<T>(target: GenericObject, methodName: string, advice: AfterAdvice<T>, receiveArguments?: boolean): Handle;
+	}
+
 	/* dojo/Deferred */
 
 	/**
