@@ -40,6 +40,11 @@ declare module 'dojo/back' {
 	export = back;
 }
 
+declare module 'dojo/behavior' {
+	const behavior: dojo.Behavior;
+	export = behavior;
+}
+
 declare module 'dojo/_base/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;

@@ -151,6 +151,23 @@ declare namespace dojo {
 		_iframeLoaded(evt: Event, ifrLoc: Location): void;
 	}
 
+	/* dojo/behavior */
+
+	interface Behavior {
+		_behaviors: { [selector: string]: any };
+
+		/**
+		 * Add the specified behavior to the list of behaviors, ignoring existing
+		 * matches.
+		 */
+		add(behaviorObject: { [selector: string]: any }): void;
+
+		/**
+		 * Applies all currently registered behaviors to the document.
+		 */
+		apply(): void;
+	}
+
 	/* dojo/Deferred */
 
 	/**
