@@ -6,7 +6,7 @@ declare module 'dojo/_base/array' {
 }
 
 declare module 'dojo/_base/Color' {
-	const Color: dojo._base.Color;
+	const Color: dojo._base.ColorConstructor;
 	export = Color;
 }
 
@@ -119,6 +119,11 @@ declare module 'dojo/behavior' {
 declare module 'dojo/cache' {
 	const cache: dojo.Cache;
 	export = cache;
+}
+
+declare module 'dojo/colors' {
+	const Color: dojo._base.ColorConstructor;
+	export = Color;
 }
 
 declare module 'dojo/Deferred' {

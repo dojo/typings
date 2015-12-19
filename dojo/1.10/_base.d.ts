@@ -66,26 +66,28 @@ declare namespace dojo {
 			a?: number;
 		}
 
+		interface ColorNamed {
+			'black': ColorValue;
+			'silver': ColorValue;
+			'gray': ColorValue,
+			'white': ColorValue,
+			'maroon': ColorValue,
+			'red': ColorValue,
+			'purple': ColorValue,
+			'fuchsia': ColorValue,
+			'green': ColorValue,
+			'lime': ColorValue,
+			'olive': ColorValue,
+			'yellow': ColorValue,
+			'navy': ColorValue,
+			'blue': ColorValue,
+			'teal': ColorValue,
+			'aqua': ColorValue,
+			'transparent': [number, number, number, number];
+		}
+
 		interface Color {
-			named: {
-				'black': ColorValue;
-				'silver': ColorValue;
-				'gray': ColorValue,
-				'white': ColorValue,
-				'maroon': ColorValue,
-				'red': ColorValue,
-				'purple': ColorValue,
-				'fuchsia': ColorValue,
-				'green': ColorValue,
-				'lime': ColorValue,
-				'olive': ColorValue,
-				'yellow': ColorValue,
-				'navy': ColorValue,
-				'blue': ColorValue,
-				'teal': ColorValue,
-				'aqua': ColorValue,
-				'transparent': [number, number, number, number];
-			};
+			named: ColorNamed;
 			r: number;
 			g: number;
 			b: number;
@@ -161,6 +163,150 @@ declare namespace dojo {
 			 * style color values.
 			 */
 			fromString(str: string, obj?: Color): Color;
+		}
+
+		interface ColorConstructor {
+			new (color: ColorValue | ColorValueAlpha | ColorObject | string): Color;
+		}
+
+		/* dojo/colors */
+
+		interface ColorNamed {
+			'aliceblue':	ColorValue;
+			'antiquewhite': ColorValue;
+			'aquamarine':	ColorValue;
+			'azure':	ColorValue;
+			'beige':	ColorValue;
+			'bisque':	ColorValue;
+			'blanchedalmond':	ColorValue;
+			'blueviolet':	ColorValue;
+			'brown':	ColorValue;
+			'burlywood':	ColorValue;
+			'cadetblue':	ColorValue;
+			'chartreuse':	ColorValue;
+			'chocolate':	ColorValue;
+			'coral':	ColorValue;
+			'cornflowerblue':	ColorValue;
+			'cornsilk': ColorValue;
+			'crimson':	ColorValue;
+			'cyan': ColorValue;
+			'darkblue': ColorValue;
+			'darkcyan': ColorValue;
+			'darkgoldenrod':	ColorValue;
+			'darkgray': ColorValue;
+			'darkgreen':	ColorValue;
+			'darkgrey': ColorValue;
+			'darkkhaki':	ColorValue;
+			'darkmagenta':	ColorValue;
+			'darkolivegreen':	ColorValue;
+			'darkorange':	ColorValue;
+			'darkorchid':	ColorValue;
+			'darkred':	ColorValue;
+			'darksalmon':	ColorValue;
+			'darkseagreen': ColorValue;
+			'darkslateblue':	ColorValue;
+			'darkslategray':	ColorValue;
+			'darkslategrey':	ColorValue;
+			'darkturquoise':	ColorValue;
+			'darkviolet':	ColorValue;
+			'deeppink': ColorValue;
+			'deepskyblue':	ColorValue;
+			'dimgray':	ColorValue;
+			'dimgrey':	ColorValue;
+			'dodgerblue':	ColorValue;
+			'firebrick':	ColorValue;
+			'floralwhite':	ColorValue;
+			'forestgreen':	ColorValue;
+			'gainsboro':	ColorValue;
+			'ghostwhite':	ColorValue;
+			'gold': ColorValue;
+			'goldenrod':	ColorValue;
+			'greenyellow':	ColorValue;
+			'grey': ColorValue;
+			'honeydew': ColorValue;
+			'hotpink':	ColorValue;
+			'indianred':	ColorValue;
+			'indigo':	ColorValue;
+			'ivory':	ColorValue;
+			'khaki':	ColorValue;
+			'lavender': ColorValue;
+			'lavenderblush':	ColorValue;
+			'lawngreen':	ColorValue;
+			'lemonchiffon': ColorValue;
+			'lightblue':	ColorValue;
+			'lightcoral':	ColorValue;
+			'lightcyan':	ColorValue;
+			'lightgoldenrodyellow': ColorValue;
+			'lightgray':	ColorValue;
+			'lightgreen':	ColorValue;
+			'lightgrey':	ColorValue;
+			'lightpink':	ColorValue;
+			'lightsalmon':	ColorValue;
+			'lightseagreen':	ColorValue;
+			'lightskyblue': ColorValue;
+			'lightslategray':	ColorValue;
+			'lightslategrey':	ColorValue;
+			'lightsteelblue':	ColorValue;
+			'lightyellow':	ColorValue;
+			'limegreen':	ColorValue;
+			'linen':	ColorValue;
+			'magenta':	ColorValue;
+			'mediumaquamarine': ColorValue;
+			'mediumblue':	ColorValue;
+			'mediumorchid': ColorValue;
+			'mediumpurple': ColorValue;
+			'mediumseagreen':	ColorValue;
+			'mediumslateblue':	ColorValue;
+			'mediumspringgreen':	ColorValue;
+			'mediumturquoise':	ColorValue;
+			'mediumvioletred':	ColorValue;
+			'midnightblue': ColorValue;
+			'mintcream':	ColorValue;
+			'mistyrose':	ColorValue;
+			'moccasin': ColorValue;
+			'navajowhite':	ColorValue;
+			'oldlace':	ColorValue;
+			'olivedrab':	ColorValue;
+			'orange':	ColorValue;
+			'orangered':	ColorValue;
+			'orchid':	ColorValue;
+			'palegoldenrod':	ColorValue;
+			'palegreen':	ColorValue;
+			'paleturquoise':	ColorValue;
+			'palevioletred':	ColorValue;
+			'papayawhip':	ColorValue;
+			'peachpuff':	ColorValue;
+			'peru': ColorValue;
+			'pink': ColorValue;
+			'plum': ColorValue;
+			'powderblue':	ColorValue;
+			'rosybrown':	ColorValue;
+			'royalblue':	ColorValue;
+			'saddlebrown':	ColorValue;
+			'salmon':	ColorValue;
+			'sandybrown':	ColorValue;
+			'seagreen': ColorValue;
+			'seashell': ColorValue;
+			'sienna':	ColorValue;
+			'skyblue':	ColorValue;
+			'slateblue':	ColorValue;
+			'slategray':	ColorValue;
+			'slategrey':	ColorValue;
+			'snow': ColorValue;
+			'springgreen':	ColorValue;
+			'steelblue':	ColorValue;
+			'tan':	ColorValue;
+			'thistle':	ColorValue;
+			'tomato':	ColorValue;
+			'turquoise':	ColorValue;
+			'violet':	ColorValue;
+			'wheat':	ColorValue;
+			'whitesmoke':	ColorValue;
+			'yellowgreen':	ColorValue;
+		}
+
+		interface Color {
+			makeGrey(g: number, a?: number): Color;
 		}
 
 		/* dojo/_base/config */
@@ -271,7 +417,7 @@ declare namespace dojo {
 
 			/**
 			 * Array containing the r, g, b components used as transparent color in dojo.Color;
-			 * if undefined, [255,255,255] (white) will be used.
+			 * if undefined, ColorValue (white) will be used.
 			 */
 			transparentColor: ColorValue | ColorValueAlpha;
 
