@@ -187,6 +187,85 @@ declare namespace dojo {
 		isSupported(): boolean;
 	}
 
+	/* dojo/currency */
+
+	interface CurrencyFormatOptions extends NumberFormatOptions {
+
+		/**
+		 * Should not be set.  Value is assumed to be "currency".
+		 */
+		type?: string;
+
+		/**
+		 * localized currency symbol. The default will be looked up in table of supported currencies in `dojo.cldr`
+		 * A [ISO4217](http://en.wikipedia.org/wiki/ISO_4217) currency code will be used if not found.
+		 */
+		symbol?: string;
+
+		/**
+		 * an [ISO4217](http://en.wikipedia.org/wiki/ISO_4217) currency code, a three letter sequence like "USD".
+		 * For use with dojo.currency only.
+		 */
+		currency?: string;
+
+		/**
+		 * number of decimal places to show.  Default is defined based on which currency is used.
+		 */
+		places?: number;
+	}
+
+	interface CurrencyParseOptions extends NumberParseOptions {
+
+		/**
+		 * Should not be set.  Value is assumed to be "currency".
+		 */
+		type?: string;
+
+		/**
+		 * localized currency symbol. The default will be looked up in table of supported currencies in `dojo.cldr`
+		 * A [ISO4217](http://en.wikipedia.org/wiki/ISO_4217) currency code will be used if not found.
+		 */
+		symbol?: string;
+
+		/**
+		 * an [ISO4217](http://en.wikipedia.org/wiki/ISO_4217) currency code, a three letter sequence like "USD".
+		 * For use with dojo.currency only.
+		 */
+		currency?: string;
+
+		/**
+		 * number of decimal places to show.  Default is defined based on which currency is used.
+		 */
+		places?: number;
+
+		/**
+		 * Whether to include the fractional portion, where the number of decimal places are implied by the currency
+		 * or explicit 'places' parameter.  The value [true,false] makes the fractional portion optional.
+		 * By default for currencies, it the fractional portion is optional.
+		 */
+		factional?: boolean | [boolean, boolean];
+	}
+
+	interface Currency {
+		_mixInDefaults(options: NumberFormatOptions): CurrencyFormatOptions;
+
+		/**
+		 * Format a Number as a currency, using locale-specific settings
+		 */
+		format(value: number, options?: CurrencyFormatOptions): string;
+
+		/**
+		 * Builds the regular needed to parse a currency value
+		 */
+		regexp(options?: NumberRegexpOptions): string;
+
+		/**
+		 * Convert a properly formatted currency string to a primitive Number,
+		 * using locale-specific settings.
+		 */
+		parse(expression: string, options?: CurrencyParseOptions): number;
+	}
+
 	/* dojo/Deferred */
 
 	/**
@@ -338,6 +417,252 @@ declare namespace dojo {
 		queryToObject(str: string): GenericObject;
 	}
 
+	/* dojo/number */
+
+	interface NumberFormatOptions {
+
+		/**
+		 * override [formatting pattern](http://www.unicode.org/reports/tr35/#Number_Format_Patterns)
+		 * with this string.  Default value is based on locale.  Overriding this property will defeat
+		 * localization.  Literal characters in patterns are not supported.
+		 */
+		pattern?: string;
+
+		/**
+		 * choose a format type based on the locale from the following:
+		 * decimal, scientific (not yet supported), percent, currency. decimal by default.
+		 */
+		type?: string;
+
+		/**
+		 * fixed number of decimal places to show.  This overrides any
+		 * information in the provided pattern.
+		 */
+		places?: number;
+
+		/**
+		 * 5 rounds to nearest .5; 0 rounds to nearest whole (default). -1
+		 * means do not round.
+		 */
+		round?: number;
+
+		/**
+		 * override the locale used to determine formatting rules
+		 */
+		locale?: string;
+
+		/**
+		 * If false, show no decimal places, overriding places and pattern settings.
+		 */
+		factional?: boolean;
+	}
+
+	interface NumberFormatAbsoluteOptions {
+		/**
+		 * the decimal separator
+		 */
+		decimal?: string;
+
+		/**
+		 * the group separator
+		 */
+		group?: string;
+
+		/**
+		 * number of decimal places.  the range "n,m" will format to m places.
+		 */
+		places?: number | string;
+
+		/**
+		 * 5 rounds to nearest .5; 0 rounds to nearest whole (default). -1
+		 * means don't round.
+		 */
+		round?: number;
+	}
+
+	interface NumberRegexpOptions {
+
+		/**
+		 * override [formatting pattern](http://www.unicode.org/reports/tr35/#Number_Format_Patterns)
+		 * with this string.  Default value is based on locale.  Overriding this property will defeat
+		 * localization.
+		 */
+		pattern?: string;
+
+		/**
+		 * choose a format type based on the locale from the following:
+		 * decimal, scientific (not yet supported), percent, currency. decimal by default.
+		 */
+		type?: string;
+
+		/**
+		 * override the locale used to determine formatting rules
+		 */
+		locacle?: string;
+
+		/**
+		 * strict parsing, false by default.  Strict parsing requires input as produced by the format() method.
+		 * Non-strict is more permissive, e.g. flexible on white space, omitting thousands separators
+		 */
+		strict?: boolean;
+
+		/**
+		 * number of decimal places to accept: Infinity, a positive number, or
+		 * a range "n,m".  Defined by pattern or Infinity if pattern not provided.
+		 */
+		places?: number | string;
+	}
+
+	interface NumberParseOptions {
+
+		/**
+		 * override [formatting pattern](http://www.unicode.org/reports/tr35/#Number_Format_Patterns)
+		 * with this string.  Default value is based on locale.  Overriding this property will defeat
+		 * localization.  Literal characters in patterns are not supported.
+		 */
+		pattern?: string;
+
+		/**
+		 * choose a format type based on the locale from the following:
+		 * decimal, scientific (not yet supported), percent, currency. decimal by default.
+		 */
+		type?: string;
+
+		/**
+		 * override the locale used to determine formatting rules
+		 */
+		locale?: string;
+
+		/**
+		 * strict parsing, false by default.  Strict parsing requires input as produced by the format() method.
+		 * Non-strict is more permissive, e.g. flexible on white space, omitting thousands separators
+		 */
+		strict?: boolean;
+
+		/**
+		 * Whether to include the fractional portion, where the number of decimal places are implied by pattern
+		 * or explicit 'places' parameter.  The value [true,false] makes the fractional portion optional.
+		 */
+		factional?: boolean | [boolean, boolean];
+	}
+
+	interface RealNumberRegexpFlags {
+
+		/**
+		 * The integer number of decimal places or a range given as "n,m".  If
+		 * not given, the decimal part is optional and the number of places is
+		 * unlimited.
+		 */
+		places?: number;
+
+		/**
+		 * A string for the character used as the decimal point.  Default
+		 * is ".".
+		 */
+		decimal?: string;
+
+		/**
+		 * Whether decimal places are used.  Can be true, false, or [true,
+		 * false].  Default is [true, false] which means optional.
+		 */
+		factional?: boolean | [boolean, boolean];
+
+		/**
+		 * Express in exponential notation.  Can be true, false, or [true,
+		 * false]. Default is [true, false], (i.e. will match if the
+		 * exponential part is present are not).
+		 */
+		exponent?: boolean | [boolean, boolean];
+
+		/**
+		 * The leading plus-or-minus sign on the exponent.  Can be true,
+		 * false, or [true, false].  Default is [true, false], (i.e. will
+		 * match if it is signed or unsigned).  flags in regexp.integer can be
+		 * applied.
+		 */
+		eSigned?: boolean | [boolean, boolean];
+	}
+
+	interface IntegerRegexpFlags {
+
+		/**
+		 * The leading plus-or-minus sign. Can be true, false, or `[true,false]`.
+		 * Default is `[true, false]`, (i.e. will match if it is signed
+		 * or unsigned).
+		 */
+		signed?: boolean;
+
+		/**
+		 * The character used as the thousands separator. Default is no
+		 * separator. For more than one symbol use an array, e.g. `[",", ""]`,
+		 * makes ',' optional.
+		 */
+		separator?: string;
+
+		/**
+		 * group size between separators
+		 */
+		groupSize?: number;
+
+		/**
+		 * second grouping, where separators 2..n have a different interval than the first separator (for India)
+		 */
+		groupSize2?: number;
+	}
+
+	interface Number {
+		/**
+		 * Format a Number as a String, using locale-specific settings
+		 */
+		format(value: number, options?: NumberFormatOptions): string;
+
+		/**
+		 * not precise, but good enough
+		 */
+		_numberPatternRE: RegExp;
+
+		/**
+		 * Apply pattern to format value as a string using options. Gives no
+		 * consideration to local customs.
+		 */
+		_applyPattern(value: number, pattern: string, options?: NumberFormatOptions): string;
+
+		/**
+		 * Rounds to the nearest value with the given number of decimal places, away from zero
+		 */
+		round(value: number, places?: number, increment?: number): number;
+
+		/**
+		 * Apply numeric pattern to absolute value using options. Gives no
+		 * consideration to local customs.
+		 */
+		_formatAbsolute(value: number, pattern: string, options?: NumberFormatAbsoluteOptions): string;
+
+		/**
+		 * Builds the regular needed to parse a number
+		 */
+		regexp(options?: NumberRegexpOptions): string;
+
+		_parseInfo(options?: any): { regexp: string, group: string, decimal: string, factor: number };
+
+		/**
+		 * Convert a properly formatted string to a primitive Number, using
+		 * locale-specific settings.
+		 */
+		parse(expression: string, options?: NumberParseOptions): number;
+
+		/**
+		 * Builds a regular expression to match a real number in exponential
+		 * notation
+		 */
+		_realNumberRegexp(flags: RealNumberRegexpFlags): string;
+
+		/**
+		 * Builds a regular expression that matches an integer
+		 */
+		_integerRegexp(flags: IntegerRegexpFlags): string;
+	}
+
 	/* dojo/on */
 
 	interface ExtensionEvent {
@@ -405,6 +730,7 @@ declare namespace dojo {
 	}
 
 	/* dojo/Stateful */
+
 	interface WatchHandle extends Handle {
 		unwatch(): void;
 	}

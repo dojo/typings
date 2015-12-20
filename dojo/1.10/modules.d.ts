@@ -131,6 +131,11 @@ declare module 'dojo/cookie' {
 	export = cookie;
 }
 
+declare module 'dojo/currency' {
+	const currency: dojo.Currency;
+	export = currency;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
@@ -152,6 +157,11 @@ declare module 'dojo/has' {
 declare module 'dojo/io-query' {
 	const ioQuery: dojo.IoQuery;
 	export = ioQuery;
+}
+
+declare module 'dojo/number' {
+	const number: dojo.Number;
+	export = number;
 }
 
 declare module 'dojo/on' {
