@@ -119,6 +119,16 @@ declare module 'dojo/cache' {
 	export = cache;
 }
 
+declare module 'dojo/cldr/monetary' {
+	const monetary: dojo.cldr.Monetary;
+	export = monetary;
+}
+
+declare module 'dojo/cldr/supplemental' {
+	const supplemental: dojo.cldr.Supplemental;
+	export = supplemental;
+}
+
 declare module 'dojo/colors' {
 	const Color: dojo._base.ColorConstructor;
 	export = Color;
