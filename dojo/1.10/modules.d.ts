@@ -184,6 +184,11 @@ declare module 'dojo/dom-form' {
 	export = domForm;
 }
 
+declare module 'dojo/dom-geometry' {
+	const domGeom: dojo.DomGeometry;
+	export = domGeom;
+}
+
 declare module 'dojo/has' {
 	const has: dojo.Has;
 	export = has;
@@ -232,4 +237,9 @@ declare module 'dojo/topic' {
 declare module 'dojo/touch' {
 	const touch: dojo.Touch;
 	export = touch;
+}
+
+declare module 'dojo/window' {
+	const window: dojo.WindowModule;
+	export = window;
 }

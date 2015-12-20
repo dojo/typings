@@ -392,6 +392,131 @@ declare namespace dojo {
 		toJson(formNode: HTMLFormElement | string): string;
 	}
 
+	/* dojo/dom-geometry */
+
+	interface DomGeometryWidthHeight {
+		w?: number;
+		h?: number;
+	}
+
+	interface DomGeometryBox extends DomGeometryWidthHeight {
+		l?: number;
+		t?: number;
+	}
+
+	interface DomGeometryBoxExtents extends DomGeometryBox {
+		r?: number;
+		b?: number;
+	}
+
+	interface DomGeometryXYBox extends DomGeometryWidthHeight {
+		x?: number;
+		y?: number;
+	}
+
+	interface DomGeometry {
+		boxModel: string; /* TODO: string literal 'border-box' | 'content-box' */
+
+		/**
+		 * Returns object with special values specifically useful for node
+		 * fitting.
+		 */
+		getPadExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+
+		/**
+		 * returns an object with properties useful for noting the border
+		 * dimensions.
+		 */
+		getBorderExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+
+		/**
+		 * Returns object with properties useful for box fitting with
+		 * regards to padding.
+		 */
+		getPadBorderExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+
+		/**
+		 * returns object with properties useful for box fitting with
+		 * regards to box margins (i.e., the outer-box).
+		 * - l/t = marginLeft, marginTop, respectively
+		 * - w = total width, margin inclusive
+		 * - h = total height, margin inclusive
+		 * The w/h are used for calculating boxes.
+		 * Normally application code will not need to invoke this
+		 * directly, and will use the ...box... functions instead.
+		 */
+		getMarginExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+
+		/**
+		 * returns an object that encodes the width, height, left and top
+		 * positions of the node's margin box.
+		 */
+		getMarginBox(node: Element, computedStyle?: GenericObject): DomGeometryBox;
+
+		/**
+		 * Returns an object that encodes the width, height, left and top
+		 * positions of the node's content box, irrespective of the
+		 * current box model.
+		 */
+		getContentBox(node: Element, computedStyle?: GenericObject): DomGeometryBox;
+
+		/**
+		 * Sets the size of the node's contents, irrespective of margins,
+		 * padding, or borders.
+		 */
+		setContentSize(node: Element, box: DomGeometryWidthHeight, computedStyle?: GenericObject): void;
+
+		/**
+		 * sets the size of the node's margin box and placement
+		 * (left/top), irrespective of box model. Think of it as a
+		 * passthrough to setBox that handles box-model vagaries for
+		 * you.
+		 */
+		setMarginBox(node: Element, box: DomGeometryBox, computedStyle?: GenericObject): void;
+
+		/**
+		 * Returns true if the current language is left-to-right, and false otherwise.
+		 */
+		isBodyLtr(doc?: Document): boolean;
+
+		/**
+		 * Returns an object with {node, x, y} with corresponding offsets.
+		 */
+		docScroll(doc: Document): { x: number; y: number; };
+
+		/**
+		 * Deprecated method previously used for IE6-IE7.  Now, just returns `{x:0, y:0}`.
+		 */
+		getIeDocumentElementOffset(doc: Document): { x: number; y: number; };
+
+		/**
+		 * In RTL direction, scrollLeft should be a negative value, but IE
+		 * returns a positive one. All codes using documentElement.scrollLeft
+		 * must call this function to fix this error, otherwise the position
+		 * will offset to right when there is a horizontal scrollbar.
+		 */
+		fixIeBiDiScrollLeft(scrollLeft: number, doc?: Document): number;
+
+		/**
+		 * Gets the position and size of the passed element relative to
+		 * the viewport (if includeScroll==false), or relative to the
+		 * document root (if includeScroll==true).
+		 */
+		position(node: Element, includeScroll?: boolean): DomGeometryXYBox;
+
+		/**
+		 * returns an object that encodes the width and height of
+		 * the node's margin box
+		 */
+		getMarginSize(node: Element, computedStyle?: GenericObject): DomGeometryWidthHeight;
+
+		/**
+		 * Normalizes the geometry of a DOM event, normalizing the pageX, pageY,
+		 * offsetX, offsetY, layerX, and layerX properties
+		 */
+		normalizeEvent(event: Event): void;
+	}
+
 	/* dojo/Evented */
 
 	interface Evented {
@@ -865,7 +990,7 @@ declare namespace dojo {
 		subscribe(topic: string | ExtensionEvent, listener: EventListener): Handle;
 	}
 
-	/** dojo/touch */
+	/* dojo/touch */
 	interface Touch {
 		press: ExtensionEvent;
 		move: ExtensionEvent;
@@ -875,5 +1000,25 @@ declare namespace dojo {
 		out: ExtensionEvent;
 		enter: ExtensionEvent;
 		leave: ExtensionEvent;
+	}
+
+	/* dojo/window */
+
+	interface WindowModule {
+
+		/**
+		 * Returns the dimensions and scroll position of the viewable area of a browser window
+		 */
+		getBox(doc?: Document): DomGeometryBox;
+
+		/**
+		 * Get window object associated with document doc.
+		 */
+		get(doc?: Document): Window;
+
+		/**
+		 * Scroll the passed node into view using minimal movement, if it is not already.
+		 */
+		scrollIntoView(node: Element, pos?: DomGeometryXYBox): void;
 	}
 }
