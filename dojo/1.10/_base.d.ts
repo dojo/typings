@@ -552,13 +552,7 @@ declare namespace dojo {
 
 		/* dojo/_base/Deferred */
 
-		/**
-		 * Deprecated.   This module defines the legacy dojo/_base/Deferred API.
-		 * New code should use dojo/Deferred instead.
-		 */
 		interface Deferred<T> {
-			new <U>(canceller?: (reason: any) => void): Deferred<U>;
-			<U>(canceller?: (reason: any) => void): Deferred<U>;
 
 			/**
 			 * Checks whether the deferred has been resolved.
@@ -603,12 +597,12 @@ declare namespace dojo {
 			/**
 			 * Adds callback and error callback for this deferred instance.
 			 */
-			addCallbacks(callback?: promise.PromiseCallback<T>, errback?: promise.PromiseErrback): Deferred<T>;
+			addCallbacks<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback): Deferred<U>;
 
 			/**
 			 * Add new callbacks to the deferred.
 			 */
-			then<U>(callback?: promise.PromiseCallback<T>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
+			then<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
 
 			/**
 			 * Cancels the asynchronous operation
@@ -618,7 +612,7 @@ declare namespace dojo {
 			/**
 			 * Adds successful callback for this deferred instance.
 			 */
-			addCallback(callback: promise.PromiseCallback<T>): Deferred<T>;
+			addCallback<U>(callback: promise.PromiseCallback<T, U>): Deferred<U>;
 
 			/**
 			 * Adds error callback for this deferred instance.
@@ -631,8 +625,20 @@ declare namespace dojo {
 			addBoth(callback?: promise.PromiseErrback): Deferred<T>;
 
 			fired: number;
+		}
 
-			when<U>(valueOrPromise: any, callback?: promise.PromiseCallback<U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): dojo.Deferred<U>;
+		interface DeferredConstructor {
+			/**
+			 * Deprecated.   This module defines the legacy dojo/_base/Deferred API.
+			 * New code should use dojo/Deferred instead.
+			 */
+			new <T>(canceller?: (reason: any) => void): Deferred<T>;
+
+			/**
+			 * Transparently applies callbacks to values and/or promises.
+			 */
+			when<T>(valueOrPromise: any): dojo.Deferred<T>;
+			when<T, U>(valueOrPromise: any, callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): dojo.Deferred<U>;
 		}
 
 		/* dojo/_base/event */

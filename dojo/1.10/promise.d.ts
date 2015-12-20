@@ -1,7 +1,7 @@
 declare namespace dojo {
 	namespace promise {
-		export interface PromiseCallback<T> {
-			(result: T): void;
+		export interface PromiseCallback<T, U> {
+			(result: T): U;
 		}
 
 		export interface PromiseErrback {
@@ -13,13 +13,13 @@ declare namespace dojo {
 		}
 
 		export interface Promise<T> {
-			then<U>(callback?: PromiseCallback<T>, errback?: PromiseErrback, progback?: PromiseProgback): Promise<U>;
+			then<U>(callback?: PromiseCallback<T, U>, errback?: PromiseErrback, progback?: PromiseProgback): Promise<U>;
 			cancel(reason: any, strict?: boolean): any;
 			isResolved(): boolean;
 			isRejected(): boolean;
 			isFulfilled(): boolean;
 			isCanceled(): boolean;
-			always(callbackOrErrback: PromiseCallback<T>|PromiseErrback): Promise<T>;
+			always<U>(callbackOrErrback: PromiseCallback<T, U>|PromiseErrback): Promise<U>;
 			otherwise(errback: PromiseErrback): Promise<T>;
 			trace(): Promise<T>;
 			traceRejected(): Promise<T>;

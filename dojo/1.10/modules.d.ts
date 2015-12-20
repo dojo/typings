@@ -26,12 +26,7 @@ declare module 'dojo/_base/declare' {
 }
 
 declare module 'dojo/_base/Deferred' {
-	const Deferred: {
-		new <T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;
-		<T>(canceller?: (reason: any) => void): dojo._base.Deferred<T>;
-
-		when<T>(valueOrPromise: any, callback?: dojo.promise.PromiseCallback<T>, errback?: dojo.promise.PromiseErrback, progback?: dojo.promise.PromiseProgback): dojo.Deferred<T>;
-	};
+	const Deferred: dojo._base.DeferredConstructor;
 	export = Deferred;
 }
 
