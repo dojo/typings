@@ -157,11 +157,13 @@ declare module 'dojo/debounce' {
 }
 
 declare module 'dojo/Deferred' {
-	const Deferred: {
-		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
-		<T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
-	};
+	const Deferred: dojo.DeferredConstructor;
 	export = Deferred;
+}
+
+declare module 'dojo/DeferredList' {
+	const DeferredList: dojo.DeferredListConstructor;
+	export = DeferredList;
 }
 
 declare module 'dojo/dom-form' {

@@ -278,13 +278,7 @@ declare namespace dojo {
 
 	/* dojo/Deferred */
 
-	/**
-	 * Creates a new deferred. This API is preferred over
-	 * `dojo/_base/Deferred`.
-	 */
 	interface Deferred<T> {
-		new <U>(canceler?: (reason: any) => void): Deferred<U>;
-		<U>(canceler?: (reason: any) => void): Deferred<U>;
 
 		/**
 		 * The public promise object that clients can add callbacks to.
@@ -335,6 +329,37 @@ declare namespace dojo {
 		 * Inform the deferred it may cancel its asynchronous operation.
 		 */
 		cancel(reason: any, strict?: boolean): any;
+
+		/**
+		 * Returns `[object Deferred]`.
+		 */
+		toString(): string;
+	}
+
+	interface DeferredConstructor {
+		/**
+		 * Creates a new deferred. This API is preferred over
+		 * `dojo/_base/Deferred`.
+		 */
+		new <T>(canceller?: (reason: any) => void): Deferred<T>;
+	}
+
+	/* dojo/DeferredList */
+
+	interface DeferredList<T> extends Deferred<T[]> {
+		/**
+		 * Gathers the results of the deferreds for packaging
+		 * as the parameters to the Deferred Lists' callback
+		 */
+		gatherResults<T>(deferredList: DeferredList<any>): DeferredList<T>;
+	}
+
+	interface DeferredListConstructor {
+		/**
+		 * Deprecated, use dojo/promise/all instead.
+		 * Provides event handling for a group of Deferred objects.
+		 */
+		new <T>(list: T[], fireOnOneCallback?: boolean, fireOnOneErrback?: boolean, consumeErrors?: boolean, canceller?: (reason: any) => void): DeferredList<T>;
 	}
 
 	/* dojo/dom-form */
