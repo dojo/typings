@@ -136,6 +136,21 @@ declare module 'dojo/currency' {
 	export = currency;
 }
 
+declare module 'dojo/date' {
+	const date: dojo.date.Date;
+	export = date;
+}
+
+declare module 'dojo/date/locale' {
+	const dateLocale: dojo.date.DateLocale;
+	export = dateLocale;
+}
+
+declare module 'dojo/date/stamp' {
+	const stamp: dojo.date.Stamp;
+	export = stamp;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;
