@@ -24,6 +24,10 @@ declare namespace dojo {
 		(evt: any): void;
 	}
 
+	interface BuildProfile {
+		resourceTags: { [tag: string]: (filename: string, mid?: string) => boolean; };
+	}
+
 	/* dojo/AdapterRegistry */
 
 	interface AdapterRegistry {
@@ -393,6 +397,53 @@ declare namespace dojo {
 	interface Evented {
 		on(type: string | ExtensionEvent, listener: EventListener): Handle;
 		emit(type: string | ExtensionEvent, event: any): boolean;
+	}
+
+	/* dojo/dojo */
+
+	interface RequireTrace {
+		(group: string, args: any[]): void;
+		on: boolean | number;
+		group: GenericObject;
+		set(group: string | GenericObject, value: any): void;
+	}
+
+	interface Require {
+		(config: GenericObject, dependencies: string[], callback?: GenericFunction<void>): Require;
+		async: number| boolean;
+		has: dojo.Has;
+		isXdurl(url: string): boolean;
+		initSyncLoader(dojoRequirePlugin_: any, checkDojoRequirePlugin_: any, transformToAmd_: any): GenericObject;
+		getXhr(): XMLHttpRequest | ActiveXObject;
+		getText(url: string, async?: boolean, onLoad?: (responseText: string, async?: boolean) => void): string;
+		eval(text: string, hint?: string): any;
+		signal(type: string, args: any[]): void;
+		on(type: string, listener: (...args: any[]) => void): Handle;
+		map: { [id: string]: any };
+		waitms?: number;
+		legacyMode: boolean;
+		rawConfig: dojo._base.Config;
+		baseUrl: string;
+		combo?: {
+			add: () => void;
+			done(callback: (mids: string[], url?: string) => void, req: Require): void;
+			plugins?: GenericObject;
+		};
+		idle(): boolean;
+		toAbsMid(mid: string, referenceModule: string): string;
+		toUrl(name: string, referenceModule: string): string;
+		undef(moduleId: string, referenceModule: string): void;
+		pageLoaded: number | boolean;
+		injectUrl(url: string, callback?: () => void, owner?: HTMLScriptElement): HTMLScriptElement;
+		log(...args: any[]): void;
+		trace: RequireTrace;
+		boot?: [string[], Function] | number;
+	}
+
+	interface Define {
+		(mid: string, dependencies?: string[], factory?: any): void;
+		(dependencies: string[], factory?: any): void;
+		amd: string;
 	}
 
 	/* dojo/has */

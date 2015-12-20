@@ -1,5 +1,8 @@
 /// <reference path="index.d.ts" />
 
+declare var require: dojo.Require;
+declare var define: dojo.Define;
+
 declare module 'dojo/_base/array' {
 	const dojoArray: dojo._base.Array;
 	export = dojoArray;
@@ -159,6 +162,11 @@ declare module 'dojo/Deferred' {
 declare module 'dojo/DeferredList' {
 	const DeferredList: dojo.DeferredListConstructor;
 	export = DeferredList;
+}
+
+declare module 'dojo/dojo' {
+	const require: dojo.Require;
+	export = require;
 }
 
 declare module 'dojo/dom-form' {
