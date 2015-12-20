@@ -126,6 +126,11 @@ declare module 'dojo/colors' {
 	export = Color;
 }
 
+declare module 'dojo/cookie' {
+	const cookie: dojo.Cookie;
+	export = cookie;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;

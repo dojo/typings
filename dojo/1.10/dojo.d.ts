@@ -168,6 +168,25 @@ declare namespace dojo {
 		apply(): void;
 	}
 
+	/* dojo/cookie */
+
+	interface CookieProps {
+		expires?: Date | string | number;
+		path?: string;
+		domain?: string;
+		secure?: boolean;
+	}
+
+	interface Cookie {
+		/* Get or set a cookie. */
+		(name: string, value?: string, props?: CookieProps): string;
+
+		/**
+		 * Use to determine if the current browser supports cookies or not.
+		 */
+		isSupported(): boolean;
+	}
+
 	/* dojo/Deferred */
 
 	/**
