@@ -151,6 +151,11 @@ declare module 'dojo/date/stamp' {
 	export = stamp;
 }
 
+declare module 'dojo/debounce' {
+	const debounce: dojo.Debounce;
+	export = debounce;
+}
+
 declare module 'dojo/Deferred' {
 	const Deferred: {
 		new <T>(canceller?: (reason: any) => void): dojo.Deferred<T>;

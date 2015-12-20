@@ -266,6 +266,16 @@ declare namespace dojo {
 		parse(expression: string, options?: CurrencyParseOptions): number;
 	}
 
+	/* dojo/debounce */
+
+	interface Debounce {
+		/**
+		 * Create a function that will only execute after `wait` milliseconds
+		 */
+		<T extends Function>(cb: T, wait: number): T;
+		<T extends Function>(cb: Function, wait: number, ...args: any[]): T;
+	}
+
 	/* dojo/Deferred */
 
 	/**
