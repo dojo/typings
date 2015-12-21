@@ -174,6 +174,66 @@ declare module 'dojo/DeferredList' {
 	export = DeferredList;
 }
 
+declare module 'dojo/dnd/autoscroll' {
+	const autoscroll: dojo.dnd.AutoScroll;
+	export = autoscroll;
+}
+
+declare module 'dojo/dnd/AutoSource' {
+	const AutoSource: dojo.dnd.AutoSourceConstructor;
+	export = AutoSource;
+}
+
+declare module 'dojo/dnd/Avatar' {
+	const Avatar: dojo.dnd.AvatarConstructor;
+	export = Avatar;
+}
+
+declare module 'dojo/dnd/common' {
+	const common: dojo.dnd.Common;
+	export = common;
+}
+
+declare module 'dojo/dnd/Container' {
+	const Container: dojo.dnd.ContainerConstructor;
+	export = Container;
+}
+
+declare module 'dojo/dnd/Manager' {
+	const Manager: dojo.dnd.ManagerConstructor;
+	export = Manager;
+}
+
+declare module 'dojo/dnd/Moveable' {
+	const Moveable: dojo.dnd.Moveable;
+	export = Moveable;
+}
+
+declare module 'dojo/dnd/Mover' {
+	const Mover: dojo.dnd.MoverConstructor;
+	export = Mover;
+}
+
+declare module 'dojo/dnd/Selector' {
+	const Selector: dojo.dnd.SelectorConstructor;
+	export = Selector;
+}
+
+declare module 'dojo/dnd/Source' {
+	const Source: dojo.dnd.Source;
+	export = Source;
+}
+
+declare module 'dojo/dnd/Target' {
+	const Target: dojo.dnd.TargetConstructor;
+	export = Target;
+}
+
+declare module 'dojo/dnd/TimedMoveable' {
+	const TimedMoveable: dojo.dnd.TimedMoveableConstructor;
+	export = TimedMoveable;
+}
+
 declare module 'dojo/dojo' {
 	const require: dojo.Require;
 	export = require;
@@ -187,6 +247,11 @@ declare module 'dojo/dom-form' {
 declare module 'dojo/dom-geometry' {
 	const domGeom: dojo.DomGeometry;
 	export = domGeom;
+}
+
+declare module 'dojo/Evented' {
+	const Evented: dojo.EventedConstructor;
+	export = Evented;
 }
 
 declare module 'dojo/has' {

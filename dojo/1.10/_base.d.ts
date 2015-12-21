@@ -69,20 +69,20 @@ declare namespace dojo {
 		interface ColorNamed {
 			'black': ColorValue;
 			'silver': ColorValue;
-			'gray': ColorValue,
-			'white': ColorValue,
-			'maroon': ColorValue,
-			'red': ColorValue,
-			'purple': ColorValue,
-			'fuchsia': ColorValue,
-			'green': ColorValue,
-			'lime': ColorValue,
-			'olive': ColorValue,
-			'yellow': ColorValue,
-			'navy': ColorValue,
-			'blue': ColorValue,
-			'teal': ColorValue,
-			'aqua': ColorValue,
+			'gray': ColorValue;
+			'white': ColorValue;
+			'maroon': ColorValue;
+			'red': ColorValue;
+			'purple': ColorValue;
+			'fuchsia': ColorValue;
+			'green': ColorValue;
+			'lime': ColorValue;
+			'olive': ColorValue;
+			'yellow': ColorValue;
+			'navy': ColorValue;
+			'blue': ColorValue;
+			'teal': ColorValue;
+			'aqua': ColorValue;
 			'transparent': [number, number, number, number];
 		}
 

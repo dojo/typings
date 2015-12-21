@@ -524,6 +524,10 @@ declare namespace dojo {
 		emit(type: string | ExtensionEvent, event: any): boolean;
 	}
 
+	interface EventedConstructor {
+		new (): Evented;
+	}
+
 	/* dojo/dojo */
 
 	interface RequireTrace {
