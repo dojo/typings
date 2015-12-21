@@ -269,6 +269,16 @@ declare module 'dojo/dom-geometry' {
 	export = domGeom;
 }
 
+declare module 'dojo/dom-prop' {
+	const domProp: dojo.DomProp;
+	export = domProp;
+}
+
+declare module 'dojo/dom-style' {
+	const domStyle: dojo.DomStyle;
+	export = domStyle;
+}
+
 declare module 'dojo/Evented' {
 	const Evented: dojo.EventedConstructor;
 	export = Evented;
