@@ -468,6 +468,42 @@ declare namespace dojo {
 		getNodeProp(node: NodeOrString, name: string): any;
 	}
 
+	/* dojo/dom-class */
+
+	interface DomClass {
+
+		/**
+		 * Returns whether or not the specified classes are a portion of the
+		 * class list currently applied to the node.
+		 */
+		contains(node: NodeOrString, classStr: string): boolean;
+
+		/**
+		 * Adds the specified classes to the end of the class list on the
+		 * passed node. Will not re-apply duplicate classes.
+		 */
+		add(node: NodeOrString, classStr: string): void;
+
+		/**
+		 * Removes the specified classes from node. No `contains()`
+		 * check is required.
+		 */
+		remove(node: NodeOrString, classStr: string): void;
+
+		/**
+		 * Replaces one or more classes on a node if not present.
+		 * Operates more quickly than calling dojo.removeClass and dojo.addClass
+		 */
+		replace(node: NodeOrString, addClassStr: string | string[], removeClassStr: string | string[]): void;
+
+		/**
+		 * Adds a class to node if not present, or removes if present.
+		 * Pass a boolean condition if you want to explicitly add or remove.
+		 * Returns the condition that was specified directly or indirectly.
+		 */
+		toggle(node: NodeOrString, classStr: string | string[], condition?: boolean): boolean;
+	}
+
 	/* dojo/dom-form */
 
 	interface DomForm {
