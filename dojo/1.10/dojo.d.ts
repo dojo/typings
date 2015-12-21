@@ -504,6 +504,44 @@ declare namespace dojo {
 		toggle(node: NodeOrString, classStr: string | string[], condition?: boolean): boolean;
 	}
 
+	/* dojo/dom-construct */
+
+	type NodeFragmentOrString = NodeOrString | DocumentFragment;
+
+	/* TODO implement for TS 1.8 */
+	/* type PosString = 'first' | 'after' | 'before' | 'last' | 'replace' | 'only'; */
+
+	interface DomConstruct {
+
+		/**
+		 * instantiates an HTML fragment returning the corresponding DOM.
+		 */
+		toDom(frag: string, doc?: Document): DocumentFragment;
+
+		/**
+		 * Attempt to insert node into the DOM, choosing from various positioning options.
+		 * Returns the first argument resolved to a DOM node.
+		 */
+		place(node: NodeFragmentOrString, refNode: NodeOrString, position?: string /* PosString */ | number): HTMLElement;
+
+		/**
+		 * Create an element, allowing for optional attribute decoration
+		 * and placement.
+		 */
+		create(tag: NodeOrString, attrs?: GenericObject, refNode?: NodeOrString, pos?: string /* PosString */ | number): HTMLElement;
+
+		/**
+		 * safely removes all children of the node.
+		 */
+		empty(node: NodeOrString): void;
+
+		/**
+		 * Removes a node from its parent, clobbering it and all of its
+		 * children.
+		 */
+		destroy(node: NodeOrString): void;
+	}
+
 	/* dojo/dom-form */
 
 	interface DomForm {

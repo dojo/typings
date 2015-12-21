@@ -254,6 +254,11 @@ declare module 'dojo/dom-class' {
 	export = domClass;
 }
 
+declare module 'dojo/dom-construct' {
+	const domConstruct: dojo.DomConstruct;
+	export = domConstruct;
+}
+
 declare module 'dojo/dom-form' {
 	const domForm: dojo.DomForm;
 	export = domForm;
