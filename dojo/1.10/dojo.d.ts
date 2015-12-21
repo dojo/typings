@@ -366,13 +366,82 @@ declare namespace dojo {
 		new <T>(list: T[], fireOnOneCallback?: boolean, fireOnOneErrback?: boolean, consumeErrors?: boolean, canceller?: (reason: any) => void): DeferredList<T>;
 	}
 
+	/* dojo/dojo */
+
+	interface RequireTrace {
+		(group: string, args: any[]): void;
+		on: boolean | number;
+		group: GenericObject;
+		set(group: string | GenericObject, value: any): void;
+	}
+
+	interface Require {
+		(config: GenericObject, dependencies: string[], callback?: GenericFunction<void>): Require;
+		async: number| boolean;
+		has: dojo.Has;
+		isXdurl(url: string): boolean;
+		initSyncLoader(dojoRequirePlugin_: any, checkDojoRequirePlugin_: any, transformToAmd_: any): GenericObject;
+		getXhr(): XMLHttpRequest | ActiveXObject;
+		getText(url: string, async?: boolean, onLoad?: (responseText: string, async?: boolean) => void): string;
+		eval(text: string, hint?: string): any;
+		signal(type: string, args: any[]): void;
+		on(type: string, listener: (...args: any[]) => void): Handle;
+		map: { [id: string]: any };
+		waitms?: number;
+		legacyMode: boolean;
+		rawConfig: dojo._base.Config;
+		baseUrl: string;
+		combo?: {
+			add: () => void;
+			done(callback: (mids: string[], url?: string) => void, req: Require): void;
+			plugins?: GenericObject;
+		};
+		idle(): boolean;
+		toAbsMid(mid: string, referenceModule: string): string;
+		toUrl(name: string, referenceModule: string): string;
+		undef(moduleId: string, referenceModule: string): void;
+		pageLoaded: number | boolean;
+		injectUrl(url: string, callback?: () => void, owner?: HTMLScriptElement): HTMLScriptElement;
+		log(...args: any[]): void;
+		trace: RequireTrace;
+		boot?: [string[], Function] | number;
+	}
+
+	interface Define {
+		(mid: string, dependencies?: string[], factory?: any): void;
+		(dependencies: string[], factory?: any): void;
+		amd: string;
+	}
+
+	/* dojo/dom */
+
+	type NodeOrString = HTMLElement | string;
+
+	interface Dom {
+		/**
+		 * Returns DOM node with matching `id` attribute or falsy value (ex: null or undefined)
+		 * if not found.  If `id` is a DomNode, this function is a no-op.
+		 */
+		byId(id: NodeOrString, doc?: Document): HTMLElement;
+
+		/**
+		 * Returns true if node is a descendant of ancestor
+		 */
+		isDescendant(node: NodeOrString, ancestor: NodeOrString): boolean;
+
+		/**
+		 * Enable or disable selection on a node
+		 */
+		setSelectable(node: NodeOrString, selectable?: boolean): void;
+	}
+
 	/* dojo/dom-form */
 
 	interface DomForm {
 		/**
 		 * Serialize a form field to a JavaScript object.
 		 */
-		fieldToObject(inputNode: HTMLElement | string): GenericObject;
+		fieldToObject(inputNode: NodeOrString): GenericObject;
 
 		/**
 		 * Serialize a form node to a JavaScript object.
@@ -526,53 +595,6 @@ declare namespace dojo {
 
 	interface EventedConstructor {
 		new (): Evented;
-	}
-
-	/* dojo/dojo */
-
-	interface RequireTrace {
-		(group: string, args: any[]): void;
-		on: boolean | number;
-		group: GenericObject;
-		set(group: string | GenericObject, value: any): void;
-	}
-
-	interface Require {
-		(config: GenericObject, dependencies: string[], callback?: GenericFunction<void>): Require;
-		async: number| boolean;
-		has: dojo.Has;
-		isXdurl(url: string): boolean;
-		initSyncLoader(dojoRequirePlugin_: any, checkDojoRequirePlugin_: any, transformToAmd_: any): GenericObject;
-		getXhr(): XMLHttpRequest | ActiveXObject;
-		getText(url: string, async?: boolean, onLoad?: (responseText: string, async?: boolean) => void): string;
-		eval(text: string, hint?: string): any;
-		signal(type: string, args: any[]): void;
-		on(type: string, listener: (...args: any[]) => void): Handle;
-		map: { [id: string]: any };
-		waitms?: number;
-		legacyMode: boolean;
-		rawConfig: dojo._base.Config;
-		baseUrl: string;
-		combo?: {
-			add: () => void;
-			done(callback: (mids: string[], url?: string) => void, req: Require): void;
-			plugins?: GenericObject;
-		};
-		idle(): boolean;
-		toAbsMid(mid: string, referenceModule: string): string;
-		toUrl(name: string, referenceModule: string): string;
-		undef(moduleId: string, referenceModule: string): void;
-		pageLoaded: number | boolean;
-		injectUrl(url: string, callback?: () => void, owner?: HTMLScriptElement): HTMLScriptElement;
-		log(...args: any[]): void;
-		trace: RequireTrace;
-		boot?: [string[], Function] | number;
-	}
-
-	interface Define {
-		(mid: string, dependencies?: string[], factory?: any): void;
-		(dependencies: string[], factory?: any): void;
-		amd: string;
 	}
 
 	/* dojo/has */

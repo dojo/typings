@@ -239,6 +239,11 @@ declare module 'dojo/dojo' {
 	export = require;
 }
 
+declare module 'dojo/dom' {
+	const dom: dojo.Dom;
+	export = dom;
+}
+
 declare module 'dojo/dom-form' {
 	const domForm: dojo.DomForm;
 	export = domForm;

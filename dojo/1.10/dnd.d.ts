@@ -36,7 +36,7 @@ declare namespace dojo {
 		interface AutoSource extends Source { }
 
 		interface AutoSourceConstructor {
-			new (node: string | Element, params?: SourceArgs): AutoSource;
+			new (node: NodeOrString, params?: SourceArgs): AutoSource;
 		}
 
 		/* dojo/dnd/Avatar */
@@ -115,7 +115,7 @@ declare namespace dojo {
 			 * node or node's id to use as the parent node for dropped items
 			 * (must be underneath the 'node' parameter in the DOM)
 			 */
-			dropParent: Element | string;
+			dropParent: NodeOrString;
 
 			/**
 			 * skip startup(), which collects children, for deferred initialization
@@ -264,7 +264,7 @@ declare namespace dojo {
 			/**
 			 * a constructor of the Container
 			 */
-			new (node: string | Element, params?: ContainerArgs): Container;
+			new (node: NodeOrString, params?: ContainerArgs): Container;
 		}
 
 		interface Common {
@@ -345,7 +345,7 @@ declare namespace dojo {
 			 * A node (or node's id), which is used as a mouse handle.
 			 * If omitted, the node itself is used as a handle.
 			 */
-			handle?: HTMLElement | string;
+			handle?: NodeOrString;
 
 			/**
 			 * delay move by this number of pixels
@@ -429,7 +429,7 @@ declare namespace dojo {
 		}
 
 		interface MoveableConstructor {
-			new (node: HTMLElement | string, params?: MoveableArgs): Moveable;
+			new (node: NodeOrString, params?: MoveableArgs): Moveable;
 		}
 
 		/* dojo/dnd/Mover */
@@ -536,7 +536,7 @@ declare namespace dojo {
 			/**
 			 * constructor of the Selector
 			 */
-			new (node: string | Element, params?: ContainerArgs): Selector;
+			new (node: NodeOrString, params?: ContainerArgs): Selector;
 		}
 
 		/* dojo/dnd/Source */
@@ -698,7 +698,7 @@ declare namespace dojo {
 		}
 
 		interface SourceConstructor {
-			new (node: string | Element, params?: SourceArgs): Source;
+			new (node: NodeOrString, params?: SourceArgs): Source;
 		}
 
 		/* dojo/dnd/Target */
