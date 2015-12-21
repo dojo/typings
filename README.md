@@ -24,6 +24,13 @@ required.
 There are examples of how to use the typings in a TypeScript project.  They are located in
 the `examples` directory of this repository.
 
+## Limitations
+
+### Typings are global
+
+At the time of this writing (TypeScript 1.7), typings are global and absolute. In order to change module resolution
+    from `dojo/...` modules.d.ts will need to be updated
+
 ## Contributing
 
 If you wish to contribute to this repository, please see our

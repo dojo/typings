@@ -1,0 +1,19 @@
+{
+  "name": "dojo-declarations-tests",
+  "version": "1.10.0",
+  "description": "Tests for ambient declarations",
+  "main": "index.js",
+  "scripts": {
+    "test": "grunt test"
+  },
+  "keywords": [
+    "typescript",
+    "dojo"
+  ],
+  "author": "SitePen <support@sitepen.com>",
+  "license": "BSD-3-Clause",
+  "dependencies": {
+    "intern": "^3.0.6",
+    "typescript": "^1.7.5"
+  }
+}

@@ -1,0 +1,17 @@
+{
+	"version": "1.7.3",
+	"compilerOptions": {
+		"declaration": false,
+		"module": "umd",
+		"noImplicitAny": true,
+		"removeComments": false,
+		"target": "ES5"
+	},
+	"files": [
+		"./**/*.ts",
+		"./typings/**/*.d.ts",
+		"../index.d.ts",
+		"../modules.d.ts",
+		"./node_modules/intern/typings/intern/intern.d.ts"
+	]
+}

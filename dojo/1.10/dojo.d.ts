@@ -1,8 +1,31 @@
 /// <reference path="index.d.ts" />
 
-declare namespace dojo {
+type NodeIdentifier = string | Node;
 
+declare namespace dojo {
 	/* general implied types */
+
+	interface Position {
+		l: number,
+		t: number,
+	}
+
+	interface Rectangle {
+		w: number,
+		h: number
+	}
+
+	interface Point {
+		x: number,
+		y: number
+	}
+
+	interface SizeAndPosition extends Rectangle, Position { }
+
+	interface FullSizeAndPosition extends SizeAndPosition {
+		r: number,
+		b: number
+	}
 
 	interface GenericConstructor<T> {
 		new (...args: any[]): T;
@@ -691,6 +714,94 @@ declare namespace dojo {
 		 * offsetX, offsetY, layerX, and layerX properties
 		 */
 		normalizeEvent(event: Event): void;
+	}
+
+	/* dojo/dom */
+
+	interface dom {
+		byId(id: string, doc?: Node): Element;
+		isDescendant(node: NodeIdentifier, ancestor: NodeIdentifier): boolean;
+		setSelectable(node: NodeIdentifier, selectable: boolean): void;
+	}
+
+	/* dojo/dom-attr */
+
+	interface domAttr {
+		has(node: NodeIdentifier, name: string): boolean;
+		get(node: NodeIdentifier, name: string): string;
+		set(node: NodeIdentifier, node: string, value: any): Node;
+		set(node: NodeIdentifier, map: GenericObject): Node;
+		remove(node: NodeIdentifier, name: string): void;
+		getNodeProp(node: NodeIdentifier, name: string): any;
+	}
+
+	/* dojo/dom-class */
+
+	interface domClass {
+		contains(node: NodeIdentifier, classStr: string): boolean;
+		add(node: NodeIdentifier, classStr: string | string[]): void;
+		remove(node: NodeIdentifier, classStr: string | string[]): void;
+		replace(node: NodeIdentifier, addClassStr: string | string[], removeClassStr: string | string[]): void;
+		toggle(node: NodeIdentifier, classStr: string | string[], condition?: boolean): boolean;
+	}
+
+	/* dojo/dom-construct */
+
+	interface domConstruct {
+		toDom(frag: string, doc?: Document): DocumentFragment;
+		place(node: NodeIdentifier | DocumentFragment, refNode: NodeIdentifier, position?: string | number): Node;
+		create(tag: NodeIdentifier, attrs: GenericObject, refNode?: NodeIdentifier, pos?: string): Node;
+		empty(node: NodeIdentifier): void;
+		destroy(node: NodeIdentifier): void;
+	}
+
+	/* dojo/dom-form */
+
+	interface domForm {
+		fieldToObject(inputNode: NodeIdentifier): Object;
+		toObject(formNode: NodeIdentifier): Object;
+		toQuery(formNode: NodeIdentifier): string;
+		toJson(formNode: NodeIdentifier, prettyPrint: boolean): string;
+	}
+
+	/* dojo/dom-geometry */
+
+	interface domGeometry {
+		getPadExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
+		getBorderExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
+		getPadBorderExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
+		getMarginExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
+		getMarginBox(node: Node, computedStyle?: CSSStyleDeclaration): SizeAndPosition;
+		getContentBox(node: Node, computedStyle?: CSSStyleDeclaration): SizeAndPosition;
+		setBox(node: Node, l?: number, t?: number, w?: number, h?: number, u?: string): void;
+		isButtonTag(node: Node): boolean;
+		usesBorderBox(node: Node): boolean;
+		setContentSize(node: Node, box: Rectangle, computedStyle?: CSSStyleDeclaration): void;
+		setMarginBox(node: Node, box: SizeAndPosition, computedStyle?: CSSStyleDeclaration): void;
+		isBodyLtr(doc?: Document): boolean;
+		docScroll(doc?: Document): Point;
+		getIeDocumentElementOffset?(doc?: Document): Point;
+		fixIeBiDiScrollLeft(scrollLeft: number, doc?: Document): number;
+		poistion(node: Node, includeScroll: boolean): Point & Rectangle;
+		getMarginSize(node: Node, computedStyle?: CSSStyleDeclaration): Rectangle;
+		normalizeEvent(event: Object): Object;
+	}
+
+	/* dojo/dom-prop */
+
+	interface domProp {
+		get(node: NodeIdentifier, name: string): any;
+		set(node: NodeIdentifier, name: string, value: number): Node;
+		set(node: NodeIdentifier, name: Object): Node;
+	}
+
+	/* dojo/dom-style */
+
+	interface domStyle {
+		getComputedStyle(node: Node): CSSStyleDeclaration;
+		get(node: NodeIdentifier, name?: string): CSSStyleDeclaration;
+		set(node: NodeIdentifier, name: string, value: string): CSSStyleDeclaration;
+		set(node: NodeIdentifier, name: CSSStyleDeclaration): CSSStyleDeclaration;
 	}
 
 	/* dojo/Evented */

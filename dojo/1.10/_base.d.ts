@@ -975,7 +975,7 @@ declare namespace dojo {
 			 * Returns true if it is a JavaScript object (or an Array, a Function
 			 * or null)
 			 */
-			isObject(it: any): it is { [id: name]: any; };
+			isObject(it: any): it is { [id: string]: any; };
 
 			/**
 			 * similar to isArray() but more permissive
