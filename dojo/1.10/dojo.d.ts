@@ -5,27 +5,9 @@ type NodeIdentifier = string | Node;
 declare namespace dojo {
 	/* general implied types */
 
-	interface Position {
-		l: number,
-		t: number,
-	}
-
-	interface Rectangle {
-		w: number,
-		h: number
-	}
-
-	interface Point {
-		x: number,
-		y: number
-	}
-
-	interface SizeAndPosition extends Rectangle, Position { }
-
-	interface FullSizeAndPosition extends SizeAndPosition {
-		r: number,
-		b: number
-	}
+	type NodeOrString = Node | string;
+	type ElementOrString = Element | string;
+	type NodeFragmentOrString = NodeOrString | DocumentFragment;
 
 	interface GenericConstructor<T> {
 		new (...args: any[]): T;
@@ -438,14 +420,12 @@ declare namespace dojo {
 
 	/* dojo/dom */
 
-	type NodeOrString = HTMLElement | string;
-
 	interface Dom {
 		/**
 		 * Returns DOM node with matching `id` attribute or falsy value (ex: null or undefined)
-		 * if not found.  If `id` is a DomNode, this function is a no-op.
+		 * if not found. Internally if `id` is not a string then `id` returned.
 		 */
-		byId(id: NodeOrString, doc?: Document): HTMLElement;
+		byId(id: string, doc?: Document): Element;
 
 		/**
 		 * Returns true if node is a descendant of ancestor
@@ -455,7 +435,7 @@ declare namespace dojo {
 		/**
 		 * Enable or disable selection on a node
 		 */
-		setSelectable(node: NodeOrString, selectable?: boolean): void;
+		setSelectable(node: ElementOrString, selectable?: boolean): void;
 	}
 
 	/* dojo/dom-attr */
@@ -473,12 +453,13 @@ declare namespace dojo {
 		 * but it can also get any other attribute on a node, therefore it is unsafe
 		 * to type just a string.
 		 */
-		get(node: NodeOrString, name: string): any;
+		get(node: ElementOrString, name: string): any;
 
 		/**
 		 * Sets an attribute on an HTML element.
 		 */
-		set(node: NodeOrString, name: string, value: string): HTMLElement;
+		set(node: ElementOrString, name: string, value: string): Element;
+		set(node: ElementOrString, map: GenericObject): Element;
 
 		/**
 		 * Removes an attribute from an HTML element.
@@ -505,13 +486,13 @@ declare namespace dojo {
 		 * Adds the specified classes to the end of the class list on the
 		 * passed node. Will not re-apply duplicate classes.
 		 */
-		add(node: NodeOrString, classStr: string): void;
+		add(node: NodeOrString, classStr: string | string[]): void;
 
 		/**
 		 * Removes the specified classes from node. No `contains()`
 		 * check is required.
 		 */
-		remove(node: NodeOrString, classStr: string): void;
+		remove(node: NodeOrString, classStr: string | string[]): void;
 
 		/**
 		 * Replaces one or more classes on a node if not present.
@@ -528,8 +509,6 @@ declare namespace dojo {
 	}
 
 	/* dojo/dom-construct */
-
-	type NodeFragmentOrString = NodeOrString | DocumentFragment;
 
 	/* TODO implement for TS 1.8 */
 	/* type PosString = 'first' | 'after' | 'before' | 'last' | 'replace' | 'only'; */
@@ -588,7 +567,7 @@ declare namespace dojo {
 		 * Create a serialized JSON string from a form node or string
 		 * ID identifying the form to serialize
 		 */
-		toJson(formNode: HTMLFormElement | string): string;
+		toJson(formNode: HTMLFormElement | string, prettyPrint?: boolean): string;
 	}
 
 	/* dojo/dom-geometry */
@@ -608,9 +587,12 @@ declare namespace dojo {
 		b?: number;
 	}
 
-	interface DomGeometryXYBox extends DomGeometryWidthHeight {
-		x?: number;
-		y?: number;
+	interface Point {
+		x: number,
+		y: number
+	}
+
+	interface DomGeometryXYBox extends DomGeometryWidthHeight, Point {
 	}
 
 	interface DomGeometry {
@@ -620,19 +602,19 @@ declare namespace dojo {
 		 * Returns object with special values specifically useful for node
 		 * fitting.
 		 */
-		getPadExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+		getPadExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
 
 		/**
 		 * returns an object with properties useful for noting the border
 		 * dimensions.
 		 */
-		getBorderExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+		getBorderExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
 
 		/**
 		 * Returns object with properties useful for box fitting with
 		 * regards to padding.
 		 */
-		getPadBorderExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+		getPadBorderExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
 
 		/**
 		 * returns object with properties useful for box fitting with
@@ -644,26 +626,26 @@ declare namespace dojo {
 		 * Normally application code will not need to invoke this
 		 * directly, and will use the ...box... functions instead.
 		 */
-		getMarginExtents(node: Element, computedStyle?: GenericObject): DomGeometryBoxExtents;
+		getMarginExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
 
 		/**
 		 * returns an object that encodes the width, height, left and top
 		 * positions of the node's margin box.
 		 */
-		getMarginBox(node: Element, computedStyle?: GenericObject): DomGeometryBox;
+		getMarginBox(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBox;
 
 		/**
 		 * Returns an object that encodes the width, height, left and top
 		 * positions of the node's content box, irrespective of the
 		 * current box model.
 		 */
-		getContentBox(node: Element, computedStyle?: GenericObject): DomGeometryBox;
+		getContentBox(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBox;
 
 		/**
 		 * Sets the size of the node's contents, irrespective of margins,
 		 * padding, or borders.
 		 */
-		setContentSize(node: Element, box: DomGeometryWidthHeight, computedStyle?: GenericObject): void;
+		setContentSize(node: Element, box: DomGeometryWidthHeight, computedStyle?: CSSStyleDeclaration): void;
 
 		/**
 		 * sets the size of the node's margin box and placement
@@ -671,7 +653,7 @@ declare namespace dojo {
 		 * passthrough to setBox that handles box-model vagaries for
 		 * you.
 		 */
-		setMarginBox(node: Element, box: DomGeometryBox, computedStyle?: GenericObject): void;
+		setMarginBox(node: Element, box: DomGeometryBox, computedStyle?: CSSStyleDeclaration): void;
 
 		/**
 		 * Returns true if the current language is left-to-right, and false otherwise.
@@ -681,12 +663,12 @@ declare namespace dojo {
 		/**
 		 * Returns an object with {node, x, y} with corresponding offsets.
 		 */
-		docScroll(doc: Document): { x: number; y: number; };
+		docScroll(doc?: Document): Point;
 
 		/**
 		 * Deprecated method previously used for IE6-IE7.  Now, just returns `{x:0, y:0}`.
 		 */
-		getIeDocumentElementOffset(doc: Document): { x: number; y: number; };
+		getIeDocumentElementOffset(doc: Document): Point;
 
 		/**
 		 * In RTL direction, scrollLeft should be a negative value, but IE
@@ -707,7 +689,7 @@ declare namespace dojo {
 		 * returns an object that encodes the width and height of
 		 * the node's margin box
 		 */
-		getMarginSize(node: Element, computedStyle?: GenericObject): DomGeometryWidthHeight;
+		getMarginSize(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryWidthHeight;
 
 		/**
 		 * Normalizes the geometry of a DOM event, normalizing the pageX, pageY,
@@ -716,93 +698,23 @@ declare namespace dojo {
 		normalizeEvent(event: Event): void;
 	}
 
-	/* dojo/dom */
-
-	interface dom {
-		byId(id: string, doc?: Node): Element;
-		isDescendant(node: NodeIdentifier, ancestor: NodeIdentifier): boolean;
-		setSelectable(node: NodeIdentifier, selectable: boolean): void;
-	}
-
-	/* dojo/dom-attr */
-
-	interface domAttr {
-		has(node: NodeIdentifier, name: string): boolean;
-		get(node: NodeIdentifier, name: string): string;
-		set(node: NodeIdentifier, node: string, value: any): Node;
-		set(node: NodeIdentifier, map: GenericObject): Node;
-		remove(node: NodeIdentifier, name: string): void;
-		getNodeProp(node: NodeIdentifier, name: string): any;
-	}
-
-	/* dojo/dom-class */
-
-	interface domClass {
-		contains(node: NodeIdentifier, classStr: string): boolean;
-		add(node: NodeIdentifier, classStr: string | string[]): void;
-		remove(node: NodeIdentifier, classStr: string | string[]): void;
-		replace(node: NodeIdentifier, addClassStr: string | string[], removeClassStr: string | string[]): void;
-		toggle(node: NodeIdentifier, classStr: string | string[], condition?: boolean): boolean;
-	}
-
-	/* dojo/dom-construct */
-
-	interface domConstruct {
-		toDom(frag: string, doc?: Document): DocumentFragment;
-		place(node: NodeIdentifier | DocumentFragment, refNode: NodeIdentifier, position?: string | number): Node;
-		create(tag: NodeIdentifier, attrs: GenericObject, refNode?: NodeIdentifier, pos?: string): Node;
-		empty(node: NodeIdentifier): void;
-		destroy(node: NodeIdentifier): void;
-	}
-
-	/* dojo/dom-form */
-
-	interface domForm {
-		fieldToObject(inputNode: NodeIdentifier): Object;
-		toObject(formNode: NodeIdentifier): Object;
-		toQuery(formNode: NodeIdentifier): string;
-		toJson(formNode: NodeIdentifier, prettyPrint: boolean): string;
-	}
-
-	/* dojo/dom-geometry */
-
-	interface domGeometry {
-		getPadExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
-		getBorderExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
-		getPadBorderExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
-		getMarginExtents(node: Node, computedStyle?: CSSStyleDeclaration): FullSizeAndPosition;
-		getMarginBox(node: Node, computedStyle?: CSSStyleDeclaration): SizeAndPosition;
-		getContentBox(node: Node, computedStyle?: CSSStyleDeclaration): SizeAndPosition;
-		setBox(node: Node, l?: number, t?: number, w?: number, h?: number, u?: string): void;
-		isButtonTag(node: Node): boolean;
-		usesBorderBox(node: Node): boolean;
-		setContentSize(node: Node, box: Rectangle, computedStyle?: CSSStyleDeclaration): void;
-		setMarginBox(node: Node, box: SizeAndPosition, computedStyle?: CSSStyleDeclaration): void;
-		isBodyLtr(doc?: Document): boolean;
-		docScroll(doc?: Document): Point;
-		getIeDocumentElementOffset?(doc?: Document): Point;
-		fixIeBiDiScrollLeft(scrollLeft: number, doc?: Document): number;
-		poistion(node: Node, includeScroll: boolean): Point & Rectangle;
-		getMarginSize(node: Node, computedStyle?: CSSStyleDeclaration): Rectangle;
-		normalizeEvent(event: Object): Object;
-	}
-
 	/* dojo/dom-prop */
 
-	interface domProp {
-		get(node: NodeIdentifier, name: string): any;
-		set(node: NodeIdentifier, name: string, value: number): Node;
-		set(node: NodeIdentifier, name: Object): Node;
+	interface DomProp {
+		get(node: ElementOrString, name: string): any;
+		set(node: ElementOrString, name: string, value: number): Element;
+		set(node: ElementOrString, name: Object): Element;
 	}
 
 	/* dojo/dom-style */
 
-	interface domStyle {
+	interface DomStyle {
 		getComputedStyle(node: Node): CSSStyleDeclaration;
-		get(node: NodeIdentifier, name?: string): CSSStyleDeclaration;
-		set(node: NodeIdentifier, name: string, value: string): CSSStyleDeclaration;
-		set(node: NodeIdentifier, name: CSSStyleDeclaration): CSSStyleDeclaration;
+		get(node: ElementOrString, name?: string): CSSStyleDeclaration;
+		set(node: ElementOrString, name: string, value: string): CSSStyleDeclaration;
+		set(node: ElementOrString, name: CSSStyleDeclaration): CSSStyleDeclaration;
 	}
+
 
 	/* dojo/Evented */
 
