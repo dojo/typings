@@ -244,6 +244,11 @@ declare module 'dojo/dom' {
 	export = dom;
 }
 
+declare module 'dojo/dom-attr' {
+	const domAttr: dojo.DomAttr;
+	export = domAttr;
+}
+
 declare module 'dojo/dom-form' {
 	const domForm: dojo.DomForm;
 	export = domForm;

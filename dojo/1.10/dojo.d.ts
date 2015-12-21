@@ -435,6 +435,39 @@ declare namespace dojo {
 		setSelectable(node: NodeOrString, selectable?: boolean): void;
 	}
 
+	/* dojo/dom-attr */
+
+	interface DomAttr {
+		/**
+		 * Returns true if the requested attribute is specified on the
+		 * given element, and false otherwise.
+		 */
+		has(node: NodeOrString, name: string): boolean;
+
+		/**
+		 * Gets an attribute on an HTML element.
+		 * Because sometimes this uses node.getAttribute, it should be a string,
+		 * but it can also get any other attribute on a node, therefore it is unsafe
+		 * to type just a string.
+		 */
+		get(node: NodeOrString, name: string): any;
+
+		/**
+		 * Sets an attribute on an HTML element.
+		 */
+		set(node: NodeOrString, name: string, value: string): HTMLElement;
+
+		/**
+		 * Removes an attribute from an HTML element.
+		 */
+		remove(node: NodeOrString, name: string): void;
+
+		/**
+		 * Returns an effective value of a property or an attribute.
+		 */
+		getNodeProp(node: NodeOrString, name: string): any;
+	}
+
 	/* dojo/dom-form */
 
 	interface DomForm {
