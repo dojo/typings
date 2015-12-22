@@ -9,7 +9,7 @@ module.exports = function (grunt) {
 		patterns: [
 			{
 				match: /import ([a-zA-Z0-9_]+) from ('[^']+');?/g,
-				replacement: '$1 = require($2);'
+				replacement: 'import $1 = require($2);'
 			}
 		]
 	});

@@ -13,6 +13,7 @@
   "author": "SitePen <support@sitepen.com>",
   "license": "BSD-3-Clause",
   "dependencies": {
+    "grunt-ts": "^5.2.0",
     "intern": "^3.0.6",
     "typescript": "^1.7.5"
   },
