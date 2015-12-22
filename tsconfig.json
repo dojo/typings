@@ -5,10 +5,11 @@
 		"module": "umd",
 		"noImplicitAny": true,
 		"removeComments": false,
-		"target": "ES5"
+		"target": "es5",
+		"outDir": "_build"
 	},
 	"files": [
-		"./dojo/1.10/index.d.ts",
-		"./dojo/1.10/modules.d.ts"
+		"dojo/1.10/index.d.ts",
+		"dojo/1.10/modules.d.ts"
 	]
 }
