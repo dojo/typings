@@ -734,7 +734,6 @@ declare namespace dojo {
 		set(node: ElementOrString, name: string | DomComputedStyle, value?: string): DomComputedStyle;
 	}
 
-
 	/* dojo/Evented */
 
 	interface Evented {

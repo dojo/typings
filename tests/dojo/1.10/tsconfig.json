@@ -16,7 +16,7 @@
 		"./dom-attr.ts",
 		"./typings/dojo2/dojo2.d.ts",
 		"./typings/sinon/sinon.d.ts",
-		"../modules.d.ts",
+		"../../../dojo/1.10/modules.d.ts",
 		"./node_modules/intern/typings/intern/intern.d.ts"
 	]
 }

@@ -8,8 +8,17 @@
 		"target": "es5",
 		"outDir": "_build"
 	},
+	"filesGlob": [
+		"dojo/**/*.ts",
+		"dijit/**/*.ts",
+		"dojox/**/*.ts"
+	],
 	"files": [
 		"dojo/1.10/index.d.ts",
-		"dojo/1.10/modules.d.ts"
+		"dojo/1.10/modules.d.ts",
+		"dijit/1.10/index.d.ts",
+		"dijit/1.10/modules.d.ts",
+		"dojox/1.10/index.d.ts",
+		"dojox/1.10/modules.d.ts"
 	]
 }

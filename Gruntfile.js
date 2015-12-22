@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 		failOnTypeErrors: true,
 		fast: 'never'
 	});
-	tsconfig.files = tsconfig.files.map(function (glob) {
+	tsconfig.filesGlob = tsconfig.filesGlob.map(function (glob) {
 		// Remove the leading './' from the glob because grunt-ts
 		// sees it and thinks it needs to create a .baseDir.ts which
 		// messes up the "dist" compilation
@@ -33,7 +33,7 @@ module.exports = function (grunt) {
 		version: packageJson.version,
 		tsconfig: tsconfig,
 		tsconfigContent: tsconfigContent,
-		all: ['<%= tsconfig.files %>'],
+		all: ['<%= tsconfig.filesGlob %>'],
 		devDirectory: '<%= tsconfig.compilerOptions.outDir %>',
 
 		ts: {

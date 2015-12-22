@@ -19,6 +19,12 @@ the `modules.d.ts`.  If you need to modify the names of the ambient modules to m
 runtime environment, then you would copy the `modules.d.ts` and rename all the modules as
 required.
 
+### Building
+
+The repositry has a `Gruntfile.js` and a development dependency of [grunt](http://gruntjs.com/)
+that can help validate any changes to the typings.  By running `grunt` or `grunt dev` it will
+compile the files with `tsc` as well as run `tslint` against the core files.
+
 ## Examples
 
 There are examples of how to use the typings in a TypeScript project.  They are located in
