@@ -1,6 +1,13 @@
 declare namespace dojo {
 	namespace dnd {
 
+		/* implied types */
+
+		interface DndLocation {
+			t: number;
+			l: number;
+		}
+
 		/* dojo/dnd/autoscroll */
 
 		interface AutoScroll {
@@ -415,17 +422,17 @@ declare namespace dojo {
 			 * called during every move notification;
 			 * should actually move the node; can be overwritten.
 			 */
-			onMove(mover: Mover, leftTop: DomGeometryBox, e?: Event): void;
+			onMove(mover: Mover, leftTop: DndLocation, e?: Event): void;
 
 			/**
 			 * called before every incremental move; can be overwritten.
 			 */
-			onMoving(mover: Mover, leftTop: DomGeometryBox): void;
+			onMoving(mover: Mover, leftTop: DndLocation): void;
 
 			/**
 			 * called after every incremental move; can be overwritten.
 			 */
-			onMoved(mover: Mover, leftTop: DomGeometryBox): void;
+			onMoved(mover: Mover, leftTop: DndLocation): void;
 		}
 
 		interface MoveableConstructor {
@@ -717,7 +724,7 @@ declare namespace dojo {
 
 		interface TimedMoveable extends Moveable {
 			onMoveStop(mover: Mover): void;
-			onMove(mover: Mover, leftTop: DomGeometryBox): void;
+			onMove(mover: Mover, leftTop: DndLocation): void;
 		}
 
 		interface TimedMoveableConstructor {

@@ -1,7 +1,5 @@
 /// <reference path="index.d.ts" />
 
-type NodeIdentifier = string | Node;
-
 declare namespace dojo {
 	/* general implied types */
 
@@ -602,19 +600,19 @@ declare namespace dojo {
 		 * Returns object with special values specifically useful for node
 		 * fitting.
 		 */
-		getPadExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
+		getPadExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
 
 		/**
 		 * returns an object with properties useful for noting the border
 		 * dimensions.
 		 */
-		getBorderExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
+		getBorderExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
 
 		/**
 		 * Returns object with properties useful for box fitting with
 		 * regards to padding.
 		 */
-		getPadBorderExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
+		getPadBorderExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
 
 		/**
 		 * returns object with properties useful for box fitting with
@@ -626,26 +624,26 @@ declare namespace dojo {
 		 * Normally application code will not need to invoke this
 		 * directly, and will use the ...box... functions instead.
 		 */
-		getMarginExtents(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBoxExtents;
+		getMarginExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
 
 		/**
 		 * returns an object that encodes the width, height, left and top
 		 * positions of the node's margin box.
 		 */
-		getMarginBox(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBox;
+		getMarginBox(node: Element, computedStyle?: DomComputedStyle): DomGeometryBox;
 
 		/**
 		 * Returns an object that encodes the width, height, left and top
 		 * positions of the node's content box, irrespective of the
 		 * current box model.
 		 */
-		getContentBox(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryBox;
+		getContentBox(node: Element, computedStyle?: DomComputedStyle): DomGeometryBox;
 
 		/**
 		 * Sets the size of the node's contents, irrespective of margins,
 		 * padding, or borders.
 		 */
-		setContentSize(node: Element, box: DomGeometryWidthHeight, computedStyle?: CSSStyleDeclaration): void;
+		setContentSize(node: Element, box: DomGeometryWidthHeight, computedStyle?: DomComputedStyle): void;
 
 		/**
 		 * sets the size of the node's margin box and placement
@@ -653,7 +651,7 @@ declare namespace dojo {
 		 * passthrough to setBox that handles box-model vagaries for
 		 * you.
 		 */
-		setMarginBox(node: Element, box: DomGeometryBox, computedStyle?: CSSStyleDeclaration): void;
+		setMarginBox(node: Element, box: DomGeometryBox, computedStyle?: DomComputedStyle): void;
 
 		/**
 		 * Returns true if the current language is left-to-right, and false otherwise.
@@ -689,7 +687,7 @@ declare namespace dojo {
 		 * returns an object that encodes the width and height of
 		 * the node's margin box
 		 */
-		getMarginSize(node: Element, computedStyle?: CSSStyleDeclaration): DomGeometryWidthHeight;
+		getMarginSize(node: Element, computedStyle?: DomComputedStyle): DomGeometryWidthHeight;
 
 		/**
 		 * Normalizes the geometry of a DOM event, normalizing the pageX, pageY,
@@ -701,18 +699,39 @@ declare namespace dojo {
 	/* dojo/dom-prop */
 
 	interface DomProp {
+		/**
+		 * Gets a property on an HTML element.
+		 */
 		get(node: ElementOrString, name: string): any;
-		set(node: ElementOrString, name: string, value: number): Element;
-		set(node: ElementOrString, name: Object): Element;
+
+		/**
+		 * Sets a property on an HTML element.
+		 */
+		set(node: ElementOrString, name: string | GenericObject, value?: any): Element;
 	}
 
 	/* dojo/dom-style */
 
+	interface DomComputedStyle extends CSSStyleDeclaration {
+		/* TODO: type common style properties */
+	}
+
 	interface DomStyle {
-		getComputedStyle(node: Node): CSSStyleDeclaration;
-		get(node: ElementOrString, name?: string): CSSStyleDeclaration;
-		set(node: ElementOrString, name: string, value: string): CSSStyleDeclaration;
-		set(node: ElementOrString, name: CSSStyleDeclaration): CSSStyleDeclaration;
+		/**
+		 * Returns a "computed style" object.
+		 */
+		getComputedStyle(node: Node): DomComputedStyle;
+
+		/**
+		 * Accesses styles on a node.
+		 */
+		get(node: ElementOrString): DomComputedStyle;
+		get(node: ElementOrString, name: string): string | number;
+
+		/**
+		 * Sets styles on a node.
+		 */
+		set(node: ElementOrString, name: string | DomComputedStyle, value?: string): DomComputedStyle;
 	}
 
 
