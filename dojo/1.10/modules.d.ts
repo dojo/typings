@@ -144,6 +144,66 @@ declare module 'dojo/currency' {
 	export = currency;
 }
 
+declare module 'dojo/data/api/Identity' {
+	const Identity: dojo.data.api.IdentityConstructor;
+	export = Identity;
+}
+
+declare module 'dojo/data/api/Item' {
+	const Item: dojo.data.api.ItemConstructor;
+	export = Item;
+}
+
+declare module 'dojo/data/api/Notification' {
+	const Notification: dojo.data.api.NotificationConstructor;
+	export = Notification;
+}
+
+declare module 'dojo/data/api/Read' {
+	const Read: dojo.data.api.ReadConstructor;
+	export = Read;
+}
+
+declare module 'dojo/data/api/Request' {
+	const Request: dojo.data.api.RequestConstructor;
+	export = Request;
+}
+
+declare module 'dojo/data/api/Write' {
+	const Write: dojo.data.api.WriteConstructor;
+	export = Write;
+}
+
+declare module 'dojo/data/util/filter' {
+	const filter: dojo.data.util.Filter;
+	export = filter;
+}
+
+declare module 'dojo/data/util/simpleFetch' {
+	const simpleFetch: dojo.data.util.SimpleFetch;
+	export = simpleFetch;
+}
+
+declare module 'dojo/data/util/sorter' {
+	const sorter: dojo.data.util.Sorter;
+	export = sorter;
+}
+
+declare module 'dojo/data/ItemFileReadStore' {
+	const ItemFileReadStore: dojo.data.ItemFileReadStoreConstructor;
+	export = ItemFileReadStore;
+}
+
+declare module 'dojo/data/ItemFileWriteStore' {
+	const ItemFileWriteStore: dojo.data.ItemFileWriteStoreConstructor;
+	export = ItemFileWriteStore;
+}
+
+declare module 'dojo/data/ObjectStore' {
+	const ObjectStore: dojo.data.ObjectStoreConstructor;
+	export = ObjectStore;
+}
+
 declare module 'dojo/date' {
 	const date: dojo.date.Date;
 	export = date;
