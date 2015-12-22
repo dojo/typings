@@ -3,8 +3,8 @@ import assert = require('intern/chai!assert');
 import domAttr = require('dojo/dom-attr');
 import domProp = require('dojo/dom-prop');
 import domStyle = require('dojo/dom-style');
-import domConstruct = require('dojo2/dom-construct');
-import has = require('dojo2/sniff');
+import domConstruct = require('dojo/dom-construct');
+import has = require('dojo/sniff');
 
 
 var attr = "data-dojo-test-attribute";
@@ -247,6 +247,7 @@ registerSuite({
                 setNode = node;
                 setName = name;
                 setValue = value;
+                return node as Element;
             }
 
             //act
@@ -282,15 +283,16 @@ registerSuite({
 
             var origDomStyle = domStyle.set;
             domStyle.set = function (node, value) {
-                setNode = node;
-                setValue = value;
+                styleNode = node;
+                styleValue = value;
+                return domStyle.get(node);
             }
 
             //act
             domAttr.set(node, "style", styles);
 
             //assert
-            assert.equal(setValue, styles,
+            assert.equal(styleValue, styles,
                 "when the attribute is 'style' and a dictionary is set, then it is set properly");
             domStyle.set = origDomStyle;
         }
@@ -668,7 +670,7 @@ registerSuite({
                 assert.equal(ctr, 0, "onfocus ctr == 0");
                 var def = this.async(1000);
 
-                firstCallback = def.callback(function () {
+                var firstCallback = def.callback(function () {
                     if (callbackFired) {
                         console.log("one");
                         assert.equal(ctr, 1, "onfocus ctr == 1");
@@ -679,7 +681,7 @@ registerSuite({
                     }
                 });
 
-                secondCallback = def.callback(function () {
+                var secondCallback = def.callback(function () {
                     if (callbackFired) {
                         console.log("two");
                         callbackFired = false;
@@ -688,7 +690,7 @@ registerSuite({
                         setTimeout(secondCallback, 50); //try again in a bit
                     }
                 });
-                thirdCallback = def.callback(function () {
+                var thirdCallback = def.callback(function () {
                     if (callbackFired) {
                         console.log("three");
                         assert.equal(ctr, 2, "onfocus ctr == 2");
@@ -717,7 +719,7 @@ registerSuite({
                 assert.equal(ctr, 0);
                 var def = this.async(1000);
 
-                firstCallback = def.callback(function () {
+                var firstCallback = def.callback(function () {
                     if (callbackFired) {
                         assert.equal(ctr, 1, "onfocus ctr == 1");
                         callbackFired = false;
@@ -727,7 +729,7 @@ registerSuite({
                     }
                 });
 
-                secondCallback = def.callback(function () {
+                var secondCallback = def.callback(function () {
                     if (callbackFired) {
                         callbackFired = false;
                         input.focus();
@@ -735,7 +737,7 @@ registerSuite({
                         setTimeout(secondCallback, 50); //try again in a bit
                     }
                 });
-                thirdCallback = def.callback(function () {
+                var thirdCallback = def.callback(function () {
                     if (callbackFired) {
                         assert.equal(ctr, 2, "onfocus ctr == 2");
                         callbackFired = false;

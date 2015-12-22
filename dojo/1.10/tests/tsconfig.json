@@ -3,14 +3,19 @@
 	"compilerOptions": {
 		"declaration": false,
 		"module": "umd",
-		"noImplicitAny": true,
+		"noImplicitAny": false,
 		"removeComments": false,
 		"target": "ES5"
 	},
+	"filesGlob": [
+		"./*.ts",
+		"./typings/**/*.d.ts"
+	],
 	"files": [
-		"./**/*.ts",
-		"./typings/**/*.d.ts",
-		"../index.d.ts",
+		"./dom.ts",
+		"./dom-attr.ts",
+		"./typings/dojo2/dojo2.d.ts",
+		"./typings/sinon/sinon.d.ts",
 		"../modules.d.ts",
 		"./node_modules/intern/typings/intern/intern.d.ts"
 	]

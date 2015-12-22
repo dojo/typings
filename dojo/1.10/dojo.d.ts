@@ -456,7 +456,7 @@ declare namespace dojo {
 		/**
 		 * Sets an attribute on an HTML element.
 		 */
-		set(node: ElementOrString, name: string, value: string): Element;
+		set(node: ElementOrString, name: string, value: any): Element;
 		set(node: ElementOrString, map: GenericObject): Element;
 
 		/**
@@ -586,8 +586,8 @@ declare namespace dojo {
 	}
 
 	interface Point {
-		x: number,
-		y: number
+		x: number;
+		y: number;
 	}
 
 	interface DomGeometryXYBox extends DomGeometryWidthHeight, Point {

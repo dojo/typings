@@ -319,6 +319,11 @@ declare module 'dojo/request/xhr' {
 	export = xhr;
 }
 
+declare module 'dojo/sniff' {
+	const sniff: dojo.Has;
+	export = sniff;
+}
+
 declare module 'dojo/text' {
 	const text: dojo.Text;
 	export = text;
