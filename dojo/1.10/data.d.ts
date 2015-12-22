@@ -510,7 +510,7 @@ declare namespace dojo {
 			/**
 			 * Internal function for looking at the values contained by the item.
 			 */
-			_containsValue(item: T, attribute: string, value: any, regexp?: RegEx): boolean;
+			_containsValue(item: T, attribute: string, value: any, regexp?: RegExp): boolean;
 
 			/**
 			 * See dojo/data/api/Read.isItem()
