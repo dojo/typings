@@ -35,7 +35,25 @@ the `examples` directory of this repository.
 ### Typings are global
 
 At the time of this writing (TypeScript 1.7), typings are global and absolute. In order to change module resolution
-    from `dojo/...` modules.d.ts will need to be updated
+from `dojo/...` modules.d.ts will need to be updated
+
+### String Literals
+
+The current typings are build around TypeScript 1.7.  TypeScript 1.8 introduced string literal types and there
+are improvements that can be made to the typings, several of them noted as comments in the existing typings.
+
+### AMD Plugin Globbing
+
+Currently, TypeScript does not support globbing of AMD modules.  There is an open ticket for this type of support
+(see Microsoft/TypeScript#5787).  Until that is done, in order to use a plugin properly, you will have to declare
+the ambient module in a projects `.d.ts`.  For example to use `dojo/text` you would want to do something like this:
+
+```typescript
+declare module 'dojo/text!./path/to/some.html' {
+    const some: string;
+    export = some;
+}
+```
 
 ## Contributing
 
