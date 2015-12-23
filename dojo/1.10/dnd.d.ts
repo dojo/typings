@@ -192,7 +192,7 @@ declare namespace dojo {
 			/**
 			 * returns a list (an array) of all valid child nodes
 			 */
-			getAllNodes(): NodeList;
+			getAllNodes(): NodeList<Node>;
 
 			/**
 			 * sync up the node list with the data map
@@ -493,7 +493,7 @@ declare namespace dojo {
 			/**
 			 * returns a list (an array) of selected nodes
 			 */
-			getSelectedNodes(): NodeList;
+			getSelectedNodes(): NodeList<Node>;
 
 			/**
 			 * unselects all items

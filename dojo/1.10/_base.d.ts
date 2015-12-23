@@ -13,12 +13,12 @@ declare namespace dojo {
 			 *                                     array and returns true if the condition is met.
 			 * @param {object} thisObj may be used to scope the call to callback
 			 */
-			every<T>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => boolean | string, thisObj?: any): boolean;
+			every<T>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => boolean | string, thisObj?: Object): boolean;
 
 			/**
 			 * Determines whether or not any item in arr satisfies the condition implemented by callback.
 			 */
-			some<T>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => boolean | string, thisObj?: any): boolean;
+			some<T>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => boolean | string, thisObj?: Object): boolean;
 
 			/**
 			 * locates the last index of the provided value in the passed array. If the value is not found, -1
@@ -38,19 +38,19 @@ declare namespace dojo {
 			 * locates the last index of the provided value in the passed array. If the value is not found,
 			 * -1 is returned.
 			 */
-			forEach<T>(arr: T[], callback: (item: T, idx: number, arr: T[]) => void, thisObj?: any): void;
+			forEach<T>(arr: T[], callback: (item: T, idx: number, arr: T[]) => void, thisObj?: Object): void;
 
 			/**
 			 * for every item in arr, callback is invoked. Return values are ignored. If you want to break
 			 * out of the loop, consider using array.every() or array.some().
 			 */
-			map<T, U>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => U | string, thisObj?: any, Ctr?: dojo.GenericConstructor<U[]>): U[];
+			map<T, U>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => U | string, thisObj?: Object, Ctr?: dojo.GenericConstructor<U[]>): U[];
 
 			/**
 			 * Returns a new Array with those items from arr that match the condition implemented by
 			 * callback.
 			 */
-			filter<T>(arr: T[], callback: (item: T, idx: number, arr: T[]) => boolean, thisObj?: any): T[];
+			filter<T>(arr: T[], callback: (item: T, idx: number, arr: T[]) => boolean, thisObj?: Object): T[];
 
 			clearCache(): void;
 		}
@@ -1218,12 +1218,12 @@ declare namespace dojo {
 			 * Invoke callback with globalObject as dojo.global and
 			 * globalObject.document as dojo.doc.
 			 */
-			withGlobal<T>(globalObject: GenericObject, callback: GenericFunction<T>, thisObject?: GenericObject, cbArguments?: any[]): T;
+			withGlobal<T>(globalObject: GenericObject, callback: GenericFunction<T>, thisObject?: Object, cbArguments?: any[]): T;
 
 			/**
 			 * Invoke callback with documentObject as dojo/_base/window::doc.
 			 */
-			withDoc<T>(documentObject: Document, callback: GenericFunction<T>, thisObject?: GenericObject, cbArguments?: any[]): T;
+			withDoc<T>(documentObject: Document, callback: GenericFunction<T>, thisObject?: Object, cbArguments?: any[]): T;
 		}
 
 		/* dojo/_base/xhr */

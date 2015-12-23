@@ -354,6 +354,11 @@ declare module 'dojo/io-query' {
 	export = ioQuery;
 }
 
+declare module 'dojo/NodeList' {
+	const NodeList: dojo.NodeListConstructor;
+	export = NodeList;
+}
+
 declare module 'dojo/number' {
 	const number: dojo.Number;
 	export = number;
@@ -362,6 +367,23 @@ declare module 'dojo/number' {
 declare module 'dojo/on' {
 	const on: dojo.On;
 	export = on;
+}
+
+declare module 'dojo/query' {
+	const query: dojo.Query;
+	export = query;
+}
+
+/* modules for included selector engines */
+
+declare module 'dojo/query!acme' {
+	const query: dojo.Query;
+	export = query;
+}
+
+declare module 'dojo/query!lite' {
+	const query: dojo.Query;
+	export = query;
 }
 
 declare module 'dojo/request' {
