@@ -201,7 +201,7 @@ declare namespace dojo {
 				/**
 				 * Retrieves the children of an object.
 				 */
-				getChildren(parent: T, options?: O): R;
+				getChildren(parent: T, options?: O): QueryResults<T>;
 
 				/**
 				 * Returns any metadata about the object. This may include attribution,
