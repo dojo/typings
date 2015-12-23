@@ -436,6 +436,21 @@ declare module 'dojo/sniff' {
 	export = sniff;
 }
 
+declare module 'dojo/store/api/Store' {
+	const Store: dojo.store.api.StoreConstructor;
+	export = Store;
+}
+
+declare module 'dojo/store/util/QueryResults' {
+	const QueryResults: dojo.store.util.QueryResultsFunction;
+	export = QueryResults;
+}
+
+declare module 'dojo/store/util/SimpleQueryEngine' {
+	const SimpleQueryEngine: dojo.store.util.SimpleQueryEngine;
+	export = SimpleQueryEngine;
+}
+
 declare module 'dojo/text' {
 	const text: dojo.Text;
 	export = text;

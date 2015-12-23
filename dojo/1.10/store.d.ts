@@ -136,11 +136,7 @@ declare namespace dojo {
 				abort(): void;
 			}
 
-			interface Store<
-				T extends Object,
-				Q extends BaseQueryType,
-				O extends QueryOptions,
-				R extends QueryResults<Object>>{
+			interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions>{
 
 				/**
 				 * If the store has a single primary key, this indicates the property to use as the
@@ -192,7 +188,7 @@ declare namespace dojo {
 				 * Queries the store for objects. This does not alter the store, but returns a
 				 * set of data from the store.
 				 */
-				query(query: Q, options?: O): R;
+				query(query: Q, options?: O): QueryResults<T>;
 
 				/**
 				 * Starts a new transaction.
@@ -213,6 +209,27 @@ declare namespace dojo {
 				 */
 				getMetadata(object: T): Object;
 			}
+
+			interface StoreConstructor {
+				new <T extends Object, Q extends BaseQueryType, O extends QueryOptions>(): Store<T, Q, O>;
+			}
 		}
+
+		namespace util {
+
+			/* dojo/store/util/QueryResults */
+
+			interface QueryResultsFunction {
+				/**
+				 * A function that wraps the results of a store query with additional
+				 * methods.
+				 */
+				<T extends Object>(results: T[]): api.QueryResults<T>;
+			}
+
+			/* dojo/store/util/SimpleQueryEngine */
+			interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> {}
+		}
+
 	}
 }
