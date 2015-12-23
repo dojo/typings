@@ -7,7 +7,7 @@ import * as query from 'dojo/query';
 const results = query('*');
 
 /* Now we are going to assert that we will be only returning HTML elements,
-  this now means resulting functions will be typed approriatly */
+  this now means resulting functions will be typed appropriately */
 results
     .filter<HTMLElement>((node) => node.parentElement === document.body)
     .forEach((item) => {
