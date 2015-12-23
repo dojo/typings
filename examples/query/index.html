@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Dojo 1 Typings – query Example</title>
+</head>
+<body>
+	<!-- An example working with query.
+		you must do an `npm install` as well as `tsc` prior to navigating
+		to this page in order for it to work properly  -->
+	<h1>Dojo 1 Typings</h1>
+	<h2><code>query</code> Example</h2>
+	<div>A div</div>
+	<div>Another Div</div>
+	<script>
+		var dojoConfig = {
+			async: true,
+			baseUrl: 'node_modules',
+			isDebug: true,
+			packages: [ 'dojo' ],
+			selectorEngine: 'lite',
+			tlmSiblingOfDojo: true
+		};
+	</script>
+	<script src="node_modules/dojo/dojo.js"></script>
+	<script>require([ '_build/main' ]);</script>
+</body>
+</html>

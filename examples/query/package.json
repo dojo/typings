@@ -1,0 +1,9 @@
+{
+	"name": "query",
+	"version": "1.10.0",
+	"description": "Dojo 1 Query Library",
+	"license": "BSD-3-Clause",
+	"dependencies": {
+		"dojo": "1.10.4"
+	}
+}
