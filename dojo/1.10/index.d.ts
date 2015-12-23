@@ -7,3 +7,4 @@
 /// <reference path="promise.d.ts" />
 /// <reference path="request.d.ts" />
 /// <reference path="selector.d.ts" />
+/// <reference path="store.d.ts" />
