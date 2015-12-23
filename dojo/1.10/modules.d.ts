@@ -401,6 +401,36 @@ declare module 'dojo/request/xhr' {
 	export = xhr;
 }
 
+declare module 'dojo/selector/_loader' {
+	const loader: dojo.selector.Loader;
+	export = loader;
+}
+
+declare module 'dojo/selector/_loader!' {
+	const lite: dojo.selector.LiteQueryEnegine;
+	export = lite;
+}
+
+declare module 'dojo/selector/_loader!acme' {
+	const acme: dojo.selector.AcmeQueryEngine;
+	export = acme;
+}
+
+declare module 'dojo/selector/_loader!lite' {
+	const lite: dojo.selector.LiteQueryEnegine;
+	export = lite;
+}
+
+declare module 'dojo/selector/acme' {
+	const acme: dojo.selector.AcmeQueryEngine;
+	export = acme;
+}
+
+declare module 'dojo/selector/lite' {
+	const lite: dojo.selector.LiteQueryEnegine;
+	export = lite;
+}
+
 declare module 'dojo/sniff' {
 	const sniff: dojo.Has;
 	export = sniff;
