@@ -45,7 +45,7 @@ are improvements that can be made to the typings, several of them noted as comme
 ### AMD Plugin Globbing
 
 Currently, TypeScript does not support globbing of AMD modules.  There is an open ticket for this type of support
-(see Microsoft/TypeScript#5787).  Until that is done, in order to use a plugin properly, you will have to declare
+(see [Microsoft/TypeScript#5787](https://github.com/Microsoft/TypeScript/issues/5787)).  Until that is done, in order to use a plugin properly, you will have to declare
 the ambient module in a projects `.d.ts`.  For example to use `dojo/text` you would want to do something like this:
 
 ```typescript
