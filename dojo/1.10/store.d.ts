@@ -231,5 +231,38 @@ declare namespace dojo {
 			interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> {}
 		}
 
+		/* dojo/store/Memory */
+
+		interface MemoryOptions<T extends Object> {
+			data?: T[];
+			idProperty?: string;
+			queryEngine?: api.QueryEngine<any, any>;
+			setData?: (data: T[]) => void;
+		}
+
+		interface Memory<T extends Object> extends api.Store<T, api.BaseQueryType, api.QueryOptions> {
+			/**
+			 * The array of all the objects in the memory store
+			 */
+			data: T[];
+
+			/**
+			 * An index of data indices into the data array by id
+			 */
+			index: { [id: string]: number };
+
+			/**
+			 * Sets the given data as the source for this store, and indexes it
+			 */
+			setData(data: T[]): void;
+		}
+
+		interface MemoryConstructor {
+			/**
+			 * This is a basic in-memory object store. It implements dojo/store/api/Store.
+			 */
+			new <T extends Object>(options?: MemoryOptions<T>): Memory<T>;
+		}
+
 	}
 }

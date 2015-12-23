@@ -451,6 +451,11 @@ declare module 'dojo/store/util/SimpleQueryEngine' {
 	export = SimpleQueryEngine;
 }
 
+declare module 'dojo/store/Memory' {
+	const Memory: dojo.store.MemoryConstructor;
+	export = Memory;
+}
+
 declare module 'dojo/text' {
 	const text: dojo.Text;
 	export = text;
