@@ -391,9 +391,39 @@ declare module 'dojo/request' {
 	export = request;
 }
 
+declare module 'dojo/request/default' {
+	const def: dojo.request.Default;
+	export = def;
+}
+
+declare module 'dojo/request/default!' {
+	const def: dojo.request.Request;
+	export = def;
+}
+
+declare module 'dojo/request/handlers' {
+	const handlers: dojo.request.Handlers;
+	export = handlers;
+}
+
+declare module 'dojo/request/node' {
+	const node: dojo.request.Node;
+	export = node;
+}
+
 declare module 'dojo/request/registry' {
 	const registry: dojo.request.Registry;
 	export = registry;
+}
+
+declare module 'dojo/request/script' {
+	const script: dojo.request.Script;
+	export = script;
+}
+
+declare module 'dojo/request/util' {
+	const util: dojo.request.Util;
+	export = util;
 }
 
 declare module 'dojo/request/watch' {
