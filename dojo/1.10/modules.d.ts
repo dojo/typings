@@ -339,6 +339,26 @@ declare module 'dojo/dom-style' {
 	export = domStyle;
 }
 
+declare module 'dojo/errors/CancelError' {
+	const CancelError: dojo.errors.CancelErrorConstructor;
+	export = CancelError;
+}
+
+declare module 'dojo/errors/create' {
+	const create: dojo.errors.Create;
+	export = create;
+}
+
+declare module 'dojo/errors/RequestError' {
+	const RequestError: dojo.errors.RequestErrorConstructor;
+	export = RequestError;
+}
+
+declare module 'dojo/errors/RequestTimeoutError' {
+	const RequestTimeoutError: dojo.errors.RequestTimeoutErrorConstructor;
+	export = RequestTimeoutError;
+}
+
 declare module 'dojo/Evented' {
 	const Evented: dojo.EventedConstructor;
 	export = Evented;

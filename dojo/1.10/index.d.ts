@@ -4,6 +4,7 @@
 /// <reference path="data.d.ts" />
 /// <reference path="date.d.ts" />
 /// <reference path="dnd.d.ts" />
+/// <reference path="errors.d.ts" />
 /// <reference path="promise.d.ts" />
 /// <reference path="request.d.ts" />
 /// <reference path="selector.d.ts" />
