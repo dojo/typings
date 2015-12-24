@@ -391,6 +391,11 @@ declare module 'dojo/request' {
 	export = request;
 }
 
+declare module 'dojo/request/registry' {
+	const registry: dojo.request.Registry;
+	export = registry;
+}
+
 declare module 'dojo/request/watch' {
 	const watch: dojo.request.Watch;
 	export = watch;

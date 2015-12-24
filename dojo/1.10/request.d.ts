@@ -77,6 +77,48 @@ declare namespace dojo {
 			del<T>(url: string, options?: BaseOptions): Promise<T>;
 		}
 
+		/* dojo/request/registry */
+
+		interface RegistryOptions extends BaseOptions, MethodOptions { }
+
+		interface RegistryFunction {
+			(url: string, options?: RequestOptions): boolean;
+		}
+
+		interface Provider<T> {
+			(url: string, options?: RequestOptions): Promise<T>;
+		}
+
+		type RegisterUrlType = string | RegExp | RegistryFunction;
+
+		interface Registry {
+			<T>(url: string, options?: RegistryOptions): Promise<T>;
+
+			register<T>(url: RegisterUrlType, provider: Provider<T>, first?: boolean): Handle;
+
+			load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+
+			/**
+			 * Send an HTTP GET request using the default transport for the current platform.
+			 */
+			get<T>(url: string, options?: BaseOptions): Promise<T>;
+
+			/**
+			 * Send an HTTP POST request using the default transport for the current platform.
+			 */
+			post<T>(url: string, options?: BaseOptions): Promise<T>;
+
+			/**
+			 * Send an HTTP PUT request using the default transport for the current platform.
+			 */
+			put<T>(url: string, options?: BaseOptions): Promise<T>;
+
+			/**
+			 * Send an HTTP DELETE request using the default transport for the current platform.
+			 */
+			del<T>(url: string, options?: BaseOptions): Promise<T>;
+		}
+
 		/* dojo/request/watch */
 
 		interface Watch {
