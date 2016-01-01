@@ -444,6 +444,11 @@ declare module 'dojo/loadInit!' {
 	export = loadInit;
 }
 
+declare module 'dojo/main' {
+	const main: dojo._base.Dojo;
+	export = main;
+}
+
 declare module 'dojo/NodeList' {
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
