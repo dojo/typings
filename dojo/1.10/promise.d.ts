@@ -1,29 +1,89 @@
 declare namespace dojo {
 	namespace promise {
-		export interface PromiseCallback<T, U> {
+
+		/* dojo/promise/all */
+
+		type PromiseObjectOrArray = { [name: string]: Promise<any> } | Promise<any>[];
+		type ResultsObjectOrArray = { [name: string]: any } | any[];
+
+		interface All {
+			/**
+			 * Takes multiple promises and returns a new promise that is fulfilled
+			 * when all promises have been resolved or one has been rejected.
+			 * @param objectOrArray The promise will be fulfilled with a list of results if invoked with an
+			 * 						array, or an object of results when passed an object (using the same
+			 * 						keys). If passed neither an object or array it is resolved with an
+			 * 						undefined value.
+			 */
+			(objectOrArray: PromiseObjectOrArray): Promise<ResultsObjectOrArray>;
+		}
+
+		/* dojo/promise/Promise */
+
+		interface PromiseCallback<T, U> {
 			(result: T): U;
 		}
 
-		export interface PromiseErrback {
+		interface PromiseErrback {
 			(error: any): void;
 		}
 
-		export interface PromiseProgback {
+		interface PromiseProgback {
 			(progress: any): void;
 		}
 
-		export interface Promise<T> {
+		interface Promise<T> {
+			/**
+			 * Add new callbacks to the promise.
+			 */
 			then<U>(callback?: PromiseCallback<T, U>, errback?: PromiseErrback, progback?: PromiseProgback): Promise<U>;
-			cancel(reason: any, strict?: boolean): any;
+
+			/**
+			 * Inform the deferred it may cancel its asynchronous operation.
+			 */
+			cancel(reason?: any, strict?: boolean): any;
+
+			/**
+			 * Checks whether the promise has been resolved.
+			 */
 			isResolved(): boolean;
+
+			/**
+			 * Checks whether the promise has been rejected.
+			 */
 			isRejected(): boolean;
+
+			/**
+			 * Checks whether the promise has been resolved or rejected.
+			 */
 			isFulfilled(): boolean;
+
+			/**
+			 * Checks whether the promise has been canceled.
+			 */
 			isCanceled(): boolean;
-			always<U>(callbackOrErrback: PromiseCallback<T, U>|PromiseErrback): Promise<U>;
+
+			/**
+			 * Add a callback to be invoked when the promise is resolved
+			 * or rejected.
+			 */
+			always<U>(callbackOrErrback: PromiseCallback<T, U> | PromiseErrback): Promise<U>;
+
+			/**
+			 * Add new errbacks to the promise.
+			 */
 			otherwise(errback: PromiseErrback): Promise<T>;
-			trace(): Promise<T>;
-			traceRejected(): Promise<T>;
+
+			trace(): this;
+			traceRejected(): this;
 			toString(): string;
+		}
+
+		interface PromiseConstructor {
+			/**
+			 * The public interface to a deferred.
+			 */
+			new <T>(): Promise<T>;
 		}
 	}
 }
