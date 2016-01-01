@@ -429,6 +429,11 @@ declare module 'dojo/json' {
 	export = json;
 }
 
+declare module 'dojo/keys' {
+	const keys: dojo.Keys;
+	export = keys;
+}
+
 declare module 'dojo/NodeList' {
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
