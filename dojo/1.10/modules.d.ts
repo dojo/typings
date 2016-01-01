@@ -299,6 +299,11 @@ declare module 'dojo/dojo' {
 	export = require;
 }
 
+declare module 'require' {
+	const require: dojo.Require;
+	export = require;
+}
+
 declare module 'dojo/dom' {
 	const dom: dojo.Dom;
 	export = dom;
@@ -387,6 +392,16 @@ declare module 'dojo/number' {
 declare module 'dojo/on' {
 	const on: dojo.On;
 	export = on;
+}
+
+declare module 'dojo/promise/all' {
+	const all: dojo.promise.All;
+	export = all;
+}
+
+declare module 'dojo/promise/Promise' {
+	const Promise: dojo.promise.PromiseConstructor;
+	export = Promise;
 }
 
 declare module 'dojo/query' {

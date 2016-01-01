@@ -400,9 +400,9 @@ declare namespace dojo {
 			plugins?: GenericObject;
 		};
 		idle(): boolean;
-		toAbsMid(mid: string, referenceModule: string): string;
-		toUrl(name: string, referenceModule: string): string;
-		undef(moduleId: string, referenceModule: string): void;
+		toAbsMid(mid: string, referenceModule?: string): string;
+		toUrl(name: string, referenceModule?: string): string;
+		undef(moduleId: string, referenceModule?: string): void;
 		pageLoaded: number | boolean;
 		injectUrl(url: string, callback?: () => void, owner?: HTMLScriptElement): HTMLScriptElement;
 		log(...args: any[]): void;
