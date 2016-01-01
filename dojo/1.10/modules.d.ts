@@ -434,6 +434,16 @@ declare module 'dojo/keys' {
 	export = keys;
 }
 
+declare module 'dojo/loadInit' {
+	const loadInit: dojo.LoadInit;
+	export = loadInit;
+}
+
+declare module 'dojo/loadInit!' {
+	const loadInit: (mid: string, require: any, loaded: (...modules: any[]) => void) => void;
+	export = loadInit;
+}
+
 declare module 'dojo/NodeList' {
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;

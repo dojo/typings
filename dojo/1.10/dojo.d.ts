@@ -1101,6 +1101,22 @@ declare namespace dojo {
 		copyKey: number;
 	}
 
+	/* dojo/loadInit */
+
+	interface LoadInit {
+		dynamic: number;
+
+		/**
+		 * Resolves id into a module id based on possibly-nested tenary expression that branches on has feature test value(s).
+		 */
+		normalize(id: string, toAbsMid: Function): string; /* TODO: Align with loader api */
+
+		/**
+		 * Conditional loading of AMD modules based on a has feature test value.
+		 */
+		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+	}
+
 	/* dojo/NodeList */
 
 	/* Just proxies dojo/query::NodeList */
