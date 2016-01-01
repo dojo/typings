@@ -280,7 +280,7 @@ declare namespace dojo {
 		/* dojo/request/util */
 
 		interface Response<T> extends ParsedArgs {
-			xhr?: XMLHttpRequest | ActiveXObject;
+			xhr?: XMLHttpRequest;
 			requestOptions?: NodeRequestOptions;
 			clientRequest?: any;
 			hasSocket?: boolean;
