@@ -399,6 +399,11 @@ declare module 'dojo/hccss' {
 	export = hccss;
 }
 
+declare module 'dojo/html' {
+	const html: dojo.Html;
+	export = html;
+}
+
 declare module 'dojo/io-query' {
 	const ioQuery: dojo.IoQuery;
 	export = ioQuery;
