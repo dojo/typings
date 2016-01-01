@@ -409,6 +409,16 @@ declare module 'dojo/i18n' {
 	export = i18n;
 }
 
+declare module 'dojo/io/iframe' {
+	const iframe: dojo.io.IFrame;
+	export = iframe;
+}
+
+declare module 'dojo/io/script' {
+	const script: dojo.io.Script;
+	export = script;
+}
+
 declare module 'dojo/io-query' {
 	const ioQuery: dojo.IoQuery;
 	export = ioQuery;
