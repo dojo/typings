@@ -979,6 +979,28 @@ declare namespace dojo {
 		set(node: Node, cont?: ContentSetterContent, params?: ContentSetterParams): promise.Promise<Node> | Node;
 	}
 
+	/* dojo/i18n */
+
+	interface I18n {
+		getLocalization(moduleName: string, bundleName: string, locale?: string): any;
+
+		dynamic: boolean;
+
+		/**
+		 * Resolves id into a module id based on possibly-nested tenary expression that branches on has feature test value(s).
+		 */
+		normalize(id: string, toAbsMid: Function): string; /* TODO: Align with loader api */
+
+		/**
+		 * Conditional loading of AMD modules based on a has feature test value.
+		 */
+		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+
+		cache: { [bundle: string]: any };
+
+		getL10nName(moduleName: string, bundleName: string, locale?: string): string;
+	}
+
 	/* dojo/io-query */
 
 	interface IoQuery {

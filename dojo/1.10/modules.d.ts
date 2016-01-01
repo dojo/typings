@@ -404,6 +404,11 @@ declare module 'dojo/html' {
 	export = html;
 }
 
+declare module 'dojo/i18n' {
+	const i18n: dojo.I18n;
+	export = i18n;
+}
+
 declare module 'dojo/io-query' {
 	const ioQuery: dojo.IoQuery;
 	export = ioQuery;
