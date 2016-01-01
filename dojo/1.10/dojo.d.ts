@@ -818,6 +818,12 @@ declare namespace dojo {
 		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
 	}
 
+	/* dojo/hash */
+
+	interface Hash {
+		(hash?: string, replace?: boolean): string;
+	}
+
 	/* dojo/io-query */
 
 	interface IoQuery {

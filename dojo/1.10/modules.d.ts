@@ -389,6 +389,11 @@ declare module 'dojo/has' {
 	export = has;
 }
 
+declare module 'dojo/hash' {
+	const hash: dojo.Hash;
+	export = hash;
+}
+
 declare module 'dojo/io-query' {
 	const ioQuery: dojo.IoQuery;
 	export = ioQuery;
