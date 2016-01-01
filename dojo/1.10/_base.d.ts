@@ -682,6 +682,10 @@ declare namespace dojo {
 			new (start: number, end: number): Line;
 		}
 
+		interface EasingFunction {
+			(n?: number): number;
+		}
+
 		interface Animation extends Evented {
 			/**
 			 * The time in milliseconds the animation will take to run
@@ -698,7 +702,7 @@ declare namespace dojo {
 			 * A Function to adjust the acceleration (or deceleration) of the progress
 			 * across a _Line
 			 */
-			easing?: Function;
+			easing?: EasingFunction;
 
 			/**
 			 * The number of times to loop the animation
@@ -760,24 +764,24 @@ declare namespace dojo {
 			 * Convenience function.  Fire event "evt" and pass it the
 			 * arguments specified in "args".
 			 */
-			_fire(evt: Event, args?: any[]): Animation;
+			_fire(evt: Event, args?: any[]): this;
 
 			/**
 			 * Start the animation.
 			 */
-			play(delay?: number, gotoStart?: boolean): Animation;
+			play(delay?: number, gotoStart?: boolean): this;
 
-			_play(gotoStart?: boolean): Animation;
+			_play(gotoStart?: boolean): this;
 
 			/**
 			 * Pauses a running animation.
 			 */
-			pause(): Animation;
+			pause(): this;
 
 			/**
 			 * Sets the progress of the animation.
 			 */
-			gotoPercent(precent: number, andPlay?: boolean): Animation;
+			gotoPercent(precent: number, andPlay?: boolean): this;
 
 			/**
 			 * Stops a running animation.
@@ -817,7 +821,7 @@ declare namespace dojo {
 		interface FadeArguments {
 			node: HTMLElement | string;
 			duration?: number;
-			easing?: Function;
+			easing?: EasingFunction;
 		}
 
 		interface AnimationArgumentsProperties {
