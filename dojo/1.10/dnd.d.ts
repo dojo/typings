@@ -44,6 +44,7 @@ declare namespace dojo {
 
 		interface AutoSourceConstructor {
 			new (node: NodeOrString, params?: SourceArgs): AutoSource;
+			prototype: AutoSource;
 		}
 
 		/* dojo/dnd/Avatar */
@@ -75,6 +76,7 @@ declare namespace dojo {
 
 		interface AvatarConstructor {
 			new (manager: Manager): Avatar;
+			prototype: Avatar;
 		}
 
 		/* dojo/dnd/common */
@@ -272,6 +274,7 @@ declare namespace dojo {
 			 * a constructor of the Container
 			 */
 			new (node: NodeOrString, params?: ContainerArgs): Container;
+			prototype: Container;
 		}
 
 		interface Common {
@@ -328,6 +331,7 @@ declare namespace dojo {
 			 * the manager of DnD operations (usually a singleton)
 			 */
 			new (): Manager;
+			prototype: Manager;
 
 			/**
 			 * Returns the current DnD manager.  Creates one if it is not created yet.
@@ -437,6 +441,7 @@ declare namespace dojo {
 
 		interface MoveableConstructor {
 			new (node: NodeOrString, params?: MoveableArgs): Moveable;
+			prototype: Moveable;
 		}
 
 		/* dojo/dnd/Mover */
@@ -472,6 +477,7 @@ declare namespace dojo {
 			 * Used as a default mover, and as a base class for custom movers.
 			 */
 			new (node: HTMLElement, e: MouseEvent, host: MoverHost): Mover;
+			prototype: Mover;
 		}
 
 		/* dojo/dnd/Selector */
@@ -544,6 +550,7 @@ declare namespace dojo {
 			 * constructor of the Selector
 			 */
 			new (node: NodeOrString, params?: ContainerArgs): Selector;
+			prototype: Selector;
 		}
 
 		/* dojo/dnd/Source */
@@ -706,6 +713,7 @@ declare namespace dojo {
 
 		interface SourceConstructor {
 			new (node: NodeOrString, params?: SourceArgs): Source;
+			prototype: Source;
 		}
 
 		/* dojo/dnd/Target */
@@ -714,6 +722,7 @@ declare namespace dojo {
 
 		interface TargetConstructor {
 			new (node: HTMLElement, params: SourceArgs): Target;
+			prototype: Target;
 		}
 
 		/* dojo/dnd/TimedMoveable */
@@ -729,6 +738,7 @@ declare namespace dojo {
 
 		interface TimedMoveableConstructor {
 			new (node: HTMLElement, params?: TimedMoveableArgs): TimedMoveable;
+			prototype: TimedMoveable;
 		}
 	}
 }

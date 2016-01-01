@@ -54,6 +54,7 @@ declare namespace dojo {
 
 			interface IdentityConstructor {
 				new <T extends Item>(): Identity<T>;
+				prototype: Identity<any>;
 			}
 
 			/* dojo/data/api/Item */
@@ -69,6 +70,7 @@ declare namespace dojo {
 
 			interface ItemConstructor {
 				new (): Item;
+				prototype: Item;
 			}
 
 			/* dojo/data/api/Notification */
@@ -109,6 +111,7 @@ declare namespace dojo {
 
 			interface NotificationConstructor {
 				new <T extends Item>(): Notification<T>;
+				prototype: Notification<Item>;
 			}
 
 			/* dojo/data/api/Read */
@@ -249,6 +252,7 @@ declare namespace dojo {
 
 			interface ReadConstructor {
 				new <T extends Item>(): Read<T>;
+				prototype: Read<Item>;
 			}
 
 			/* dojo/data/api/Request */
@@ -271,6 +275,7 @@ declare namespace dojo {
 
 			interface RequestConstructor {
 				new (): Request;
+				prototype: Request;
 			}
 
 			/* dojo/data/api/Write */
@@ -354,6 +359,7 @@ declare namespace dojo {
 
 			interface WriteConstructor {
 				new <T>(): Write<T>;
+				prototype: Write<any>;
 			}
 		}
 
@@ -420,6 +426,7 @@ declare namespace dojo {
 
 		interface ItemConstructor<V, T> {
 			new (value: V): T;
+			prototype: T;
 		}
 
 		interface ItemConstructorObject<V, T> {
@@ -606,6 +613,7 @@ declare namespace dojo {
 
 		interface ItemFileReadStoreConstructor {
 			new <T extends api.Item>(keywordParameters: ItemFileReadStoreArgs<T>): ItemFileReadStore<T>;
+			prototype: ItemFileReadStore<api.Item>;
 		}
 
 		/* dojo/data/ItemFileWriteStore */
@@ -705,6 +713,7 @@ declare namespace dojo {
 
 		interface ItemFileWriteStoreConstructor {
 			new <T extends api.Item>(keywordParameters: ItemFileReadStoreArgs<T>): ItemFileWriteStore<T>;
+			prototype: ItemFileWriteStore<api.Item>;
 		}
 
 		/* dojo/data/ObjectStore */
@@ -919,6 +928,7 @@ declare namespace dojo {
 		 */
 		interface ObjectStoreConstructor {
 			new <T extends api.Item>(options: ObjectStoreOptions): ObjectStore<T>;
+			prototype: ObjectStore<api.Item>;
 		}
 	}
 }

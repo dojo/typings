@@ -9,6 +9,7 @@ declare namespace dojo {
 
 	interface GenericConstructor<T> {
 		new (...args: any[]): T;
+		prototype: T;
 	}
 
 	interface GenericObject {
@@ -56,6 +57,7 @@ declare namespace dojo {
 
 	interface AdapterRegistryConstructor {
 		new (returnWrappers?: boolean): AdapterRegistry;
+		prototype: AdapterRegistry;
 	}
 
 	/* dojo/aspect */
@@ -349,6 +351,7 @@ declare namespace dojo {
 		 * `dojo/_base/Deferred`.
 		 */
 		new <T>(canceller?: (reason: any) => void): Deferred<T>;
+		prototype: Deferred<any>;
 	}
 
 	/* dojo/DeferredList */
@@ -367,6 +370,7 @@ declare namespace dojo {
 		 * Provides event handling for a group of Deferred objects.
 		 */
 		new <T>(list: T[], fireOnOneCallback?: boolean, fireOnOneErrback?: boolean, consumeErrors?: boolean, canceller?: (reason: any) => void): DeferredList<T>;
+		prototype: DeferredList<any>;
 	}
 
 	/* dojo/dojo */
@@ -743,6 +747,7 @@ declare namespace dojo {
 
 	interface EventedConstructor {
 		new (): Evented;
+		prototype: Evented;
 	}
 
 	/* dojo/has */
@@ -1241,6 +1246,8 @@ declare namespace dojo {
 		new <T extends Node>(...args: T[]): NodeList<T>;
 		<T extends Node>(array: number | Array<T>): NodeList<T>;
 		<T extends Node>(...args: T[]): NodeList<T>;
+
+		prototype: NodeList<any>;
 
 		/**
 		 * decorate an array to make it look like a `dojo/NodeList`.

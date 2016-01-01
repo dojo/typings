@@ -167,6 +167,7 @@ declare namespace dojo {
 
 		interface ColorConstructor {
 			new (color: ColorValue | ColorValueAlpha | ColorObject | string): Color;
+			prototype: Color;
 		}
 
 		/* dojo/colors */
@@ -510,6 +511,7 @@ declare namespace dojo {
 
 		interface DeclareConstructor<T> {
 			new (...args: any[]): T;
+			prototype: T;
 
 			/**
 			 * Adds all properties and methods of source to constructor's
@@ -633,6 +635,8 @@ declare namespace dojo {
 			 * New code should use dojo/Deferred instead.
 			 */
 			new <T>(canceller?: (reason: any) => void): Deferred<T>;
+
+			prototype: Deferred<any>;
 
 			/**
 			 * Transparently applies callbacks to values and/or promises.
@@ -803,6 +807,7 @@ declare namespace dojo {
 		 */
 		interface AnimationConstructor {
 			new (args: any): Animation;
+			prototype: Animation;
 		}
 
 		interface AnimationCallback {
@@ -1183,6 +1188,7 @@ declare namespace dojo {
 
 		interface UrlConstructor {
 			new (...args: any[]): Url;
+			prototype: Url;
 		}
 
 		/* dojo/_base/window */
