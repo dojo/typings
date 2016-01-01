@@ -449,6 +449,11 @@ declare module 'dojo/main' {
 	export = main;
 }
 
+declare module 'dojo/mouse' {
+	const mouse: dojo.Mouse;
+	export = mouse;
+}
+
 declare module 'dojo/NodeList' {
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
