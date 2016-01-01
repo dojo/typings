@@ -768,6 +768,15 @@ declare namespace dojo {
 	/* dojo/fx augments the dojo/_base/fx, therefore it is typed in fx.d.ts and not referenced from
 	  index.d.ts or module.d.ts and is self contained typings for dojo/fx and dojo/fx/* */
 
+	/* dojo/gears */
+
+	/* This is long-ago deprecated by Google, so just doing a minimal typing */
+
+	interface Gears {
+		_gearsObject(): any;
+		available: boolean;
+	}
+
 	/* dojo/has */
 
 	interface HasCache {

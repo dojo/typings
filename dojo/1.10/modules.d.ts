@@ -379,6 +379,11 @@ declare module 'dojo/Evented' {
 	export = Evented;
 }
 
+declare module 'dojo/gears' {
+	const gears: dojo.Gears;
+	export = gears;
+}
+
 declare module 'dojo/has' {
 	const has: dojo.Has;
 	export = has;
