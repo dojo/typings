@@ -738,6 +738,19 @@ declare namespace dojo {
 		set(node: ElementOrString, name: string | DomComputedStyle, value?: string): DomComputedStyle;
 	}
 
+	/* dojo/domReady */
+
+	interface DomReady {
+		/**
+		 * Plugin to delay require()/define() callback from firing until the DOM has finished
+		 */
+		(callback: Function): void;
+
+		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+		_Q: Function[];
+		_onEmpty(): void;
+	}
+
 	/* dojo/Evented */
 
 	interface Evented {

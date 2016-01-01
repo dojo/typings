@@ -344,6 +344,16 @@ declare module 'dojo/dom-style' {
 	export = domStyle;
 }
 
+declare module 'dojo/domReady' {
+	const domReady: dojo.DomReady;
+	export = domReady;
+}
+
+declare module 'dojo/domReady!' {
+	const callback: any;
+	export = callback;
+}
+
 declare module 'dojo/errors/CancelError' {
 	const CancelError: dojo.errors.CancelErrorConstructor;
 	export = CancelError;
