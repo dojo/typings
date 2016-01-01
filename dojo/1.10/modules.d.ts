@@ -399,9 +399,24 @@ declare module 'dojo/promise/all' {
 	export = all;
 }
 
+declare module 'dojo/promise/first' {
+	const first: dojo.promise.First;
+	export = first;
+}
+
+declare module 'dojo/promise/instrumentation' {
+	const instrumentation: dojo.promise.Instrumentation;
+	export = instrumentation;
+}
+
 declare module 'dojo/promise/Promise' {
 	const Promise: dojo.promise.PromiseConstructor;
 	export = Promise;
+}
+
+declare module 'dojo/promise/tracer' {
+	const tracer: dojo.promise.Tracer;
+	export = tracer;
 }
 
 declare module 'dojo/query' {
