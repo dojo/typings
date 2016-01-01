@@ -424,6 +424,11 @@ declare module 'dojo/io-query' {
 	export = ioQuery;
 }
 
+declare module 'dojo/json' {
+	const json: dojo.Json;
+	export = json;
+}
+
 declare module 'dojo/NodeList' {
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;

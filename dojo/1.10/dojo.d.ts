@@ -1017,6 +1017,21 @@ declare namespace dojo {
 		queryToObject(str: string): GenericObject;
 	}
 
+	/* dojo/json */
+
+	interface Json {
+
+		/**
+		 * Parses a [JSON](http://json.org) string to return a JavaScript object.
+		 */
+		parse(str: string, strict?: boolean): any;
+
+		/**
+		 * Returns a [JSON](http://json.org) serialization of an object.
+		 */
+		stringify(value: any, replacer?: (key: string, value: any) => any| any[], space?: string | number): string;
+	}
+
 	/* dojo/NodeList */
 
 	/* Just proxies dojo/query::NodeList */
