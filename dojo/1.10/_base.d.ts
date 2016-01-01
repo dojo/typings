@@ -820,8 +820,12 @@ declare namespace dojo {
 			easing?: Function;
 		}
 
+		interface AnimationArgumentsProperties {
+			[name: string]: any;
+		}
+
 		interface AnimationArguments extends FadeArguments {
-			properties: { [name: string]: any };
+			properties: AnimationArgumentsProperties;
 			onEnd?: AnimationCallback;
 		}
 

@@ -763,6 +763,11 @@ declare namespace dojo {
 		prototype: Evented;
 	}
 
+	/* dojo/fx */
+
+	/* dojo/fx augments the dojo/_base/fx, therefore it is typed in fx.d.ts and not referenced from
+	  index.d.ts or module.d.ts and is self contained typings for dojo/fx and dojo/fx/* */
+
 	/* dojo/has */
 
 	interface HasCache {
