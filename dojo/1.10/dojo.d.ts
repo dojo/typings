@@ -1156,6 +1156,10 @@ declare namespace dojo {
 		isRight(e: MouseEvent): boolean;
 	}
 
+	/* dojo/node */
+
+	/* should only be used for re-exporting CommonJS modules */
+
 	/* dojo/NodeList */
 
 	/* Just proxies dojo/query::NodeList */
