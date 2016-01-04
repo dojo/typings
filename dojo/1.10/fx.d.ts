@@ -6,8 +6,8 @@ declare namespace dojo {
 	namespace _base {
 
 		interface AnimationStartEnd {
-			start?: number;
-			end?: number;
+			start?: number | string;
+			end?: number | string;
 		}
 
 		interface AnimationArgumentsProperties {

@@ -13,12 +13,12 @@ declare namespace dojo {
 			 *                                     array and returns true if the condition is met.
 			 * @param {object} thisObj may be used to scope the call to callback
 			 */
-			every<T>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => boolean | string, thisObj?: Object): boolean;
+			every<T>(arr: T[] | string, callback: string | ((item: T, idx: number, arr: T[]) => boolean), thisObj?: Object): boolean;
 
 			/**
 			 * Determines whether or not any item in arr satisfies the condition implemented by callback.
 			 */
-			some<T>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => boolean | string, thisObj?: Object): boolean;
+			some<T>(arr: T[] | string, callback: string | ((item: T, idx: number, arr: T[]) => boolean), thisObj?: Object): boolean;
 
 			/**
 			 * locates the last index of the provided value in the passed array. If the value is not found, -1
@@ -38,19 +38,19 @@ declare namespace dojo {
 			 * locates the last index of the provided value in the passed array. If the value is not found,
 			 * -1 is returned.
 			 */
-			forEach<T>(arr: T[], callback: (item: T, idx: number, arr: T[]) => void, thisObj?: Object): void;
+			forEach<T>(arr: T[], callback: string | ((item: T, idx: number, arr: T[]) => void), thisObj?: Object): void;
 
 			/**
 			 * for every item in arr, callback is invoked. Return values are ignored. If you want to break
 			 * out of the loop, consider using array.every() or array.some().
 			 */
-			map<T, U>(arr: T[] | string, callback: (item: T, idx: number, arr: T[]) => U | string, thisObj?: Object, Ctr?: dojo.GenericConstructor<U[]>): U[];
+			map<T, U>(arr: T[] | string, callback: string | ((item: T, idx: number, arr: T[]) => U), thisObj?: Object, Ctr?: dojo.GenericConstructor<U[]>): U[];
 
 			/**
 			 * Returns a new Array with those items from arr that match the condition implemented by
 			 * callback.
 			 */
-			filter<T>(arr: T[], callback: (item: T, idx: number, arr: T[]) => boolean, thisObj?: Object): T[];
+			filter<T>(arr: T[], callback: string | ((item: T, idx: number, arr: T[]) => boolean), thisObj?: Object): T[];
 
 			clearCache(): void;
 		}

@@ -102,7 +102,7 @@ declare namespace dojo {
 		 * removes elements in this list that match the filter
 		 * from their parents and returns them as a new NodeList.
 		 */
-		orphan(filter?: string): this;
+		orphan(filter?: string | NodeListFilterCallback<T>): this;
 
 		/**
 		 * places any/all elements in queryOrListOrNode at a
@@ -124,7 +124,7 @@ declare namespace dojo {
 		 * string filter in addition to supporting filtering function
 		 * objects.
 		 */
-		filter(filter: (item: T, idx: number, arr: Node[]) => boolean | string): this;
+		filter(filter: string | NodeListFilterCallback<T>): this;
 
 		/**
 		 * creates node clones of each element of this list
