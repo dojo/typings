@@ -1164,6 +1164,8 @@ declare namespace dojo {
 
 	/* Just proxies dojo/query::NodeList */
 
+	/* dojo/NodeList-* are included as seperate .d.ts files */
+
 	/* dojo/number */
 
 	interface NumberFormatOptions {
