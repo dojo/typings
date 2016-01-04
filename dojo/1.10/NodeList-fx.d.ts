@@ -1,5 +1,6 @@
 /// <reference path="dojo" />
 /// <reference path="_base" />
+/// <reference path="fx" />
 
 declare namespace dojo {
 
