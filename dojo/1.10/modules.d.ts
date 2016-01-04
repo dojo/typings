@@ -469,6 +469,21 @@ declare module 'dojo/on' {
 	export = on;
 }
 
+declare module 'dojo/on/asyncEventListener' {
+	const asyncEventListener: dojo.on.AsyncEventListener;
+	export = asyncEventListener;
+}
+
+declare module 'dojo/on/debounce' {
+	const debounce: dojo.on.Debounce;
+	export = debounce;
+}
+
+declare module 'dojo/on/throttle' {
+	const throttle: dojo.on.Throttle;
+	export = throttle;
+}
+
 declare module 'dojo/promise/all' {
 	const all: dojo.promise.All;
 	export = all;

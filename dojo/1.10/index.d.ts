@@ -6,6 +6,7 @@
 /// <reference path="dnd.d.ts" />
 /// <reference path="errors.d.ts" />
 /// <reference path="io.d.ts" />
+/// <reference path="on.d.ts" />
 /// <reference path="promise.d.ts" />
 /// <reference path="request.d.ts" />
 /// <reference path="selector.d.ts" />
