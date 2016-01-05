@@ -598,6 +598,11 @@ declare module 'dojo/robot' {
 	export = robot;
 }
 
+declare module 'dojo/robotx' {
+	const robotx: dojo.RobotX;
+	export = robotx;
+}
+
 declare module 'dojo/selector/_loader' {
 	const loader: dojo.selector.Loader;
 	export = loader;

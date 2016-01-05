@@ -1818,6 +1818,29 @@ declare namespace dojo {
 		): void;
 	}
 
+	/* dojo/robotx */
+
+	interface RobotX extends Robot {
+		/**
+		 * Called every time a new page is loaded into the iframe, to setup variables
+		 * Point dojo.global, dojo.publish, etc. to refer to iframe.
+		 * Remove for 2.0?
+		 */
+		_updateDocument(): void;
+
+		/**
+		 * Opens the application at the specified URL for testing, redirecting dojo to point to the application
+		 * environment instead of the test environment.
+		 */
+		initRobot(url: string): void;
+
+		/**
+		 * Notifies DOH that the doh.robot is about to make a page change in the application it is driving,
+		 * returning a doh.Deferred object the user should return in their runTest function as part of a DOH test.
+		 */
+		waitForPageToLoad(submitActions: () => void): any;
+	}
+
 	/* dojo/Stateful */
 
 	interface WatchHandle extends Handle {
