@@ -588,6 +588,11 @@ declare module 'dojo/request/xhr' {
 	export = xhr;
 }
 
+declare module 'dojo/require' {
+	const require: dojo.RequirePlugin;
+	export = require;
+}
+
 declare module 'dojo/selector/_loader' {
 	const loader: dojo.selector.Loader;
 	export = loader;

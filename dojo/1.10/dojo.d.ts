@@ -1780,6 +1780,18 @@ declare namespace dojo {
 		group(expression: string, nonCapture?: boolean): string;
 	}
 
+	/* dojo/request */
+
+	/* This is contained in request.d.ts */
+
+	/* dojo/require */
+
+	interface RequirePlugin {
+		dynamic: number;
+		normalize(id: string): string;
+		load(mid: string, require: any, loaded: (...modules: any[]) => void): void;
+	}
+
 	/* dojo/Stateful */
 
 	interface WatchHandle extends Handle {
