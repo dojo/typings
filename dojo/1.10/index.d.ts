@@ -10,5 +10,6 @@
 /// <reference path="on.d.ts" />
 /// <reference path="promise.d.ts" />
 /// <reference path="request.d.ts" />
+/// <reference path="router.d.ts" />
 /// <reference path="selector.d.ts" />
 /// <reference path="store.d.ts" />

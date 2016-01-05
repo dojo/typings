@@ -603,6 +603,16 @@ declare module 'dojo/robotx' {
 	export = robotx;
 }
 
+declare module 'dojo/router' {
+	const router: dojo.router.RouterBase;
+	export = router;
+}
+
+declare module 'dojo/router/RouterBase' {
+	const RouterBase: dojo.router.RouterBaseConstructor;
+	export = RouterBase;
+}
+
 declare module 'dojo/selector/_loader' {
 	const loader: dojo.selector.Loader;
 	export = loader;

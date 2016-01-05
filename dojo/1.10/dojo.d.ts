@@ -1841,6 +1841,10 @@ declare namespace dojo {
 		waitForPageToLoad(submitActions: () => void): any;
 	}
 
+	/* dojo/router */
+
+	/* Module just exports instance of dojo.router.BaseRouter */
+
 	/* dojo/Stateful */
 
 	interface WatchHandle extends Handle {
