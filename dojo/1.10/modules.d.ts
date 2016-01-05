@@ -533,6 +533,11 @@ declare module 'dojo/ready' {
 	export = ready;
 }
 
+declare module 'dojo/regexp' {
+	const regexp: dojo.RegExpModule;
+	export = regexp;
+}
+
 declare module 'dojo/request' {
 	const request: dojo.request.Request;
 	export = request;

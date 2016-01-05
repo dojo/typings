@@ -1761,6 +1761,25 @@ declare namespace dojo {
 		(priority: number, context: Object, callback: Function | string): void;
 	}
 
+	/* dojo/regexp */
+
+	interface RegExpModule {
+		/**
+		 * Adds escape sequences for special characters in regular expressions
+		 */
+		escapeString(str: string, except?: string): string;
+
+		/**
+		 * Builds a regular expression that groups subexpressions
+		 */
+		buildGroupRE(arr: any[] | Object, re: (item: any) => string, nonCapture?: boolean): string;
+
+		/**
+		 * adds group match to expression
+		 */
+		group(expression: string, nonCapture?: boolean): string;
+	}
+
 	/* dojo/Stateful */
 
 	interface WatchHandle extends Handle {
