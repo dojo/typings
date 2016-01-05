@@ -9,7 +9,7 @@
 	},
 	"filesGlob": [
 		"./*.ts",
-		"./_generated/**/*.ts",
+		"./src/**/*.ts",
 		"./typings/**/*.d.ts",
 		"../../../dojo/1.10/modules.d.ts"
 	],

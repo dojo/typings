@@ -1,8 +1,5 @@
 /// <reference path="index.d.ts" />
 
-declare var require: dojo.Require;
-declare var define: dojo.Define;
-
 declare module 'dojo/_base/array' {
 	const dojoArray: dojo._base.Array;
 	export = dojoArray;

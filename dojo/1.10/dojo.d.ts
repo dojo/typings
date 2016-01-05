@@ -494,13 +494,13 @@ declare namespace dojo {
 		 * Removes the specified classes from node. No `contains()`
 		 * check is required.
 		 */
-		remove(node: NodeOrString, classStr: string | string[]): void;
+		remove(node: NodeOrString, classStr?: string | string[]): void;
 
 		/**
 		 * Replaces one or more classes on a node if not present.
 		 * Operates more quickly than calling dojo.removeClass and dojo.addClass
 		 */
-		replace(node: NodeOrString, addClassStr: string | string[], removeClassStr: string | string[]): void;
+		replace(node: NodeOrString, addClassStr: string | string[], removeClassStr?: string | string[]): void;
 
 		/**
 		 * Adds a class to node if not present, or removes if present.
@@ -520,7 +520,7 @@ declare namespace dojo {
 		/**
 		 * instantiates an HTML fragment returning the corresponding DOM.
 		 */
-		toDom(frag: string, doc?: Document): DocumentFragment;
+		toDom(frag: string, doc?: Document): DocumentFragment | Node;
 
 		/**
 		 * Attempt to insert node into the DOM, choosing from various positioning options.
@@ -716,8 +716,12 @@ declare namespace dojo {
 
 	/* dojo/dom-style */
 
-	interface DomComputedStyle extends CSSStyleDeclaration {
-		/* TODO: type common style properties */
+	// TODO move over the most common properties from CSSStyleDeclaration
+	interface DomComputedStyle {
+		position?: string;
+		width?: string;
+		height?: string;
+		[id: string]: any;
 	}
 
 	interface DomStyle {
@@ -736,6 +740,11 @@ declare namespace dojo {
 		 * Sets styles on a node.
 		 */
 		set(node: ElementOrString, name: string | DomComputedStyle, value?: string): DomComputedStyle;
+
+		/**
+		 * converts style value to pixels on IE or return a numeric value.
+		 */
+		toPixelValue(element: Element, value: string): number;
 	}
 
 	/* dojo/domReady */

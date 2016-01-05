@@ -14,7 +14,6 @@ module.exports = function (grunt) {
 	grunt.loadTasks('./tasks');
 	grunt.loadNpmTasks('grunt-contrib-clean');
 	grunt.loadNpmTasks('grunt-ts');
-	grunt.loadNpmTasks('grunt-tslint');
 
 	const tsconfigContent = grunt.file.read('tsconfig.json');
 	const tsconfig = JSON.parse(tsconfigContent);
@@ -61,7 +60,7 @@ module.exports = function (grunt) {
 
 		clean: {
 			dojo: {
-				src: [ '_generated/' ]
+				src: [ '_generated/', 'src/**/*.js', 'src/**/*.js.map' ]
 			}
 		}
 	});

@@ -1,1 +1,3 @@
 _generated/
+src/**/*.js
+src/**/*.js.map

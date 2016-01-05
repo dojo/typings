@@ -1,4 +1,5 @@
 /// <reference path="dojo.d.ts" />
+/// <reference path="loader.d.ts" />
 /// <reference path="_base.d.ts" />
 /// <reference path="cldr.d.ts" />
 /// <reference path="data.d.ts" />
