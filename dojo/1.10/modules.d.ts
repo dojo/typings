@@ -481,6 +481,11 @@ declare module 'dojo/on/throttle' {
 	export = throttle;
 }
 
+declare module 'dojo/parser' {
+	const parser: dojo.Parser;
+	export = parser;
+}
+
 declare module 'dojo/promise/all' {
 	const all: dojo.promise.All;
 	export = all;
