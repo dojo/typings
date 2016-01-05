@@ -683,6 +683,11 @@ declare module 'dojo/touch' {
 	export = touch;
 }
 
+declare module 'dojo/when' {
+	const when: dojo.When;
+	export = when;
+}
+
 declare module 'dojo/window' {
 	const window: dojo.WindowModule;
 	export = window;

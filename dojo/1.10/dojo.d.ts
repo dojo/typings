@@ -1907,6 +1907,18 @@ declare namespace dojo {
 		leave: ExtensionEvent;
 	}
 
+	interface When {
+		<T>(value: T | dojo.promise.Promise<T>): dojo.promise.Promise<T>;
+		<T>(value: T | dojo.promise.Promise<T>,
+			   callback?: dojo.promise.PromiseCallback<T, T>,
+			   errback?: dojo.promise.PromiseErrback,
+			   progress?: dojo.promise.PromiseProgback): T | dojo.promise.Promise<T>;
+		<T, U>(value: T | dojo.promise.Promise<T>,
+			callback?: dojo.promise.PromiseCallback<T, U>,
+			errback?: dojo.promise.PromiseErrback,
+			progress?: dojo.promise.PromiseProgback): U | dojo.promise.Promise<U>;
+	}
+
 	/* dojo/window */
 
 	interface WindowModule {
