@@ -528,6 +528,11 @@ declare module 'dojo/query!lite' {
 	export = query;
 }
 
+declare module 'dojo/ready' {
+	const ready: dojo.Ready;
+	export = ready;
+}
+
 declare module 'dojo/request' {
 	const request: dojo.request.Request;
 	export = request;

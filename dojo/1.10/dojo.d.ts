@@ -1745,6 +1745,22 @@ declare namespace dojo {
 		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
 	}
 
+	/* dojo/ready */
+
+	interface Ready {
+		/**
+		 * Add a function to execute on DOM content loaded and all requested modules have arrived and been evaluated.
+		 * In most cases, the `domReady` plug-in should suffice and this method should not be needed.
+		 *
+		 * When called in a non-browser environment, just checks that all requested modules have arrived and been
+		 * evaluated.
+		 */
+		(callback: Function): void;
+		(context: Object, callback: Function | string): void;
+		(priority: number, callback: Function): void;
+		(priority: number, context: Object, callback: Function | string): void;
+	}
+
 	/* dojo/Stateful */
 
 	interface WatchHandle extends Handle {
