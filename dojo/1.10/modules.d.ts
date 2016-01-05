@@ -593,6 +593,11 @@ declare module 'dojo/require' {
 	export = require;
 }
 
+declare module 'dojo/robot' {
+	const robot: dojo.Robot;
+	export = robot;
+}
+
 declare module 'dojo/selector/_loader' {
 	const loader: dojo.selector.Loader;
 	export = loader;

@@ -1,4 +1,5 @@
 /// <reference path="index.d.ts" />
+/// <reference path="../../doh/1.10/doh" />
 
 declare namespace dojo {
 	/* general implied types */
@@ -1790,6 +1791,31 @@ declare namespace dojo {
 		dynamic: number;
 		normalize(id: string): string;
 		load(mid: string, require: any, loaded: (...modules: any[]) => void): void;
+	}
+
+	/* dojo/robot */
+
+	interface Robot extends doh.Robot {
+		_resolveNode(n: NodeOrString | (() => Node)): Node;
+		_scrollIntoView(n: Node): void;
+		_position(n: Node): DomGeometryBoxExtents;
+		_getWindowChain(n: Node): Window[];
+
+		/**
+		 * Scroll the passed node into view, if it is not.
+		 */
+		scrollIntoView(node: NodeOrString | (() => Node), delay?: number): void;
+
+		/**
+		 * Moves the mouse over the specified node at the specified relative x,y offset.
+		 */
+		mouseMoveAt(
+			node: NodeOrString | (() => Node),
+			delay?: number,
+			duration?: number,
+			offsetX?: number,
+			offsetY?: number
+		): void;
 	}
 
 	/* dojo/Stateful */
