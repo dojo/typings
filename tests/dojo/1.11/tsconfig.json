@@ -11,7 +11,7 @@
 		"./*.ts",
 		"./src/**/*.ts",
 		"./typings/**/*.d.ts",
-		"../../../dojo/1.10/modules.d.ts"
+		"../../../dojo/1.11/modules.d.ts"
 	],
 	"files": [
 		"./request/xhr.ts"

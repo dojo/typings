@@ -1,6 +1,6 @@
 {
 	"name": "store",
-	"version": "1.10.0",
+	"version": "1.11.0",
 	"description": "Dojo 1 Store Library",
 	"license": "BSD-3-Clause",
 	"dependencies": {

@@ -10,7 +10,7 @@
 	"files": [
 		"./src/app/main.ts",
 		"./src/app/Dialog.ts",
-		"../../dojo/1.10/modules.d.ts",
-		"../../dijit/1.10/modules.d.ts"
+		"../../dojo/1.11/modules.d.ts",
+		"../../dijit/1.11/modules.d.ts"
 	]
 }

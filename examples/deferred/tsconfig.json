@@ -9,6 +9,6 @@
 	},
 	"files": [
 		"./src/main.ts",
-		"../../dojo/1.10/modules.d.ts"
+		"../../dojo/1.11/modules.d.ts"
 	]
 }

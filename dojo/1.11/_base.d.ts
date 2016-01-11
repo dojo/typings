@@ -1,5 +1,5 @@
-/// <reference path="../../dijit/1.10/index.d.ts" />
-/// <reference path="../../dojox/1.10/index.d.ts" />
+/// <reference path="../../dijit/1.11/index.d.ts" />
+/// <reference path="../../dojox/1.11/index.d.ts" />
 
 declare namespace dojo {
 	namespace _base {
