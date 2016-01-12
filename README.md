@@ -2,6 +2,11 @@
 
 This is a repository of Dojo 1 TypeScript Typings (including Dijit and DojoX).
 
+Dojo 2 is built on TypeScript and therefore its typings are inherit in its distrubution.
+The goal affiliated Dojo 1 projects (like [dgrid](http://dgrid.io/) and
+[dstore](http://dstorejs.io/) is that they will include their typings as part of
+their repository.
+
 ## Usage
 
 Because Dojo, Dijit and DojoX are such large and complex code bases, the repository
