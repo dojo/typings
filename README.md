@@ -26,7 +26,7 @@ required.
 
 Basic usage would be to include the `index.d.ts` and likely `modules.d.ts` in files used
 either by `tsc` or in your `tsconfig.json` or referenced within your TypeScript files.
-The [wiki]() contains some basic *how to* instructions.
+The [wiki](https://github.com/dojo/typings/wiki) contains some basic *how to* instructions.
 
 ### Building
 
