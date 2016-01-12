@@ -683,9 +683,19 @@ declare module 'dojo/store/Memory' {
 	export = Memory;
 }
 
+declare module 'dojo/string' {
+	const string: dojo.String;
+	export = string;
+}
+
 declare module 'dojo/text' {
 	const text: dojo.Text;
 	export = text;
+}
+
+declare module 'dojo/throttle' {
+	const throttle: dojo.Throttle;
+	export = throttle;
 }
 
 declare module 'dojo/topic' {

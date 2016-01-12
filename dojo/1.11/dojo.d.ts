@@ -1845,6 +1845,10 @@ declare namespace dojo {
 
 	/* Module just exports instance of dojo.router.BaseRouter */
 
+	/* dojo/sniff */
+
+	/* Just rexports has after adding features */
+
 	/* dojo/Stateful */
 
 	interface WatchHandle extends Handle {
@@ -1856,6 +1860,39 @@ declare namespace dojo {
 		get(name: string): any;
 		set(name: string, value: any): Stateful;
 		watch(name: string, callback: (prop: string, oldValue: any, newValue: any) => void): WatchHandle;
+	}
+
+	/* dojo/string */
+
+	interface String {
+
+		/**
+		 * Efficiently escape a string for insertion into HTML (innerHTML or attributes), replacing &, <, >, ", ', and / characters.
+		 */
+		escape(str: string): string;
+
+		/**
+		 * Efficiently replicate a string `n` times.
+		 */
+		rep(str: string, num: number): string;
+
+		/**
+		 * Pad a string to guarantee that it is at least `size` length by
+		 * filling with the character `ch` at either the start or end of the
+		 * string. Pads at the start, by default.
+		 */
+		pad(text: string, size: number, ch?: string, end?: boolean): string;
+
+		/**
+		 * Performs parameterized substitutions on a string. Throws an
+		 * exception if any parameter is unmatched.
+		 */
+		substitute(template: string, map: Object | any[], transform?: (value: any, key: string) => any, thisObject?: Object): string;
+
+		/**
+		 * Trims whitespace from both sides of the string
+		 */
+		trim(str: string): string;
 	}
 
 	/* dojo/text */
@@ -1877,6 +1914,12 @@ declare namespace dojo {
 		normalize(id: string, toAbsMid: Function): string; /* TODO: Align with loader api */
 
 		load(id: string, parentRequire: Function, loaded: Function): void; /* TODO: Align with loader api */
+	}
+
+	/* dojo/throttle */
+
+	interface Throttle {
+		<T extends Function>(cb: T, wait: number): T;
 	}
 
 	/* dojo/topic */
