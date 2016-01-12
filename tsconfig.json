@@ -6,7 +6,8 @@
 		"noImplicitAny": true,
 		"removeComments": false,
 		"target": "es5",
-		"outDir": "_build"
+		"outDir": "_build",
+		"moduleResolution": "classic"
 	},
 	"filesGlob": [
 		"dojo/**/*.ts",
@@ -17,9 +18,19 @@
 	"files": [
 		"dojo/1.11/index.d.ts",
 		"dojo/1.11/modules.d.ts",
+		"dojo/1.11/fx.d.ts",
+		"dojo/1.11/NodeList-data.d.ts",
+		"dojo/1.11/NodeList-dom.d.ts",
+		"dojo/1.11/NodeList-fx.d.ts",
+		"dojo/1.11/NodeList-html.d.ts",
+		"dojo/1.11/NodeList-manipulate.d.ts",
+		"dojo/1.11/NodeList-traverse.d.ts",
+		"dojo/1.11/OpenAjax.d.ts",
 		"dijit/1.11/index.d.ts",
 		"dijit/1.11/modules.d.ts",
 		"dojox/1.11/index.d.ts",
-		"dojox/1.11/modules.d.ts"
+		"dojox/1.11/modules.d.ts",
+		"doh/1.11/index.d.ts",
+		"doh/1.11/modules.d.ts"
 	]
 }
