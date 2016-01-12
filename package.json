@@ -1,6 +1,6 @@
 {
 	"name": "dojo-typings",
-	"version": "1.11.0-alpha.1",
+	"version": "1.11.0-pre",
 	"description": "A set of Dojo 1 Typings for TypeScript",
 	"license": "BSD-3-Clause",
 	"repository": {
