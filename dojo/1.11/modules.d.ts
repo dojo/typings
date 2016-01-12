@@ -45,7 +45,10 @@ declare module 'dojo/_base/html' {
 	export = dojo;
 }
 
-/* TODO: dojo/_base/json */
+declare module 'dojo/_base/json' {
+	const dojo: dojo._base.Dojo;
+	export = dojo;
+}
 
 declare module 'dojo/_base/kernel' {
 	const dojo: dojo._base.Dojo;
@@ -62,9 +65,15 @@ declare module 'dojo/_base/loader' {
 	export = loader;
 }
 
-/* TODO: dojo/_base/NodeList */
+declare module 'dojo/_base/NodeList' {
+	const NodeList: dojo.NodeListConstructor;
+	export = NodeList;
+}
 
-/* TODO: dojo/_base/query */
+declare module 'dojo/_base/query' {
+	const query: dojo.Query;
+	export = query;
+}
 
 declare module 'dojo/_base/sniff' {
 	const has: dojo.Has;
@@ -706,6 +715,11 @@ declare module 'dojo/topic' {
 declare module 'dojo/touch' {
 	const touch: dojo.Touch;
 	export = touch;
+}
+
+declare module 'dojo/uacss' {
+	const uacss: dojo.Has;
+	export = uacss;
 }
 
 declare module 'dojo/when' {

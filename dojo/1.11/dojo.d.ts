@@ -1939,6 +1939,7 @@ declare namespace dojo {
 	}
 
 	/* dojo/touch */
+
 	interface Touch {
 		press: ExtensionEvent;
 		move: ExtensionEvent;
@@ -1950,7 +1951,16 @@ declare namespace dojo {
 		leave: ExtensionEvent;
 	}
 
+	/* dojo/uacss */
+
+	/* rexports has after adding classes to dom */
+
+	/* dojo/when */
+
 	interface When {
+		/**
+		 * Transparently applies callbacks to values and/or promises.
+		 */
 		<T>(value: T | dojo.promise.Promise<T>): dojo.promise.Promise<T>;
 		<T>(value: T | dojo.promise.Promise<T>,
 			   callback?: dojo.promise.PromiseCallback<T, T>,

@@ -875,6 +875,326 @@ declare namespace dojo {
 				delay?: number): Animation;
 		}
 
+		/* dojo/_base/html */
+
+		interface CoordBox extends DomGeometryBox, Point { }
+
+		interface Dojo {
+			/**
+			 * Returns DOM node with matching `id` attribute or falsy value (ex: null or undefined)
+			 * if not found. Internally if `id` is not a string then `id` returned.
+			 */
+			byId(id: string, doc?: Document): Element;
+
+			/**
+			 * Returns true if node is a descendant of ancestor
+			 */
+			isDescendant(node: NodeOrString, ancestor: NodeOrString): boolean;
+
+			/**
+			 * Enable or disable selection on a node
+			 */
+			setSelectable(node: ElementOrString, selectable?: boolean): void;
+
+			/**
+			 * Returns true if the requested attribute is specified on the
+			 * given element, and false otherwise.
+			 */
+			hasAttr(node: NodeOrString, name: string): boolean;
+
+			/**
+			 * Gets an attribute on an HTML element.
+			 * Because sometimes this uses node.getAttribute, it should be a string,
+			 * but it can also get any other attribute on a node, therefore it is unsafe
+			 * to type just a string.
+			 */
+			getAttr(node: ElementOrString, name: string): any;
+
+			/**
+			 * Sets an attribute on an HTML element.
+			 */
+			setAttr(node: ElementOrString, name: string, value: any): Element;
+			setAttr(node: ElementOrString, map: Object): Element;
+
+			/**
+			 * Removes an attribute from an HTML element.
+			 */
+			removeAttr(node: NodeOrString, name: string): void;
+
+			/**
+			 * Returns an effective value of a property or an attribute.
+			 */
+			getNodeProp(node: NodeOrString, name: string): any;
+
+			/**
+			 * Gets or sets an attribute on an HTML element.
+			 */
+			attr(node: NodeOrString, name: string): any;
+			attr(node: NodeOrString, map: Object): Element;
+			attr(node: NodeOrString, name: string, value: any): Element;
+
+			/**
+			 * Returns whether or not the specified classes are a portion of the
+			 * class list currently applied to the node.
+			 */
+			containsClass(node: NodeOrString, classStr: string): boolean;
+
+			/**
+			 * Adds the specified classes to the end of the class list on the
+			 * passed node. Will not re-apply duplicate classes.
+			 */
+			addClass(node: NodeOrString, classStr: string | string[]): void;
+
+			/**
+			 * Removes the specified classes from node. No `contains()`
+			 * check is required.
+			 */
+			removeClass(node: NodeOrString, classStr?: string | string[]): void;
+
+			/**
+			 * Replaces one or more classes on a node if not present.
+			 * Operates more quickly than calling dojo.removeClass and dojo.addClass
+			 */
+			replaceClass(node: NodeOrString, addClassStr: string | string[], removeClassStr?: string | string[]): void;
+
+			/**
+			 * Adds a class to node if not present, or removes if present.
+			 * Pass a boolean condition if you want to explicitly add or remove.
+			 * Returns the condition that was specified directly or indirectly.
+			 */
+			toggleClass(node: NodeOrString, classStr: string | string[], condition?: boolean): boolean;
+
+			/**
+			 * instantiates an HTML fragment returning the corresponding DOM.
+			 */
+			toDom(frag: string, doc?: Document): DocumentFragment | Node;
+
+			_toDom(frag: string, doc?: Document): DocumentFragment | Node;
+
+			/**
+			 * Attempt to insert node into the DOM, choosing from various positioning options.
+			 * Returns the first argument resolved to a DOM node.
+			 */
+			place(node: NodeFragmentOrString, refNode: NodeOrString, position?: string /* PosString */ | number): HTMLElement;
+
+			/**
+			 * Create an element, allowing for optional attribute decoration
+			 * and placement.
+			 */
+			create(tag: NodeOrString, attrs?: GenericObject, refNode?: NodeOrString, pos?: string /* PosString */ | number): HTMLElement;
+
+			/**
+			 * safely removes all children of the node.
+			 */
+			empty(node: NodeOrString): void;
+
+			/**
+			 * Removes a node from its parent, clobbering it and all of its
+			 * children.
+			 */
+			destroy(node: NodeOrString): void;
+
+			_destroyElement(node: NodeOrString): void;
+
+			/**
+			 * Returns object with special values specifically useful for node
+			 * fitting.
+			 */
+			getPadExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			_getPadExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			/**
+			 * returns an object with properties useful for noting the border
+			 * dimensions.
+			 */
+			getBorderExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			_getBorderExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			/**
+			 * Returns object with properties useful for box fitting with
+			 * regards to padding.
+			 */
+			getPadBorderExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			_getPadBorderExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			/**
+			 * returns object with properties useful for box fitting with
+			 * regards to box margins (i.e., the outer-box).
+			 * - l/t = marginLeft, marginTop, respectively
+			 * - w = total width, margin inclusive
+			 * - h = total height, margin inclusive
+			 * The w/h are used for calculating boxes.
+			 * Normally application code will not need to invoke this
+			 * directly, and will use the ...box... functions instead.
+			 */
+			getMarginExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			_getMarginExtents(node: Element, computedStyle?: DomComputedStyle): DomGeometryBoxExtents;
+
+			/**
+			 * returns an object that encodes the width, height, left and top
+			 * positions of the node's margin box.
+			 */
+			getMarginBox(node: Element, computedStyle?: DomComputedStyle): DomGeometryBox;
+
+			_getMarginBox(node: Element, computedStyle?: DomComputedStyle): DomGeometryBox;
+
+			/**
+			 * Returns an object that encodes the width, height, left and top
+			 * positions of the node's content box, irrespective of the
+			 * current box model.
+			 */
+			getContentBox(node: Element, computedStyle?: DomComputedStyle): DomGeometryBox;
+
+			_getContentBox(node: Element, computedStyle?: DomComputedStyle): DomGeometryBox;
+
+			/**
+			 * Sets the size of the node's contents, irrespective of margins,
+			 * padding, or borders.
+			 */
+			setContentSize(node: Element, box: DomGeometryWidthHeight, computedStyle?: DomComputedStyle): void;
+
+			/**
+			 * sets the size of the node's margin box and placement
+			 * (left/top), irrespective of box model. Think of it as a
+			 * passthrough to setBox that handles box-model vagaries for
+			 * you.
+			 */
+			setMarginBox(node: Element, box: DomGeometryBox, computedStyle?: DomComputedStyle): void;
+
+			/**
+			 * Returns true if the current language is left-to-right, and false otherwise.
+			 */
+			isBodyLtr(doc?: Document): boolean;
+
+			_isBodyLtr(doc?: Document): boolean;
+
+			/**
+			 * Returns an object with {node, x, y} with corresponding offsets.
+			 */
+			docScroll(doc?: Document): Point;
+
+			_docScroll(doc?: Document): Point;
+
+			/**
+			 * Deprecated method previously used for IE6-IE7.  Now, just returns `{x:0, y:0}`.
+			 */
+			getIeDocumentElementOffset(doc: Document): Point;
+
+			_getIeDocumentElementOffset(doc: Document): Point;
+
+			/**
+			 * In RTL direction, scrollLeft should be a negative value, but IE
+			 * returns a positive one. All codes using documentElement.scrollLeft
+			 * must call this function to fix this error, otherwise the position
+			 * will offset to right when there is a horizontal scrollbar.
+			 */
+			fixIeBiDiScrollLeft(scrollLeft: number, doc?: Document): number;
+
+			_fixIeBiDiScrollLeft(scrollLeft: number, doc?: Document): number;
+
+			/**
+			 * Gets the position and size of the passed element relative to
+			 * the viewport (if includeScroll==false), or relative to the
+			 * document root (if includeScroll==true).
+			 */
+			position(node: Element, includeScroll?: boolean): DomGeometryXYBox;
+
+			/**
+			 * returns an object that encodes the width and height of
+			 * the node's margin box
+			 */
+			getMarginSize(node: Element, computedStyle?: DomComputedStyle): DomGeometryWidthHeight;
+
+			_getMarginSize(node: Element, computedStyle?: DomComputedStyle): DomGeometryWidthHeight;
+
+			/**
+			 * Getter/setter for the margin-box of node.
+			 */
+			marginBox(node: Element): DomGeometryBox;
+			marginBox(node: Element, box: DomGeometryBox): void;
+
+			/**
+			 * Getter/setter for the content-box of node.
+			 */
+			contentBox(node: Element): DomGeometryBox;
+			contentBox(node: Element, box: DomGeometryWidthHeight): void;
+
+			/**
+			 * Deprecated: Use position() for border-box x/y/w/h
+			 * or marginBox() for margin-box w/h/l/t.
+			 */
+			coords(node: NodeOrString, includeScroll?: boolean): CoordBox;
+
+			/**
+			 * Gets a property on an HTML element.
+			 */
+			getProp(node: ElementOrString, name: string): any;
+
+			/**
+			 * Sets a property on an HTML element.
+			 */
+			setProp(node: ElementOrString, name: string | Object, value?: any): Element;
+
+			/**
+			 * Gets or sets a property on an HTML element.
+			 */
+			prop(node: ElementOrString, name: string): string;
+			prop(node: ElementOrString, name: Object): Element;
+			prop(node: ElementOrString, name: string, value: any): Element;
+
+			/**
+			 * Returns a "computed style" object.
+			 */
+			getComputedStyle(node: Node): DomComputedStyle;
+
+			/**
+			 * Accesses styles on a node.
+			 */
+			getStyle(node: ElementOrString): DomComputedStyle;
+			getStyle(node: ElementOrString, name: string): string | number;
+
+			/**
+			 * Sets styles on a node.
+			 */
+			setStyle(node: ElementOrString, name: string | DomComputedStyle, value?: string): DomComputedStyle;
+
+			/**
+			 * converts style value to pixels on IE or return a numeric value.
+			 */
+			toPixelValue(element: Element, value: string): number;
+
+			__toPixelValue(element: Element, value: string): number;
+
+			/**
+			 * Accesses styles on a node. If 2 arguments are
+			 * passed, acts as a getter. If 3 arguments are passed, acts
+			 * as a setter.
+			 */
+			style(node: ElementOrString): DomComputedStyle;
+			style(node: ElementOrString, name: string): string | number;
+			style(node: ElementOrString, name: DomComputedStyle): DomComputedStyle;
+			style(node: ElementOrString, name: string, value: string): DomComputedStyle;
+		}
+
+		/* dojo/_base/json */
+
+		interface Dojo {
+			/**
+			 * Parses a JavaScript expression and returns a JavaScript value.
+			 */
+			fromJson(js: string): any;
+
+			_escapeString(value: any, replacer?: (key: string, value: any) => any | any[], space?: string | number): string;
+
+			toJsonIndentStr: string;
+
+			toJson(it: any, prettyPrint?: boolean): string;
+		}
+
 		/* dojo/_base/kernel */
 
 		interface Dojo {
@@ -1522,6 +1842,87 @@ declare namespace dojo {
 			 * Send an HTTP DELETE request using the default transport for the current platform.
 			 */
 			del<T>(url: string, options?: dojo.request.XhrBaseOptions): dojo.request.Promise<T>;
+		}
+	}
+
+	/* dojo/_base/NodeList */
+
+	interface NodeList<T extends Node> {
+		/**
+		 * Attach event handlers to every item of the NodeList. Uses dojo.connect()
+		 * so event properties are normalized.
+		 */
+		connect(method: string, objOrFunc: EventListener | string): this;
+		connect(method: string, objOrFunc: Object, funcName: string): this;
+
+		/**
+		 * Deprecated: Use position() for border-box x/y/w/h
+		 * or marginBox() for margin-box w/h/l/t.
+		 * Returns the box objects of all elements in a node list as
+		 * an Array (*not* a NodeList). Acts like `domGeom.coords`, though assumes
+		 * the node passed is each node in this list.
+		 */
+		coords(node: NodeOrString, includeScroll?: boolean): _base.CoordBox[];
+
+		onblur(method: string, objOrFunc: EventListener | string): this;
+		onblur(method: string, objOrFunc: Object, funcName: string): this;
+
+		onfocus(method: string, objOrFunc: EventListener | string): this;
+		onfocus(method: string, objOrFunc: Object, funcName: string): this;
+
+		onchange(method: string, objOrFunc: EventListener | string): this;
+		onchange(method: string, objOrFunc: Object, funcName: string): this;
+
+		onclick(method: string, objOrFunc: EventListener | string): this;
+		onclick(method: string, objOrFunc: Object, funcName: string): this;
+
+		onerror(method: string, objOrFunc: EventListener | string): this;
+		onerror(method: string, objOrFunc: Object, funcName: string): this;
+
+		onkeydown(method: string, objOrFunc: EventListener | string): this;
+		onkeydown(method: string, objOrFunc: Object, funcName: string): this;
+
+		onkeypress(method: string, objOrFunc: EventListener | string): this;
+		onkeypress(method: string, objOrFunc: Object, funcName: string): this;
+
+		onkeyup(method: string, objOrFunc: EventListener | string): this;
+		onkeyup(method: string, objOrFunc: Object, funcName: string): this;
+
+		onload(method: string, objOrFunc: EventListener | string): this;
+		onload(method: string, objOrFunc: Object, funcName: string): this;
+
+		ondown(method: string, objOrFunc: EventListener | string): this;
+		ondown(method: string, objOrFunc: Object, funcName: string): this;
+
+		onmouseenter(method: string, objOrFunc: EventListener | string): this;
+		onmouseenter(method: string, objOrFunc: Object, funcName: string): this;
+
+		onmouseleave(method: string, objOrFunc: EventListener | string): this;
+		onmouseleave(method: string, objOrFunc: Object, funcName: string): this;
+
+		onmousemove(method: string, objOrFunc: EventListener | string): this;
+		onmousemove(method: string, objOrFunc: Object, funcName: string): this;
+
+		onmouseout(method: string, objOrFunc: EventListener | string): this;
+		onmouseout(method: string, objOrFunc: Object, funcName: string): this;
+
+		onmouseover(method: string, objOrFunc: EventListener | string): this;
+		onmouseover(method: string, objOrFunc: Object, funcName: string): this;
+
+		onmouseup(method: string, objOrFunc: EventListener | string): this;
+		onmouseup(method: string, objOrFunc: Object, funcName: string): this;
+
+		onsubmit(method: string, objOrFunc: EventListener | string): this;
+		onsubmit(method: string, objOrFunc: Object, funcName: string): this;
+	}
+
+	interface NodeListConstructor {
+		events: string[];
+	}
+
+	namespace _base {
+		interface Dojo {
+			NodeList: NodeListConstructor;
 		}
 	}
 }
