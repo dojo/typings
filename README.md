@@ -1,4 +1,4 @@
-# dojo1-typings
+# dojo/typings
 
 This is a repository of Dojo 1 TypeScript Typings (including Dijit and DojoX).
 
@@ -19,11 +19,16 @@ the `modules.d.ts`.  If you need to modify the names of the ambient modules to m
 runtime environment, then you would copy the `modules.d.ts` and rename all the modules as
 required.
 
+Basic usage would be to include the `index.d.ts` and likely `modules.d.ts` in files used
+either by `tsc` or in your `tsconfig.json` or referenced within your TypeScript files.
+The [wiki]() contains some basic *how to* instructions.
+
 ### Building
 
 The repository has a `Gruntfile.js` and a development dependency of [grunt](http://gruntjs.com/)
-that can help validate any changes to the typings.  After cloning the repository and running `npm install`,
-you can then run `grunt` or `grunt dev` which will compile the files with `tsc` as well as run `tslint` against the core files.
+that can help validate any changes to the typings.  After cloning the repository and running
+`npm install`, you can then run `grunt` or `grunt dev` which will compile the files with
+`tsc` as well as run `tslint` against the core files.
 
 ## Examples
 
@@ -34,19 +39,22 @@ the `examples` directory of this repository.
 
 ### Typings are global
 
-At the time of this writing (TypeScript 1.7), typings are global and absolute. In order to change module resolution
-from `dojo/...` modules.d.ts will need to be updated
+At the time of this writing (TypeScript 1.7), typings are global and absolute. In order
+to change module resolution from `dojo/...` the `modules.d.ts` will need to be updated.
 
 ### String Literals
 
-The current typings are build around TypeScript 1.7.  TypeScript 1.8 introduced string literal types and there
-are improvements that can be made to the typings, several of them noted as comments in the existing typings.
+The current typings are build around TypeScript 1.7.  TypeScript 1.8 introduced string
+literal types and there are improvements that can be made to the typings, several of
+them noted as comments in the existing typings.
 
 ### AMD Plugin Globbing
 
-Currently, TypeScript does not support globbing of AMD modules.  There is an open ticket for this type of support
-(see [Microsoft/TypeScript#5787](https://github.com/Microsoft/TypeScript/issues/5787)).  Until that is done, in order to use a plugin properly, you will have to declare
-the ambient module in a projects `.d.ts`.  For example to use `dojo/text` you would want to do something like this:
+Currently, TypeScript does not support globbing of AMD modules.  There is an open ticket
+for this type of support (see [Microsoft/TypeScript#5787](https://github.com/Microsoft/TypeScript/issues/5787)).
+Until that is done, in order to use a plugin properly, you will have to declare the
+ambient module in a projects `.d.ts`.  For example to use `dojo/text` you would want
+to do something like this:
 
 ```typescript
 declare module 'dojo/text!./path/to/some.html' {

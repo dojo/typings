@@ -1,84 +1,66 @@
 declare namespace dijit {
+
 	namespace form {
 
 		/* dijit/form/_FormMixin */
+
 		interface OnValidStateChange {
 			(isValid?: boolean): void;
 		}
 
 		/* tslint:disable:class-name */
-		export interface _FormMixin {
+		interface _FormMixin {
+
+			/**
+			 * Will be "Error" if one or more of the child widgets has an invalid value,
+			 * "Incomplete" if not all of the required child widgets are filled in.  Otherwise, "",
+			 * which indicates that the form is ready to be submitted.
+			 */
 			state: string;
+
 			reset(): void;
+
+			/**
+			 * returns if the form is valid - same as isValid - but
+			 * provides a few additional (ui-specific) features:
+			 *
+			 * 1. it will highlight any sub-widgets that are not valid
+			 * 2. it will call focus() on the first invalid sub-widget
+			 */
 			validate(): boolean;
+
 			setValues(val: any): _FormMixin;
 			getValues(): any;
+
+			/**
+			 * Returns true if all of the widgets are valid.
+			 * Deprecated, will be removed in 2.0.  Use get("state") instead.
+			 */
 			isValid(): boolean;
+
+			/**
+			 * Stub function to connect to if you want to do something
+			 * (like disable/enable a submit button) when the valid
+			 * state changes on the form as a whole.
+			 *
+			 * Deprecated.  Will be removed in 2.0.  Use watch("state", ...) instead.
+			 */
 			onValidStateChange: OnValidStateChange;
+
+			/**
+			 * Deprecated method.   Applications no longer need to call this.   Remove for 2.0.
+			 */
 			disconnectChildren(): void;
+
+			/**
+			 * You can call this function directly, ex. in the event that you
+			 * programmatically add a widget to the form *after* the form has been
+			 * initialized.
+			 */
 			connectChildren(inStartup?: boolean): void;
-			startup(): void;
-			destory(): void;
-		}
-	}
 
-	namespace layout {
-		/* dijit/ContentPane */
-		export interface ContentPane extends _Widget, _Container, _ContentPaneResizeMixin {
-			href: string;
-			content: string;
-			extractContent: boolean;
-			parseOnLoad: boolean;
-			parserScope: string;
-			preventCache: boolean;
-			preload: boolean;
-			refreshOnShow: boolean;
-			loadingMessage: string;
-			errorMessage: string;
-			isLoaded: boolean;
-			baseClass: string;
-			ioArgs: { [arg: string]: string|number };
-			onLoadDeferred: dojo.Deferred<any>;
-			stopParser: boolean;
-			template: boolean;
-			markupFactory<T>(params: any, node: HTMLElement, ctor: dojo.GenericConstructor<T>): T;
-			create(params: any, srcNodeRef: HTMLElement): void;
-			postMixInProperties(): void;
-			buildRendering(): void;
 			startup(): void;
-			setHref(href: string|URL): ContentPane;
-			setContent(data: string|HTMLElement|NodeList): ContentPane;
-			cancel(): void;
 			destroy(): void;
-			destroyRecursive(): void;
-			refresh(): dojo.Deferred<any>;
-			destroyDescendants(preserveDom?: boolean): void;
-			onLoad(data?: any): void;
-			onUnload(): void;
-			onDownloadStart(): string;
-			onContentError(error: Error): void;
-			onDownloadError(error: Error): void;
-			onDownloadEnd(): void;
-		}
-
-		export interface ChangeSizeObject {
-			w?: number;
-			h?: number;
-			l?: number;
-			t?: number;
-		}
-
-		export interface ResultSizeObject {
-			w: number;
-			h: number;
-		}
-
-		/* dijit/layout/_ContentPaneResizeMixin */
-		export interface _ContentPaneResizeMixin {
-			doLayout: boolean;
-			isLayoutContainer: boolean;
-			startup(): void;
-			resize(changeSize?: ChangeSizeObject, resultSize?: ResultSizeObject): void;
 		}
 	}
 }
