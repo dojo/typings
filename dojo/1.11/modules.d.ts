@@ -613,6 +613,21 @@ declare module 'dojo/router/RouterBase' {
 	export = RouterBase;
 }
 
+declare module 'dojo/rpc/JsonpService' {
+	const JsonpService: dojo.rpc.JsonpServiceConstructor;
+	export = JsonpService;
+}
+
+declare module 'dojo/rpc/JsonService' {
+	const JsonService: dojo.rpc.JsonServiceConstructor;
+	export = JsonService;
+}
+
+declare module 'dojo/rpc/RpcService' {
+	const RpcService: dojo.rpc.RpcServiceConstructor;
+	export = RpcService;
+}
+
 declare module 'dojo/selector/_loader' {
 	const loader: dojo.selector.Loader;
 	export = loader;
