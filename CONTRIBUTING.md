@@ -4,7 +4,7 @@ Thank you for taking an interest in contributing to `dojo1-typings`.
 
 ## Reporting Bugs
 
-For things that you think might be bugs, please open a [GitHub issue](https://github.com/SitePen/dojo1-typings/issues/new?body=Description:%0A%0ASteps+to+reproduce:%0A%0A1.%20%E2%80%A6%0A2.%20%E2%80%A6%0A3.%20%E2%80%A6%0A%0AExpected%20result:%0AActual%20result:%0A%0AVersion:%0A%0AAny%20additional%20information:).
+For things that you think might be bugs, please open a [GitHub issue](https://github.com/dojo/typings/issues/new?body=Description:%0A%0ASteps+to+reproduce:%0A%0A1.%20%E2%80%A6%0A2.%20%E2%80%A6%0A3.%20%E2%80%A6%0A%0AExpected%20result:%0AActual%20result:%0A%0AVersion:%0A%0AAny%20additional%20information:).
 
 ## Feature Requests
 

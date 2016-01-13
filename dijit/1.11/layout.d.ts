@@ -1,6 +1,6 @@
 declare namespace dijit {
 
-    namespace layout {
+	namespace layout {
 
 		/* dijit/ContentPane */
 
@@ -74,7 +74,6 @@ declare namespace dijit {
 			 */
 			isLoaded: boolean;
 
-
 			baseClass: string;
 
 			/**
@@ -84,7 +83,7 @@ declare namespace dijit {
 
 			/**
 			 * Parameters to pass to xhrGet() request, for example:
-		// |	<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="href: './bar', ioArgs: {timeout: 500}">
+			 * |	<div data-dojo-type="dijit/layout/ContentPane" data-dojo-props="href: './bar', ioArgs: {timeout: 500}">
 			 */
 			ioArgs: { [arg: string]: string | number };
 

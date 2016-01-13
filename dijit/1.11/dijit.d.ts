@@ -54,7 +54,7 @@ declare namespace dijit {
 	/* dijit/Dialog */
 
 	/* tslint:disable:class-name */
-	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStatefulMixin {
+	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStateMixin {
 		templateString: string;
 		baseClass: string;
 		cssStateNodes: { closeButtonNode: string };
