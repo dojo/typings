@@ -1,5 +1,7 @@
 # dojo/typings
 
+[![npm version](https://badge.fury.io/js/dojo-typings.svg)](http://badge.fury.io/js/dojo-typings)
+
 This is a repository of Dojo 1 TypeScript Typings (including Dijit and DojoX).
 
 Dojo 2 is built on TypeScript and therefore its typings are inherit in its distrubution.
@@ -27,6 +29,12 @@ required.
 Basic usage would be to include the `index.d.ts` and likely `modules.d.ts` in files used
 either by `tsc` or in your `tsconfig.json` or referenced within your TypeScript files.
 The [wiki](https://github.com/dojo/typings/wiki) contains some basic *how to* instructions.
+
+The easiest way to install the typings is via `npm`:
+
+```sh
+> npm install dojo-typings --save-dev
+```
 
 ### Building
 
