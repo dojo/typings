@@ -1856,9 +1856,43 @@ declare namespace dojo {
 	}
 
 	interface Stateful {
-		postscript(params?: any): void;
+		/**
+		 * Used across all instances a hash to cache attribute names and their getter
+		 * and setter names.
+		 */
+		_attrPairNames: { [attr: string]: string };
+
+		/**
+		 * Helper function for get() and set().
+		 * Caches attribute name values so we don't do the string ops every time.
+		 */
+		_getAttrNames(name: string): string;
+
+		/**
+		 * Automatic setting of params during construction
+		 */
+		postscript(params?: Object): void;
+
+		/**
+		 * Get a property on a Stateful instance.
+		 */
 		get(name: string): any;
-		set(name: string, value: any): Stateful;
+
+		/**
+		 * Set a property on a Stateful instance
+		 */
+		set(name: string, value: any): this;
+		set(name: Object): this;
+
+		/**
+		 * Internal helper for directly changing an attribute value.
+		 */
+		_changeAttrValue(name: string, value: any): this;
+
+		/**
+		 * Watches a property for changes
+		 */
+		watch(callback: (prop: string, oldValue: any, newValue: any) => void): WatchHandle;
 		watch(name: string, callback: (prop: string, oldValue: any, newValue: any) => void): WatchHandle;
 	}
 
