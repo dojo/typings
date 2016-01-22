@@ -60,7 +60,7 @@ declare namespace dijit {
 			connectChildren(inStartup?: boolean): void;
 
 			startup(): void;
-			destroy(): void;
+			destroy(preserveDom?: boolean): void;
 		}
 	}
 }
