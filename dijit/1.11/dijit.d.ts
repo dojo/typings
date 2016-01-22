@@ -135,11 +135,10 @@ declare namespace dijit {
 		destroy(): void;
 	}
 
-	interface _DialogBaseConstructor {
-		new (params: any[], srcNodeRef?: HTMLElement): _DialogBase;
-	}
+	interface _DialogBaseConstructor extends _WidgetBaseConstructor<_DialogBase> { }
 
 	interface Dialog extends layout.ContentPane, _DialogBase {
+		/* overrides conflicting methods */
 		resize(dim?: dojo.DomGeometryWidthHeight): void;
 	}
 
@@ -175,11 +174,6 @@ declare namespace dijit {
 	}
 
 	interface DialogConstructor extends _WidgetBaseConstructor<Dialog> {
-		/**
-		 * A modal dialog Widget.
-		 */
-		new (params: any[], srcNodeRef?: HTMLElement): Dialog;
-
 		/**
 		 * for monkey patching and dojox/widget/DialogSimple
 		 */
@@ -363,9 +357,7 @@ declare namespace dijit {
 		buildRendering(): void;
 	}
 
-	interface _TemplatedMixinConstructor {
-		new (params: any[], srcNodeRef: HTMLElement): _TemplatedMixin;
-
+	interface _TemplatedMixinConstructor extends _WidgetBaseConstructor<_TemplatedMixin> {
 		/**
 		 * Static method to get a template based on the templatePath or
 		 * templateString key
@@ -709,6 +701,6 @@ declare namespace dijit {
 	}
 
 	interface _WidgetBaseConstructor<T> extends dojo._base.DeclareConstructor<T> {
-		new (params: any[], srcNodeRef: HTMLElement): T;
+		new (params: Object, srcNodeRef: dojo.NodeOrString): T;
 	}
 }
