@@ -139,12 +139,9 @@ declare namespace dijit {
 		new (params: any[], srcNodeRef?: HTMLElement): _DialogBase;
 	}
 
-	/* We have to manually override API extension conflicts with TypeScript */
-	interface DialogContentPane extends layout.ContentPane {
+	interface Dialog extends layout.ContentPane, _DialogBase {
 		resize(dim?: dojo.DomGeometryWidthHeight): void;
 	}
-
-	interface Dialog extends DialogContentPane, _DialogBase { }
 
 	interface DialogLevelManager {
 		_beginZIndex: number;
