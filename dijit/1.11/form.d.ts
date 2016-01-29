@@ -133,6 +133,28 @@ declare namespace dijit {
 			set(values: Object): this;
 		}
 
+		/* dijit/form/_ButtonMixin */
+
+		interface _ButtonMixin {
+			/**
+			 * A mixin to add a thin standard API wrapper to a normal HTML button
+			 */
+			label: string;
+
+			/**
+			 * Type of button (submit, reset, button, checkbox, radio)
+			 */
+			type: string;
+			postCreate(): void;
+
+			/**
+			 * Callback for when button is clicked.
+			 * If type="submit", return true to perform submit, or false to cancel it.
+			 */
+			onClick(e: DocumentEvent): boolean;
+			onSetLabel(e: DocumentEvent): void;
+		}
+
 		/* dijit/form/_CheckBoxMixin */
 
 		interface _CheckBoxMixin {
@@ -158,34 +180,111 @@ declare namespace dijit {
 			reset: () => void;
 		}
 
-		/* dijit/form/_ButtonMixin */
-
-		interface _ButtonMixin {
-			/**
-			 * A mixin to add a thin standard API wrapper to a normal HTML button
-			 */
-			label: string;
-
-			/**
-			 * Type of button (submit, reset, button, checkbox, radio)
-			 */
-			type: string;
-			postCreate(): void;
-
-			/**
-			 * Callback for when button is clicked.
-			 * If type="submit", return true to perform submit, or false to cancel it.
-			 */
-			onClick(e: DocumentEvent): boolean;
-			onSetLabel(e: DocumentEvent): void;
-		}
-
 		/* dijit/form/_ExpandingTextAreaMixin */
 
 		interface _ExpandingTextAreaMixin {
 			postCreate(): void;
 			startup(): void;
 			resize(): void;
+		}
+
+		/* dijit/form/_ComboBoxMenu */
+
+		interface _ComboBoxMenu<T> extends _WidgetBase, _TemplatedMixin, _ListMouseMixin, _ComboBoxMenuMixin<T> {
+			templateString: string;
+			baseClass: string;
+
+			/**
+			 * Add hover CSS
+			 */
+			onHover(node: HTMLElement): void;
+
+			/**
+			 * Remove hover CSS
+			 */
+			onUnhover(node: HTMLElement): void;
+
+			/**
+			 * Add selected CSS
+			 */
+			onSelect(node: HTMLElement): void;
+
+			/**
+			 * Remove selected CSS
+			 */
+			onDeselect(node: HTMLElement): void;
+
+			/**
+			 * Handles page-up and page-down keypresses
+			 */
+			_page(up?: boolean): void;
+
+			/**
+			 * Handle keystroke event forwarded from ComboBox, returning false if it's
+			 * a keystroke I recognize and process, true otherwise.
+			 */
+			handleKey(evt: KeyboardEvent): boolean;
+
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		interface _ComboBoxMenuConstructor extends _WidgetBaseConstructor<_ComboBoxMenu<any>> {
+			new <T>(params: Object, srcNodeRef: dojo.NodeOrString): _ComboBoxMenu<T>;
+		}
+
+		/* dijit/form/_ComboBoxMenuMixin */
+
+		interface _ComboBoxMenuMixin<T> {
+			/**
+			 * Holds "next" and "previous" text for paging buttons on drop down
+			 */
+			_messages: { next: string; previous: string; };
+
+			onClick(node: HTMLElement): void;
+
+			/**
+			 * Notifies ComboBox/FilteringSelect that user selected an option.
+			 */
+			onChange(direction: number): void;
+
+			/**
+			 * Notifies ComboBox/FilteringSelect that user clicked to advance to next/previous page.
+			 */
+			onPage(direction: number): void;
+
+			/**
+			 * Callback from dijit.popup code to this widget, notifying it that it closed
+			 */
+			onClose(): void;
+
+			/**
+			 * Fills in the items in the drop down list
+			 */
+			createOptions(results: T[], options: dojo.store.api.QueryOptions, labelFunc: (item: T) => { html: boolean; label: string; }): void;
+
+			/**
+			 * Clears the entries in the drop down list, but of course keeps the previous and next buttons.
+			 */
+			clearResultList(): void;
+
+			/**
+			 * Highlight the first real item in the list (not Previous Choices).
+			 */
+			highlightFirstOption(): void;
+
+			/**
+			 * Highlight the last real item in the list (not More Choices).
+			 */
+			highlightLastOption(): void;
+
+			selectFirstNode(): void;
+			selectLastNode(): void;
+			getHighlightedOption(): HTMLElement;
+
+			set(name: 'value', value: Object): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
 
 		/* dijit/form/_FormMixin */
@@ -379,6 +478,48 @@ declare namespace dijit {
 			set(name: 'disabled', value: boolean): this;
 			set(name: string, value: any): this;
 			set(values: Object): this;
+		}
+
+		/* dijit/form/_ListBase */
+
+		interface _ListBase {
+			/**
+			 * currently selected node
+			 */
+			selected: HTMLElement;
+
+			/**
+			 * Select the first displayed item in the list.
+			 */
+			selectFirstNode(): void;
+
+			/**
+			 * Select the last displayed item in the list
+			 */
+			selectLastNode(): void;
+
+			/**
+			 * Select the item just below the current selection.
+			 * If nothing selected, select first node.
+			 */
+			selectNextNode(): void;
+
+			/**
+			 * Select the item just above the current selection.
+			 * If nothing selected, select last node (if
+			 * you select Previous and try to keep scrolling up the list).
+			 */
+			selectPreviousNode(): void;
+
+			set(name: 'selected', value: HTMLElement): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		/* dijit/form/_ListMouseMixin */
+
+		interface _ListMouseMixin extends _ListBase {
+			postCreate(): void;
 		}
 
 		/* dijit/form/_RadioButtonMixin */
