@@ -46,9 +46,95 @@ declare namespace dijit {
 			(val: any, options?: Object): string;
 		}
 
-		/* dojo/form/_CheckBoxMixin */
+		/* dijit/form/_AutoCompleterMixin */
 
 		/* tslint:disable:class-name */
+		interface _AutoCompleterMixin<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions> extends _SearchMixin<T, Q, O> {
+			/**
+			 * This is the item returned by the dojo/store/api/Store implementation that
+			 * provides the data for this ComboBox, it's the currently selected item.
+			 */
+			item: T;
+
+			/**
+			 * If user types in a partial string, and then tab out of the `<input>` box,
+			 * automatically copy the first entry displayed in the drop down list to
+			 * the `<input>` field
+			 */
+			autoComplete: boolean;
+
+			/**
+			 * One of: "first", "all" or "none".
+			 */
+			highlightMatch: string;
+			/* TODO: Uncomment for TS 1.8 and remove above */
+			/* highlightMatch: 'fisrt' | 'all' | 'none'; */
+
+			/**
+			 * The entries in the drop down list come from this attribute in the
+			 * dojo.data items.
+			 * If not specified, the searchAttr attribute is used instead.
+			 */
+			labelAttr: string;
+
+			/**
+			 * Specifies how to interpret the labelAttr in the data store items.
+			 * Can be "html" or "text".
+			 */
+			labelType: string;
+
+			/**
+			 * Flags to _HasDropDown to limit height of drop down to make it fit in viewport
+			 */
+			maxHeight: number;
+
+			/**
+			 * For backwards compatibility let onClick events propagate, even clicks on the down arrow button
+			 */
+			_stopClickEvents: boolean;
+
+			_getCaretPos(element: HTMLElement): number;
+			_setCaretPos(element: HTMLElement, location: number): void;
+
+			/**
+			 * Overrides _HasDropDown.loadDropDown().
+			 */
+			loadDropDown(calback: Function): void;
+
+			/**
+			 * signal to _HasDropDown that it needs to call loadDropDown() to load the
+			 * drop down asynchronously before displaying it
+			 */
+			isLoaded(): boolean;
+
+			/**
+			 * Overrides _HasDropDown.closeDropDown().  Closes the drop down (assuming that it's open).
+			 * This method is the callback when the user types ESC or clicking
+			 * the button icon while the drop down is open.  It's also called by other code.
+			 */
+			closeDropDown(): void;
+
+			postMixInProperties(): void;
+			postCreate(): void;
+
+			/**
+			 * Highlights the string entered by the user in the menu.  By default this
+			 * highlights the first occurrence found. Override this method
+			 * to implement your custom highlighting.
+			 */
+			doHighlight(label: string, find: string): string;
+			reset(): void;
+			labelFunc(item: T, store: dojo.store.api.Store<T, Q, O>): string;
+
+			set(name: 'value', value: string): this;
+			set(name: 'item', value: T): this;
+			set(name: 'disabled', value: boolean): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		/* dijit/form/_CheckBoxMixin */
+
 		interface _CheckBoxMixin {
 			/**
 			 * type attribute on `<input>` node.
@@ -72,7 +158,7 @@ declare namespace dijit {
 			reset: () => void;
 		}
 
-		/* dojo/form/_ButtonMixin */
+		/* dijit/form/_ButtonMixin */
 
 		interface _ButtonMixin {
 			/**
@@ -94,7 +180,7 @@ declare namespace dijit {
 			onSetLabel(e: DocumentEvent): void;
 		}
 
-		/* dojo/form/_ExpandingTextAreaMixin */
+		/* dijit/form/_ExpandingTextAreaMixin */
 
 		interface _ExpandingTextAreaMixin {
 			postCreate(): void;
@@ -108,7 +194,6 @@ declare namespace dijit {
 			(isValid?: boolean): void;
 		}
 
-		/* tslint:disable:class-name */
 		interface _FormMixin {
 
 			/**
@@ -163,7 +248,7 @@ declare namespace dijit {
 			destroy(preserveDom?: boolean): void;
 		}
 
-		/* dojo/form/_FormValueMixin */
+		/* dijit/form/_FormValueMixin */
 
 		interface _FormValueMixin extends _FormWidgetMixin {
 
@@ -187,7 +272,7 @@ declare namespace dijit {
 			reset(): void;
 		}
 
-		/* dojo/form/_FormValueWidget */
+		/* dijit/form/_FormValueWidget */
 
 		interface _FormValueWidget extends _FormWidget, _FormValueMixin {
 			/**
@@ -201,7 +286,7 @@ declare namespace dijit {
 
 		interface _FormValueWidgetConstructor extends _WidgetBaseConstructor<_FormValueWidget> { }
 
-		/* dojo/form/_FormWidget */
+		/* dijit/form/_FormWidget */
 
 		interface _FormWidget extends _Widget, _TemplatedMixin, _CssStateMixin, _FormWidgetMixin {
 			setDisabled(disabled: boolean): void;
@@ -215,7 +300,7 @@ declare namespace dijit {
 
 		interface _FormWidgetConstructor extends _WidgetBaseConstructor<_FormWidget> { }
 
-		/* dojo/form/_FormWidgetMixin */
+		/* dijit/form/_FormWidgetMixin */
 
 		interface _FormWidgetMixin {
 			/**
@@ -296,7 +381,7 @@ declare namespace dijit {
 			set(values: Object): this;
 		}
 
-		/* dojo/form/_RadioButtonMixin */
+		/* dijit/form/_RadioButtonMixin */
 
 		interface _RadioButtonMixin {
 			/**
@@ -306,7 +391,102 @@ declare namespace dijit {
 			type: string;
 		}
 
-		/* dojo/form/_Spinner */
+		/* dijit/form/_SearchMixin */
+
+		interface _SearchMixin<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions> {
+			/**
+			 * Argument to data provider.
+			 * Specifies maximum number of search results to return per query
+			 */
+			pageSize: number;
+
+			/**
+			 * Reference to data provider object used by this ComboBox.
+			 * The store must accept an object hash of properties for its query. See `query` and `queryExpr` for details.
+			 */
+			store: dojo.store.api.Store<T, Q, O>;
+
+			/**
+			 * Mixin to the store's fetch.
+			 * For example, to set the sort order of the ComboBox menu, pass:
+			 * { sort: [{attribute:"name",descending: true}] }
+			 * To override the default queryOptions so that deep=false, do:
+			 * { queryOptions: {ignoreCase: true, deep: false} }
+			 */
+			fetchProperties: { [property: string]: any };
+
+			/**
+			 * A query that can be passed to `store` to initially filter the items.
+			 * ComboBox overwrites any reference to the `searchAttr` and sets it to the `queryExpr` with the user's input substituted.
+			 */
+			query: Q;
+
+			/**
+			 * Alternate to specifying a store.  Id of a dijit/form/DataList widget.
+			 */
+			list: string;
+
+			/**
+			 * Delay in milliseconds between when user types something and we start
+			 * searching based on that value
+			 */
+			searchDelay: number;
+
+			/**
+			 * Search for items in the data store where this attribute (in the item)
+			 * matches what the user typed
+			 */
+			searchAttr: string;
+
+			/**
+			 * This specifies what query is sent to the data store,
+			 * based on what the user has typed.  Changing this expression will modify
+			 * whether the results are only exact matches, a "starting with" match,
+			 * etc.
+			 * `${0}` will be substituted for the user text.
+			 * `*` is used for wildcards.
+			 * `${0}*` means "starts with", `*${0}*` means "contains", `${0}` means "is"
+			 */
+			queryExpr: string;
+
+			/**
+			 * Set true if the query should ignore case when matching possible items
+			 */
+			ignoreCase: boolean;
+
+			/**
+			 * Helper function to convert a simple pattern to a regular expression for matching.
+			 */
+			_patternToRegExp(pattern: string): RegExp;
+
+			_abortQuery(): void;
+
+			/**
+			 * Handles input (keyboard/paste) events
+			 */
+			_processInput(e: KeyboardEvent): void;
+
+			/**
+			 * Callback when a search completes.
+			 */
+			onSearch(results: T[], query: Q, options: O): void;
+
+			_startSearchFromInput(): void;
+
+			/**
+			 * Starts a search for elements matching text (text=="" means to return all items
+			 * and calls onSearch(...) when the search completes, to display the results.
+			 */
+			_startSearch(text: string): void;
+
+			postMixInProperties(): void;
+
+			set(name: 'list', value: string): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		/* dijit/form/_Spinner */
 
 		interface CSSStateNodes {
 			[node: string]: string;
@@ -359,7 +539,7 @@ declare namespace dijit {
 
 		interface _SpinnerConstrctor extends _WidgetBaseConstructor<_Spinner> { }
 
-		/* dojo/form/_TextBoxMixin */
+		/* dijit/form/_TextBoxMixin */
 
 		interface _TextBoxMixin {
 			/**
@@ -445,7 +625,7 @@ declare namespace dijit {
 			reset(): void;
 		}
 
-		/* dojo/form/_ToggleButtonMixin */
+		/* dijit/form/_ToggleButtonMixin */
 
 		interface _ToggleButtonMixin {
 			/**
@@ -464,7 +644,7 @@ declare namespace dijit {
 			reset(): void;
 		}
 
-		/* dojo/form/Button */
+		/* dijit/form/Button */
 
 		interface Button extends _FormWidget, _ButtonMixin {
 			/**
@@ -498,7 +678,7 @@ declare namespace dijit {
 
 		interface ButtonConstructor extends _WidgetBaseConstructor<Button> { }
 
-		/* dojo/form/CheckBox */
+		/* dijit/form/CheckBox */
 
 		interface CheckBox extends ToggleButton, _CheckBoxMixin {
 			templateString: string;
@@ -509,7 +689,7 @@ declare namespace dijit {
 
 		interface CheckBoxConstructor extends _WidgetBaseConstructor<CheckBox> { }
 
-		/* dojo/form/Form */
+		/* dijit/form/Form */
 
 		interface Form extends _Widget, _TemplatedMixin, _FormMixin, layout._ContentPaneResizeMixin {
 			name?: string;
@@ -558,7 +738,7 @@ declare namespace dijit {
 
 		interface FormConstructor extends _WidgetBaseConstructor<Form> { }
 
-		/* dojo/form/MappedTextBox */
+		/* dijit/form/MappedTextBox */
 
 		interface MappedTextBox extends ValidationTextBox {
 			postMixInProperties(): void;
@@ -571,7 +751,7 @@ declare namespace dijit {
 
 		interface MappedTextBoxConstructor extends _WidgetBaseConstructor<MappedTextBoxConstructor> { }
 
-		/* dojo/form/NumberSpinner */
+		/* dijit/form/NumberSpinner */
 
 		interface NumberSpinner extends _Spinner, NumberTextBoxMixin {
 			baseClass: string;
@@ -587,7 +767,7 @@ declare namespace dijit {
 
 		interface NumberSpinnerConstructor extends _WidgetBaseConstructor<NumberSpinner> { }
 
-		/* dojo/form/NumberTextBox */
+		/* dijit/form/NumberTextBox */
 
 		interface NumberTextBoxMixin {
 			pattern: ConstraintsToRegExpString;
@@ -622,7 +802,7 @@ declare namespace dijit {
 			Mixin: NumberTextBoxMixinConstructor;
 		}
 
-		/* dojo/form/RadioButton */
+		/* dijit/form/RadioButton */
 
 		interface RadioButton extends CheckBox, _RadioButtonMixin {
 			baseClass: string;
@@ -630,7 +810,7 @@ declare namespace dijit {
 
 		interface RadioButtonConstructor extends _WidgetBaseConstructor<RadioButton> { }
 
-		/* dojo/form/RangeBoundTextBox */
+		/* dijit/form/RangeBoundTextBox */
 
 		interface RangeBoundTextBox extends MappedTextBox {
 			/**
@@ -661,7 +841,7 @@ declare namespace dijit {
 
 		interface RangeBoundTextBoxConstructor extends _WidgetBaseConstructor<RangeBoundTextBox> { }
 
-		/* dojo/form/SimpleTextarea */
+		/* dijit/form/SimpleTextarea */
 
 		interface SimpleTextarea extends TextBox {
 			baseClass: string;
@@ -677,7 +857,7 @@ declare namespace dijit {
 			new (params: Object, srcNodeRef: dojo.NodeOrString): SimpleTextarea;
 		}
 
-		/* dojo/form/Textarea */
+		/* dijit/form/Textarea */
 
 		interface Textarea extends SimpleTextarea, _ExpandingTextAreaMixin {
 			baseClass: string;
@@ -687,7 +867,7 @@ declare namespace dijit {
 
 		interface TextareaConstructor extends _WidgetBaseConstructor<Textarea> { }
 
-		/* dojo/form/TextBox */
+		/* dijit/form/TextBox */
 
 		interface TextBox extends _FormValueWidget, _TextBoxMixin {
 			set(name: 'displayedValue', value: string): this;
@@ -703,7 +883,7 @@ declare namespace dijit {
 
 		interface TextBoxConstructor extends _WidgetBaseConstructor<TextBox> { }
 
-		/* dojo/form/ToggleButton */
+		/* dijit/form/ToggleButton */
 
 		interface ToggleButton extends Button, _ToggleButtonMixin {
 			baseClass: string;
@@ -717,7 +897,7 @@ declare namespace dijit {
 
 		interface ToggleButtonConstructor extends _WidgetBaseConstructor<ToggleButton> { }
 
-		/* dojo/form/ValidationTextBox */
+		/* dijit/form/ValidationTextBox */
 
 		interface IsValidFunction {
 			(isFocused?: boolean): boolean;
