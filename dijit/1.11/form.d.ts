@@ -194,7 +194,12 @@ declare namespace dijit {
 			 * Work around table sizing bugs on IE7 by forcing redraw
 			 */
 			_layoutHackIE7(): void;
+
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
+
+		interface _FormValueWidgetConstructor extends _WidgetBaseConstructor<_FormValueWidget> { }
 
 		/* dojo/form/_FormWidget */
 
@@ -202,26 +207,93 @@ declare namespace dijit {
 			setDisabled(disabled: boolean): void;
 			setValue(value: string): void;
 			postMixInProperties(): void;
+
+			set(name: 'value', value: string): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
+
+		interface _FormWidgetConstructor extends _WidgetBaseConstructor<_FormWidget> { }
 
 		/* dojo/form/_FormWidgetMixin */
 
 		interface _FormWidgetMixin {
+			/**
+			 * Name used when submitting form; same as "name" attribute or plain HTML elements
+			 */
 			name: string;
+
+			/**
+			 * Corresponds to the native HTML `<input>` element's attribute.
+			 */
 			alt: string;
+
+			/**
+			 * Corresponds to the native HTML `<input>` element's attribute.
+			 */
 			value: any;
+
+			/**
+			 * Corresponds to the native HTML `<input>` element's attribute.
+			 */
 			type: string;
+
+			/**
+			 * Apply aria-label in markup to the widget's focusNode
+			 */
 			'aria-label': string;
+
+			/**
+			 * Order fields are traversed when user hits the tab key
+			 */
 			tabIndex: number;
+
+			/**
+			 * Should this widget respond to user input?
+			 * In markup, this is specified as "disabled='disabled'", or just "disabled".
+			 */
 			disabled: boolean;
+
+			/**
+			 * Fires onChange for each value change or only on demand
+			 */
 			intermediateChanges: boolean;
+
+			/**
+			 * On focus, should this widget scroll into view?
+			 */
 			scrollOnFocus: boolean;
+
+			/**
+			 * Tells if this widget is focusable or not.  Used internally by dijit.
+			 */
 			isFocusable(): boolean;
+
+			/**
+			 * Put focus on this widget
+			 */
 			focus(): void;
+
+			/**
+			 * Compare 2 values (as returned by get('value') for this widget).
+			 */
 			compare(val1: any, val2: any): number;
+
+			/**
+			 * Callback when this widget's value is changed.
+			 */
 			onChange(value: string): void;
+
+			/**
+			 * Overrides _Widget.create()
+			 */
 			create(params?: any, srcNodeRef?: HTMLElement): void;
+
 			destroy(preserveDom?: boolean): void;
+
+			set(name: 'disabled', value: boolean): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
 
 		/* dojo/form/_RadioButtonMixin */
@@ -245,17 +317,47 @@ declare namespace dijit {
 		}
 
 		interface _Spinner extends RangeBoundTextBox {
+			/**
+			 * Number of milliseconds before a held arrow key or up/down button becomes typematic
+			 */
 			defaultTimeout: number;
+
+			/**
+			 * minimum number of milliseconds that typematic event fires when held key or button is held
+			 */
 			minimumTimeout: number;
+
+			/**
+			 * Fraction of time used to change the typematic timer between events.
+			 * 1.0 means that each typematic event fires at defaultTimeout intervals.
+			 * Less than 1.0 means that each typematic event fires at an increasing faster rate.
+			 */
 			timeoutChangeRate: number;
+
+			/**
+			 * Adjust the value by this much when spinning using the arrow keys/buttons
+			 */
 			smallDelta: number;
+
+			/**
+			 * Adjust the value by this much when spinning using the PgUp/Dn keys
+			 */
 			largeDelta: number;
+
 			templateString: string;
 			baseClass: string;
 			cssStateNodes: CSSStateNodes;
+
+			/**
+			 * Overridable function used to adjust a primitive value(Number/Date/...) by the delta amount specified.
+			 * The val is adjusted in a way that makes sense to the object type.
+			 */
 			adjust: AdjustFunction;
+
 			postCreate(): void;
 		}
+
+		interface _SpinnerConstrctor extends _WidgetBaseConstructor<_Spinner> { }
 
 		/* dojo/form/_TextBoxMixin */
 
@@ -364,27 +466,37 @@ declare namespace dijit {
 
 		/* dojo/form/Button */
 
-		interface _ButtonFormWidget extends _FormWidget {
-			onClick(e: DocumentEvent): boolean;
-		}
-
-		interface Button extends _ButtonFormWidget, _ButtonMixin {
+		interface Button extends _FormWidget, _ButtonMixin {
+			/**
+			 * Set this to true to hide the label text and display only the icon.
+			 * (If showLabel=false then iconClass must be specified.)
+			 * Especially useful for toolbars.
+			 * If showLabel=true, the label will become the title (a.k.a. tooltip/hint)
+			 */
 			showLabel: boolean;
+
+			/**
+			 * Class to apply to DOMNode in button to make it display an icon
+			 */
 			iconClass: string;
+
 			baseClass: string;
 			templateString: string;
 			postCreate(): void;
 			setLabel(content: string): void;
 			onLabelSet(e: DocumentEvent): void;
 
+			onClick(e: DocumentEvent): boolean;
+
+			set(name: 'showLabel', value: boolean): this;
+			set(name: 'value', value: string): this;
+			set(name: 'name', value: string): this;
 			set(name: 'label', value: string): this;
 			set(name: string, value: any): this;
 			set(values: Object): this;
 		}
 
-		interface ButtonConstructor extends _WidgetBaseConstructor<Button> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): Button;
-		}
+		interface ButtonConstructor extends _WidgetBaseConstructor<Button> { }
 
 		/* dojo/form/CheckBox */
 
@@ -395,11 +507,10 @@ declare namespace dijit {
 			value: string;
 		}
 
-		interface CheckBoxConstructor extends _WidgetBaseConstructor<CheckBox> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): CheckBox;
-		}
+		interface CheckBoxConstructor extends _WidgetBaseConstructor<CheckBox> { }
 
 		/* dojo/form/Form */
+
 		interface Form extends _Widget, _TemplatedMixin, _FormMixin, layout._ContentPaneResizeMixin {
 			name?: string;
 			action?: string;
@@ -445,9 +556,7 @@ declare namespace dijit {
 			submit(): void;
 		}
 
-		interface FormConstructor extends _WidgetBaseConstructor<Form> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): Form;
-		}
+		interface FormConstructor extends _WidgetBaseConstructor<Form> { }
 
 		/* dojo/form/MappedTextBox */
 
@@ -460,9 +569,7 @@ declare namespace dijit {
 			reset(): void;
 		}
 
-		interface MappedTextBoxConstructor extends _WidgetBaseConstructor<MappedTextBoxConstructor> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): MappedTextBox;
-		}
+		interface MappedTextBoxConstructor extends _WidgetBaseConstructor<MappedTextBoxConstructor> { }
 
 		/* dojo/form/NumberSpinner */
 
@@ -478,9 +585,7 @@ declare namespace dijit {
 			value: number;
 		}
 
-		interface NumberSpinnerConstructor extends _WidgetBaseConstructor<NumberSpinner> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): NumberSpinner;
-		}
+		interface NumberSpinnerConstructor extends _WidgetBaseConstructor<NumberSpinner> { }
 
 		/* dojo/form/NumberTextBox */
 
@@ -514,7 +619,6 @@ declare namespace dijit {
 		}
 
 		interface NumberTextBoxConstructor extends _WidgetBaseConstructor<NumberTextBox> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): NumberTextBox;
 			Mixin: NumberTextBoxMixinConstructor;
 		}
 
@@ -524,25 +628,38 @@ declare namespace dijit {
 			baseClass: string;
 		}
 
-		interface RadioButtonConstructor extends _WidgetBaseConstructor<RadioButton> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): RadioButton;
-		}
+		interface RadioButtonConstructor extends _WidgetBaseConstructor<RadioButton> { }
 
 		/* dojo/form/RangeBoundTextBox */
 
 		interface RangeBoundTextBox extends MappedTextBox {
+			/**
+			 * The message to display if value is out-of-range
+			 */
 			rangeMessage: string;
+
+			/**
+			 * Overridable function used to validate the range of the numeric input value.
+			 */
 			rangeCheck(primative: number, constraints: Constraints): boolean;
+
+			/**
+			 * Tests if the value is in the min/max range specified in constraints
+			 */
 			isInRange(isFocused: boolean): boolean;
+
+			/**
+			 * Returns true if the value is out of range and will remain
+			 * out of range even if the user types more characters
+			 */
 			_isDefinitelyOutOfRange(): boolean;
+
 			isValid(isFocused: boolean): boolean;
 			getErrorMessage(isFocused: boolean): string;
 			postMixInProperties(): void;
 		}
 
-		interface RangeBoundTextBoxConstructor extends _WidgetBaseConstructor<RangeBoundTextBox> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): RangeBoundTextBox;
-		}
+		interface RangeBoundTextBoxConstructor extends _WidgetBaseConstructor<RangeBoundTextBox> { }
 
 		/* dojo/form/SimpleTextarea */
 
@@ -568,9 +685,7 @@ declare namespace dijit {
 			buildRendering(): void;
 		}
 
-		interface TextareaConstructor extends _WidgetBaseConstructor<Textarea> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): Textarea;
-		}
+		interface TextareaConstructor extends _WidgetBaseConstructor<Textarea> { }
 
 		/* dojo/form/TextBox */
 
@@ -586,9 +701,7 @@ declare namespace dijit {
 			get(name: string): any;
 		}
 
-		interface TextBoxConstructor extends _WidgetBaseConstructor<TextBox> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): TextBox;
-		}
+		interface TextBoxConstructor extends _WidgetBaseConstructor<TextBox> { }
 
 		/* dojo/form/ToggleButton */
 
@@ -602,10 +715,7 @@ declare namespace dijit {
 			set(values: Object): this;
 		}
 
-		/* TODO: Remove new function when upstream changes are available */
-		interface ToggleButtonConstructor extends _WidgetBaseConstructor<ToggleButton> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): ToggleButton;
-		}
+		interface ToggleButtonConstructor extends _WidgetBaseConstructor<ToggleButton> { }
 
 		/* dojo/form/ValidationTextBox */
 
@@ -655,9 +765,7 @@ declare namespace dijit {
 			get(name: string): any;
 		}
 
-		interface ValidationTextBoxConstructor extends _WidgetBaseConstructor<ValidationTextBox> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): ValidationTextBox;
-		}
+		interface ValidationTextBoxConstructor extends _WidgetBaseConstructor<ValidationTextBox> { }
 	}
 }
 
