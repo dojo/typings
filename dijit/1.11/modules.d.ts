@@ -5,6 +5,16 @@ declare module 'dijit/Dialog' {
 	export = Dialog;
 }
 
+declare module 'dijit/place' {
+	let place: dijit.Place;
+	export = place;
+}
+
+declare module 'dijit/popup' {
+	let popup: dijit.PopupManager;
+	export = popup;
+}
+
 declare module 'dijit/form/Button' {
 	const Button: dijit.form.ButtonConstructor;
 	export = Button;

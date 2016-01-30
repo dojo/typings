@@ -11,14 +11,14 @@ declare namespace dijit {
 			max?: number;
 		}
 
-		interface ConstrainedValueFunction {
+		interface ConstrainedValueFunction<V, C extends Constraints, T> {
 			/**
 			 * Returns a value that has been constrained by the constraints
 			 * @param   value       The value to constrain
 			 * @param   constraints The constraints to use
 			 * @returns             The constrained value
 			 */
-			(value: any, constraints: Constraints): string;
+			(value: V, constraints: C): T;
 		}
 
 		interface ConstrainedValidFunction {
@@ -180,14 +180,6 @@ declare namespace dijit {
 			reset: () => void;
 		}
 
-		/* dijit/form/_ExpandingTextAreaMixin */
-
-		interface _ExpandingTextAreaMixin {
-			postCreate(): void;
-			startup(): void;
-			resize(): void;
-		}
-
 		/* dijit/form/_ComboBoxMenu */
 
 		interface _ComboBoxMenu<T> extends _WidgetBase, _TemplatedMixin, _ListMouseMixin, _ComboBoxMenuMixin<T> {
@@ -285,6 +277,112 @@ declare namespace dijit {
 			set(name: 'value', value: Object): this;
 			set(name: string, value: any): this;
 			set(values: Object): this;
+		}
+
+		/* dijit/form/_DateTimeTextBox */
+
+		interface DateTimeConstraints extends Constraints, dojo.date.DateLocaleFormatOptions {}
+
+		interface _DateTimeTextBox<T extends _Widget> extends RangeBoundTextBox, _HasDropDown<T> {
+			templateString: string;
+
+			/**
+			 * Set this textbox to display a down arrow button, to open the drop down list.
+			 */
+			hasDownArrow: boolean;
+			cssStateNodes: CSSStateNodes;
+
+			/**
+			 * Despite the name, this parameter specifies both constraints on the input
+			 * (including starting/ending dates/times allowed) as well as
+			 * formatting options like whether the date is displayed in long (ex: December 25, 2005)
+			 * or short (ex: 12/25/2005) format.  See `dijit/form/_DateTimeTextBox.__Constraints` for details.
+			 */
+			constraints: DateTimeConstraints;
+
+			/**
+			 * The constraints without the min/max properties. Used by the compare() method
+			 */
+			_unboundedConstraints: DateTimeConstraints;
+
+			pattern: (options?: dojo.date.DateLocaleFormatOptions) => string;
+
+			/**
+			 * JavaScript namespace to find calendar routines.	 If unspecified, uses Gregorian calendar routines
+			 * at dojo/date and dojo/date/locale.
+			 */
+			datePackage: string;
+
+			postMixInProperties(): void;
+			compare(val1: Date, val2: Date): number;
+			autoWidth: boolean;
+
+			/**
+			 * Formats the value as a Date, according to specified locale (second argument)
+			 */
+			format: ConstrainedValueFunction<Date, DateTimeConstraints, string>;
+
+			/**
+			 * Parses as string as a Date, according to constraints
+			 */
+			parse: ConstrainedValueFunction<string, DateTimeConstraints, Date>;
+
+			serialize(val: any, options?: dojo.date.StampFormatOptions): string;
+
+			/**
+			 * The default value to focus in the popupClass widget when the textbox value is empty.
+			 */
+			dropDownDefaultValue: Date;
+
+			/**
+			 * The value of this widget as a JavaScript Date object.  Use get("value") / set("value", val) to manipulate.
+			 * When passed to the parser in markup, must be specified according to `dojo/date/stamp.fromISOString()`
+			 */
+			value: Date;
+
+			_blankValue: string;
+
+			/**
+			 * Name of the popup widget class used to select a date/time.
+			 * Subclasses should specify this.
+			 */
+			popupClass: string;
+
+			/**
+			 * Specifies constraints.selector passed to dojo.date functions, should be either
+			 * "date" or "time".
+			 * Subclass must specify this.
+			 */
+			_selector: string;
+			/* TODO: uncomment for TS 1.8 */
+			/* _selector: 'data' | 'time'; */
+
+			buildRendering(): void;
+
+			/**
+			 * Runs various tests on the value, checking for invalid conditions
+			 */
+			_isInvalidDate(value: Date): boolean;
+
+			get(name: 'displayedValue'): string;
+			get(name: string): any;
+
+			set(name: 'displayedValue', value: string): this;
+			set(name: 'dropDownDefaultValue', value: Date): this;
+			set(name: 'value', value: Date | string): this;
+			set(name: 'constraints', value: Constraints): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		interface _DateTimeTextBoxConstructor<T extends _Widget> extends _WidgetBaseConstructor<_DateTimeTextBox<T>> { }
+
+		/* dijit/form/_ExpandingTextAreaMixin */
+
+		interface _ExpandingTextAreaMixin {
+			postCreate(): void;
+			startup(): void;
+			resize(): void;
 		}
 
 		/* dijit/form/_FormMixin */
@@ -733,12 +831,12 @@ declare namespace dijit {
 			/**
 			 * Replaceable function to convert a value to a properly formatted string.
 			 */
-			format: ConstrainedValueFunction;
+			format: ConstrainedValueFunction<any, Constraints, any>;
 
 			/**
 			 * Replaceable function to convert a formatted string to a value
 			 */
-			parse: ConstrainedValueFunction;
+			parse: ConstrainedValueFunction<any, Constraints, any>;
 
 			/**
 			 * Connect to this function to receive notifications of various user data-input events.

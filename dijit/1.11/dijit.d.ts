@@ -2,191 +2,9 @@ declare namespace dijit {
 	/* Global Dijit Interface */
 	interface Dijit {}
 
-	/* dijit/a11yclick */
-
-	interface A11yClick {
-
-		/**
-		 * Custom press, release, and click synthetic events
-		 * which trigger on a left mouse click, touch, or space/enter keyup.
-		 */
-		(node: HTMLElement, listener: Function): dojo.Handle;
-
-		/**
-		 * Mousedown (left button), touchstart, or keydown (space or enter) corresponding to logical click operation.
-		 */
-		press: dojo.ExtensionEvent;
-
-		/**
-		 * Mouseup (left button), touchend, or keyup (space or enter) corresponding to logical click operation.
-		 */
-		release: dojo.ExtensionEvent;
-
-		/**
-		 * Mouse cursor or a finger is dragged over the given node.
-		 */
-		move: dojo.ExtensionEvent;
-	}
-
-	/* dijit/Destroyable */
-
-	interface Destroyable {
-
-		/**
-		 * Destroy this class, releasing any resources registered via own().
-		 */
-		destroy(preserveDom?: boolean): void;
-
-		/**
-		 * Track specified handles and remove/destroy them when this instance is destroyed, unless they were
-		 * already removed/destroyed manually.
-		 */
-		own(...args: any[]): any[];
-	}
-
-	interface DestroyableConstructor {
-		/**
-		 * Mixin to track handles and release them when instance is destroyed.
-		 */
-		new (): Destroyable;
-	}
-
-	/* dijit/Dialog */
+	/* dijit/_AttachMixin */
 
 	/* tslint:disable:class-name */
-	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStateMixin {
-		templateString: string;
-		baseClass: string;
-		cssStateNodes: { closeButtonNode: string };
-
-		/**
-		 * True if Dialog is currently displayed on screen.
-		 */
-		open: boolean;
-
-		/**
-		 * The time in milliseconds it takes the dialog to fade in and out
-		 */
-		duration: number;
-
-		/**
-		 * A Toggle to modify the default focus behavior of a Dialog, which
-		 * is to re-focus the element which had focus before being opened.
-		 * False will disable refocusing. Default: true
-		 */
-		refocus: boolean;
-
-		/**
-		 * A Toggle to modify the default focus behavior of a Dialog, which
-		 * is to focus on the first dialog element after opening the dialog.
-		 * False will disable autofocusing. Default: true
-		 */
-		autofocus: boolean;
-
-		/**
-		 * Toggles the movable aspect of the Dialog. If true, Dialog
-		 * can be dragged by it's title. If false it will remain centered
-		 * in the viewport.
-		 */
-		draggable: boolean;
-
-		/**
-		 * Maximum size to allow the dialog to expand to, relative to viewport size
-		 */
-		maxRatio: number;
-
-		/**
-		 * Dialog show [x] icon to close itself, and ESC key will close the dialog.
-		 */
-		closable: boolean;
-		postMixInProperties(): void;
-		postCreate(): void;
-
-		/**
-		 * Called when data has been loaded from an href.
-		 * Unlike most other callbacks, this function can be connected to (via `dojo.connect`)
-		 * but should *not* be overridden.
-		 */
-		onLoad(data?: any): void;
-
-		focus(): void;
-
-		/* Not entirely sure of the resolution type of these promises */
-
-		/**
-		 * Display the dialog
-		 */
-		show(): dojo.promise.Promise<any>;
-
-		/**
-		 * Hide the dialog
-		 */
-		hide(): dojo.promise.Promise<any>;
-
-		/**
-		 * Called with no argument when viewport scrolled or viewport size changed.  Adjusts Dialog as
-		 * necessary to keep it visible.
-		 *
-		 * Can also be called with an argument (by dojox/layout/ResizeHandle etc.) to explicitly set the
-		 * size of the dialog.
-		 */
-		resize(dim?: dojo.DomGeometryWidthHeight): void;
-
-		destroy(): void;
-	}
-
-	interface _DialogBaseConstructor extends _WidgetBaseConstructor<_DialogBase> { }
-
-	interface Dialog extends layout.ContentPane, _DialogBase {
-		/* overrides conflicting methods */
-		resize(dim?: dojo.DomGeometryWidthHeight): void;
-	}
-
-	interface DialogLevelManager {
-		_beginZIndex: number;
-
-		/**
-		 * Call right before fade-in animation for new dialog.
-		 *
-		 * Saves current focus, displays/adjusts underlay for new dialog,
-		 * and sets the z-index of the dialog itself.
-		 *
-		 * New dialog will be displayed on top of all currently displayed dialogs.
-		 * Caller is responsible for setting focus in new dialog after the fade-in
-		 * animation completes.
-		 */
-		show(dialog: _WidgetBase, underlayAttrs: Object): void;
-
-		/**
-		 * Called when the specified dialog is hidden/destroyed, after the fade-out
-		 * animation ends, in order to reset page focus, fix the underlay, etc.
-		 * If the specified dialog isn't open then does nothing.
-		 *
-		 * Caller is responsible for either setting display:none on the dialog domNode,
-		 * or calling dijit/popup.hide(), or removing it from the page DOM.
-		 */
-		hide(dialog: _WidgetBase): void;
-
-		/**
-		 * Returns true if specified Dialog is the top in the task
-		 */
-		isTop(dialog: _WidgetBase): boolean;
-	}
-
-	interface DialogConstructor extends _WidgetBaseConstructor<Dialog> {
-		/**
-		 * for monkey patching and dojox/widget/DialogSimple
-		 */
-		_DialogBase: _DialogBaseConstructor;
-		_DialogLevelManager: DialogLevelManager;
-		_dialogStack: {
-			dialog: _WidgetBase,
-			focus: any,
-			underlayAttrs: any
-		}[];
-	}
-
-	/* dijit/_AttachMixin */
 
 	interface _WidgetBase extends dojo.Stateful, Destroyable {
 		dojoAttachEvent: string;
@@ -288,6 +106,160 @@ declare namespace dijit {
 		onExecute(): void;
 	}
 
+	/* dijit/_FocusMixin */
+	interface _FocusMixin {}
+
+	interface _WidgetBase extends dojo.Stateful, Destroyable {
+		/**
+		 * Called when the widget becomes "active" because
+		 * it or a widget inside of it either has focus, or has recently
+		 * been clicked.
+		 */
+		onFocus(): void;
+
+		/**
+		 * Called when the widget stops being "active" because
+		 * focus moved to something outside of it, or the user
+		 * clicked somewhere outside of it, or the widget was
+		 * hidden.
+		 */
+		onBlur(): void;
+	}
+
+	/* dijit/_HasDropDown */
+
+	interface _HasDropDown<T extends _WidgetBase> extends _FocusMixin {
+		/**
+		 * The button/icon/node to click to display the drop down.
+		 * Can be set via a data-dojo-attach-point assignment.
+		 * If missing, then either focusNode or domNode (if focusNode is also missing) will be used.
+		 */
+		_buttonNode: HTMLElement;
+
+		/**
+		 * Will set CSS class dijitUpArrow, dijitDownArrow, dijitRightArrow etc. on this node depending
+		 * on where the drop down is set to be positioned.
+		 * Can be set via a data-dojo-attach-point assignment.
+		 * If missing, then _buttonNode will be used.
+		 */
+		_arrowWrapperNode: HTMLElement;
+
+		/**
+		 * The node to set the aria-expanded class on.
+		 * Also sets popupActive class but that will be removed in 2.0.
+		 * Can be set via a data-dojo-attach-point assignment.
+		 * If missing, then focusNode or _buttonNode (if focusNode is missing) will be used.
+		 */
+		_popupStateNode: HTMLElement;
+
+		/**
+		 * The node to display the popup around.
+		 * Can be set via a data-dojo-attach-point assignment.
+		 * If missing, then domNode will be used.
+		 */
+		_aroundNode: HTMLElement;
+
+		/**
+		 * The widget to display as a popup.  This widget *must* be
+		 * defined before the startup function is called.
+		 */
+		dropDown: T;
+
+		/**
+		 * Set to true to make the drop down at least as wide as this
+		 * widget.  Set to false if the drop down should just be its
+		 * default width.
+		 */
+		autoWidth: boolean;
+
+		/**
+		 * Set to true to make the drop down exactly as wide as this
+		 * widget.  Overrides autoWidth.
+		 */
+		forceWidth: boolean;
+
+		/**
+		 * The max height for our dropdown.
+		 * Any dropdown taller than this will have scrollbars.
+		 * Set to 0 for no max height, or -1 to limit height to available space in viewport
+		 */
+		maxHeight: number;
+
+		/**
+		 * This variable controls the position of the drop down.
+		 * It's an array of strings
+		 */
+		dropDownPosition: string[];
+		/* TODO remove for TS 1.8 */
+		/* dropDownPosition: ('before' | 'after' | 'above' | 'below')[]; */
+
+		/**
+		 * When set to false, the click events will not be stopped, in
+		 * case you want to use them in your subclass
+		 */
+		_stopClickEvents: boolean;
+
+		/**
+		 * Callback when the user mousedown/touchstart on the arrow icon.
+		 */
+		_onDropDownMouseDown(e: MouseEvent): void;
+
+		/**
+		 * Callback on mouseup/touchend after mousedown/touchstart on the arrow icon.
+		 * Note that this function is called regardless of what node the event occurred on (but only after
+		 * a mousedown/touchstart on the arrow).
+		 */
+		_onDropDownMouseUp(e?: MouseEvent): void;
+
+		/**
+		 * The drop down was already opened on mousedown/keydown; just need to stop the event
+		 */
+		_onDropDownClick(e: MouseEvent): void;
+
+		buildRendering(): void;
+		postCreate(): void;
+		destroy(preserveDom?: boolean): void;
+
+		/**
+		 * Returns true if the dropdown exists and it's data is loaded.  This can
+		 * be overridden in order to force a call to loadDropDown().
+		 */
+		isLoaded(): boolean;
+
+		/**
+		 * Creates the drop down if it doesn't exist, loads the data
+		 * if there's an href and it hasn't been loaded yet, and then calls
+		 * the given callback.
+		 */
+		loadDropDown(loadCallback: () => void): void;
+
+		/**
+		 * Creates the drop down if it doesn't exist, loads the data
+		 * if there's an href and it hasn't been loaded yet, and
+		 * then opens the drop down.  This is basically a callback when the
+		 * user presses the down arrow button to open the drop down.
+		 */
+		loadAndOpenDropDown(): dojo.Deferred<T>;
+
+		/**
+		 * Callback when the user presses the down arrow button or presses
+		 * the down arrow key to open/close the drop down.
+		 * Toggle the drop-down widget; if it is up, close it, if not, open it
+		 */
+		toggleDropDown(): void;
+
+		/**
+		 * Opens the dropdown for this widget.   To be called only when this.dropDown
+		 * has been created and is ready to display (ie, it's data is loaded).
+		 */
+		openDropDown(): PlaceLocation;
+
+		/**
+		 * Closes the drop down on this widget
+		 */
+		closeDropDown(focus?: boolean): void;
+	}
+
 	/* dijit/_OnDijitClickMixin */
 
 	interface _OnDijitClickMixin {
@@ -308,26 +280,6 @@ declare namespace dijit {
 		 */
 		new (): _OnDijitClickMixin;
 		a11yclick: A11yClick;
-	}
-
-	/* dijit/_FocusMixin */
-	interface _FocusMixin {}
-
-	interface _WidgetBase extends dojo.Stateful, Destroyable {
-		/**
-		 * Called when the widget becomes "active" because
-		 * it or a widget inside of it either has focus, or has recently
-		 * been clicked.
-		 */
-		onFocus(): void;
-
-		/**
-		 * Called when the widget stops being "active" because
-		 * focus moved to something outside of it, or the user
-		 * clicked somewhere outside of it, or the widget was
-		 * hidden.
-		 */
-		onBlur(): void;
 	}
 
 	/* dijit/_TemplatedMixin */
@@ -703,4 +655,372 @@ declare namespace dijit {
 	interface _WidgetBaseConstructor<T> extends dojo._base.DeclareConstructor<T> {
 		new (params: Object, srcNodeRef: dojo.NodeOrString): T;
 	}
+
+	/* dijit/a11yclick */
+
+	interface A11yClick {
+
+		/**
+		 * Custom press, release, and click synthetic events
+		 * which trigger on a left mouse click, touch, or space/enter keyup.
+		 */
+		(node: HTMLElement, listener: Function): dojo.Handle;
+
+		/**
+		 * Mousedown (left button), touchstart, or keydown (space or enter) corresponding to logical click operation.
+		 */
+		press: dojo.ExtensionEvent;
+
+		/**
+		 * Mouseup (left button), touchend, or keyup (space or enter) corresponding to logical click operation.
+		 */
+		release: dojo.ExtensionEvent;
+
+		/**
+		 * Mouse cursor or a finger is dragged over the given node.
+		 */
+		move: dojo.ExtensionEvent;
+	}
+
+	/* dijit/Destroyable */
+
+	interface Destroyable {
+
+		/**
+		 * Destroy this class, releasing any resources registered via own().
+		 */
+		destroy(preserveDom?: boolean): void;
+
+		/**
+		 * Track specified handles and remove/destroy them when this instance is destroyed, unless they were
+		 * already removed/destroyed manually.
+		 */
+		own(...args: any[]): any[];
+	}
+
+	interface DestroyableConstructor {
+		/**
+		 * Mixin to track handles and release them when instance is destroyed.
+		 */
+		new (): Destroyable;
+	}
+
+	/* dijit/Dialog */
+
+	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStateMixin {
+		templateString: string;
+		baseClass: string;
+		cssStateNodes: { closeButtonNode: string };
+
+		/**
+		 * True if Dialog is currently displayed on screen.
+		 */
+		open: boolean;
+
+		/**
+		 * The time in milliseconds it takes the dialog to fade in and out
+		 */
+		duration: number;
+
+		/**
+		 * A Toggle to modify the default focus behavior of a Dialog, which
+		 * is to re-focus the element which had focus before being opened.
+		 * False will disable refocusing. Default: true
+		 */
+		refocus: boolean;
+
+		/**
+		 * A Toggle to modify the default focus behavior of a Dialog, which
+		 * is to focus on the first dialog element after opening the dialog.
+		 * False will disable autofocusing. Default: true
+		 */
+		autofocus: boolean;
+
+		/**
+		 * Toggles the movable aspect of the Dialog. If true, Dialog
+		 * can be dragged by it's title. If false it will remain centered
+		 * in the viewport.
+		 */
+		draggable: boolean;
+
+		/**
+		 * Maximum size to allow the dialog to expand to, relative to viewport size
+		 */
+		maxRatio: number;
+
+		/**
+		 * Dialog show [x] icon to close itself, and ESC key will close the dialog.
+		 */
+		closable: boolean;
+		postMixInProperties(): void;
+		postCreate(): void;
+
+		/**
+		 * Called when data has been loaded from an href.
+		 * Unlike most other callbacks, this function can be connected to (via `dojo.connect`)
+		 * but should *not* be overridden.
+		 */
+		onLoad(data?: any): void;
+
+		focus(): void;
+
+		/* Not entirely sure of the resolution type of these promises */
+
+		/**
+		 * Display the dialog
+		 */
+		show(): dojo.promise.Promise<any>;
+
+		/**
+		 * Hide the dialog
+		 */
+		hide(): dojo.promise.Promise<any>;
+
+		/**
+		 * Called with no argument when viewport scrolled or viewport size changed.  Adjusts Dialog as
+		 * necessary to keep it visible.
+		 *
+		 * Can also be called with an argument (by dojox/layout/ResizeHandle etc.) to explicitly set the
+		 * size of the dialog.
+		 */
+		resize(dim?: dojo.DomGeometryWidthHeight): void;
+
+		destroy(): void;
+	}
+
+	interface _DialogBaseConstructor extends _WidgetBaseConstructor<_DialogBase> { }
+
+	interface Dialog extends layout.ContentPane, _DialogBase {
+		/* overrides conflicting methods */
+		resize(dim?: dojo.DomGeometryWidthHeight): void;
+	}
+
+	interface DialogLevelManager {
+		_beginZIndex: number;
+
+		/**
+		 * Call right before fade-in animation for new dialog.
+		 *
+		 * Saves current focus, displays/adjusts underlay for new dialog,
+		 * and sets the z-index of the dialog itself.
+		 *
+		 * New dialog will be displayed on top of all currently displayed dialogs.
+		 * Caller is responsible for setting focus in new dialog after the fade-in
+		 * animation completes.
+		 */
+		show(dialog: _WidgetBase, underlayAttrs: Object): void;
+
+		/**
+		 * Called when the specified dialog is hidden/destroyed, after the fade-out
+		 * animation ends, in order to reset page focus, fix the underlay, etc.
+		 * If the specified dialog isn't open then does nothing.
+		 *
+		 * Caller is responsible for either setting display:none on the dialog domNode,
+		 * or calling dijit/popup.hide(), or removing it from the page DOM.
+		 */
+		hide(dialog: _WidgetBase): void;
+
+		/**
+		 * Returns true if specified Dialog is the top in the task
+		 */
+		isTop(dialog: _WidgetBase): boolean;
+	}
+
+	interface DialogConstructor extends _WidgetBaseConstructor<Dialog> {
+		/**
+		 * for monkey patching and dojox/widget/DialogSimple
+		 */
+		_DialogBase: _DialogBaseConstructor;
+		_DialogLevelManager: DialogLevelManager;
+		_dialogStack: {
+			dialog: _WidgetBase,
+			focus: any,
+			underlayAttrs: any
+		}[];
+	}
+
+	/* dijit/place */
+
+	interface PlacePosition {
+		x: number;
+		y: number;
+	}
+
+	interface PlaceWidthHeight {
+		w: number;
+		h: number;
+	}
+
+	interface PlaceRectangle extends PlacePosition, PlaceWidthHeight { }
+
+	/* TODO: uncomment for TS 1.8 */
+	/* type PlaceCorner = 'BL' | 'TR' | 'BR' | 'TL'; */
+
+	/* TODO: uncomment for TS 1.8 */
+	/* type PlacePosistions = 'before' | 'after' | 'before-centered' | 'after-centered' | 'above-centered' | 'above' | 'above-alt' | 'below-centered' | 'below' | 'below-alt'; */
+
+	interface PlaceChoice {
+		corner: /* PlaceCorner */ string;
+		pos: PlacePosition;
+		aroundCorner?: /* PlaceCorner */ string;
+	}
+
+	interface PlaceLocation extends PlaceRectangle {
+		corner: /* PlaceCorner */ string;
+		aroundCorner: /* PlaceCorner */ string;
+		overflow: number;
+		spaceAvailable: PlaceWidthHeight;
+	}
+
+	interface LayoutNodeFunction {
+		(node: HTMLElement, aroundCorner: string, corner: string, spaceAvailable: PlaceWidthHeight, aroundNodeCoords: PlaceWidthHeight): number;
+	}
+
+	interface Place {
+		/**
+		 * Positions node kitty-corner to the rectangle centered at (pos.x, pos.y) with width and height of
+		 * padding.x * 2 and padding.y * 2, or zero if padding not specified.  Picks first corner in corners[]
+		 * where node is fully visible, or the corner where it's most visible.
+		 *
+		 * Node is assumed to be absolutely or relatively positioned.
+		 */
+		at(node: Element, pos?: PlacePosition, corners?: /* PlaceCorner */ string[], padding?: PlacePosition, layoutNode?: LayoutNodeFunction): PlaceLocation;
+
+		/**
+		 * Position node adjacent or kitty-corner to anchor
+		 * such that it's fully visible in viewport.
+		 */
+		around(node: Element, anchor: Element | PlaceRectangle, positions: /* PlacePositions */ string[], leftToRight?: boolean, layoutNode?: LayoutNodeFunction): PlaceLocation;
+	}
+
+	/* dijit/popup */
+
+	interface PopupOpenArgs {
+		/**
+		 * widget to display
+		 */
+		popup?: _WidgetBase;
+
+		/**
+		 * the button etc. that is displaying this popup
+		 */
+		parent?: _WidgetBase;
+
+		/**
+		 * DOM node (typically a button); place popup relative to this node.  (Specify this *or* "x" and "y" parameters.)
+		 */
+		around?: HTMLElement;
+
+		/**
+		 * Absolute horizontal position (in pixels) to place node at.  (Specify this *or* "around" parameter.)
+		 */
+		x?: number;
+
+		/**
+		 * Absolute vertical position (in pixels) to place node at.  (Specify this *or* "around" parameter.)
+		 */
+		y?: number;
+
+		/**
+		 * When the around parameter is specified, orient should be a list of positions to try
+		 */
+		orient?: string | string[] | { BL?: string; TR?: string; TL?: string; BR?: string; };
+
+		/**
+		 * callback when user has canceled the popup by:
+		 *
+		 * 1. hitting ESC or
+		 * 2. by using the popup widget's proprietary cancel mechanism (like a cancel button in a dialog);
+		 *    i.e. whenever popupWidget.onCancel() is called, args.onCancel is called
+		 */
+		onCancel?: () => void;
+
+		/**
+		 * callback whenever this popup is closed
+		 */
+		onClose?: () => void;
+
+		/**
+		 * callback when user "executed" on the popup/sub-popup by selecting a menu choice, etc. (top menu only)
+		 */
+		onExecute?: () => void;
+
+		/**
+		 * adding a buffer around the opening position. This is only useful when around is not set.
+		 */
+		padding?: PlacePosition;
+
+		/**
+		 * The max height for the popup.  Any popup taller than this will have scrollbars.
+		 * Set to Infinity for no max height.  Default is to limit height to available space in viewport,
+		 * above or below the aroundNode or specified x/y position.
+		 */
+		maxHeight?: number;
+	}
+
+	interface PopupManager {
+		/**
+		 * Stack of currently popped up widgets.
+		 * (someone opened _stack[0], and then it opened _stack[1], etc.)
+		 */
+		_stack: _WidgetBase[];
+
+		/**
+		 * Z-index of the first popup.   (If first popup opens other
+		 * popups they get a higher z-index.)
+		 */
+		_beginZIndex: number;
+
+		_idGen: number;
+
+		/**
+		 * If screen has been scrolled, reposition all the popups in the stack.
+		 * Then set timer to check again later.
+		 */
+		_repositionAll(): void;
+
+		/**
+		 * Initialization for widgets that will be used as popups.
+		 * Puts widget inside a wrapper DIV (if not already in one),
+		 * and returns pointer to that wrapper DIV.
+		 */
+		_createWrapper(widget: _WidgetBase): HTMLDivElement;
+
+		/**
+		 * Moves the popup widget off-screen.
+		 * Do not use this method to hide popups when not in use, because
+		 * that will create an accessibility issue: the offscreen popup is
+		 * still in the tabbing order.
+		 */
+		moveOffScreen(widget: _WidgetBase): HTMLDivElement;
+
+		/**
+		 * Hide this popup widget (until it is ready to be shown).
+		 * Initialization for widgets that will be used as popups
+		 *
+		 * Also puts widget inside a wrapper DIV (if not already in one)
+		 *
+		 * If popup widget needs to layout it should
+		 * do so when it is made visible, and popup._onShow() is called.
+		 */
+		hide(widget: _WidgetBase): void;
+
+		/**
+		 * Compute the closest ancestor popup that's *not* a child of another popup.
+		 * Ex: For a TooltipDialog with a button that spawns a tree of menus, find the popup of the button.
+		 */
+		getTopPopup(): _WidgetBase;
+
+		/**
+		 * Popup the widget at the specified position
+		 */
+		open(args: PopupOpenArgs): PlaceLocation;
+
+		/**
+		 * Close specified popup and any popups that it parented.
+		 * If no popup is specified, closes all popups.
+		 */
+		close(popup?: _WidgetBase): void;
+	}
+
 }
