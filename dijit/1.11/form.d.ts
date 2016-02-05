@@ -99,7 +99,7 @@ declare namespace dijit {
 			/**
 			 * Overrides _HasDropDown.loadDropDown().
 			 */
-			loadDropDown(calback: Function): void;
+			loadDropDown(loadCallback: () => void): void;
 
 			/**
 			 * signal to _HasDropDown that it needs to call loadDropDown() to load the
@@ -112,7 +112,7 @@ declare namespace dijit {
 			 * This method is the callback when the user types ESC or clicking
 			 * the button icon while the drop down is open.  It's also called by other code.
 			 */
-			closeDropDown(): void;
+			closeDropDown(focus?: boolean): void;
 
 			postMixInProperties(): void;
 			postCreate(): void;
@@ -1138,9 +1138,56 @@ declare namespace dijit {
 			baseClass: string;
 			postMixInProperties(): void;
 			value: string;
+
+			set(name: 'value', value: string | boolean): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
 
 		interface CheckBoxConstructor extends _WidgetBaseConstructor<CheckBox> { }
+
+		/* dijit/form/ComboBox */
+
+		interface ComboBox<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions> extends ValidationTextBox, ComboBoxMixin<T, Q, O> {
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		interface ComboBoxConstructor extends _WidgetBaseConstructor<ComboBox<any, any, any>> {
+			new <T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions>(params: Object, srcNodeRef: dojo.NodeOrString): ComboBox<T, Q, O>;
+		}
+
+		/* dijit/form/ComboBoxMixin */
+
+		interface ComboBoxMixin<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions> extends _HasDropDown<_ComboBoxMenu<T>>, _AutoCompleterMixin<T, Q, O> {
+
+			/**
+			 * Dropdown widget class used to select a date/time.
+			 * Subclasses should specify this.
+			 */
+			dropDownClass: _ComboBoxMenu<T>;
+
+			/**
+			 * Set this textbox to have a down arrow button, to display the drop down list.
+			 * Defaults to true.
+			 */
+			hasDownArrow: boolean;
+
+			templateString: string;
+			baseClass: string;
+
+			/**
+			 * Reference to data provider object used by this ComboBox.
+			 *
+			 * Should be dojo/store/api/Store, but dojo/data/api/Read supported
+			 * for backwards compatibility.
+			 */
+			store: dojo.store.api.Store<T, Q, O>;
+
+			cssStateNodes: CSSStateNodes;
+			postMixInProperties(): void;
+			buildRendering(): void;
+		}
 
 		/* dijit/form/Form */
 

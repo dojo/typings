@@ -25,6 +25,11 @@ declare module 'dijit/form/CheckBox' {
 	export = CheckBox;
 }
 
+declare module 'dijit/form/ComboBox' {
+	const ComboBox: dijit.form.ComboBoxConstructor;
+	export = ComboBox;
+}
+
 declare module 'dijit/form/Form' {
 	const Form: dijit.form.FormConstructor;
 	export = Form;
