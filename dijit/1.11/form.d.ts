@@ -445,6 +445,220 @@ declare namespace dijit {
 			destroy(preserveDom?: boolean): void;
 		}
 
+		/* dijit/form/_FormSelectWidget */
+
+		interface SelectOption {
+			value?: string;
+			label: string;
+			selected?: boolean;
+			disabled?: boolean;
+		}
+
+		interface _FormSelectWidget<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions> extends _FormValueWidget {
+			/**
+			 * Whether or not we are multi-valued
+			 */
+			multiple: boolean;
+
+			/**
+			 * The set of options for our select item.  Roughly corresponds to
+			 * the html `<option>` tag.
+			 */
+			options: SelectOption[];
+
+			/**
+			 * A store to use for getting our list of options - rather than reading them
+			 * from the `<option>` html tags.   Should support getIdentity().
+			 * For back-compat store can also be a dojo/data/api/Identity.
+			 */
+			store: dojo.store.api.Store<T, Q, O>;
+
+			/**
+			 * A query to use when fetching items from our store
+			 */
+			query: Q;
+
+			/**
+			 * Query options to use when fetching from the store
+			 */
+			queryOptions: O;
+
+			/**
+			 * The entries in the drop down list come from this attribute in the dojo.store items.
+			 * If ``store`` is set, labelAttr must be set too, unless store is an old-style
+			 * dojo.data store rather than a new dojo/store.
+			 */
+			labelAttr: string;
+
+			/**
+			 * A callback to do with an onFetch - but before any items are actually
+			 * iterated over (i.e. to filter even further what you want to add)
+			 */
+			onFetch: (items: T[]) => void;
+
+			/**
+			 * Flag to sort the options returned from a store by the label of
+			 * the store.
+			 */
+			sortByLabel: boolean;
+
+			/**
+			 * By default loadChildren is called when the items are fetched from the
+			 * store.  This property allows delaying loadChildren (and the creation
+			 * of the options/menuitems) until the user clicks the button to open the
+			 * dropdown.
+			 */
+			loadChildrenOnOpen: boolean;
+
+			/**
+			 * This is the `dojo.Deferred` returned by setStore().
+			 * Calling onLoadDeferred.then() registers your
+			 * callback to be called only once, when the prior setStore completes.
+			 */
+			onLoadDeferred: dojo.Deferred<void>;
+
+			/**
+			 * Returns a given option (or options).
+			 */
+			getOptions(valueOrIdx: string): SelectOption;
+			getOptions(valueOrIdx: number): SelectOption;
+			getOptions(valueOrIdx: SelectOption): SelectOption;
+			getOptions(valueOrIdx: (string | number | SelectOption)[]): SelectOption[];
+			getOptions(): SelectOption[];
+
+			/**
+			 * Adds an option or options to the end of the select.  If value
+			 * of the option is empty or missing, a separator is created instead.
+			 * Passing in an array of options will yield slightly better performance
+			 * since the children are only loaded once.
+			 */
+			addOption(option: SelectOption | SelectOption[]): void;
+
+			/**
+			 * Removes the given option or options.  You can remove by string
+			 * (in which case the value is removed), number (in which case the
+			 * index in the options array is removed), or select option (in
+			 * which case, the select option with a matching value is removed).
+			 * You can also pass in an array of those values for a slightly
+			 * better performance since the children are only loaded once.
+			 * For numeric option values, specify {value: number} as the argument.
+			 */
+			removeOption(option: string | number | SelectOption | (string | number | SelectOption)[]): void;
+
+			/**
+			 * Updates the values of the given option.  The option to update
+			 * is matched based on the value of the entered option.  Passing
+			 * in an array of new options will yield better performance since
+			 * the children will only be loaded once.
+			 */
+			updateOption(newOption: SelectOption | SelectOption[]): void;
+
+			/**
+			 * Deprecated!
+			 */
+			setStore(store: dojo.store.api.Store<T, Q, O>, selectedValue?: T, fetchArgs?: {
+				query: Q;
+				queryOptions: O;
+				onFetch: (items: T[], fetchArgs?: any) => void;
+			}): dojo.store.api.Store<T, Q, O>;
+
+			/**
+			 * Sets the store you would like to use with this select widget.
+			 * The selected value is the value of the new store to set.  This
+			 * function returns the original store, in case you want to reuse
+			 * it or something.
+			 */
+			_deprecatedSetStore(store: dojo.store.api.Store<T, Q, O>, selectedValue?: T, fetchArgs?: {
+				query: Q;
+				queryOptions: O;
+				onFetch: (items: T[], fetchArgs?: any) => void;
+			}): dojo.store.api.Store<T, Q, O>;
+
+			/**
+			 * Loads the children represented by this widget's options.
+			 * reset the menu to make it populatable on the next click
+			 */
+			_loadChildren(): void;
+
+			/**
+			 * Sets the "selected" class on the item for styling purposes
+			 */
+			_updateSelection(): void;
+
+			/**
+			 * Returns the value of the widget by reading the options for
+			 * the selected flag
+			 */
+			_getValueFromOpts(): string;
+
+			buildRendering(): void;
+
+			/**
+			 * Loads our options and sets up our dropdown correctly.  We
+			 * don't want any content, so we don't call any inherit chain
+			 * function.
+			 */
+			_fillContent(): void;
+
+			/**
+			 * sets up our event handling that we need for functioning
+			 * as a select
+			 */
+			postCreate(): void;
+
+			startup(): void;
+
+			/**
+			 * Clean up our connections
+			 */
+			destroy(preserveDom?: boolean): void;
+
+			/**
+			 * User-overridable function which, for the given option, adds an
+			 * item to the select.  If the option doesn't have a value, then a
+			 * separator is added in that place.  Make sure to store the option
+			 * in the created option widget.
+			 */
+			_addOptionItem(option: SelectOption): void;
+
+			/**
+			 * User-overridable function which, for the given option, removes
+			 * its item from the select.
+			 */
+			_removeOptionItem(option: SelectOption): void;
+
+			/**
+			 * Overridable function which will set the display for the
+			 * widget.  newDisplay is either a string (in the case of
+			 * single selects) or array of strings (in the case of multi-selects)
+			 */
+			_setDisplay(newDisplay: string | string[]): void;
+
+			/**
+			 * Overridable function to return the children that this widget contains.
+			 */
+			_getChildren(): any[];
+
+			/**
+			 * hooks into this.attr to provide a mechanism for getting the
+			 * option items for the current value of the widget.
+			 */
+			_getSelectedOptionsAttr(): SelectOption[];
+
+			/**
+			 * a function that will "fake" loading children, if needed, and
+			 * if we have set to not load children until the widget opens.
+			 */
+			_pseudoLoadChildren(items: T[]): void;
+
+			/**
+			 * a function that can be connected to in order to receive a
+			 * notification that the store has finished loading and all options
+			 * from that store are available
+			 */
+			onSetStore(): void;
+		}
+
 		/* dijit/form/_FormValueMixin */
 
 		interface _FormValueMixin extends _FormWidgetMixin {
