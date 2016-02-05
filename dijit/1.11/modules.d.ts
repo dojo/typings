@@ -35,6 +35,11 @@ declare module 'dijit/form/CurrencyTextBox' {
 	export = CurrencyTextBox;
 }
 
+declare module 'dijit/form/DataList' {
+	const DataList: dijit.form.DataListConstructor;
+	export = DataList;
+}
+
 declare module 'dijit/form/Form' {
 	const Form: dijit.form.FormConstructor;
 	export = Form;

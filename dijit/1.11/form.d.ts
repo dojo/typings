@@ -1218,6 +1218,20 @@ declare namespace dijit {
 
 		interface CurrencyTextBoxConstructor extends _WidgetBaseConstructor<CurrencyTextBox> { }
 
+		/* dijit/form/DataList */
+
+		interface DataList<T extends Object> extends dojo.store.Memory<T> {
+			/**
+			 * Get the option marked as selected, like `<option selected>`.
+			 * Not part of dojo.data API.
+			 */
+			fetchSelectedItem(): T;
+		}
+
+		interface DataListConstructor {
+			new <T extends Object>(params: Object, srcNodeRef: dojo.NodeOrString): DataList<T>;
+		}
+
 		/* dijit/form/Form */
 
 		interface Form extends _Widget, _TemplatedMixin, _FormMixin, layout._ContentPaneResizeMixin {
