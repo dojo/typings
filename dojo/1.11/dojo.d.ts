@@ -1213,7 +1213,7 @@ declare namespace dojo {
 		/**
 		 * If false, show no decimal places, overriding places and pattern settings.
 		 */
-		factional?: boolean;
+		factional?: boolean | [ boolean, boolean ];
 	}
 
 	interface NumberFormatAbsoluteOptions {

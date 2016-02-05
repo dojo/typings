@@ -30,6 +30,11 @@ declare module 'dijit/form/ComboBox' {
 	export = ComboBox;
 }
 
+declare module 'dijit/form/CurrencyTextBox' {
+	const CurrencyTextBox: dijit.form.CurrencyTextBoxConstructor;
+	export = CurrencyTextBox;
+}
+
 declare module 'dijit/form/Form' {
 	const Form: dijit.form.FormConstructor;
 	export = Form;

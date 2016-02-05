@@ -6,9 +6,6 @@ declare namespace dijit {
 
 		interface Constraints {
 			[prop: string]: any;
-			locale?: string;
-			min?: number;
-			max?: number;
 		}
 
 		interface ConstrainedValueFunction<V, C extends Constraints, T> {
@@ -21,7 +18,7 @@ declare namespace dijit {
 			(value: V, constraints: C): T;
 		}
 
-		interface ConstrainedValidFunction {
+		interface ConstrainedValidFunction<C extends Constraints> {
 			/**
 			 * Returns true if the value is valid based on the constraints, otherwise
 			 * returns false.
@@ -29,17 +26,17 @@ declare namespace dijit {
 			 * @param   constraints The constraints to use
 			 * @returns             true if valid, otherwise false
 			 */
-			(value: any, constraints: Constraints): boolean;
+			(value: any, constraints: C): boolean;
 		}
 
-		interface ConstraintsToRegExpString {
+		interface ConstraintsToRegExpString<C extends Constraints> {
 			/**
 			 * Takes a set of constraints and returns a RegExpString that can be used
 			 * to match values against
 			 * @param   constraints The constraints to use
 			 * @returns             The RegExpString that represents the constraints
 			 */
-			(constraints: Constraints): string;
+			(constraints: C): string;
 		}
 
 		interface SerializationFunction {
@@ -370,7 +367,7 @@ declare namespace dijit {
 			set(name: 'displayedValue', value: string): this;
 			set(name: 'dropDownDefaultValue', value: Date): this;
 			set(name: 'value', value: Date | string): this;
-			set(name: 'constraints', value: Constraints): this;
+			set(name: 'constraints', value: DateTimeConstraints): this;
 			set(name: string, value: any): this;
 			set(values: Object): this;
 		}
@@ -994,7 +991,7 @@ declare namespace dijit {
 
 		/* dijit/form/_TextBoxMixin */
 
-		interface _TextBoxMixin {
+		interface _TextBoxMixin<C extends Constraints> {
 			/**
 			 * Removes leading and trailing whitespace if true.  Default is false.
 			 */
@@ -1045,12 +1042,12 @@ declare namespace dijit {
 			/**
 			 * Replaceable function to convert a value to a properly formatted string.
 			 */
-			format: ConstrainedValueFunction<any, Constraints, any>;
+			format: ConstrainedValueFunction<any, C, any>;
 
 			/**
 			 * Replaceable function to convert a formatted string to a value
 			 */
-			parse: ConstrainedValueFunction<any, Constraints, any>;
+			parse: ConstrainedValueFunction<any, C, any>;
 
 			/**
 			 * Connect to this function to receive notifications of various user data-input events.
@@ -1148,13 +1145,13 @@ declare namespace dijit {
 
 		/* dijit/form/ComboBox */
 
-		interface ComboBox<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions> extends ValidationTextBox, ComboBoxMixin<T, Q, O> {
+		interface ComboBox<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions, C extends Constraints> extends ValidationTextBox<C>, ComboBoxMixin<T, Q, O> {
 			set(name: string, value: any): this;
 			set(values: Object): this;
 		}
 
-		interface ComboBoxConstructor extends _WidgetBaseConstructor<ComboBox<any, any, any>> {
-			new <T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions>(params: Object, srcNodeRef: dojo.NodeOrString): ComboBox<T, Q, O>;
+		interface ComboBoxConstructor extends _WidgetBaseConstructor<ComboBox<any, any, any, any>> {
+			new <T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions, C extends Constraints>(params: Object, srcNodeRef: dojo.NodeOrString): ComboBox<T, Q, O, C>;
 		}
 
 		/* dijit/form/ComboBoxMixin */
@@ -1188,6 +1185,38 @@ declare namespace dijit {
 			postMixInProperties(): void;
 			buildRendering(): void;
 		}
+
+		/* dijit/form/CurrencyTextBox */
+
+		interface CurrencyTextBoxConstraints extends NumberTextBoxConstraints, dojo.CurrencyFormatOptions, dojo.CurrencyParseOptions {
+		}
+
+		interface CurrencyTextBox extends NumberTextBox {
+			/**
+			 * the [ISO4217](http://en.wikipedia.org/wiki/ISO_4217) currency code, a three letter sequence like "USD"
+			 */
+			currency: string;
+
+			/**
+			 * Despite the name, this parameter specifies both constraints on the input
+			 * (including minimum/maximum allowed values) as well as
+			 * formatting options.  See `dijit/form/CurrencyTextBox.__Constraints` for details.
+			 */
+			constraints: CurrencyTextBoxConstraints;
+
+			baseClass: string;
+
+			_formatter: (value: number, options?: dojo.CurrencyFormatOptions) => string;
+			_parser: (expression: string, options?: dojo.CurrencyParseOptions) => number;
+			_regExpGenerator: (options?: dojo.NumberRegexpOptions) => string;
+
+			/**
+			 * Parses string value as a Currency, according to the constraints object
+			 */
+			parse(value: string, constraints: CurrencyTextBoxConstraints): string;
+		}
+
+		interface CurrencyTextBoxConstructor extends _WidgetBaseConstructor<CurrencyTextBox> { }
 
 		/* dijit/form/Form */
 
@@ -1240,7 +1269,7 @@ declare namespace dijit {
 
 		/* dijit/form/MappedTextBox */
 
-		interface MappedTextBox extends ValidationTextBox {
+		interface MappedTextBox<C extends Constraints> extends ValidationTextBox<C> {
 			postMixInProperties(): void;
 			serialize: SerializationFunction;
 			toString(): string;
@@ -1249,18 +1278,21 @@ declare namespace dijit {
 			reset(): void;
 		}
 
-		interface MappedTextBoxConstructor extends _WidgetBaseConstructor<MappedTextBoxConstructor> { }
+		interface MappedTextBoxConstructor extends _WidgetBaseConstructor<MappedTextBox<Constraints>> {
+			new <C extends Constraints>(params: Object, srcNodeRef: dojo.NodeOrString): MappedTextBox<C>;
+		}
 
 		/* dijit/form/NumberSpinner */
 
 		interface NumberSpinner extends _Spinner, NumberTextBoxMixin {
+			constraints: NumberTextBoxConstraints;
 			baseClass: string;
 			adjust(val: any, delta: number): any;
 
 			/* overrides */
-			pattern: ConstraintsToRegExpString;
-			parse(value: string, constraints: dojo.NumberParseOptions): string;
-			format(value: number, constraints: dojo.NumberFormatOptions): string;
+			pattern: ConstraintsToRegExpString<NumberTextBoxConstraints>;
+			parse(value: string, constraints: NumberTextBoxConstraints): string;
+			format(value: number, constraints: NumberTextBoxConstraints): string;
 			filter(value: number): number;
 			value: number;
 		}
@@ -1269,16 +1301,18 @@ declare namespace dijit {
 
 		/* dijit/form/NumberTextBox */
 
+		interface NumberTextBoxConstraints extends RangeBoundTextBoxConstraints, dojo.NumberFormatOptions, dojo.NumberParseOptions { }
+
 		interface NumberTextBoxMixin {
-			pattern: ConstraintsToRegExpString;
-			constraints: Constraints;
+			pattern: ConstraintsToRegExpString<NumberTextBoxConstraints>;
+			constraints: NumberTextBoxConstraints;
 			value: number;
 			editOptions: { pattern: string };
 			_formatter: (value: number, options?: dojo.NumberFormatOptions) => string;
 			_regExpGenerator: (options?: dojo.NumberRegexpOptions) => string;
 			_decimalInfo: (constraints: Constraints) => { sep: string; places: number; };
 			postMixInProperties(): void;
-			format(value: number, constraints: dojo.NumberFormatOptions): string;
+			format(value: number, constraints: NumberTextBoxConstraints): string;
 			_parser: (expression: string, options?: dojo.NumberParseOptions) => number;
 			parse(value: string, constraints: dojo.NumberParseOptions): string;
 			filter(value: number): number;
@@ -1286,12 +1320,11 @@ declare namespace dijit {
 			isValid(isFocused: boolean): boolean;
 		}
 
-		interface NumberTextBoxMixinConstructor extends _WidgetBaseConstructor<NumberTextBoxMixin> {
-			new (params: Object, srcNodeRef: dojo.NodeOrString): NumberTextBoxMixin;
-		}
+		interface NumberTextBoxMixinConstructor extends _WidgetBaseConstructor<NumberTextBoxMixin> { }
 
 		interface NumberTextBox extends RangeBoundTextBox, NumberTextBoxMixin {
-			pattern: ConstraintsToRegExpString;
+			constraints: NumberTextBoxConstraints;
+			pattern: ConstraintsToRegExpString<NumberTextBoxConstraints>;
 			parse(value: string, constraints: dojo.NumberParseOptions): string;
 			format(value: number, constraints: dojo.NumberFormatOptions): string;
 			value: number;
@@ -1312,7 +1345,12 @@ declare namespace dijit {
 
 		/* dijit/form/RangeBoundTextBox */
 
-		interface RangeBoundTextBox extends MappedTextBox {
+		interface RangeBoundTextBoxConstraints extends Constraints {
+			min?: number;
+			max?: number;
+		}
+
+		interface RangeBoundTextBox extends MappedTextBox<RangeBoundTextBoxConstraints> {
 			/**
 			 * The message to display if value is out-of-range
 			 */
@@ -1321,7 +1359,7 @@ declare namespace dijit {
 			/**
 			 * Overridable function used to validate the range of the numeric input value.
 			 */
-			rangeCheck(primative: number, constraints: Constraints): boolean;
+			rangeCheck(primative: number, constraints: RangeBoundTextBoxConstraints): boolean;
 
 			/**
 			 * Tests if the value is in the min/max range specified in constraints
@@ -1369,7 +1407,7 @@ declare namespace dijit {
 
 		/* dijit/form/TextBox */
 
-		interface TextBox extends _FormValueWidget, _TextBoxMixin {
+		interface TextBox extends _FormValueWidget, _TextBoxMixin<Constraints> {
 			set(name: 'displayedValue', value: string): this;
 			set(name: 'disabled', value: boolean): this;
 			set(name: 'value', value: string): this;
@@ -1403,20 +1441,20 @@ declare namespace dijit {
 			(isFocused?: boolean): boolean;
 		}
 
-		interface ValidationTextBox extends TextBox {
+		interface ValidationTextBox<C extends Constraints> extends TextBox {
 			templateString: string;
 			required: boolean;
 			promptMessage: string;
 			invalidMessage: string;
 			missingMessage: string;
 			message: string;
-			constraints: Constraints;
-			pattern: string | ConstraintsToRegExpString;
+			constraints: C;
+			pattern: string | ConstraintsToRegExpString<C>;
 			regExp: string;
-			regExpGen(constraints: Constraints): void;
+			regExpGen(constraints: C): void;
 			state: string;
 			tooltipPosition: string[];
-			validator: ConstrainedValidFunction;
+			validator: ConstrainedValidFunction<C>;
 			isValid: IsValidFunction;
 			getErrorMessage(isFocused: boolean): string;
 			getPromptMessage(isFocused: boolean): string;
@@ -1433,7 +1471,7 @@ declare namespace dijit {
 			set(name: 'constraints', value: Constraints): this;
 			set(name: 'disabled', value: boolean): this;
 			set(name: 'message', value: string): this;
-			set(name: 'pattern', value: string | ConstraintsToRegExpString): this;
+			set(name: 'pattern', value: string | ConstraintsToRegExpString<C>): this;
 			set(name: 'regExp', value: string): this;
 			set(name: 'regExpGen', value: Constraints): this;
 			set(name: 'required', value: boolean): this;
@@ -1441,11 +1479,13 @@ declare namespace dijit {
 			set(name: string, value: any): this;
 			set(values: Object): this;
 
-			get(name: 'pattern'): string | ConstraintsToRegExpString;
+			get(name: 'pattern'): string | ConstraintsToRegExpString<C>;
 			get(name: string): any;
 		}
 
-		interface ValidationTextBoxConstructor extends _WidgetBaseConstructor<ValidationTextBox> { }
+		interface ValidationTextBoxConstructor extends _WidgetBaseConstructor<ValidationTextBox<Constraints>> {
+			new <C extends Constraints>(params: Object, srcNodeRef: dojo.NodeOrString): ValidationTextBox<C>;
+		}
 	}
 }
 
