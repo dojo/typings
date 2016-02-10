@@ -6,7 +6,7 @@ declare module 'dojox/widget/DialogSimple' {
 }
 
 declare module 'dojox/widget/Dialog' {
-	let DialogSimple: dojox.widget.Dialog;
+	let Dialog: dojox.widget.Dialog;
 	export = Dialog;
 }
 
