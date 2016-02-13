@@ -38,6 +38,48 @@ declare namespace dijit {
 		restoreOriginalText(origObj: HTMLOptionElement): HTMLOptionElement;
 	}
 
+	/* dijit/_ConfirmDialogMixin */
+
+	interface _ConfirmDialogMixin extends _WidgetsInTemplateMixin {
+		/**
+		 * HTML snippet for action bar, overrides _DialogMixin.actionBarTemplate
+		 */
+		actionBarTemplate: string;
+
+		/**
+		 * Label of OK button.
+		 */
+		buttonOk: string;
+
+		/**
+		 * Label of cancel button.
+		 */
+		buttonCancel: string;
+	}
+
+	/* dijit/_Contained */
+
+    interface _Contained {
+        /**
+         * Returns the previous child of the parent or null if this is the
+         * first child of the parent.
+         */
+        getPreviousSibling<T extends dijit._WidgetBase>(): T;
+
+        /**
+         * Returns the next child of the parent or null if this is the last
+         * child of the parent.
+         */
+        getNextSibling<T extends dijit._WidgetBase>(): T;
+
+        /**
+         * Returns the index of this widget within its container parent.
+         * It returns -1 if the parent does not exist or if the parent is
+         * not a dijit/_Container.
+         */
+        getIndexInParent(): number;
+    }
+
 	/* dijit/_Container */
 
 	interface _Container {
@@ -656,6 +698,18 @@ declare namespace dijit {
 		new (params: Object, srcNodeRef: dojo.NodeOrString): T;
 	}
 
+	/* dijit/_WidgetsInTemplateMixin */
+
+	interface _WidgetsInTemplateMixin {
+		/**
+		 * Used to provide a context require to dojo/parser in order to be
+		 * able to use relative MIDs (e.g. `./Widget`) in the widget's template.
+		 */
+		contextRequire: Function;
+
+		startup(): void;
+	}
+
 	/* dijit/a11yclick */
 
 	interface A11yClick {
@@ -838,6 +892,12 @@ declare namespace dijit {
 			underlayAttrs: any
 		}[];
 	}
+
+	/* dijit/ConfirmDialog */
+
+	interface ConfirmDialog extends _ConfirmDialogMixin { }
+
+	interface ConfirmDialogConstructor extends DialogConstructor { }
 
 	/* dijit/place */
 

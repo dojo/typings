@@ -1,5 +1,25 @@
 /// <reference path="index.d.ts" />
 
+declare module 'dijit/_WidgetBase' {
+	let _WidgetBase: dijit._WidgetBase;
+	export = _WidgetBase;
+}
+
+declare module 'dijit/_TemplatedMixin' {
+	let _TemplatedMixin: dijit._TemplatedMixin;
+	export = _TemplatedMixin;
+}
+
+declare module 'dijit/_WidgetsInTemplateMixin' {
+	let _WidgetsInTemplateMixin: dijit._WidgetsInTemplateMixin;
+	export = _WidgetsInTemplateMixin;
+}
+
+declare module 'dijit/ConfirmDialog' {
+	let ConfirmDialog: dijit.ConfirmDialogConstructor;
+	export = ConfirmDialog;
+}
+
 declare module 'dijit/Dialog' {
 	let Dialog: dijit.DialogConstructor;
 	export = Dialog;
@@ -13,6 +33,11 @@ declare module 'dijit/place' {
 declare module 'dijit/popup' {
 	let popup: dijit.PopupManager;
 	export = popup;
+}
+
+declare module 'dijit/form/_FormMixin' {
+	let _FormMixin: dijit.form._FormMixin;
+	export = _FormMixin;
 }
 
 declare module 'dijit/form/Button' {
@@ -93,4 +118,19 @@ declare module 'dijit/form/ToggleButton' {
 declare module 'dijit/form/ValidationTextBox' {
 	const ValidationTextBox: dijit.form.ValidationTextBoxConstructor;
 	export = ValidationTextBox;
+}
+
+declare module 'dijit/layout/ContentPane' {
+	const ContentPane: dijit.layout.ContentPaneConstructor;
+	export = ContentPane;
+}
+
+declare module 'dijit/layout/StackContainer' {
+	const StackContainer: dijit.layout.StackContainerConstructor;
+	export = StackContainer;
+}
+
+declare module 'dijit/layout/StackController' {
+	const StackController: dijit.layout.StackControllerConstructor;
+	export = StackController;
 }
