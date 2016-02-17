@@ -135,11 +135,6 @@ declare module 'dijit/layout/ContentPane' {
 	export = ContentPane;
 }
 
-declare module 'dijit/layout/LayoutContainer' {
-	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
-	export = LayoutContainer;
-}
-
 declare module 'dijit/layout/BorderContainer' {
 	const BorderContainer: dijit.layout.BorderContainerConstructor;
 	export = BorderContainer;
