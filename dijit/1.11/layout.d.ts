@@ -58,6 +58,82 @@ declare namespace dijit {
 			layout(): void;
 		}
 
+		/* dijit/layout/_TabContainerBase */
+
+		interface _TabContainerBase extends StackContainer, _TemplatedMixin {
+			/**
+			 * Defines where tabs go relative to tab content.
+			 * "top", "bottom", "left-h", "right-h"
+			 */
+			tabPosition: string;
+
+			/**
+			 * Defines whether the tablist gets an extra class for layouting, putting a border/shading
+			 * around the set of tabs.   Not supported by claro theme.
+			 */
+			tabStrip: boolean;
+
+			/**
+			 * If true, use styling for a TabContainer nested inside another TabContainer.
+			 * For tundra etc., makes tabs look like links, and hides the outer
+			 * border since the outer TabContainer already has a border.
+			 */
+			nested: boolean
+		}
+
+		/* dijit/layout/LayoutContainer */
+
+		interface LayoutContainer extends _LayoutWidget {
+			/**
+			 * Which design is used for the layout:
+			 *
+			 * - "headline" (default) where the top and bottom extend the full width of the container
+			 * - "sidebar" where the left and right sides extend from top to bottom.
+			 *
+			 * However, a `layoutPriority` setting on child panes overrides the `design` attribute on the parent.
+			 * In other words, if the top and bottom sections have a lower `layoutPriority` than the left and right
+			 * panes, the top and bottom panes will extend the entire width of the box.
+			 */
+			design: string;
+
+			layout(): void;
+			addChild<T extends _WidgetBase>(child: T, insertIndex?: number): void;
+			removeChild<T extends _WidgetBase>(child: T): void;
+		}
+
+		interface LayoutContainerConstructor extends _WidgetBaseConstructor<LayoutContainer> { }
+
+		/* dijit/layout/BorderContainer */
+
+
+		interface BorderContainer extends LayoutContainer {
+			/**
+			 * Give each pane a border and margin.
+			 * Margin determined by domNode.paddingLeft.
+			 * When false, only resizable panes have a gutter (i.e. draggable splitter) for resizing.
+			 */
+			gutters: boolean;
+
+			/**
+			 * Specifies whether splitters resize as you drag (true) or only upon mouseup (false)
+			 */
+			liveSplitters: boolean;
+
+			/**
+			 * Save splitter positions in a cookie.
+			 */
+			persist: boolean;
+
+			/**
+			 * Returns the widget responsible for rendering the splitter associated with region.with
+			 */
+			getSplitter(region: string): any;
+
+			destroyRecursive(): void;
+		}
+
+		interface BorderContainerConstructor extends _WidgetBaseConstructor<BorderContainer> { }
+
 		/* dijit/ContentPane */
 
 		interface ContentPane extends _Widget, _Container, _ContentPaneResizeMixin {
@@ -415,7 +491,28 @@ declare namespace dijit {
 			onContainerKeyDown(info: Object): void;
 		}
 
-		 interface StackControllerConstructor extends _WidgetBaseConstructor<StackController> { }
+		interface StackControllerConstructor extends _WidgetBaseConstructor<StackController> { }
 
+		interface TabContainer extends _TabContainerBase {
+
+			/**
+			 * True if a menu should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useMenu: boolean;
+
+			/**
+			 * True if a slider should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useSlider: boolean;
+
+			/**
+			 * An optional parameter to override the widget used to display the tab labels.
+			 */
+			controllerWidget: string;
+		}
+
+		interface TabContainerConstructor extends _WidgetBaseConstructor<TabContainer> { }
 	}
 }

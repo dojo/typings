@@ -120,9 +120,29 @@ declare module 'dijit/form/ValidationTextBox' {
 	export = ValidationTextBox;
 }
 
+declare module 'dijit/layout/_LayoutWidget' {
+	const _LayoutWidget: dijit.layout._LayoutWidget;
+	export = _LayoutWidget;
+}
+
+declare module 'dijit/layout/LayoutContainer' {
+	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
+	export = LayoutContainer;
+}
+
 declare module 'dijit/layout/ContentPane' {
 	const ContentPane: dijit.layout.ContentPaneConstructor;
 	export = ContentPane;
+}
+
+declare module 'dijit/layout/LayoutContainer' {
+	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
+	export = LayoutContainer;
+}
+
+declare module 'dijit/layout/BorderContainer' {
+	const BorderContainer: dijit.layout.BorderContainerConstructor;
+	export = BorderContainer;
 }
 
 declare module 'dijit/layout/StackContainer' {
@@ -133,4 +153,9 @@ declare module 'dijit/layout/StackContainer' {
 declare module 'dijit/layout/StackController' {
 	const StackController: dijit.layout.StackControllerConstructor;
 	export = StackController;
+}
+
+declare module 'dijit/layout/TabContainer' {
+	const TabContainer: dijit.layout.TabContainerConstructor;
+	export = TabContainer;
 }

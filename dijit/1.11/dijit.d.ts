@@ -64,13 +64,13 @@ declare namespace dijit {
          * Returns the previous child of the parent or null if this is the
          * first child of the parent.
          */
-        getPreviousSibling<T extends dijit._WidgetBase>(): T;
+        getPreviousSibling<T extends _WidgetBase>(): T;
 
         /**
          * Returns the next child of the parent or null if this is the last
          * child of the parent.
          */
-        getNextSibling<T extends dijit._WidgetBase>(): T;
+        getNextSibling<T extends _WidgetBase>(): T;
 
         /**
          * Returns the index of this widget within its container parent.
