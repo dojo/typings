@@ -78,7 +78,7 @@ declare namespace dijit {
 			 * For tundra etc., makes tabs look like links, and hides the outer
 			 * border since the outer TabContainer already has a border.
 			 */
-			nested: boolean
+			nested: boolean;
 		}
 
 		/* dijit/layout/LayoutContainer */
@@ -104,7 +104,6 @@ declare namespace dijit {
 		interface LayoutContainerConstructor extends _WidgetBaseConstructor<LayoutContainer> { }
 
 		/* dijit/layout/BorderContainer */
-
 
 		interface BorderContainer extends LayoutContainer {
 			/**
