@@ -2,6 +2,137 @@ declare namespace dijit {
 
 	namespace layout {
 
+		/* dijit/_LayoutWidget */
+
+		/* tslint:disable:class-name */
+		interface _LayoutWidget extends _Widget, _Container, _Contained {
+
+			/**
+			 * Base class for a _Container widget which is responsible for laying
+			 * out its children. Widgets which mixin this code must define layout()
+			 * to manage placement and sizing of the children.
+			 */
+			baseClass: string;
+			/**
+			 * Indicates that this widget is going to call resize() on its
+			 * children widgets, setting their size, when they become visible.
+			 */
+			isLayoutContainer: boolean;
+
+			/**
+			 * Call this to resize a widget, or after its size has changed.
+			 *
+			 * ####Change size mode:
+			 *
+			 * When changeSize is specified, changes the marginBox of this widget
+			 * and forces it to re-layout its contents accordingly.
+			 * changeSize may specify height, width, or both.
+			 *
+			 * If resultSize is specified it indicates the size the widget will
+			 * become after changeSize has been applied.
+			 *
+			 * ####Notification mode:
+			 *
+			 * When changeSize is null, indicates that the caller has already changed
+			 * the size of the widget, or perhaps it changed because the browser
+			 * window was resized. Tells widget to re-layout its contents accordingly.
+			 *
+			 * If resultSize is also specified it indicates the size the widget has
+			 * become.
+			 *
+			 * In either mode, this method also:
+			 *
+			 * 1. Sets this._borderBox and this._contentBox to the new size of
+			 * 	the widget. Queries the current domNode size if necessary.
+			 * 2. Calls layout() to resize contents (and maybe adjust child widgets).
+			 */
+			resize(changeSize?: dojo.DomGeometryBox, resultSize?: dojo.DomGeometryWidthHeight): void;
+
+			/**
+			 * Widgets override this method to size and position their contents/children.
+			 * When this is called, this._contentBox is guaranteed to be set (see resize()).
+			 *
+			 * This is called after startup(), and also when the widget's size has been
+			 * changed.
+			 */
+			layout(): void;
+		}
+
+		/* dijit/layout/_TabContainerBase */
+
+		interface _TabContainerBase extends StackContainer, _TemplatedMixin {
+			/**
+			 * Defines where tabs go relative to tab content.
+			 * "top", "bottom", "left-h", "right-h"
+			 */
+			tabPosition: string;
+
+			/**
+			 * Defines whether the tablist gets an extra class for layouting, putting a border/shading
+			 * around the set of tabs.   Not supported by claro theme.
+			 */
+			tabStrip: boolean;
+
+			/**
+			 * If true, use styling for a TabContainer nested inside another TabContainer.
+			 * For tundra etc., makes tabs look like links, and hides the outer
+			 * border since the outer TabContainer already has a border.
+			 */
+			nested: boolean;
+		}
+
+		/* dijit/layout/LayoutContainer */
+
+		interface LayoutContainer extends _LayoutWidget {
+			/**
+			 * Which design is used for the layout:
+			 *
+			 * - "headline" (default) where the top and bottom extend the full width of the container
+			 * - "sidebar" where the left and right sides extend from top to bottom.
+			 *
+			 * However, a `layoutPriority` setting on child panes overrides the `design` attribute on the parent.
+			 * In other words, if the top and bottom sections have a lower `layoutPriority` than the left and right
+			 * panes, the top and bottom panes will extend the entire width of the box.
+			 */
+			design: string;
+
+			layout(): void;
+			addChild<T extends _WidgetBase>(child: T, insertIndex?: number): void;
+			removeChild<T extends _WidgetBase>(child: T): void;
+		}
+
+		interface LayoutContainerConstructor extends _WidgetBaseConstructor<LayoutContainer> { }
+
+		/* dijit/layout/BorderContainer */
+
+		interface BorderContainer extends LayoutContainer {
+			/**
+			 * Give each pane a border and margin.
+			 * Margin determined by domNode.paddingLeft.
+			 * When false, only resizable panes have a gutter (i.e. draggable splitter) for resizing.
+			 */
+			gutters: boolean;
+
+			/**
+			 * Specifies whether splitters resize as you drag (true) or only upon mouseup (false)
+			 */
+			liveSplitters: boolean;
+
+			/**
+			 * Save splitter positions in a cookie.
+			 */
+			persist: boolean;
+
+			/**
+			 * Returns the widget responsible for rendering the splitter associated with region.with
+			 */
+			getSplitter(region: string): any;
+
+			destroyRecursive(): void;
+		}
+
+		interface BorderContainerConstructor extends _WidgetBaseConstructor<BorderContainer> { }
+
 		/* dijit/ContentPane */
 
 		interface ContentPane extends _Widget, _Container, _ContentPaneResizeMixin {
@@ -222,5 +353,165 @@ declare namespace dijit {
 			 */
 			resize(changeSize?: dojo.DomGeometryBox, resultSize?: dojo.DomGeometryWidthHeight): void;
 		}
+
+		/* dijit/layout/StackContainer */
+
+		interface StackContainer extends _LayoutWidget {
+			/**
+			 * If true, change the size of my currently displayed child to match my size.
+			 */
+			doLayout: boolean;
+
+			/**
+			 * Remembers the selected child across sessions.
+			 */
+			persist: boolean;
+
+			selectChild<T extends dijit._WidgetBase>(page: T | string, animate: boolean): dojo.promise.Promise<any>;
+
+			forward(): dojo.promise.Promise<any>;
+
+			back(): dojo.promise.Promise<any>;
+
+			closeChild<T extends dijit._WidgetBase>(page: T): void;
+
+			/**
+			 * Destroy all the widgets inside the StackContainer and empty containerNode
+			 */
+			destroyDescendants(preserveDom?: boolean): void;
+		}
+
+		interface StackContainerConstructor extends _WidgetBaseConstructor<StackContainer> { }
+
+		interface StackContainerChildWidget extends _WidgetBase {
+			/**
+			 * Specifies that this widget should be the initially displayed pane.
+			 * Note: to change the selected child use `dijit/layout/StackContainer.selectChild`
+			 */
+			 selected: boolean;
+
+			/**
+			 * Specifies that the button to select this pane should be disabled.
+			 * Doesn't affect programmatic selection of the pane, nor does it deselect the pane if it is currently selected.
+			 */
+			 disabled: boolean;
+
+			/**
+			 * True if user can close (destroy) this child, such as (for example) clicking the X on the tab.
+			 */
+			 closable: boolean;
+
+			/**
+			 * CSS class specifying icon to use in label associated with this pane.
+			 */
+			 iconClass: string;
+
+			/**
+			 * When true, display title of this widget as tab label etc., rather than just using
+			 * icon specified in iconClass.
+			 */
+			 showTitle: boolean;
+		}
+
+		/* dijit/layout/StackController */
+
+		interface StackController extends _Widget, _TemplatedMixin, _Container {
+
+			/**
+			 * The id of the page container I point to.
+			 */
+			containerId: string;
+
+			/**
+			 * The buntton widget to create to correspond to each page.
+			 */
+			buttonWidget: _WidgetBase;
+
+			/**
+			 * CSS class of [x] close icon used by event delegation code to tell when
+			 * the close button was clicked.
+			 */
+			buttonWidgetCloseClass: string;
+
+			/**
+			 * Returns the button corresponding to the pane with the given id.
+			 */
+			pane2button<T extends _WidgetBase>(id: string): T;
+
+			/**
+			 * Called after the StackContainer has finished initializing.
+			 */
+			onStartup(info: Object): void;
+
+			/**
+			 * Called whenever a page is added to the container. Create button
+			 * corresponding to the page.
+			 */
+			onAddChild<T extends _WidgetBase>(page: T, insertIndex?: number): void;
+
+			/**
+			 * Called whenever a page is removed from the container. Remove the
+			 * button corresponding to the page.
+			 */
+			onRemoveChild<T extends _WidgetBase>(page: T): void;
+
+			/**
+			 * Called when a page has been selected in the StackContainer, either
+			 * by me or by another StackController.
+			 */
+			onSelectChild<T extends _WidgetBase>(page: T): void;
+
+			/**
+			 * Called whenever one of my child buttons is pressed in an attempt to
+			 * select a page.
+			 */
+			onButtonClick<T extends _WidgetBase>(page: T): void;
+
+			/**
+			 * Called whenever one of my child buttons [X] is pressed in an attempt
+			 * to close a page.
+			 */
+			onCloseButtonClick<T extends _WidgetBase>(page: T): void;
+
+			/**
+			 * Helper for onkeydown to find next/previous button.
+			 */
+			adjacent(forward: boolean): dijit._WidgetBase;
+
+			/**
+			 * Handle keystrokes on the page list, for advancing to next/previous
+			 * button and closing the page in the page is closable.
+			 */
+			onkeydown(e: Event, fromContainer?: boolean): void;
+
+			/**
+			 * Called when there was a keydown on the container.
+			 */
+			onContainerKeyDown(info: Object): void;
+		}
+
+		interface StackControllerConstructor extends _WidgetBaseConstructor<StackController> { }
+
+		interface TabContainer extends _TabContainerBase {
+
+			/**
+			 * True if a menu should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useMenu: boolean;
+
+			/**
+			 * True if a slider should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useSlider: boolean;
+
+			/**
+			 * An optional parameter to override the widget used to display the tab labels.
+			 */
+			controllerWidget: string;
+		}
+
+		interface TabContainerConstructor extends _WidgetBaseConstructor<TabContainer> { }
 	}
 }
