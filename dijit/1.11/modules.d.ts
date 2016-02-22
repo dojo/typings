@@ -20,6 +20,16 @@ declare module 'dijit/ConfirmDialog' {
 	export = ConfirmDialog;
 }
 
+declare module 'dijit/Calendar' {
+	let Calendar: dijit.CalendarConstructor;
+	export = Calendar;
+}
+
+declare module 'dijit/CalendarLite' {
+	let CalendarLite: dijit.CalendarLiteConstructor;
+	export = CalendarLite;
+}
+
 declare module 'dijit/Dialog' {
 	let Dialog: dijit.DialogConstructor;
 	export = Dialog;
@@ -63,6 +73,16 @@ declare module 'dijit/form/CurrencyTextBox' {
 declare module 'dijit/form/DataList' {
 	const DataList: dijit.form.DataListConstructor;
 	export = DataList;
+}
+
+declare module 'dijit/form/DateTextBox' {
+	const DateTextBox: dijit.form.DateTextBoxConstructor;
+	export = DateTextBox;
+}
+
+declare module 'dijit/form/DropDownButton' {
+	const DropDownButton: dijit.form.DropDownButtonConstructor;
+	export = DropDownButton;
 }
 
 declare module 'dijit/form/Form' {

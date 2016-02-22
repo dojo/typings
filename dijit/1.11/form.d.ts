@@ -343,7 +343,7 @@ declare namespace dijit {
 			 * Name of the popup widget class used to select a date/time.
 			 * Subclasses should specify this.
 			 */
-			popupClass: string;
+			popupClass: string | _WidgetBaseConstructor<T>;
 
 			/**
 			 * Specifies constraints.selector passed to dojo.date functions, should be either
@@ -938,10 +938,6 @@ declare namespace dijit {
 
 		/* dijit/form/_Spinner */
 
-		interface CSSStateNodes {
-			[node: string]: string;
-		}
-
 		interface AdjustFunction {
 			(val: any, delta: number): any;
 		}
@@ -1230,6 +1226,60 @@ declare namespace dijit {
 
 		interface DataListConstructor {
 			new <T extends Object>(params: Object, srcNodeRef: dojo.NodeOrString): DataList<T>;
+		}
+
+		/* dijit/form/DateTextBox */
+
+		interface DateTextBox extends _DateTimeTextBox<Calendar> {
+			baseClass: string;
+			popupClass: CalendarConstructor;
+			_selector: string;
+			maxHeight: number;
+
+			/**
+			 * The value of this widget as a JavaScript Date object, with only year/month/day specified.`
+			 */
+			value: Date;
+		}
+
+		interface DateTextBoxConstructor extends _WidgetBaseConstructor<DateTextBox> { }
+
+		/* dijit/form/DropDownButton */
+
+		interface DropDownButton<T extends _WidgetBase> extends Button, _Container, _HasDropDown<T> {
+			baseClass: string;
+			templateString: string;
+
+			/**
+			 * Overrides _TemplatedMixin#_fillContent().
+			 * My inner HTML possibly contains both the button label and/or a drop down widget, like
+			 * <DropDownButton>  <span>push me</span>  <Menu> ... </Menu> </DropDownButton>
+			 */
+			_fillContent(): void;
+			startup(): void;
+
+			/**
+			 * Returns whether or not we are loaded - if our dropdown has an href,
+			 * then we want to check that.
+			 */
+			isLoaded(): boolean;
+
+			/**
+			 * Default implementation assumes that drop down already exists,
+			 * but hasn't loaded it's data (ex: ContentPane w/href).
+			 * App must override if the drop down is lazy-created.
+			 */
+			loadDropDown(callback: () => void): void;
+
+			/**
+			 * Overridden so that focus is handled by the _HasDropDown mixin, not by
+			 * the _FormWidget mixin.
+			 */
+			isFocusable(): boolean;
+		}
+
+		interface DropDownButtonConstructor extends _WidgetBaseConstructor<DropDownButton<any>> {
+			new <T extends _WidgetBase>(params: Object, srcNodeRef: dojo.NodeOrString): DropDownButton<T>;
 		}
 
 		/* dijit/form/Form */

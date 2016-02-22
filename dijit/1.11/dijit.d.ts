@@ -110,6 +110,10 @@ declare namespace dijit {
 
 	/* dijit/_CssStateMixin */
 
+	interface CSSStateNodes {
+		[node: string]: string;
+	}
+
 	interface _CssStateMixin {
 		/**
 		 * True if cursor is over this widget
@@ -736,6 +740,279 @@ declare namespace dijit {
 		move: dojo.ExtensionEvent;
 	}
 
+	/* dijit/Calendar */
+
+	interface _MonthDropDownButton extends form.DropDownButton<_MonthDropDown> {
+		onMonthSelect(): void;
+		postCreate(): void;
+
+		set(name: 'month', value: number): this;
+		set(name: string, value: any): this;
+		set(values: Object): this;
+	}
+
+	interface _MonthDropDownButtonConstructor extends _WidgetBaseConstructor<_MonthDropDownButton> {}
+
+	interface _MonthDropDown extends _Widget, _TemplatedMixin, _CssStateMixin {
+		months: string[];
+		baseClass: string;
+		templateString: string;
+
+		/**
+		 * Callback when month is selected from drop down
+		 */
+		onChange(month: number): void;
+
+		set(name: 'months', value: string[]): this;
+		set(name: string, value: any): this;
+		set(values: Object): this;
+	}
+
+	interface _MonthDropDownConstructor extends _WidgetBaseConstructor<_MonthDropDown> {}
+
+	interface Calendar extends CalendarLite, _Widget, _CssStateMixin {
+
+		baseClass: string;
+
+		/**
+		 * Set node classes for various mouse events, see dijit._CssStateMixin for more details
+		 */
+		cssStateNodes: CSSStateNodes;
+
+		/**
+		 * Creates the drop down button that displays the current month and lets user pick a new one
+		 */
+		_createMonthWidget(): _MonthDropDownButton;
+
+		postCreate(): void;
+
+		/**
+		 * Handler for when user selects a month from the drop down list
+		 */
+		_onMonthSelect(newMonth: number): void;
+
+		/**
+		 * Handler for mouse over events on days, sets hovered style
+		 */
+		_onDayMouseOver(evt: MouseEvent): void;
+
+		/**
+		 * Handler for mouse out events on days, clears hovered style
+		 */
+		_onDayMouseOut(evt: MouseEvent): void;
+		_onDayMouseDown(evt: MouseEvent): void;
+		_onDayMouseUp(evt: MouseEvent): void;
+
+		/**
+		 * Provides keyboard navigation of calendar.
+		 */
+		handleKey(evt: KeyboardEvent): void;
+
+		/**
+		 * For handling keydown events on a stand alone calendar
+		 */
+		_onKeyDown(evt: KeyboardEvent): void;
+
+		/**
+		 * Deprecated.   Notification that a date cell was selected.  It may be the same as the previous value.
+		 */
+		onValueSelected(date: Date): void;
+
+		onChange(date: Date): void;
+
+		/**
+		 * May be overridden to return CSS classes to associate with the date entry for the given dateObject
+		 * for example to indicate a holiday in specified locale.
+		 */
+		getClassForDate(dateObject: Date, locale?: string): string;
+
+		get(name: 'value'): Date;
+		get(name: string): any;
+
+		set(name: 'value', value: number | Date): this;
+		set(name: string, value: any): this;
+		set(values: Object): this;
+	}
+
+	interface CalendarConstructor extends _WidgetBaseConstructor<Calendar> {
+		_MonthWidget: _MonthWidgetConstructor;
+		_MonthDropDown: _MonthDropDownButtonConstructor;
+		_MonthDropDownButton: _MonthDropDownButtonConstructor;
+	}
+
+	/* dijit/CalendarLite */
+
+	interface _MonthWidget extends _WidgetBase {
+		set(name: 'month', value: Date): this;
+		set(name: string, value: any): this;
+		set(values: Object): this;
+	}
+
+	interface _MonthWidgetConstructor extends _WidgetBaseConstructor<_MonthWidget> { }
+
+	interface CalendarLite extends _WidgetBase, _TemplatedMixin {
+		/**
+		 * Template for main calendar
+		 */
+		templateString: string;
+
+		/**
+		 * Template for cell for a day of the week (ex: M)
+		 */
+		dowTemplateString: string;
+
+		dateTemplateString: string;
+		weekTemplateString: string;
+
+		/**
+		 * The currently selected Date, initially set to invalid date to indicate no selection.
+		 */
+		value: Date;
+
+		/**
+		 * JavaScript namespace to find calendar routines.	 If unspecified, uses Gregorian calendar routines
+		 * at dojo/date and dojo/date/locale.
+		 */
+		datePackage: string;
+
+		/**
+		 * How to represent the days of the week in the calendar header. See locale
+		 */
+		dayWidth: string;
+
+		/**
+		 * Order fields are traversed when user hits the tab key
+		 */
+		tabIndex: string;
+
+		/**
+		 * (Optional) The first day of week override. By default the first day of week is determined
+		 * for the current locale (extracted from the CLDR).
+		 * Special value -1 (default value), means use locale dependent value.
+		 */
+		dayOffset: number;
+
+		/**
+		 * Date object containing the currently focused date, or the date which would be focused
+		 * if the calendar itself was focused.   Also indicates which year and month to display,
+		 * i.e. the current "page" the calendar is on.
+		 */
+		currentFocus: Date;
+
+		/**
+		 * Put the summary to the node with role=grid
+		 */
+		_setSummaryAttr: string;
+
+		baseClass: string;
+
+		/**
+		 * Runs various tests on the value, checking that it's a valid date, rather
+		 * than blank or NaN.
+		 */
+		_isValidDate(value: Date): boolean;
+
+		/**
+		 * Convert Number into Date, or copy Date object.   Then, round to nearest day,
+		 * setting to 1am to avoid issues when DST shift occurs at midnight, see #8521, #9366)
+		 */
+		_patchDate(value: number | Date): Date;
+
+		/**
+		 * This just sets the content of node to the specified text.
+		 * Can't do "node.innerHTML=text" because of an IE bug w/tables, see #3434.
+		 */
+		_setText(node: HTMLElement, text?: string): void;
+
+		/**
+		 * Fills in the calendar grid with each day (1-31).
+		 * Call this on creation, when moving to a new month.
+		 */
+		_populateGrid(): void;
+
+		/**
+		 * Fill in localized month, and prev/current/next years
+		 */
+		_populateControls(): void;
+
+		/**
+		 * Sets calendar's value to today's date
+		 */
+		goToToday(): void;
+
+		/**
+		 * Creates the drop down button that displays the current month and lets user pick a new one
+		 */
+		_createMonthWidget(): void;
+
+		buildRendering(): void;
+		postCreate(): void;
+
+		/**
+		 * Set up connects for increment/decrement of months/years
+		 */
+		_connectControls(): void;
+
+		/**
+		 * If the calendar currently has focus, then focuses specified date,
+		 * changing the currently displayed month/year if necessary.
+		 * If the calendar doesn't have focus, updates currently
+		 * displayed month/year, and sets the cell that will get focus
+		 * when Calendar is focused.
+		 */
+		_setCurrentFocusAttr(date: Date, forceFocus?: boolean): void;
+
+		/**
+		 * Focus the calendar by focusing one of the calendar cells
+		 */
+		focus(): void;
+
+		/**
+		 * Handler for day clicks, selects the date if appropriate
+		 */
+		_onDayClick(evt: MouseEvent): void;
+
+		/**
+		 * Returns the cell corresponding to the date, or null if the date is not within the currently
+		 * displayed month.
+		 */
+		_getNodeByDate(value: Date): HTMLElement;
+
+		/**
+		 * Marks the specified cells as selected, and clears cells previously marked as selected.
+		 * For CalendarLite at most one cell is selected at any point, but this allows an array
+		 * for easy subclassing.
+		 */
+		_markSelectedDates(dates: Date[]): void;
+
+		/**
+		 * Called only when the selected date has changed
+		 */
+		onChange(date: Date): void;
+
+		/**
+		 * May be overridden to disable certain dates in the calendar e.g. `isDisabledDate=dojo.date.locale.isWeekend`
+		 */
+		isDisabledDate(dateObject: Date, locale?: string): boolean;
+
+		/**
+		 * May be overridden to return CSS classes to associate with the date entry for the given dateObject,
+		 * for example to indicate a holiday in specified locale.
+		 */
+		getClassForDate(dateObject: Date, locale?: string): string;
+
+		get(name: 'value'): Date;
+		get(name: string): any;
+
+		set(name: 'value', value: number | Date): this;
+		set(name: string, value: any): this;
+		set(values: Object): this;
+	}
+
+	interface CalendarLiteConstructor extends _WidgetBaseConstructor<CalendarLite> {
+		_MonthWidget: _MonthWidgetConstructor;
+	}
+
 	/* dijit/Destroyable */
 
 	interface Destroyable {
@@ -764,7 +1041,7 @@ declare namespace dijit {
 	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStateMixin {
 		templateString: string;
 		baseClass: string;
-		cssStateNodes: { closeButtonNode: string };
+		cssStateNodes: CSSStateNodes;
 
 		/**
 		 * True if Dialog is currently displayed on screen.
