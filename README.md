@@ -5,10 +5,14 @@
 
 This is a repository of Dojo 1 TypeScript Typings (including Dijit and DojoX).
 
-Dojo 2 is built on TypeScript and therefore its typings are inherit in its distrubution.
-The goal affiliated Dojo 1 projects (like [dgrid](http://dgrid.io/) and
-[dstore](http://dstorejs.io/) is that they will include their typings as part of
-their repository.
+Currently, this reopsitory does not include all the typings for Dijit and DojoX, although
+Dojo is currently fully covered.  The aim is to cover all of Dijit and continue to accept
+any community contributions for DojoX.
+
+For other packages, because Dojo 2 is built on TypeScript and therefore its typings are
+inherit in its distrubution. The goal for affiliated Dojo 1 projects (like
+[dgrid](http://dgrid.io/) and [dstore](http://dstorejs.io/) is that they will include
+typings as part of their repository.
 
 ## Usage
 
@@ -17,7 +21,9 @@ tries to break it down into easier to maintain pieces that also allow easy addit
 modifications, etc.
 
 Each major namespace is broken down into `dojo`, `dijit` and `dojox` directories, having
-the major version number in a sub directory within.
+the major version number in a sub directory within.  Currently only Dojo 1.11 is included.
+These typings should work for most older versions of Dojo post 1.7, though it may
+include some functionality that is not present in those older releases.
 
 The ambient declarations that mirror the Dojo namespaces are indexed via the `index.d.ts`
 file located in each directory and the ambient module names are then declared in a single
@@ -82,5 +88,5 @@ declare module 'dojo/text!./path/to/some.html' {
 
 ## Contributing
 
-If you wish to contribute to this repository, please see our
-[Contributing Guidelines](CONTRIBUTING.md).
+Contributions to this repository are very much welcomed! If you wish to contribute to this repository,
+please see our [Contributing Guidelines](CONTRIBUTING.md).
