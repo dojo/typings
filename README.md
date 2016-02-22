@@ -53,7 +53,7 @@ the `examples` directory of this repository.
 
 ### Typings are global
 
-At the time of this writing (TypeScript 1.7), typings are global and absolute. In order
+At the time of this writing (TypeScript 1.7/1.8), typings are global and absolute. In order
 to change module resolution from `dojo/...` the `modules.d.ts` will need to be updated.
 
 ### String Literals
@@ -61,6 +61,9 @@ to change module resolution from `dojo/...` the `modules.d.ts` will need to be u
 The current typings are build around TypeScript 1.7.  TypeScript 1.8 introduced string
 literal types and there are improvements that can be made to the typings, several of
 them noted as comments in the existing typings.
+
+*Note* while the repository currently uses TypeScript 1.8 as its development dependency
+we haven't started using the string literals yet, as TypeScript 1.8 isn't yet GA.
 
 ### AMD Plugin Globbing
 

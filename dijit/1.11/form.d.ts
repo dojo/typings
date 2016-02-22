@@ -280,7 +280,7 @@ declare namespace dijit {
 
 		interface DateTimeConstraints extends Constraints, dojo.date.DateLocaleFormatOptions {}
 
-		interface _DateTimeTextBox<T extends _Widget> extends RangeBoundTextBox, _HasDropDown<T> {
+		interface _DateTimeTextBox<T extends _WidgetBase> extends RangeBoundTextBox, _HasDropDown<T> {
 			templateString: string;
 
 			/**
@@ -372,7 +372,7 @@ declare namespace dijit {
 			set(values: Object): this;
 		}
 
-		interface _DateTimeTextBoxConstructor<T extends _Widget> extends _WidgetBaseConstructor<_DateTimeTextBox<T>> { }
+		interface _DateTimeTextBoxConstructor<T extends _WidgetBase> extends _WidgetBaseConstructor<_DateTimeTextBox<T>> { }
 
 		/* dijit/form/_ExpandingTextAreaMixin */
 

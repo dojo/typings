@@ -26,7 +26,6 @@
 		"no-shadowed-variable": false,
 		"no-string-literal": false,
 		"no-switch-case-fall-through": false,
-		"no-trailing-comma": true,
 		"no-trailing-whitespace": true,
 		"no-unreachable": true,
 		"no-unused-expression": false,
@@ -38,6 +37,7 @@
 		"quotemark": [ true, "single" ],
 		"radix": true,
 		"semicolon": true,
+		"trailing-comma": "never",
 		"triple-equals": [ true, "allow-null-check" ],
 		"typedef": false,
 		"typedef-whitespace": [ true, {
