@@ -169,9 +169,14 @@ interface DojoConfig {
 	 *     in an attempt to detect unhandled rejections.
 	 */
 	useDeferredInstrumentation?: string | boolean | number;
-}
 
-/**
- * The configuration which is looked for when Dojo is booting.
- */
-declare var dojoConfig: DojoConfig;
+	/**
+	 * Package configuration to pass to the AMD loader.
+	 */
+	packages?: dojo.Package[];
+
+	/**
+	 * A map of packages used to configure the AMD loader
+	 */
+	map?: dojo.ModuleMap;
+}

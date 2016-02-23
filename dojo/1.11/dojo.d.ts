@@ -33,6 +33,24 @@ declare namespace dojo {
 		resourceTags: { [tag: string]: (filename: string, mid?: string) => boolean; };
 	}
 
+	interface Package {
+		location?: string;
+		main?: string;
+		name?: string;
+	}
+
+	export interface ModuleMap extends ModuleMapItem {
+		[ sourceMid: string ]: ModuleMapReplacement;
+	}
+
+	export interface ModuleMapItem {
+		[ mid: string ]: /* ModuleMapReplacement | ModuleMap */ any;
+	}
+
+	export interface ModuleMapReplacement extends ModuleMapItem {
+		[ findMid: string ]: /* replaceMid */ string;
+	}
+
 	/* dojo/AdapterRegistry */
 
 	interface AdapterRegistry {
