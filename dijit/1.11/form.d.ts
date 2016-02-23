@@ -1282,6 +1282,37 @@ declare namespace dijit {
 			new <T extends _WidgetBase>(params: Object, srcNodeRef: dojo.NodeOrString): DropDownButton<T>;
 		}
 
+		/* dijit/form/FilteringSelect */
+
+		interface FilteringSelect<C extends Constraints, T extends Object, Q extends string | Object | Function, O extends dojo.store.api.QueryOptions> extends MappedTextBox<C>, ComboBoxMixin<T, Q, O> {
+			/**
+			 * True (default) if user is required to enter a value into this field.
+			 */
+			required: boolean;
+
+			_lastDisplayedValue: string;
+			_isValidSubset(): boolean;
+			isValid(): boolean;
+			_refreshState(): void;
+
+			/**
+			 * Callback from dojo.store after lookup of user entered value finishes
+			 */
+			_callbackSetLabel(result: T[], query: Q, options: O, priorityChange?: boolean): void;
+
+			_openResultList(results: T[], query: Q, options: O): void;
+			undo(): void;
+
+			set(name: 'displayedValue', value: string): this;
+			set(name: 'item', value: T): this;
+			set(name: string, value: any): this;
+			set(values: Object): this;
+		}
+
+		interface FilteringSelectConstructor extends _WidgetBaseConstructor<FilteringSelect<any, any, any, any>> {
+			new <C extends Constraints, T extends Object, Q extends string | Object | Function, O extends dojo.store.api.QueryOptions>(params: Object, srcNodeRef: dojo.NodeOrString): FilteringSelect<C, T, Q, O>;
+		}
+
 		/* dijit/form/Form */
 
 		interface Form extends _Widget, _TemplatedMixin, _FormMixin, layout._ContentPaneResizeMixin {

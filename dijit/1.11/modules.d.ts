@@ -85,6 +85,11 @@ declare module 'dijit/form/DropDownButton' {
 	export = DropDownButton;
 }
 
+declare module 'dijit/form/FilteringSelect' {
+	const FilteringSelect: dijit.form.FilteringSelectConstructor;
+	export = FilteringSelect;
+}
+
 declare module 'dijit/form/Form' {
 	const Form: dijit.form.FormConstructor;
 	export = Form;
