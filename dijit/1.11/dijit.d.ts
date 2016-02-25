@@ -329,6 +329,7 @@ declare namespace dijit {
 	}
 
 	/* dijit/_TemplatedMixin */
+
 	interface _TemplatedMixin extends _AttachMixin {
 
 		/**
