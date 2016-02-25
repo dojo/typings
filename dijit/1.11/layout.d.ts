@@ -104,6 +104,33 @@ declare namespace dijit {
 
 		interface LayoutContainerConstructor extends _WidgetBaseConstructor<LayoutContainer> { }
 
+		/* dijit/layout/AccordionContainer */
+
+		interface AccordionContainer extends StackContainer {
+			/**
+			 * Amount of time (in ms) it takes to slide panes.
+			 */
+			duration: number;
+
+			/**
+			 * The name of the widget used to display the title of each pane.
+			 */
+			buttonWidget: any; // typeof AccordionButton,
+		}
+
+		interface AccordionContainerConstructor extends _WidgetBaseConstructor<AccordionContainer> { }
+
+		/* dijit/layout/AccordionPane */
+
+		interface AccordionPane extends ContentPane {
+			/**
+			 * Called when this pane is selected.
+			 */
+			onSelected(): void;
+		}
+
+		interface AccordionPaneConstructor extends _WidgetBaseConstructor<AccordionPane> { }
+
 		/* dijit/layout/BorderContainer */
 
 		interface BorderContainer extends LayoutContainer {

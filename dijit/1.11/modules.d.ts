@@ -150,6 +150,16 @@ declare module 'dijit/layout/_LayoutWidget' {
 	export = _LayoutWidget;
 }
 
+declare module 'dijit/layout/AccordionContainer' {
+	const AccordionContainer: dijit.layout.AccordionContainerConstructor;
+	export = AccordionContainer;
+}
+
+declare module 'dijit/layout/AccordionPane' {
+	const AccordionPane: dijit.layout.AccordionPaneConstructor;
+	export = AccordionPane;
+}
+
 declare module 'dijit/layout/ContentPane' {
 	const ContentPane: dijit.layout.ContentPaneConstructor;
 	export = ContentPane;
