@@ -180,6 +180,11 @@ declare module 'dijit/layout/LinkPane' {
 	export = LinkPane;
 }
 
+declare module 'dijit/layout/ScrollingTabController' {
+	const ScrollingTabController: dijit.layout.ScrollingTabControllerConstructor;
+	export = ScrollingTabController;
+}
+
 declare module 'dijit/layout/StackContainer' {
 	const StackContainer: dijit.layout.StackContainerConstructor;
 	export = StackContainer;

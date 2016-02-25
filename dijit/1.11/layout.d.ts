@@ -393,6 +393,51 @@ declare namespace dijit {
 
 		interface LinkPaneConstructor extends _WidgetBaseConstructor<LinkPane> { }
 
+		/* dijit/layout/ScrollingTabController */
+
+		interface ScrollingTabController extends TabController, _WidgetsInTemplateMixin {
+			/**
+			 * True if a menu should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useMenu: boolean;
+
+			/**
+			 * True if a slider should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useSlider: boolean;
+
+			/**
+			 * The css class to apply to the tab strip, if it is visible.
+			 */
+			tabStripClass: string;
+
+			/**
+			 * Creates an Animation object that smoothly scrolls the tab list
+			 * either to a fixed horizontal pixel value, or to the selected tab.
+			 */
+			createSmoothScroll(x?: number): dojo._base.Animation;
+
+			/**
+			 * Scrolls the menu to the right.
+			 */
+			doSlideRight(e: MouseEvent): void;
+
+			/**
+			 * Scrolls the menu to the left.
+			 */
+			doSlideLeft(e: MouseEvent): void;
+
+			/**
+			 * Scrolls the tab list to the left or right by 75% of the widget
+			 * width.
+			 */
+			doSlide(direction: number, node: HTMLElement): void;
+		}
+
+		interface ScrollingTabControllerConstructor extends _WidgetBaseConstructor<ScrollingTabController> { }
+
 		/* dijit/layout/StackContainer */
 
 		interface StackContainer extends _LayoutWidget {
