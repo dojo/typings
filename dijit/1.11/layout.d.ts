@@ -66,7 +66,7 @@ declare namespace dijit {
 			 * "top", "bottom", "left-h", "right-h"
 			 */
 			tabPosition: string;
-			//tabPosition: "top" | "bottom" | "left-h" | "right-h";
+			// tabPosition: 'top' | 'bottom' | 'left-h' | 'right-h';
 
 			/**
 			 * Defines whether the tablist gets an extra class for layouting, putting a border/shading
@@ -96,7 +96,7 @@ declare namespace dijit {
 			 * panes, the top and bottom panes will extend the entire width of the box.
 			 */
 			design: string;
-			//design: "headline" | "sidebar";
+			// design: 'headline' | 'sidebar';
 
 			addChild<T extends _WidgetBase>(child: T, insertIndex?: number): void;
 			removeChild<T extends _WidgetBase>(child: T): void;
@@ -354,6 +354,17 @@ declare namespace dijit {
 			 */
 			resize(changeSize?: dojo.DomGeometryBox, resultSize?: dojo.DomGeometryWidthHeight): void;
 		}
+
+		/* dijit/layout/LinkPane */
+
+		interface LinkPane extends ContentPane, _TemplatedMixin {
+			/**
+			 * A ContentPane with an href where (when declared in markup) the
+			 * title is specified as innerHTML rather than as a title attribute.
+			 */
+		}
+
+		interface LinkPaneConstructor extends _WidgetBaseConstructor<LinkPane> { }
 
 		/* dijit/layout/StackContainer */
 

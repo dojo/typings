@@ -150,11 +150,6 @@ declare module 'dijit/layout/_LayoutWidget' {
 	export = _LayoutWidget;
 }
 
-declare module 'dijit/layout/LayoutContainer' {
-	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
-	export = LayoutContainer;
-}
-
 declare module 'dijit/layout/ContentPane' {
 	const ContentPane: dijit.layout.ContentPaneConstructor;
 	export = ContentPane;
@@ -163,6 +158,16 @@ declare module 'dijit/layout/ContentPane' {
 declare module 'dijit/layout/BorderContainer' {
 	const BorderContainer: dijit.layout.BorderContainerConstructor;
 	export = BorderContainer;
+}
+
+declare module 'dijit/layout/LayoutContainer' {
+	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
+	export = LayoutContainer;
+}
+
+declare module 'dijit/layout/LinkPane' {
+	const LinkPane: dijit.layout.LinkPaneConstructor;
+	export = LinkPane;
 }
 
 declare module 'dijit/layout/StackContainer' {
