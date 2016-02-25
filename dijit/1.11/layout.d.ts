@@ -66,6 +66,7 @@ declare namespace dijit {
 			 * "top", "bottom", "left-h", "right-h"
 			 */
 			tabPosition: string;
+			//tabPosition: "top" | "bottom" | "left-h" | "right-h";
 
 			/**
 			 * Defines whether the tablist gets an extra class for layouting, putting a border/shading
@@ -95,8 +96,8 @@ declare namespace dijit {
 			 * panes, the top and bottom panes will extend the entire width of the box.
 			 */
 			design: string;
+			//design: "headline" | "sidebar";
 
-			layout(): void;
 			addChild<T extends _WidgetBase>(child: T, insertIndex?: number): void;
 			removeChild<T extends _WidgetBase>(child: T): void;
 		}
@@ -367,13 +368,13 @@ declare namespace dijit {
 			 */
 			persist: boolean;
 
-			selectChild<T extends dijit._WidgetBase>(page: T | string, animate: boolean): dojo.promise.Promise<any>;
+			selectChild<T extends _WidgetBase>(page: T | string, animate: boolean): dojo.promise.Promise<any>;
 
 			forward(): dojo.promise.Promise<any>;
 
 			back(): dojo.promise.Promise<any>;
 
-			closeChild<T extends dijit._WidgetBase>(page: T): void;
+			closeChild<T extends _WidgetBase>(page: T): void;
 
 			/**
 			 * Destroy all the widgets inside the StackContainer and empty containerNode
@@ -423,7 +424,7 @@ declare namespace dijit {
 			containerId: string;
 
 			/**
-			 * The buntton widget to create to correspond to each page.
+			 * The button widget to create to correspond to each page.
 			 */
 			buttonWidget: _WidgetBase;
 
@@ -476,7 +477,7 @@ declare namespace dijit {
 			/**
 			 * Helper for onkeydown to find next/previous button.
 			 */
-			adjacent(forward: boolean): dijit._WidgetBase;
+			adjacent(forward: boolean): _WidgetBase;
 
 			/**
 			 * Handle keystrokes on the page list, for advancing to next/previous
