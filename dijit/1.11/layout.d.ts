@@ -417,7 +417,7 @@ declare namespace dijit {
 			 * Creates an Animation object that smoothly scrolls the tab list
 			 * either to a fixed horizontal pixel value, or to the selected tab.
 			 */
-			createSmoothScroll(x?: number): dojo._base.Animation;
+			createSmoothScroll(pixels?: number): dojo._base.Animation;
 
 			/**
 			 * Scrolls the menu to the right.
