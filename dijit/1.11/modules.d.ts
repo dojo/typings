@@ -184,3 +184,8 @@ declare module 'dijit/layout/TabContainer' {
 	const TabContainer: dijit.layout.TabContainerConstructor;
 	export = TabContainer;
 }
+
+declare module 'dijit/layout/TabController' {
+	const TabController: dijit.layout.TabControllerConstructor;
+	export = TabController;
+}

@@ -504,6 +504,8 @@ declare namespace dijit {
 
 		interface StackControllerConstructor extends _WidgetBaseConstructor<StackController> { }
 
+		/* dijit/layout/TabContainer */
+
 		interface TabContainer extends _TabContainerBase {
 
 			/**
@@ -525,5 +527,29 @@ declare namespace dijit {
 		}
 
 		interface TabContainerConstructor extends _WidgetBaseConstructor<TabContainer> { }
+
+		/* dijit/layout/TabController */
+
+		interface TabController extends StackController {
+			/**
+			 * Defines where tabs go relative to the content.
+			 * "top", "bottom", "left-h", "right-h"
+			 */
+			tabPosition: string;
+			// tabPosition: 'top' | 'bottom' | 'left-h' | 'right-h';
+
+			/**
+			 * The tab widget to create to correspond to each page.
+			 */
+			buttonWidget: any; // typeof TabButton
+
+			/**
+			 * Class of [x] close icon, used by event delegation code to tell
+			 * when close button was clicked.
+			 */
+			buttonWidgetCloseClass: string;
+		}
+
+		interface TabControllerConstructor extends _WidgetBaseConstructor<TabController> { }
 	}
 }
