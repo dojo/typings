@@ -5,22 +5,27 @@ declare module 'dojox/layout/ContentPane' {
 	export = ContentPane;
 }
 
+declare module 'dojox/layout/GridContainer' {
+	const GridContainer: dojox.layout.GridContainerConstructor;
+	export = GridContainer;
+}
+
 declare module 'dojox/layout/GridContainerLite' {
-	const GridContainerLite: dojox.layout.GridContainerLite;
+	const GridContainerLite: dojox.layout.GridContainerLiteConstructor;
 	export = GridContainerLite;
 }
 
 declare module 'dojox/widget/DialogSimple' {
-	let DialogSimple: dojox.widget.DialogSimple;
+	const DialogSimple: dojox.widget.DialogSimpleConstructor;
 	export = DialogSimple;
 }
 
 declare module 'dojox/widget/Dialog' {
-	let Dialog: dojox.widget.Dialog;
+	const Dialog: dojox.widget.DialogConstructor;
 	export = Dialog;
 }
 
 declare module 'dojox/widget/Toaster' {
-	let Toaster: dojox.widget.ToasterConstructor;
+	const Toaster: dojox.widget.ToasterConstructor;
 	export = Toaster;
 }

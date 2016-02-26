@@ -114,5 +114,55 @@ declare namespace dojox {
 		}
 
 		interface GridContainerLiteConstructor extends dijit._WidgetBaseConstructor<GridContainerLite> { }
+
+        /* dojox/layout/GridContainer */
+
+        interface GridContainer extends GridContainerLite {
+            /**
+    		 * Allow or not resizing of columns by a grip handle.
+             */
+    		hasResizableColumns: boolean;
+
+    		/**
+    		 * Specifies whether columns resize as you drag (true) or only upon mouseup (false).
+             */
+    		liveResizeColumns: boolean;
+
+    		/**
+    		 * Minimum column width in percentage.
+             */
+    		minColWidth: number;
+
+    		/**
+    		 * Minimum children width in pixel (only used for IE6 which doesn't
+             * handle min-width css property).
+             */
+    		minChildWidth: number;
+
+    		/**
+    		 * Location to add/remove columns, must be set to 'left' or 'right' (default).
+             */
+    		mode: string;
+            // mode: 'left' | 'right';
+
+    		/**
+    		 * Define if the last right column is fixed.
+    		 * Used when you add or remove columns by calling setColumns method.
+             */
+    		isRightFixed: boolean;
+
+    		/**
+    		 * Define if the last left column is fixed.
+    		 * Used when you add or remove columns by calling setColumns method.
+             */
+    		isLeftFixed: boolean;
+
+            /**
+             * Set the number of columns.
+             */
+            setColumns(nbColumns: number): void;
+        }
+
+        interface GridContainerConstructor extends dijit._WidgetBaseConstructor<GridContainer> { }
 	}
 }
