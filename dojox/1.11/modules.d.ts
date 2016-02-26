@@ -15,6 +15,11 @@ declare module 'dojox/layout/GridContainerLite' {
 	export = GridContainerLite;
 }
 
+declare module 'dojox/layout/TableContainer' {
+	const TableContainer: dojox.layout.TableContainerConstructor;
+	export = TableContainer;
+}
+
 declare module 'dojox/widget/DialogSimple' {
 	const DialogSimple: dojox.widget.DialogSimpleConstructor;
 	export = DialogSimple;

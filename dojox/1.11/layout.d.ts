@@ -164,5 +164,45 @@ declare namespace dojox {
         }
 
         interface GridContainerConstructor extends dijit._WidgetBaseConstructor<GridContainer> { }
+
+        /* dojox/layout/TableContainer */
+
+        interface TableContainer extends dijit.layout._LayoutWidget {
+
+            cols: number;
+
+        	/**
+        	 * Defines the width of a label. If the value is a number, it is
+        	 * treated as a pixel value. The other valid value is a percentage,
+        	 * e.g. "50%".
+             */
+        	labelWidth: string | number;
+
+        	/**
+        	 * True if labels should be displayed, false otherwise.
+             */
+        	showLabels: boolean;
+
+        	/**
+        	 * Either "horiz" or "vert" for label orientation.
+             */
+        	orientation: string;
+            // orientation: 'horiz' | 'vert';
+
+        	/**
+        	 * The cell spacing to apply to the table.
+             */
+        	spacing: number;
+
+        	/**
+        	 * A CSS class that will be applied to child elements. For example, if
+        	 * the class is "myClass", the table will have "myClass-table" applied to it,
+        	 * each label TD will have "myClass-labelCell" applied, and each
+        	 * widget TD will have "myClass-valueCell" applied.
+             */
+        	customClass: string;
+        }
+
+        interface TableContainerConstructor extends dijit._WidgetBaseConstructor<TableContainer> { }
 	}
 }
