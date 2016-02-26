@@ -115,94 +115,94 @@ declare namespace dojox {
 
 		interface GridContainerLiteConstructor extends dijit._WidgetBaseConstructor<GridContainerLite> { }
 
-        /* dojox/layout/GridContainer */
+		/* dojox/layout/GridContainer */
 
-        interface GridContainer extends GridContainerLite {
-            /**
-    		 * Allow or not resizing of columns by a grip handle.
-             */
-    		hasResizableColumns: boolean;
+		interface GridContainer extends GridContainerLite {
+			/**
+			 * Allow or not resizing of columns by a grip handle.
+			 */
+			hasResizableColumns: boolean;
 
-    		/**
-    		 * Specifies whether columns resize as you drag (true) or only upon mouseup (false).
-             */
-    		liveResizeColumns: boolean;
+			/**
+			 * Specifies whether columns resize as you drag (true) or only upon mouseup (false).
+			 */
+			liveResizeColumns: boolean;
 
-    		/**
-    		 * Minimum column width in percentage.
-             */
-    		minColWidth: number;
+			/**
+			 * Minimum column width in percentage.
+			 */
+			minColWidth: number;
 
-    		/**
-    		 * Minimum children width in pixel (only used for IE6 which doesn't
-             * handle min-width css property).
-             */
-    		minChildWidth: number;
+			/**
+			 * Minimum children width in pixel (only used for IE6 which doesn't
+			 * handle min-width css property).
+			 */
+			minChildWidth: number;
 
-    		/**
-    		 * Location to add/remove columns, must be set to 'left' or 'right' (default).
-             */
-    		mode: string;
-            // mode: 'left' | 'right';
+			/**
+			 * Location to add/remove columns, must be set to 'left' or 'right' (default).
+			 */
+			mode: string;
+			// mode: 'left' | 'right';
 
-    		/**
-    		 * Define if the last right column is fixed.
-    		 * Used when you add or remove columns by calling setColumns method.
-             */
-    		isRightFixed: boolean;
+			/**
+			 * Define if the last right column is fixed.
+			 * Used when you add or remove columns by calling setColumns method.
+			 */
+			isRightFixed: boolean;
 
-    		/**
-    		 * Define if the last left column is fixed.
-    		 * Used when you add or remove columns by calling setColumns method.
-             */
-    		isLeftFixed: boolean;
+			/**
+			 * Define if the last left column is fixed.
+			 * Used when you add or remove columns by calling setColumns method.
+			 */
+			isLeftFixed: boolean;
 
-            /**
-             * Set the number of columns.
-             */
-            setColumns(nbColumns: number): void;
-        }
+			/**
+			 * Set the number of columns.
+			 */
+			setColumns(nbColumns: number): void;
+		}
 
-        interface GridContainerConstructor extends dijit._WidgetBaseConstructor<GridContainer> { }
+		interface GridContainerConstructor extends dijit._WidgetBaseConstructor<GridContainer> { }
 
-        /* dojox/layout/TableContainer */
+		/* dojox/layout/TableContainer */
 
-        interface TableContainer extends dijit.layout._LayoutWidget {
+		interface TableContainer extends dijit.layout._LayoutWidget {
 
-            cols: number;
+			cols: number;
 
-        	/**
-        	 * Defines the width of a label. If the value is a number, it is
-        	 * treated as a pixel value. The other valid value is a percentage,
-        	 * e.g. "50%".
-             */
-        	labelWidth: string | number;
+			/**
+			 * Defines the width of a label. If the value is a number, it is
+			 * treated as a pixel value. The other valid value is a percentage,
+			 * e.g. "50%".
+			 */
+			labelWidth: string | number;
 
-        	/**
-        	 * True if labels should be displayed, false otherwise.
-             */
-        	showLabels: boolean;
+			/**
+			 * True if labels should be displayed, false otherwise.
+			 */
+			showLabels: boolean;
 
-        	/**
-        	 * Either "horiz" or "vert" for label orientation.
-             */
-        	orientation: string;
-            // orientation: 'horiz' | 'vert';
+			/**
+			 * Either "horiz" or "vert" for label orientation.
+			 */
+			orientation: string;
+			// orientation: 'horiz' | 'vert';
 
-        	/**
-        	 * The cell spacing to apply to the table.
-             */
-        	spacing: number;
+			/**
+			 * The cell spacing to apply to the table.
+			 */
+			spacing: number;
 
-        	/**
-        	 * A CSS class that will be applied to child elements. For example, if
-        	 * the class is "myClass", the table will have "myClass-table" applied to it,
-        	 * each label TD will have "myClass-labelCell" applied, and each
-        	 * widget TD will have "myClass-valueCell" applied.
-             */
-        	customClass: string;
-        }
+			/**
+			 * A CSS class that will be applied to child elements. For example, if
+			 * the class is "myClass", the table will have "myClass-table" applied to it,
+			 * each label TD will have "myClass-labelCell" applied, and each
+			 * widget TD will have "myClass-valueCell" applied.
+			 */
+			customClass: string;
+		}
 
-        interface TableContainerConstructor extends dijit._WidgetBaseConstructor<TableContainer> { }
+		interface TableContainerConstructor extends dijit._WidgetBaseConstructor<TableContainer> { }
 	}
 }
