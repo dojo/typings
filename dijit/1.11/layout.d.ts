@@ -66,6 +66,7 @@ declare namespace dijit {
 			 * "top", "bottom", "left-h", "right-h"
 			 */
 			tabPosition: string;
+			// tabPosition: 'top' | 'bottom' | 'left-h' | 'right-h';
 
 			/**
 			 * Defines whether the tablist gets an extra class for layouting, putting a border/shading
@@ -95,13 +96,40 @@ declare namespace dijit {
 			 * panes, the top and bottom panes will extend the entire width of the box.
 			 */
 			design: string;
+			// design: 'headline' | 'sidebar';
 
-			layout(): void;
 			addChild<T extends _WidgetBase>(child: T, insertIndex?: number): void;
 			removeChild<T extends _WidgetBase>(child: T): void;
 		}
 
 		interface LayoutContainerConstructor extends _WidgetBaseConstructor<LayoutContainer> { }
+
+		/* dijit/layout/AccordionContainer */
+
+		interface AccordionContainer extends StackContainer {
+			/**
+			 * Amount of time (in ms) it takes to slide panes.
+			 */
+			duration: number;
+
+			/**
+			 * The name of the widget used to display the title of each pane.
+			 */
+			buttonWidget: any; // typeof AccordionButton,
+		}
+
+		interface AccordionContainerConstructor extends _WidgetBaseConstructor<AccordionContainer> { }
+
+		/* dijit/layout/AccordionPane */
+
+		interface AccordionPane extends ContentPane {
+			/**
+			 * Called when this pane is selected.
+			 */
+			onSelected(): void;
+		}
+
+		interface AccordionPaneConstructor extends _WidgetBaseConstructor<AccordionPane> { }
 
 		/* dijit/layout/BorderContainer */
 
@@ -354,6 +382,62 @@ declare namespace dijit {
 			resize(changeSize?: dojo.DomGeometryBox, resultSize?: dojo.DomGeometryWidthHeight): void;
 		}
 
+		/* dijit/layout/LinkPane */
+
+		interface LinkPane extends ContentPane, _TemplatedMixin {
+			/**
+			 * A ContentPane with an href where (when declared in markup) the
+			 * title is specified as innerHTML rather than as a title attribute.
+			 */
+		}
+
+		interface LinkPaneConstructor extends _WidgetBaseConstructor<LinkPane> { }
+
+		/* dijit/layout/ScrollingTabController */
+
+		interface ScrollingTabController extends TabController, _WidgetsInTemplateMixin {
+			/**
+			 * True if a menu should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useMenu: boolean;
+
+			/**
+			 * True if a slider should be used to select tabs when they are too
+			 * wide to fit the TabContainer, false otherwise.
+			 */
+			useSlider: boolean;
+
+			/**
+			 * The css class to apply to the tab strip, if it is visible.
+			 */
+			tabStripClass: string;
+
+			/**
+			 * Creates an Animation object that smoothly scrolls the tab list
+			 * either to a fixed horizontal pixel value, or to the selected tab.
+			 */
+			createSmoothScroll(pixels?: number): dojo._base.Animation;
+
+			/**
+			 * Scrolls the menu to the right.
+			 */
+			doSlideRight(e: MouseEvent): void;
+
+			/**
+			 * Scrolls the menu to the left.
+			 */
+			doSlideLeft(e: MouseEvent): void;
+
+			/**
+			 * Scrolls the tab list to the left or right by 75% of the widget
+			 * width.
+			 */
+			doSlide(direction: number, node: HTMLElement): void;
+		}
+
+		interface ScrollingTabControllerConstructor extends _WidgetBaseConstructor<ScrollingTabController> { }
+
 		/* dijit/layout/StackContainer */
 
 		interface StackContainer extends _LayoutWidget {
@@ -367,13 +451,13 @@ declare namespace dijit {
 			 */
 			persist: boolean;
 
-			selectChild<T extends dijit._WidgetBase>(page: T | string, animate: boolean): dojo.promise.Promise<any>;
+			selectChild<T extends _WidgetBase>(page: T | string, animate: boolean): dojo.promise.Promise<any>;
 
 			forward(): dojo.promise.Promise<any>;
 
 			back(): dojo.promise.Promise<any>;
 
-			closeChild<T extends dijit._WidgetBase>(page: T): void;
+			closeChild<T extends _WidgetBase>(page: T): void;
 
 			/**
 			 * Destroy all the widgets inside the StackContainer and empty containerNode
@@ -423,7 +507,7 @@ declare namespace dijit {
 			containerId: string;
 
 			/**
-			 * The buntton widget to create to correspond to each page.
+			 * The button widget to create to correspond to each page.
 			 */
 			buttonWidget: _WidgetBase;
 
@@ -476,7 +560,7 @@ declare namespace dijit {
 			/**
 			 * Helper for onkeydown to find next/previous button.
 			 */
-			adjacent(forward: boolean): dijit._WidgetBase;
+			adjacent(forward: boolean): _WidgetBase;
 
 			/**
 			 * Handle keystrokes on the page list, for advancing to next/previous
@@ -491,6 +575,8 @@ declare namespace dijit {
 		}
 
 		interface StackControllerConstructor extends _WidgetBaseConstructor<StackController> { }
+
+		/* dijit/layout/TabContainer */
 
 		interface TabContainer extends _TabContainerBase {
 
@@ -513,5 +599,29 @@ declare namespace dijit {
 		}
 
 		interface TabContainerConstructor extends _WidgetBaseConstructor<TabContainer> { }
+
+		/* dijit/layout/TabController */
+
+		interface TabController extends StackController {
+			/**
+			 * Defines where tabs go relative to the content.
+			 * "top", "bottom", "left-h", "right-h"
+			 */
+			tabPosition: string;
+			// tabPosition: 'top' | 'bottom' | 'left-h' | 'right-h';
+
+			/**
+			 * The tab widget to create to correspond to each page.
+			 */
+			buttonWidget: any; // typeof TabButton
+
+			/**
+			 * Class of [x] close icon, used by event delegation code to tell
+			 * when close button was clicked.
+			 */
+			buttonWidgetCloseClass: string;
+		}
+
+		interface TabControllerConstructor extends _WidgetBaseConstructor<TabController> { }
 	}
 }

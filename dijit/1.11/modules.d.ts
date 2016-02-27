@@ -150,9 +150,14 @@ declare module 'dijit/layout/_LayoutWidget' {
 	export = _LayoutWidget;
 }
 
-declare module 'dijit/layout/LayoutContainer' {
-	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
-	export = LayoutContainer;
+declare module 'dijit/layout/AccordionContainer' {
+	const AccordionContainer: dijit.layout.AccordionContainerConstructor;
+	export = AccordionContainer;
+}
+
+declare module 'dijit/layout/AccordionPane' {
+	const AccordionPane: dijit.layout.AccordionPaneConstructor;
+	export = AccordionPane;
 }
 
 declare module 'dijit/layout/ContentPane' {
@@ -163,6 +168,21 @@ declare module 'dijit/layout/ContentPane' {
 declare module 'dijit/layout/BorderContainer' {
 	const BorderContainer: dijit.layout.BorderContainerConstructor;
 	export = BorderContainer;
+}
+
+declare module 'dijit/layout/LayoutContainer' {
+	const LayoutContainer: dijit.layout.LayoutContainerConstructor;
+	export = LayoutContainer;
+}
+
+declare module 'dijit/layout/LinkPane' {
+	const LinkPane: dijit.layout.LinkPaneConstructor;
+	export = LinkPane;
+}
+
+declare module 'dijit/layout/ScrollingTabController' {
+	const ScrollingTabController: dijit.layout.ScrollingTabControllerConstructor;
+	export = ScrollingTabController;
 }
 
 declare module 'dijit/layout/StackContainer' {
@@ -178,4 +198,9 @@ declare module 'dijit/layout/StackController' {
 declare module 'dijit/layout/TabContainer' {
 	const TabContainer: dijit.layout.TabContainerConstructor;
 	export = TabContainer;
+}
+
+declare module 'dijit/layout/TabController' {
+	const TabController: dijit.layout.TabControllerConstructor;
+	export = TabController;
 }
