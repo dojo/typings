@@ -59,26 +59,26 @@ declare namespace dijit {
 
 	/* dijit/_Contained */
 
-    interface _Contained {
-        /**
-         * Returns the previous child of the parent or null if this is the
-         * first child of the parent.
-         */
-        getPreviousSibling<T extends _WidgetBase>(): T;
+	interface _Contained {
+		/**
+		 * Returns the previous child of the parent or null if this is the
+		 * first child of the parent.
+		 */
+		getPreviousSibling<T extends _WidgetBase>(): T;
 
-        /**
-         * Returns the next child of the parent or null if this is the last
-         * child of the parent.
-         */
-        getNextSibling<T extends _WidgetBase>(): T;
+		/**
+		 * Returns the next child of the parent or null if this is the last
+		 * child of the parent.
+		 */
+		getNextSibling<T extends _WidgetBase>(): T;
 
-        /**
-         * Returns the index of this widget within its container parent.
-         * It returns -1 if the parent does not exist or if the parent is
-         * not a dijit/_Container.
-         */
-        getIndexInParent(): number;
-    }
+		/**
+		 * Returns the index of this widget within its container parent.
+		 * It returns -1 if the parent does not exist or if the parent is
+		 * not a dijit/_Container.
+		 */
+		getIndexInParent(): number;
+	}
 
 	/* dijit/_Container */
 

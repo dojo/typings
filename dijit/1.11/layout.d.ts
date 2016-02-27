@@ -472,29 +472,29 @@ declare namespace dijit {
 			 * Specifies that this widget should be the initially displayed pane.
 			 * Note: to change the selected child use `dijit/layout/StackContainer.selectChild`
 			 */
-			 selected: boolean;
+			selected: boolean;
 
 			/**
 			 * Specifies that the button to select this pane should be disabled.
 			 * Doesn't affect programmatic selection of the pane, nor does it deselect the pane if it is currently selected.
 			 */
-			 disabled: boolean;
+			disabled: boolean;
 
 			/**
 			 * True if user can close (destroy) this child, such as (for example) clicking the X on the tab.
 			 */
-			 closable: boolean;
+			closable: boolean;
 
 			/**
 			 * CSS class specifying icon to use in label associated with this pane.
 			 */
-			 iconClass: string;
+			iconClass: string;
 
 			/**
 			 * When true, display title of this widget as tab label etc., rather than just using
 			 * icon specified in iconClass.
 			 */
-			 showTitle: boolean;
+			showTitle: boolean;
 		}
 
 		/* dijit/layout/StackController */
