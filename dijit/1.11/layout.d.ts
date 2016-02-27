@@ -106,6 +106,30 @@ declare namespace dijit {
 
 		/* dijit/layout/AccordionContainer */
 
+		interface _AccordionButton extends _WidgetBase, _TemplatedMixin, _CssStateMixin {
+			/**
+			 * Title of the pane.
+			 */
+			label: string;
+
+			/**
+			 * Tooltip that appears on hover.
+			 */
+			title: string;
+
+			/**
+			 * CSS class for icon to left of label.
+			 */
+			iconClassAttr: string;
+
+			/**
+			 * Returns the height of the title dom node.
+			 */
+			getTitleHeight(): number;
+		}
+
+		interface _AccordionButtonConstructor extends _WidgetBaseConstructor<_AccordionButton> { }
+
 		interface AccordionContainer extends StackContainer {
 			/**
 			 * Amount of time (in ms) it takes to slide panes.
@@ -115,7 +139,7 @@ declare namespace dijit {
 			/**
 			 * The name of the widget used to display the title of each pane.
 			 */
-			buttonWidget: any; // typeof AccordionButton,
+			buttonWidget: _AccordionButtonConstructor;
 		}
 
 		interface AccordionContainerConstructor extends _WidgetBaseConstructor<AccordionContainer> { }
@@ -499,17 +523,21 @@ declare namespace dijit {
 
 		/* dijit/layout/StackController */
 
-		interface StackController extends _Widget, _TemplatedMixin, _Container {
+		interface _StackButton extends dijit.form.ToggleButton {
+			/**
+			 * When true, display close button for this tab.
+			 */
+			closeButton: boolean;
+		}
+
+		interface _StackButtonConstructor extends _WidgetBaseConstructor<_StackButton> { }
+
+		interface StackControllerBase extends _Widget, _TemplatedMixin, _Container {
 
 			/**
 			 * The id of the page container I point to.
 			 */
 			containerId: string;
-
-			/**
-			 * The button widget to create to correspond to each page.
-			 */
-			buttonWidget: _WidgetBase;
 
 			/**
 			 * CSS class of [x] close icon used by event delegation code to tell when
@@ -574,6 +602,13 @@ declare namespace dijit {
 			onContainerKeyDown(info: Object): void;
 		}
 
+		interface StackController extends StackControllerBase {
+			/**
+			 * The button widget to create to correspond to each page.
+			 */
+			buttonWidget: _StackButtonConstructor;
+		}
+
 		interface StackControllerConstructor extends _WidgetBaseConstructor<StackController> { }
 
 		/* dijit/layout/TabContainer */
@@ -602,7 +637,11 @@ declare namespace dijit {
 
 		/* dijit/layout/TabController */
 
-		interface TabController extends StackController {
+		interface _TabButton extends _StackButton { }
+
+		interface _TabButtonConstructor extends _WidgetBaseConstructor<_TabButton> { }
+
+		interface TabController extends StackControllerBase {
 			/**
 			 * Defines where tabs go relative to the content.
 			 * "top", "bottom", "left-h", "right-h"
@@ -613,7 +652,7 @@ declare namespace dijit {
 			/**
 			 * The tab widget to create to correspond to each page.
 			 */
-			buttonWidget: any; // typeof TabButton
+			buttonWidget: _TabButtonConstructor;
 
 			/**
 			 * Class of [x] close icon, used by event delegation code to tell
