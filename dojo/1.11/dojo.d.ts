@@ -403,6 +403,7 @@ declare namespace dojo {
 
 	interface Require {
 		(config: GenericObject, dependencies: string[], callback?: GenericFunction<void>): Require;
+		(dependencies: string[], callback: GenericFunction<void>): Require;
 		async: number| boolean;
 		has: dojo.Has;
 		isXdurl(url: string): boolean;
