@@ -822,6 +822,9 @@ declare namespace dojo {
 			node: HTMLElement | string;
 			duration?: number;
 			easing?: EasingFunction;
+
+			start?: Function;
+			end?: Function;
 		}
 
 		interface AnimationArgumentsProperties {
