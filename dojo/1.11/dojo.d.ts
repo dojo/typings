@@ -1874,6 +1874,10 @@ declare namespace dojo {
 		unwatch(): void;
 	}
 
+    interface StatefulConstructor {
+        new<T>(options?: T): T & Stateful;
+    }
+
 	interface Stateful {
 		/**
 		 * Used across all instances a hash to cache attribute names and their getter

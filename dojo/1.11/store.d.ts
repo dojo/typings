@@ -82,7 +82,7 @@ declare namespace dojo {
 			}
 
 			interface QueryResults<T extends Object> extends ArrayLike<T> {
-
+                sort(sort: Function): QueryResults<T>;
 				/**
 				 * Iterates over the query results, based on
 				 * https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/forEach.
