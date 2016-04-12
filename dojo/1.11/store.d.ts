@@ -1,23 +1,23 @@
 declare namespace dojo {
-	namespace store {
-		namespace api {
+    namespace store {
+        namespace api {
 
-			/* dojo/store/api/Store */
+            /* dojo/store/api/Store */
 
-			interface SortInformation {
+            interface SortInformation {
 
 				/**
 				 * The name of the attribute to sort on.
 				 */
-				attribute: string;
+                attribute: string;
 
 				/**
 				 * The direction of the sort.  Default is false.
 				 */
-				descending?: boolean;
-			}
+                descending?: boolean;
+            }
 
-			interface QueryOptions {
+            interface QueryOptions {
 				/**
 				 * A list of attributes to sort on, as well as direction
 				 * For example:
@@ -25,36 +25,36 @@ declare namespace dojo {
 				 * If the sort parameter is omitted, then the natural order of the store may be
 				 * applied if there is a natural order.
 				 */
-				sort?: SortInformation[];
+                sort?: SortInformation[];
 
 				/**
 				 * The first result to begin iteration on
 				 */
-				start?: number;
+                start?: number;
 
 				/**
 				 * The number of how many results should be returned.
 				 */
-				count?: number;
-			}
+                count?: number;
+            }
 
-			interface QueryEngineFunction<T extends Object> {
-				(array: T[]): T[];
-				matches(object: T): boolean;
-			}
+            interface QueryEngineFunction<T extends Object> {
+                (array: T[]): T[];
+                matches(object: T): boolean;
+            }
 
-			type BaseQueryType = string | Object | Function;
+            type BaseQueryType = string | Object | Function;
 
-			interface QueryEngine<T extends Object, Q extends BaseQueryType> {
-				<O extends QueryOptions>(query: Q, options?: O): QueryEngineFunction<T>;
-			}
+            interface QueryEngine<T extends Object, Q extends BaseQueryType> {
+                <O extends QueryOptions>(query: Q, options?: O): QueryEngineFunction<T>;
+            }
 
-			interface PutDirectives<T extends Object> {
+            interface PutDirectives<T extends Object> {
 
 				/**
 				 * Indicates the identity of the object if a new object is created
 				 */
-				id?: string | number;
+                id?: string | number;
 
 				/**
 				 * If the collection of objects in the store has a natural ordering,
@@ -62,13 +62,13 @@ declare namespace dojo {
 				 * object specified by the value of this property. A value of null indicates that the
 				 * object should be last.
 				 */
-				before?: T;
+                before?: T;
 
 				/**
 				 * If the store is hierarchical (with single parenting) this property indicates the
 				 * new parent of the created or updated object.
 				 */
-				parent?: T;
+                parent?: T;
 
 				/**
 				 * If this is provided as a boolean it indicates that the object should or should not
@@ -78,10 +78,10 @@ declare namespace dojo {
 				 * object should be created (which is the same as an add() operation). When
 				 * this property is not provided, either an update or creation is acceptable.
 				 */
-				overwrite?: boolean;
-			}
+                overwrite?: boolean;
+            }
 
-			interface QueryResults<T extends Object> extends ArrayLike<T> {
+            interface QueryResults<T extends Object> extends ArrayLike<T> {
                 sort(sort: Function): QueryResults<T>;
 				/**
 				 * Iterates over the query results, based on
@@ -89,7 +89,7 @@ declare namespace dojo {
 				 * Note that this may executed asynchronously. The callback may be called
 				 * after this function returns.
 				 */
-				forEach(callback: (item: T, id: string | number, results: this) => void, thisObject?: Object): void | this;
+                forEach(callback: (item: T, id: string | number, results: this) => void, thisObject?: Object): void | this;
 
 				/**
 				 * Filters the query results, based on
@@ -97,7 +97,7 @@ declare namespace dojo {
 				 * Note that this may executed asynchronously. The callback may be called
 				 * after this function returns.
 				 */
-				filter(callback: (item: T, id: string | number, results: this) => boolean, thisObject?: Object): this;
+                filter(callback: (item: T, id: string | number, results: this) => boolean, thisObject?: Object): this;
 
 				/**
 				 * Maps the query results, based on
@@ -105,44 +105,44 @@ declare namespace dojo {
 				 * Note that this may executed asynchronously. The callback may be called
 				 * after this function returns.
 				 */
-				map<U>(callback: (item: T, id: string | number, results: this) => U, thisObject?: Object): QueryResults<U>;
+                map<U>(callback: (item: T, id: string | number, results: this) => U, thisObject?: Object): QueryResults<U>;
 
 				/**
 				 * This registers a callback for when the query is complete, if the query is asynchronous.
 				 * This is an optional method, and may not be present for synchronous queries.
 				 */
-				then?: <U>(callback?: promise.PromiseCallback<this, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback) => promise.Promise<U>;
+                then?: <U>(callback?: promise.PromiseCallback<this, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback) => promise.Promise<U>;
 
 				/**
 				 * This registers a callback for notification of when data is modified in the query results.
 				 * This is an optional method, and is usually provided by dojo/store/Observable.
 				 */
-				total: number | promise.Promise<number>;
-			}
+                total: number | promise.Promise<number>;
+            }
 
-			interface Transaction {
+            interface Transaction {
 				/**
 				 * Commits the transaction. This may throw an error if it fails. Of if the operation
 				 * is asynchronous, it may return a promise that represents the eventual success
 				 * or failure of the commit.
 				 */
-				commit(): void;
+                commit(): void;
 
 				/**
 				 * Aborts the transaction. This may throw an error if it fails. Of if the operation
 				 * is asynchronous, it may return a promise that represents the eventual success
 				 * or failure of the abort.
 				 */
-				abort(): void;
-			}
+                abort(): void;
+            }
 
-			interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions>{
+            interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions> {
 
 				/**
 				 * If the store has a single primary key, this indicates the property to use as the
 				 * identity property. The values of this property should be unique.
 				 */
-				idProperty: string;
+                idProperty: string;
 
 				/**
 				 * If the store can be queried locally (on the client side in JS), this defines
@@ -157,38 +157,38 @@ declare namespace dojo {
 				 * | query.matches({id:"some-object", foo:"bar"}) -> true
 				 * | query.matches({id:"some-object", foo:"something else"}) -> false
 				 */
-				queryEngine: QueryEngine<any, any>;
+                queryEngine: QueryEngine<any, any>;
 
 				/**
 				 * Retrieves an object by its identity
 				 */
-				get(id: string | number): T;
+                get(id: string | number): T;
 
 				/**
 				 * Returns an object's identity
 				 */
-				getIdentity(object: T): string | number;
+                getIdentity(object: T): string | number;
 
 				/**
 				 * Stores an object
 				 */
-				put<D extends PutDirectives<T>>(object: T, directives?: D): string | number;
+                put<D extends PutDirectives<T>>(object: T, directives?: D): string | number;
 
 				/**
 				 * Creates an object, throws an error if the object already exists
 				 */
-				add<D extends PutDirectives<T>>(object: T, directives?: D): string | number;
+                add<D extends PutDirectives<T>>(object: T, directives?: D): string | number;
 
 				/**
 				 * Deletes an object by its identity
 				 */
-				remove(id: string | number): void;
+                remove(id: string | number): void;
 
 				/**
 				 * Queries the store for objects. This does not alter the store, but returns a
 				 * set of data from the store.
 				 */
-				query(query: Q, options?: O): QueryResults<T>;
+                query(query: Q, options?: O): QueryResults<T>;
 
 				/**
 				 * Starts a new transaction.
@@ -196,73 +196,87 @@ declare namespace dojo {
 				 * delete, etc. in which case these operations effectively could be thought of
 				 * as "auto-commit" style actions.
 				 */
-				transaction(): Transaction;
+                transaction(): Transaction;
 
 				/**
 				 * Retrieves the children of an object.
 				 */
-				getChildren(parent: T, options?: O): QueryResults<T>;
+                getChildren(parent: T, options?: O): QueryResults<T>;
 
 				/**
 				 * Returns any metadata about the object. This may include attribution,
 				 * cache directives, history, or version information.
 				 */
-				getMetadata(object: T): Object;
-			}
+                getMetadata(object: T): Object;
+            }
 
-			interface StoreConstructor {
-				new <T extends Object, Q extends BaseQueryType, O extends QueryOptions>(): Store<T, Q, O>;
-			}
-		}
+            interface StoreConstructor {
+                new <T extends Object, Q extends BaseQueryType, O extends QueryOptions>(): Store<T, Q, O>;
+            }
+        }
 
-		namespace util {
+        namespace util {
 
-			/* dojo/store/util/QueryResults */
+            /* dojo/store/util/QueryResults */
 
-			interface QueryResultsFunction {
+            interface QueryResultsFunction {
 				/**
 				 * A function that wraps the results of a store query with additional
 				 * methods.
 				 */
-				<T extends Object>(results: T[]): api.QueryResults<T>;
-			}
+                <T extends Object>(results: T[]): api.QueryResults<T>;
+            }
 
-			/* dojo/store/util/SimpleQueryEngine */
-			interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> {}
-		}
+            /* dojo/store/util/SimpleQueryEngine */
+            interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> { }
+        }
 
-		/* dojo/store/Memory */
+        /* dojo/store/Memory */
 
-		interface MemoryOptions<T extends Object> {
-			data?: T[];
-			idProperty?: string;
-			queryEngine?: api.QueryEngine<any, any>;
-			setData?: (data: T[]) => void;
-		}
+        interface MemoryOptions<T extends Object> {
+            data?: T[];
+            idProperty?: string;
+            queryEngine?: api.QueryEngine<any, any>;
+            setData?: (data: T[]) => void;
+        }
 
-		interface Memory<T extends Object> extends api.Store<T, api.BaseQueryType, api.QueryOptions> {
+        interface Memory<T extends Object> extends api.Store<T, api.BaseQueryType, api.QueryOptions> {
 			/**
 			 * The array of all the objects in the memory store
 			 */
-			data: T[];
+            data: T[];
 
 			/**
 			 * An index of data indices into the data array by id
 			 */
-			index: { [id: string]: number };
+            index: { [id: string]: number };
 
 			/**
 			 * Sets the given data as the source for this store, and indexes it
 			 */
-			setData(data: T[]): void;
-		}
+            setData(data: T[]): void;
+        }
 
-		interface MemoryConstructor {
+        interface MemoryConstructor {
 			/**
 			 * This is a basic in-memory object store. It implements dojo/store/api/Store.
 			 */
-			new <T extends Object>(options?: MemoryOptions<T>): Memory<T>;
-		}
+            new <T extends Object>(options?: MemoryOptions<T>): T & Memory<T>;
+        }
 
-	}
+        interface Observable<T> extends dojo.Stateful {
+            observe(cb: Function): any;
+            query(filter?: any): (T & Observable<T>)[] & { observe: Function };
+            // set(pair: any);
+            // set(name: string, value: any): T;
+            // get(name: string): any;
+        }
+
+        interface ObservableConstructor {
+            new <T>(options?: T): T & Observable<T>;
+        }
+
+
+
+    }
 }
