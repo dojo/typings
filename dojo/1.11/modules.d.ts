@@ -733,12 +733,12 @@ declare module 'dojo/window' {
 }
 
 declare module 'dojo/Stateful' {
-    const stateful: dojo.StatefulConstructor;
-    export = stateful;
+	const stateful: dojo.StatefulConstructor;
+	export = stateful;
 }
 
-declare module "dojo/store/Observable" {
-    const observable: dojo.store.ObservableConstructor;
-    export = observable;
+declare module 'dojo/store/Observable' {
+	const observable: dojo.store.ObservableConstructor;
+	export = observable;
 }
 

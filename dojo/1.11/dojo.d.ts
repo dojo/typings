@@ -1,5 +1,5 @@
 /// <reference path="index.d.ts" />
-/// <reference path="../../doh/1.11/doh" />
+/// <reference path="../../doh/1.11/doh.d.ts" />
 
 declare namespace dojo {
 	/* general implied types */
@@ -1874,9 +1874,9 @@ declare namespace dojo {
 		unwatch(): void;
 	}
 
-    interface StatefulConstructor {
-        new<T>(options?: T): T & Stateful;
-    }
+	interface StatefulConstructor {
+		new<T>(options?: T): T & Stateful;
+	}
 
 	interface Stateful {
 		/**
