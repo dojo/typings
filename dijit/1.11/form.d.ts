@@ -1,8 +1,8 @@
 declare namespace dijit {
 
-    interface ToolbarSeparator {
-        (): any;
-    }
+	interface ToolbarSeparator {
+		(): any;
+	}
 
 	namespace form {
 

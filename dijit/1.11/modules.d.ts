@@ -206,13 +206,13 @@ declare module 'dijit/layout/TabController' {
 }
 
 declare module 'dijit/TitlePane' {
-    const TitlePane: dijit.TitlePaneConstructor;
-    export = TitlePane;
+	const TitlePane: dijit.TitlePaneConstructor;
+	export = TitlePane;
 }
 
 declare module 'dijit/ToolbarSeparator' {
-    const x: dijit.ToolbarSeparator;
-    export = x;
+	const x: dijit.ToolbarSeparator;
+	export = x;
 }
 
 declare module 'dijit/form/Select' {

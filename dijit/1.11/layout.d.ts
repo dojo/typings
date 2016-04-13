@@ -1,10 +1,10 @@
 declare namespace dijit {
 
-    interface TitlePane extends layout.ContentPane {
-        titleNode: any;
-    }
-    
-    interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> { }
+	interface TitlePane extends layout.ContentPane {
+		titleNode: any;
+	}
+
+	interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> { }
 
 	namespace layout {
 
@@ -668,7 +668,7 @@ declare namespace dijit {
 		}
 
 		interface TabControllerConstructor extends _WidgetBaseConstructor<TabController> { }
-        
+
 	}
 }
 
