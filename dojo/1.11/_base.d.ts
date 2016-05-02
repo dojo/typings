@@ -1278,6 +1278,17 @@ declare namespace dojo {
 			_mixin<T, U>(dest: T, source: U, copyFunc?: (s: any) => any): T & U;
 
 			/**
+			 * Copies/adds all properties of one or more sources to dest; returns dest.
+			 */
+			mixin<T, U>(dest: T, sources: U): T & U;
+			mixin<T, U, V>(dest: T, source1: U, source2: V): T & U & V;
+			mixin<T, U, V, W>(dest: T, source1: U, source2: V, source3: W): T & U & V & W;
+			mixin<T, U, V, W, X>(dest: T, source1: U, source2: V, source3: W, source4: X): T & U & V & W & X;
+			mixin<T, U, V, W, X, Y>(dest: T, source1: U, source2: V, source3: W, source4: X, source5: Y): T & U & V & W & X & Y;
+			mixin<T, U, V, W, X, Y, Z>(dest: T, source1: U, source2: V, source3: W, source4: X, source5: Y, source6: Z): T & U & V & W & X & Y & Z;
+			mixin<T, U>(dest: T, ...sources: U[]): T & U;
+
+			/**
 			 * Set a property from a dot-separated string, such as "A.B.C"
 			 */
 			setObject(name: string, value: any, context?: any): any;
