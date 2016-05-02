@@ -584,12 +584,12 @@ declare namespace dojo {
 			/**
 			 * Resolve the deferred.
 			 */
-			resolve(value: T): void;
+			resolve(value?: T): void;
 
 			/**
 			 * Reject the deferred.
 			 */
-			reject(error: any): void;
+			reject(error?: any): void;
 
 			/**
 			 * The results of the Defereed

@@ -341,12 +341,12 @@ declare namespace dojo {
 		/**
 		 * Resolve the deferred.
 		 */
-		resolve(value: T, strict?: boolean): promise.Promise<T>;
+		resolve(value?: T, strict?: boolean): promise.Promise<T>;
 
 		/**
 		 * Reject the deferred.
 		 */
-		reject(error: any, strict?: boolean): promise.Promise<T>;
+		reject(error?: any, strict?: boolean): promise.Promise<T>;
 
 		/**
 		 * Add new callbacks to the deferred.
