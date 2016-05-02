@@ -1,5 +1,5 @@
 /// <reference path="index.d.ts" />
-/// <reference path="../../doh/1.11/doh" />
+/// <reference path="../../doh/1.11/doh.d.ts" />
 
 declare namespace dojo {
 	/* general implied types */
