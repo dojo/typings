@@ -692,9 +692,29 @@ declare module 'dojo/store/util/SimpleQueryEngine' {
 	export = SimpleQueryEngine;
 }
 
+declare module 'dojo/store/Cache' {
+	const Cache: dojo.store.Cache;
+	export = Cache;
+}
+
+declare module 'dojo/store/DataStore' {
+	const DataStore: dojo.store.DataStoreConstructor;
+	export = DataStore;
+}
+
+declare module 'dojo/store/JsonRest' {
+	const JsonRest: dojo.store.JsonRestConstrcutor;
+	export = JsonRest;
+}
+
 declare module 'dojo/store/Memory' {
 	const Memory: dojo.store.MemoryConstructor;
 	export = Memory;
+}
+
+declare module 'dojo/store/Observable' {
+	const Observerable: dojo.store.Observable;
+	export = Observerable;
 }
 
 declare module 'dojo/string' {

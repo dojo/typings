@@ -231,12 +231,189 @@ declare namespace dojo {
 			interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> {}
 		}
 
+		/* dojo/store/Cache */
+
+		interface CacheOptions {
+			/**
+			 * This is a function that will be called for each item in a query response to determine
+			 * if it is cacheable. If isLoaded returns true, the item will be cached, otherwise it
+			 * will not be cached. If isLoaded is not provided, all items will be cached.
+			 */
+			isLoaded?: Function;
+		}
+
+		interface CacheMixin {
+			/**
+			 * Remove the object with the specific id.
+			 */
+			remove(id: string | number): promise.Promise<void>;
+
+			/**
+			 * Remove the object with the given id from the underlying caching store.
+			 */
+			evict(id: string | number): promise.Promise<void>;
+		}
+
+		interface Cache {
+			/**
+			 * The Cache store wrapper takes a master store and a caching store,
+			 * caches data from the master into the caching store for faster
+			 * lookup. Normally one would use a memory store for the caching
+			 * store and a server store like JsonRest for the master store.
+			 */
+			<T, Q extends api.BaseQueryType, O extends api.QueryOptions, S extends api.Store<T, Q, O>>(masterStore: S, cacheStore: api.Store<T, Q, O>, options?: CacheOptions): CacheMixin & S;
+		}
+
+		/* dojo/store/DataStore */
+
+		interface DataStoreOptions<T> {
+			idProperty?: string;
+			queryEngine?: api.QueryEngine<T, api.QueryOptions>;
+			store?: data.api.Read<T> | data.api.Write<T> | data.api.Identity<T>;
+		}
+
+		interface DataStore<T extends Object> extends api.Store<T, api.BaseQueryType, api.QueryOptions> {
+			/**
+			 * The object store to convert to a data store
+			 */
+			store: data.api.Read<T> | data.api.Write<T> | data.api.Identity<T>;
+
+			/**
+			 * Defines the query engine to use for querying the data store
+			 */
+			queryEngine: api.QueryEngine<T, api.BaseQueryType>;
+
+			_objectConverter(callback: (item: T) => any): (item: T) => any;
+		}
+
+		interface DataStoreConstructor extends _base.DeclareConstructor<DataStore<Object>> {
+			new <T>(options?: DataStoreOptions<T>): DataStore<T>;
+		}
+
+		/* dojo/store/JsonRest */
+
+		interface Headers {
+			[header: string]: string;
+		}
+
+		interface JsonRestPutDirectives<T> extends api.PutDirectives<T> {
+			headers?: Headers;
+		}
+
+		interface JsonRestQueryOptions extends api.QueryOptions {
+			headers?: Headers;
+		}
+
+		interface JsonRestOptions<T extends Object> {
+			idProperty?: string;
+			queryEngine?: api.QueryEngine<T, JsonRestQueryOptions>;
+			headers?: Headers;
+			target?: string;
+			rangeParam?: string;
+			sortParam?: string;
+			ascendingPrefix?: string;
+			descendingPrefix?: string;
+			accepts?: string;
+		}
+
+		interface JsonRest<T, Q extends api.BaseQueryType, O extends JsonRestQueryOptions> {
+			/**
+			 * Additional headers to pass in all requests to the server. These can be overridden
+			 * by passing additional headers to calls to the store.
+			 */
+			headers: Headers;
+
+			/**
+			 * The target base URL to use for all requests to the server. This string will be
+			 * prepended to the id to generate the URL (relative or absolute) for requests
+			 * sent to the server
+			 */
+			target: string;
+
+			/**
+			 * Indicates the property to use as the identity property. The values of this
+			 * property should be unique.
+			 */
+			idProperty: string;
+
+			/**
+			 * Use a query parameter for the requested range. If this is omitted, than the
+			 * Range header will be used. Independent of this, the X-Range header is always set.
+			 */
+			rangeParam?: string;
+
+			/**
+			 * The query parameter to used for holding sort information. If this is omitted, than
+			 * the sort information is included in a functional query token to avoid colliding
+			 * with the set of name/value pairs.
+			 */
+			sortParam?: string;
+
+			/**
+			 * The prefix to apply to sort attribute names that are ascending
+			 */
+			ascendingPrefix: string;
+
+			/**
+			 * The prefix to apply to sort attribute names that are descending
+			 */
+			descendingPrefix: string;
+
+			/**
+			 * If the target has no trailing '/', then append it.
+			 */
+			_getTarget(id: string | number): string;
+
+			/**
+			 * Retrieves an object by its identity. This will trigger a GET request to the server using
+			 * the url `this.target + id`.
+			 */
+			get(id: string | number, options?: { headers: Headers } | Headers): promise.Promise<T>;
+
+			/**
+			 * Defines the Accept header to use on HTTP requests
+			 */
+			accepts: string;
+
+			/**
+			 * Returns an object's identity
+			 */
+			getIdentity(object: T): string | number;
+
+			/**
+			 * Stores an object. This will trigger a PUT request to the server
+			 * if the object has an id, otherwise it will trigger a POST request.
+			 */
+			put(object: T, options?: JsonRestPutDirectives<T>): promise.Promise<T>;
+
+			/**
+			 * Adds an object. This will trigger a PUT request to the server
+			 * if the object has an id, otherwise it will trigger a POST request.
+			 */
+			add(object: T, options?: JsonRestPutDirectives<T>): promise.Promise<T>;
+
+			/**
+			 * Deletes an object by its identity. This will trigger a DELETE request to the server.
+			 */
+			remove(id: string | number, options?: { headers: Headers }): promise.Promise<void>;
+
+			/**
+			 * Queries the store for objects. This will trigger a GET request to the server, with the
+			 * query added as a query string.
+			 */
+			query(query: Q, options?: O): api.QueryResults<T>;
+		}
+
+		interface JsonRestConstrcutor extends _base.DeclareConstructor<JsonRest<Object, api.BaseQueryType, JsonRestQueryOptions>> {
+			new <T extends Object, Q extends api.BaseQueryType, O extends JsonRestQueryOptions>(options?: JsonRestOptions<T>): JsonRest<T, Q, O>;
+		}
+
 		/* dojo/store/Memory */
 
 		interface MemoryOptions<T extends Object> {
 			data?: T[];
 			idProperty?: string;
-			queryEngine?: api.QueryEngine<any, any>;
+			queryEngine?: api.QueryEngine<T, api.QueryOptions>;
 			setData?: (data: T[]) => void;
 		}
 
@@ -257,11 +434,37 @@ declare namespace dojo {
 			setData(data: T[]): void;
 		}
 
-		interface MemoryConstructor {
+		interface MemoryConstructor extends _base.DeclareConstructor<Memory<Object>> {
 			/**
 			 * This is a basic in-memory object store. It implements dojo/store/api/Store.
 			 */
 			new <T extends Object>(options?: MemoryOptions<T>): Memory<T>;
+		}
+
+		/* dojo/store/Observable */
+
+		interface ObservableQueryResults<T> extends api.QueryResults<T> {
+			/**
+			 * Allows observation of results
+			 */
+			observe(listener: (object: T, previousIndex: number, newIndex: number) => void, includeUpdates?: boolean): {
+				remove(): void;
+				cancel(): void;
+			};
+		}
+
+		interface ObservableMixin<T, Q extends api.BaseQueryType, O extends api.QueryOptions> {
+			notify(object: T, existingId: string | number): void;
+
+			/**
+			 * Queries the store for objects. This does not alter the store, but returns a
+			 * set of data from the store.
+			 */
+			query(query: Q, options?: O): ObservableQueryResults<T>;
+		}
+
+		interface Observable {
+			<T, Q extends api.BaseQueryType, O extends api.QueryOptions, S extends api.Store<T, Q, O>>(store: S): ObservableMixin<T, Q, O> & S;
 		}
 
 	}
