@@ -787,9 +787,8 @@ declare namespace dojo {
 		emit(type: string | ExtensionEvent, event: any): boolean;
 	}
 
-	interface EventedConstructor {
-		new (): Evented;
-		prototype: Evented;
+	interface EventedConstructor extends _base.DeclareConstructor<Evented> {
+		new (params?: Object): Evented;
 	}
 
 	/* dojo/fx */
@@ -975,9 +974,8 @@ declare namespace dojo {
 		_onError(type: string, err: Error, consoleText?: string): void;
 	}
 
-	interface ContentSetterConstructor {
+	interface ContentSetterConstructor extends _base.DeclareConstructor<ContentSetter> {
 		new (params?: ContentSetterParams, node?: NodeOrString): ContentSetter;
-		prototype: ContentSetter;
 	}
 
 	interface Html {
@@ -1913,6 +1911,10 @@ declare namespace dojo {
 		 */
 		watch(callback: (prop: string, oldValue: any, newValue: any) => void): WatchHandle;
 		watch(name: string, callback: (prop: string, oldValue: any, newValue: any) => void): WatchHandle;
+	}
+
+	interface StatefulConstructor extends _base.DeclareConstructor<Stateful> {
+		new (params?: Object): Stateful;
 	}
 
 	/* dojo/string */

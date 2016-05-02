@@ -672,6 +672,11 @@ declare module 'dojo/sniff' {
 	export = sniff;
 }
 
+declare module 'dojo/Stateful' {
+	const Stateful: dojo.StatefulConstructor;
+	export = Stateful;
+}
+
 declare module 'dojo/store/api/Store' {
 	const Store: dojo.store.api.StoreConstructor;
 	export = Store;
