@@ -231,6 +231,7 @@ declare module 'dojo/debounce' {
 }
 
 declare module 'dojo/Deferred' {
+	type Deferred<T> = dojo.Deferred<T>;
 	const Deferred: dojo.DeferredConstructor;
 	export = Deferred;
 }
