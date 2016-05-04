@@ -1,4 +1,4 @@
-/// <reference path="dojo" />
+/// <reference path="dojo.d.ts" />
 
 declare namespace dojo {
 	namespace on {

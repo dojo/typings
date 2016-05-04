@@ -187,6 +187,7 @@ declare namespace dojo {
 }
 
 declare module 'dojox/color/api/ColorModel' {
+	type ColorModel = dojox.color.api.ColorModel;
 	const ColorModel: dojox.color.api.ColorModelConstructor;
 	export = ColorModel;
 }

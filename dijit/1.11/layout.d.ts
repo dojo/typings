@@ -58,6 +58,8 @@ declare namespace dijit {
 			layout(): void;
 		}
 
+		interface _LayoutWidgetConstructor extends _WidgetBaseConstructor<_LayoutWidget> { }
+
 		/* dijit/layout/_TabContainerBase */
 
 		interface _TabContainerBase extends StackContainer, _TemplatedMixin {

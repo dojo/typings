@@ -699,8 +699,8 @@ declare namespace dijit {
 		defer(fcn: Function, delay?: number): dojo.Handle;
 	}
 
-	interface _WidgetBaseConstructor<T> extends dojo._base.DeclareConstructor<T> {
-		new (params: Object, srcNodeRef: dojo.NodeOrString): T;
+	interface _WidgetBaseConstructor<W> extends dojo._base.DeclareConstructor<W> {
+		new (params: Object, srcNodeRef: dojo.NodeOrString): W;
 	}
 
 	/* dijit/_WidgetsInTemplateMixin */
@@ -713,6 +713,10 @@ declare namespace dijit {
 		contextRequire: Function;
 
 		startup(): void;
+	}
+
+	interface _WidgetsInTemplateMixinConstructor extends dojo._base.DeclareConstructor<_WidgetsInTemplateMixin> {
+		new (params: Object, srcNodeRef: dojo.NodeOrString): _WidgetsInTemplateMixin;
 	}
 
 	/* dijit/a11yclick */
