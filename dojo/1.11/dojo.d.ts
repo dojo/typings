@@ -784,7 +784,7 @@ declare namespace dojo {
 
 	interface Evented {
 		on(type: string | ExtensionEvent, listener: EventListener): Handle;
-		emit(type: string | ExtensionEvent, event: any): boolean;
+		emit(type: string | ExtensionEvent, event?: any): boolean;
 	}
 
 	interface EventedConstructor extends _base.DeclareConstructor<Evented> {
@@ -1496,7 +1496,7 @@ declare namespace dojo {
 		/**
 		 * Fires an event on the target object.
 		 */
-		emit(target: Element | GenericObject, type: string | ExtensionEvent, event: any): boolean;
+		emit(target: Element | GenericObject, type: string | ExtensionEvent, event?: any): boolean;
 
 		/**
 		 * normalizes properties on the event object including event
