@@ -1,5 +1,5 @@
-/// <reference path="dojo" />
-/// <reference path="NodeList-dom" />
+/// <reference path="dojo.d.ts" />
+/// <reference path="NodeList-dom.d.ts" />
 
 declare namespace dojo {
 	interface NodeList<T extends Node> {
@@ -129,6 +129,7 @@ declare namespace dojo {
 }
 
 declare module 'dojo/NodeList-manipulate' {
+	type NodeList<T extends Node> = dojo.NodeList<T>;
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
 }

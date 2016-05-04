@@ -6,6 +6,7 @@ declare module 'dojo/_base/array' {
 }
 
 declare module 'dojo/_base/Color' {
+	type Color = dojo._base.Color;
 	const Color: dojo._base.ColorConstructor;
 	export = Color;
 }
@@ -26,6 +27,7 @@ declare module 'dojo/_base/declare' {
 }
 
 declare module 'dojo/_base/Deferred' {
+	type Deferred<T> = dojo._base.Deferred<T>;
 	const Deferred: dojo._base.DeferredConstructor;
 	export = Deferred;
 }
@@ -66,6 +68,7 @@ declare module 'dojo/_base/loader' {
 }
 
 declare module 'dojo/_base/NodeList' {
+	type NodeList<T extends Node> = dojo.NodeList<T>;
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
 }
@@ -101,6 +104,7 @@ declare module 'dojo/_base/xhr' {
 }
 
 declare module 'dojo/AdapterRegistry' {
+	type AdapterRegistry = dojo.AdapterRegistry;
 	const AdapterRegistry: dojo.AdapterRegistryConstructor;
 	export = AdapterRegistry;
 }
@@ -136,6 +140,7 @@ declare module 'dojo/cldr/supplemental' {
 }
 
 declare module 'dojo/colors' {
+	type Color = dojo._base.Color;
 	const Color: dojo._base.ColorConstructor;
 	export = Color;
 }
@@ -151,31 +156,37 @@ declare module 'dojo/currency' {
 }
 
 declare module 'dojo/data/api/Identity' {
+	type Identity<T> = dojo.data.api.Identity<T>;
 	const Identity: dojo.data.api.IdentityConstructor;
 	export = Identity;
 }
 
 declare module 'dojo/data/api/Item' {
+	type Item = dojo.data.api.Item;
 	const Item: dojo.data.api.ItemConstructor;
 	export = Item;
 }
 
 declare module 'dojo/data/api/Notification' {
+	type Notification<T> = dojo.data.api.Notification<T>;
 	const Notification: dojo.data.api.NotificationConstructor;
 	export = Notification;
 }
 
 declare module 'dojo/data/api/Read' {
+	type Read<T> = dojo.data.api.Read<T>;
 	const Read: dojo.data.api.ReadConstructor;
 	export = Read;
 }
 
 declare module 'dojo/data/api/Request' {
+	type Request = dojo.data.api.Request;
 	const Request: dojo.data.api.RequestConstructor;
 	export = Request;
 }
 
 declare module 'dojo/data/api/Write' {
+	type Write<T> = dojo.data.api.Write<T>;
 	const Write: dojo.data.api.WriteConstructor;
 	export = Write;
 }
@@ -196,16 +207,19 @@ declare module 'dojo/data/util/sorter' {
 }
 
 declare module 'dojo/data/ItemFileReadStore' {
+	type ItemFileReadStore<T> = dojo.data.ItemFileReadStore<T>;
 	const ItemFileReadStore: dojo.data.ItemFileReadStoreConstructor;
 	export = ItemFileReadStore;
 }
 
 declare module 'dojo/data/ItemFileWriteStore' {
+	type ItemFileWriteStore<T> = dojo.data.ItemFileWriteStore<T>;
 	const ItemFileWriteStore: dojo.data.ItemFileWriteStoreConstructor;
 	export = ItemFileWriteStore;
 }
 
 declare module 'dojo/data/ObjectStore' {
+	type ObjectStore<T> = dojo.data.ObjectStore<T>;
 	const ObjectStore: dojo.data.ObjectStoreConstructor;
 	export = ObjectStore;
 }
@@ -237,6 +251,7 @@ declare module 'dojo/Deferred' {
 }
 
 declare module 'dojo/DeferredList' {
+	type DeferredList<T> = dojo.DeferredList<T>;
 	const DeferredList: dojo.DeferredListConstructor;
 	export = DeferredList;
 }
@@ -252,6 +267,7 @@ declare module 'dojo/dnd/AutoSource' {
 }
 
 declare module 'dojo/dnd/Avatar' {
+	type Avatar = dojo.dnd.Avatar;
 	const Avatar: dojo.dnd.AvatarConstructor;
 	export = Avatar;
 }
@@ -262,41 +278,49 @@ declare module 'dojo/dnd/common' {
 }
 
 declare module 'dojo/dnd/Container' {
+	type Container = dojo.dnd.Container;
 	const Container: dojo.dnd.ContainerConstructor;
 	export = Container;
 }
 
 declare module 'dojo/dnd/Manager' {
+	type Manager = dojo.dnd.Manager;
 	const Manager: dojo.dnd.ManagerConstructor;
 	export = Manager;
 }
 
 declare module 'dojo/dnd/Moveable' {
+	type Moveable = dojo.dnd.Moveable;
 	const Moveable: dojo.dnd.Moveable;
 	export = Moveable;
 }
 
 declare module 'dojo/dnd/Mover' {
+	type Mover = dojo.dnd.Mover;
 	const Mover: dojo.dnd.MoverConstructor;
 	export = Mover;
 }
 
 declare module 'dojo/dnd/Selector' {
+	type Selector = dojo.dnd.Selector;
 	const Selector: dojo.dnd.SelectorConstructor;
 	export = Selector;
 }
 
 declare module 'dojo/dnd/Source' {
-	const Source: dojo.dnd.Source;
+	type Source = dojo.dnd.Source;
+	const Source: dojo.dnd.SourceConstructor;
 	export = Source;
 }
 
 declare module 'dojo/dnd/Target' {
+	type Target = dojo.dnd.Target;
 	const Target: dojo.dnd.TargetConstructor;
 	export = Target;
 }
 
 declare module 'dojo/dnd/TimedMoveable' {
+	type TimedMoveable = dojo.dnd.TimedMoveable;
 	const TimedMoveable: dojo.dnd.TimedMoveableConstructor;
 	export = TimedMoveable;
 }
@@ -362,6 +386,7 @@ declare module 'dojo/domReady!' {
 }
 
 declare module 'dojo/errors/CancelError' {
+	type CancelError = dojo.errors.CancelError;
 	const CancelError: dojo.errors.CancelErrorConstructor;
 	export = CancelError;
 }
@@ -372,16 +397,19 @@ declare module 'dojo/errors/create' {
 }
 
 declare module 'dojo/errors/RequestError' {
+	type RequestError = dojo.errors.RequestError;
 	const RequestError: dojo.errors.RequestErrorConstructor;
 	export = RequestError;
 }
 
 declare module 'dojo/errors/RequestTimeoutError' {
+	type RequestTimeoutError = dojo.errors.RequestError;
 	const RequestTimeoutError: dojo.errors.RequestTimeoutErrorConstructor;
 	export = RequestTimeoutError;
 }
 
 declare module 'dojo/Evented' {
+	type Evented = dojo.Evented;
 	const Evented: dojo.EventedConstructor;
 	export = Evented;
 }
@@ -462,6 +490,7 @@ declare module 'dojo/mouse' {
 }
 
 declare module 'dojo/NodeList' {
+	type NodeList<T extends Node> = dojo.NodeList<T>;
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
 }
@@ -512,6 +541,7 @@ declare module 'dojo/promise/instrumentation' {
 }
 
 declare module 'dojo/promise/Promise' {
+	type Promise<T> = dojo.promise.Promise<T>;
 	const Promise: dojo.promise.PromiseConstructor;
 	export = Promise;
 }
@@ -619,21 +649,25 @@ declare module 'dojo/router' {
 }
 
 declare module 'dojo/router/RouterBase' {
+	type RouterBase = dojo.router.RouterBase;
 	const RouterBase: dojo.router.RouterBaseConstructor;
 	export = RouterBase;
 }
 
 declare module 'dojo/rpc/JsonpService' {
+	type JsonpService<T> = dojo.rpc.JsonpService<T>;
 	const JsonpService: dojo.rpc.JsonpServiceConstructor;
 	export = JsonpService;
 }
 
 declare module 'dojo/rpc/JsonService' {
+	type JsonService<T> = dojo.rpc.JsonService<T>;
 	const JsonService: dojo.rpc.JsonServiceConstructor;
 	export = JsonService;
 }
 
 declare module 'dojo/rpc/RpcService' {
+	type RpcService<T> = dojo.rpc.RpcService<T>;
 	const RpcService: dojo.rpc.RpcServiceConstructor;
 	export = RpcService;
 }
@@ -674,11 +708,13 @@ declare module 'dojo/sniff' {
 }
 
 declare module 'dojo/Stateful' {
+	type Stateful = dojo.Stateful;
 	const Stateful: dojo.StatefulConstructor;
 	export = Stateful;
 }
 
 declare module 'dojo/store/api/Store' {
+	type Store<T extends Object, Q extends string | Object | Function, O extends dojo.store.api.QueryOptions>  = dojo.store.api.Store<T, Q, O>;
 	const Store: dojo.store.api.StoreConstructor;
 	export = Store;
 }
@@ -699,16 +735,19 @@ declare module 'dojo/store/Cache' {
 }
 
 declare module 'dojo/store/DataStore' {
+	type DataStore<T extends Object> = dojo.store.DataStore<T>;
 	const DataStore: dojo.store.DataStoreConstructor;
 	export = DataStore;
 }
 
 declare module 'dojo/store/JsonRest' {
+	type JsonRest<T, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.JsonRestQueryOptions> = dojo.store.JsonRest<T, Q, O>;
 	const JsonRest: dojo.store.JsonRestConstrcutor;
 	export = JsonRest;
 }
 
 declare module 'dojo/store/Memory' {
+	type Memory<T extends Object> = dojo.store.Memory<T>;
 	const Memory: dojo.store.MemoryConstructor;
 	export = Memory;
 }

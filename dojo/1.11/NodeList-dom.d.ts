@@ -1,4 +1,4 @@
-/// <reference path="dojo" />
+/// <reference path="dojo.d.ts" />
 
 declare namespace dojo {
 	interface NormalizeObject {
@@ -141,6 +141,7 @@ declare namespace dojo {
 }
 
 declare module 'dojo/NodeList-dom' {
+	type NodeList<T extends Node> = dojo.NodeList<T>;
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
 }

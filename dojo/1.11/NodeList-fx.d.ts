@@ -1,6 +1,6 @@
-/// <reference path="dojo" />
-/// <reference path="_base" />
-/// <reference path="fx" />
+/// <reference path="dojo.d.ts" />
+/// <reference path="_base.d.ts" />
+/// <reference path="fx.d.ts" />
 
 declare namespace dojo {
 
@@ -52,6 +52,7 @@ declare namespace dojo {
 }
 
 declare module 'dojo/NodeList-fx' {
+	type NodeList<T extends Node> = dojo.NodeList<T>;
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
 }

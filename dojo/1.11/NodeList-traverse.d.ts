@@ -1,4 +1,4 @@
-/// <reference path="dojo" />
+/// <reference path="dojo.d.ts" />
 
 declare namespace dojo {
 	interface NodeList<T extends Node> {
@@ -112,6 +112,7 @@ declare namespace dojo {
 }
 
 declare module 'dojo/NodeList-traverse' {
+	type NodeList<T extends Node> = dojo.NodeList<T>;
 	const NodeList: dojo.NodeListConstructor;
 	export = NodeList;
 }
