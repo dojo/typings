@@ -45,8 +45,15 @@ declare namespace dojo {
 
 		/* dojo/promise/Promise */
 
+		interface Thenable<T> {
+			/**
+			 * Add new callbacks to the promise.
+			 */
+			then<U>(callback?: PromiseCallback<T, U>, errback?: PromiseErrback, progback?: PromiseProgback): Promise<U>;
+		}
+
 		interface PromiseCallback<T, U> {
-			(result: T): U;
+			(result: T): U | Thenable<U>;
 		}
 
 		interface PromiseErrback {
@@ -57,12 +64,7 @@ declare namespace dojo {
 			(progress: any): void;
 		}
 
-		interface Promise<T> {
-			/**
-			 * Add new callbacks to the promise.
-			 */
-			then<U>(callback?: PromiseCallback<T, U>, errback?: PromiseErrback, progback?: PromiseProgback): Promise<U>;
-
+		interface Promise<T> extends Thenable<T> {
 			/**
 			 * Inform the deferred it may cancel its asynchronous operation.
 			 */
