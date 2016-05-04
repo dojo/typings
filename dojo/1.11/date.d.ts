@@ -7,7 +7,7 @@ declare namespace dojo {
 		/* type DatePortion = 'date' | 'time' | 'datetime'; */
 		/* type DateInterval = 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second' | 'millisecond' | 'quarter' | 'week' | 'weekday'; */
 
-		interface Date {
+		interface DateBase {
 			/**
 			 * Returns the number of days in the month used by dateObject
 			 */
@@ -32,14 +32,14 @@ declare namespace dojo {
 			/**
 			 * Add to a Date in intervals of different size, from milliseconds to years
 			 */
-			add(date: Date, interval: string /* DateInternval */, amount: number): Date;
+			add(date: Date, interval: string /* DateInterval */, amount: number): Date;
 
 			/**
 			 * Get the difference in a specific unit of time (e.g., number of
 			 * months, weeks, days, etc.) between two dates, rounded to the
 			 * nearest integer.
 			 */
-			difference(date1: Date, date2?: Date, internval?: string /* DateInternval */): number;
+			difference(date1: Date, date2?: Date, interval?: string /* DateInterval */): number;
 		}
 
 		/* dojo/date/locale */

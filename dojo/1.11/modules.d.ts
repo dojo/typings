@@ -225,7 +225,7 @@ declare module 'dojo/data/ObjectStore' {
 }
 
 declare module 'dojo/date' {
-	const date: dojo.date.Date;
+	const date: dojo.date.DateBase;
 	export = date;
 }
 
