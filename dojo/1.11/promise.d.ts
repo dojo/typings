@@ -5,8 +5,6 @@ declare namespace dojo {
 
 		type PromiseObjectOrArray = { [name: string]: Promise<any> } | Promise<any>[];
 		type PromiseTypedObjectOrArray<T> = { [name: string]: Promise<T> } | Promise<T>[];
-		type ResultsObjectOrArray = { [name: string]: any } | any[];
-		type ResultsTypedObjectOrArray<T> = { [name: string]: T } | T[];
 
 		interface All {
 			/**
@@ -17,8 +15,10 @@ declare namespace dojo {
 			 * 						keys). If passed neither an object or array it is resolved with an
 			 * 						undefined value.
 			 */
-			<T>(objectOrArray?: PromiseTypedObjectOrArray<T>): Promise<ResultsTypedObjectOrArray<T>>;
-			(objectOrArray?: PromiseObjectOrArray): Promise<ResultsObjectOrArray>;
+			<T>(array: Promise<T>[]): Promise<T[]>;
+			<T>(object: { [name: string]: Promise<T> }): Promise<{ [name: string]: T }>;
+			(array: Promise<any>[]): Promise<any[]>;
+			(object: { [name: string]: Promise<any> }): Promise<{ [name: string]: any }>;
 		}
 
 		/* dojo/promise/first */
