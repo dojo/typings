@@ -15,10 +15,10 @@ declare namespace dojo {
 			 * 						keys). If passed neither an object or array it is resolved with an
 			 * 						undefined value.
 			 */
-			<T>(array: Promise<T>[]): Promise<T[]>;
-			<T>(object: { [name: string]: Promise<T> }): Promise<{ [name: string]: T }>;
-			(array: Promise<any>[]): Promise<any[]>;
-			(object: { [name: string]: Promise<any> }): Promise<{ [name: string]: any }>;
+			<T>(array: Thenable<T>[]): Promise<T[]>;
+			<T>(object: { [name: string]: Thenable<T> }): Promise<{ [name: string]: T }>;
+			(array: Thenable<any>[]): Promise<any[]>;
+			(object: { [name: string]: Thenable<any> }): Promise<{ [name: string]: any }>;
 		}
 
 		/* dojo/promise/first */
