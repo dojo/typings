@@ -599,12 +599,12 @@ declare namespace dojo {
 			/**
 			 * Adds callback and error callback for this deferred instance.
 			 */
-			addCallbacks<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback): Deferred<U>;
+			addCallbacks<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback<U>): Deferred<U>;
 
 			/**
 			 * Add new callbacks to the deferred.
 			 */
-			then<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
+			then<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback<U>, progback?: promise.PromiseProgback): promise.Promise<U>;
 
 			/**
 			 * Cancels the asynchronous operation
@@ -619,12 +619,12 @@ declare namespace dojo {
 			/**
 			 * Adds error callback for this deferred instance.
 			 */
-			addErrback(errback: promise.PromiseErrback): Deferred<T>;
+			addErrback<U>(errback: promise.PromiseErrback<U>): Deferred<U>;
 
 			/**
 			 * Add handler as both successful callback and error callback for this deferred instance.
 			 */
-			addBoth(callback?: promise.PromiseErrback): Deferred<T>;
+			addBoth<U>(callback?: promise.PromiseErrback<U>): Deferred<U>;
 
 			fired: number;
 		}
@@ -642,7 +642,7 @@ declare namespace dojo {
 			 * Transparently applies callbacks to values and/or promises.
 			 */
 			when<T>(valueOrPromise: any): dojo.Deferred<T>;
-			when<T, U>(valueOrPromise: any, callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): dojo.Deferred<U>;
+			when<T, U>(valueOrPromise: any, callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback<U>, progback?: promise.PromiseProgback): dojo.Deferred<U>;
 		}
 
 		/* dojo/_base/event */

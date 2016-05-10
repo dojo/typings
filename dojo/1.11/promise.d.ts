@@ -49,15 +49,15 @@ declare namespace dojo {
 			/**
 			 * Add new callbacks to the promise.
 			 */
-			then<U>(callback?: PromiseCallback<T, U>, errback?: PromiseErrback, progback?: PromiseProgback): Promise<U>;
+			then<U>(callback?: PromiseCallback<T, U>, errback?: PromiseErrback<U>, progback?: PromiseProgback): Promise<U>;
 		}
 
 		interface PromiseCallback<T, U> {
 			(result: T): U | Thenable<U>;
 		}
 
-		interface PromiseErrback {
-			(error: any): void;
+		interface PromiseErrback<U> {
+			(error: any): U | Thenable<U> | void;
 		}
 
 		interface PromiseProgback {
@@ -94,12 +94,12 @@ declare namespace dojo {
 			 * Add a callback to be invoked when the promise is resolved
 			 * or rejected.
 			 */
-			always<U>(callbackOrErrback: PromiseCallback<T, U> | PromiseErrback): Promise<U>;
+			always<U>(callbackOrErrback: PromiseCallback<T, U> | PromiseErrback<U>): Promise<U>;
 
 			/**
 			 * Add new errbacks to the promise.
 			 */
-			otherwise(errback: PromiseErrback): Promise<T>;
+			otherwise<U>(errback: PromiseErrback<U>): Promise<U>;
 
 			trace(): this;
 			traceRejected(): this;

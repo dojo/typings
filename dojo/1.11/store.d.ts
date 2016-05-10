@@ -111,7 +111,7 @@ declare namespace dojo {
 				 * This registers a callback for when the query is complete, if the query is asynchronous.
 				 * This is an optional method, and may not be present for synchronous queries.
 				 */
-				then?: <U>(callback?: promise.PromiseCallback<this, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback) => promise.Promise<U>;
+				then?: <U>(callback?: promise.PromiseCallback<this, U>, errback?: promise.PromiseErrback<U>, progback?: promise.PromiseProgback) => promise.Promise<U>;
 
 				/**
 				 * This registers a callback for notification of when data is modified in the query results.
