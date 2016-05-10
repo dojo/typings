@@ -351,7 +351,7 @@ declare namespace dojo {
 		/**
 		 * Add new callbacks to the deferred.
 		 */
-		then<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback, progback?: promise.PromiseProgback): promise.Promise<U>;
+		then<U>(callback?: promise.PromiseCallback<T, U>, errback?: promise.PromiseErrback<U>, progback?: promise.PromiseProgback): promise.Promise<U>;
 
 		/**
 		 * Inform the deferred it may cancel its asynchronous operation.
@@ -2019,11 +2019,11 @@ declare namespace dojo {
 		<T>(value: T | dojo.promise.Promise<T>): dojo.promise.Promise<T>;
 		<T>(value: T | dojo.promise.Promise<T>,
 			callback?: dojo.promise.PromiseCallback<T, T>,
-			errback?: dojo.promise.PromiseErrback,
+			errback?: dojo.promise.PromiseErrback<T>,
 			progress?: dojo.promise.PromiseProgback): T | dojo.promise.Promise<T>;
 		<T, U>(value: T | dojo.promise.Promise<T>,
 			callback?: dojo.promise.PromiseCallback<T, U>,
-			errback?: dojo.promise.PromiseErrback,
+			errback?: dojo.promise.PromiseErrback<U>,
 			progress?: dojo.promise.PromiseProgback): U | dojo.promise.Promise<U>;
 	}
 
