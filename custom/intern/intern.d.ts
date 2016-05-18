@@ -1,3 +1,5 @@
+/// <reference path="../../typings/modules/chai/index.d.ts" />
+
 declare module 'intern' {
 	import main = require('intern/main');
 	export = main;
@@ -86,21 +88,22 @@ declare module 'intern!tdd' {
 }
 
 declare module 'intern/chai!' {
-	export = Chai;
+	import * as chai from 'chai';
+	export = chai;
 }
 
 declare module 'intern/chai!assert' {
-	var assert: Chai.AssertStatic;
+	import { assert } from 'chai';
 	export = assert;
 }
 
 declare module 'intern/chai!expect' {
-	var expect: Chai.ExpectStatic;
+	import { expect } from 'chai';
 	export = expect;
 }
 
 declare module 'intern/chai!should' {
-	function should(): void;
+	import { should } from 'chai';
 	export = should;
 }
 
