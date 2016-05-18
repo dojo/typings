@@ -1,0 +1,8 @@
+{
+	"name": "dojo",
+	"main": "modules.d.ts",
+	"version": "1.11.1",
+	"ambientDependencies": {
+		"doh": "github:dojo/typings/doh/1.11"
+	}
+}

@@ -1,0 +1,15 @@
+{
+	"compilerOptions": {
+		"module": "amd",
+		"noImplicitAny": true,
+		"outDir": "_build",
+		"removeComments": false,
+		"sourceMap": true,
+		"target": "es5"
+	},
+	"files": [
+		"./src/main.ts",
+		"./src/node.ts",
+		"../../dojo/1.11/modules.d.ts"
+	]
+}

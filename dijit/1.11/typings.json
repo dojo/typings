@@ -1,0 +1,8 @@
+{
+	"name": "dijit",
+	"main": "modules.d.ts",
+	"version": "1.11.1",
+	"ambientDependencies": {
+		"dojo": "github:dojo/typings/dojo/1.11"
+	}
+}
