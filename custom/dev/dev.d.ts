@@ -1,5 +1,3 @@
-/// <reference path="../intern/intern.d.ts" />
-
 declare module 'intern/dojo/Promise' {
 	import Promise = require('dojo/Promise');
 	export = Promise;
@@ -21,7 +19,19 @@ declare module 'intern/lib/reporters/Runner' {
 	export = Runner;
 }
 
-declare module 'istanbul/lib/collector' {
+declare module 'intern/lib/reporters/Combined' {
+	class Combined {
+		protected hasErrors: boolean;
+		protected sessions: any;
+		protected _writeLine(): void;
+		protected output: { write(args: any[]): void; };
+
+		constructor(config?: any);
+	}
+	export = Combined;
+}
+
+declare module 'intern/dojo/node!istanbul/lib/collector' {
 	class Collector {
 		add(coverage: any): void;
 		files(): string[];
@@ -30,8 +40,8 @@ declare module 'istanbul/lib/collector' {
 	export = Collector;
 }
 
-declare module 'istanbul/lib/report/json' {
-	import Collector = require('istanbul/lib/collector');
+declare module 'intern/dojo/node!istanbul/lib/report/json' {
+	import Collector = require('intern/dojo/node!istanbul/lib/collector');
 	class JsonReporter {
 		constructor(options: any);
 
@@ -40,7 +50,7 @@ declare module 'istanbul/lib/report/json' {
 	export = JsonReporter;
 }
 
-declare module 'istanbul/lib/instrumenter' {
+declare module 'intern/dojo/node!istanbul/lib/instrumenter' {
 	class Instrumenter {
 		constructor(options?: any);
 
@@ -50,12 +60,12 @@ declare module 'istanbul/lib/instrumenter' {
 	export = Instrumenter;
 }
 
-declare module 'istanbul/index' {
+declare module 'intern/dojo/node!istanbul/index' {
 	let result: any;
 	export = result;
 }
 
-declare module 'glob' {
+declare module 'intern/dojo/node!glob' {
 	const glob: {
 		(pattern: string, callback: (err: Error, matches: string[]) => void): void;
 		(pattern: string, options: any, callback: (err: Error, matches: string[]) => void): void;
@@ -83,4 +93,26 @@ declare module 'charm' {
 		}
 	}
 	export = charm;
+}
+
+declare module 'intern/dojo/node!fs' {
+	import * as fs from 'fs';
+	export = fs;
+}
+
+declare module 'intern/dojo/node!util' {
+	import * as util from 'util';
+	export = util;
+}
+
+declare module 'intern/dojo/node!path' {
+	import * as path from 'path';
+	export = path;
+}
+
+declare namespace NodeJS {
+	interface Global {
+		require: DojoLoader.RootRequire;
+		define: DojoLoader.Define;
+	}
 }
