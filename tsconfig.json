@@ -13,7 +13,8 @@
 		"dojo/**/*.ts",
 		"dijit/**/*.ts",
 		"dojox/**/*.ts",
-		"doh/**/*.ts"
+		"doh/**/*.ts",
+		"typings/index.d.ts"
 	],
 	"files": [
 		"dojo/1.11/_base.d.ts",
@@ -53,7 +54,8 @@
 		"dojox/1.11/widget.d.ts",
 		"doh/1.11/doh.d.ts",
 		"doh/1.11/index.d.ts",
-		"doh/1.11/modules.d.ts"
+		"doh/1.11/modules.d.ts",
+		"typings/index.d.ts"
 	],
 	"atom": {
 		"rewriteTsconfig": true
