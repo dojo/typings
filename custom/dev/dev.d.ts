@@ -95,6 +95,44 @@ declare module 'charm' {
 	export = charm;
 }
 
+declare module 'intern/lib/util' {
+	export function getErrorMessage(error: any): string;
+}
+
+declare module 'istanbul/lib/collector' {
+	class Collector {
+		add(coverage: any): void;
+		files(): string[];
+	}
+
+	export = Collector;
+}
+
+declare module 'istanbul/lib/report/json' {
+	import Collector = require('istanbul/lib/collector');
+	class JsonReporter {
+		constructor(options: any);
+
+		writeReport(collector: Collector, sync: boolean): void;
+	}
+	export = JsonReporter;
+}
+
+declare module 'istanbul/lib/instrumenter' {
+	class Instrumenter {
+		constructor(options?: any);
+
+		instrumentSync(code: string, path: string): string;
+		lastFileCoverage(): any;
+	}
+	export = Instrumenter;
+}
+
+declare module 'istanbul/index' {
+	let result: any;
+	export = result;
+}
+
 declare module 'intern/dojo/node!fs' {
 	import * as fs from 'fs';
 	export = fs;
@@ -109,4 +147,3 @@ declare module 'intern/dojo/node!path' {
 	import * as path from 'path';
 	export = path;
 }
-
