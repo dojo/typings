@@ -1,0 +1,8 @@
+{
+	"name": "dojo2-integrations",
+	"devDependencies": {
+		"@reactivex/RxJS": "npm:@reactivex/rxjs",
+		"immutable": "npm:immutable",
+		"maquette": "npm:maquette"
+	}
+}
