@@ -357,6 +357,8 @@ declare module leadfoot {
 declare module 'leadfoot/helpers/pollUntil' {
 	import Promise = require('dojo/Promise');
 
+	namespace pollUntil { }
+
 	/**
 	 * A {@link module:leadfoot/Command} helper that polls for a value within the client environment until the value exists
 	 * or a timeout is reached.
