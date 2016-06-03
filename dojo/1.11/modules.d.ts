@@ -89,8 +89,9 @@ declare module 'dojo/_base/unload' {
 }
 
 declare module 'dojo/_base/url' {
-	const url: dojo._base.Url;
-	export = url;
+	type Url = dojo._base.Url;
+	const Url: dojo._base.UrlConstructor;
+	export = Url;
 }
 
 declare module 'dojo/_base/window' {
