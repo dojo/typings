@@ -4,7 +4,8 @@
  */
 
 declare module 'rxjs/Rx' {
-	export * from '@reactivex/RxJS';
+	import * as RxJS from '@reactivex/RxJS';
+	export = RxJS;
 }
 
 declare module 'rxjs/Observable' {
