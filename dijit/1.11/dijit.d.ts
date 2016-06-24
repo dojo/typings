@@ -1365,4 +1365,119 @@ declare namespace dijit {
 		close(popup?: _WidgetBase): void;
 	}
 
+	/* dijit/Tooltip */
+
+	interface Tooltip extends _Widget {
+		/**
+		 * HTML to display in the tooltip.
+		 * Specified as innerHTML when creating the widget from markup.
+		 */
+		label: string;
+
+		/**
+		 * Number of milliseconds to wait after hovering over/focusing on the object, before
+		 * the tooltip is displayed.
+		 */
+		showDelay: number;
+
+		/**
+		 * Number of milliseconds to wait after unhovering the object, before
+		 * the tooltip is hidden.  Note that blurring an object hides the tooltip immediately.
+		 */
+		hideDelay: number;
+
+		/**
+		 * Id of domNode(s) to attach the tooltip to.
+		 * When user hovers over specified dom node(s), the tooltip will appear.
+		 */
+		connectId: dojo.NodeOrString | dojo.NodeOrString[];
+
+		/**
+		 * See description of `dijit/Tooltip.defaultPosition` for details on position parameter.
+		 */
+		position: string;
+
+		/**
+		 * CSS expression to apply this Tooltip to descendants of connectIds, rather than to
+		 * the nodes specified by connectIds themselves.    Useful for applying a Tooltip to
+		 * a range of rows in a table, tree, etc.   Use in conjunction with getContent() parameter.
+		 * Ex: connectId: myTable, selector: "tr", getContent: function(node){ return ...; }
+		 *
+		 * The application must require() an appropriate level of dojo/query to handle the selector.
+		 */
+		selector: string;
+
+		/**
+		 * Attach tooltip to specified node if it's not already connected
+		 */
+		addTarget(node: dojo.NodeOrString): void;
+
+		/**
+		 * Detach tooltip from specified node
+		 */
+		removeTarget(node: dojo.NodeOrString): void;
+
+		/**
+		 * User overridable function that return the text to display in the tooltip.
+		 */
+		getContent(node: Node): Node;
+
+		/**
+		 * Display the tooltip; usually not called directly.
+		 */
+		open(target: Node): void;
+
+		/**
+		 * Hide the tooltip or cancel timer for show of tooltip
+		 */
+		close(): void;
+
+		/**
+		 * Called when the tooltip is shown
+		 */
+		onShow(): void;
+
+		/**
+		 * Called when the tooltip is hidden
+		 */
+		onHide(): void;
+	}
+
+	interface TooltipConstructor extends _WidgetBaseConstructor<Tooltip> {
+		/**
+		 * 	This variable controls the position of tooltips, if the position is not specified to
+		 * 	the Tooltip widget or *TextBox widget itself.  It's an array of strings with the values
+		 * 	possible for `dijit/place.around()`.   The recommended values are:
+		 *
+		 * 	- before-centered: centers tooltip to the left of the anchor node/widget, or to the right
+		 * 	  in the case of RTL scripts like Hebrew and Arabic
+		 * 	- after-centered: centers tooltip to the right of the anchor node/widget, or to the left
+		 * 	  in the case of RTL scripts like Hebrew and Arabic
+		 * 	- above-centered: tooltip is centered above anchor node
+		 * 	- below-centered: tooltip is centered above anchor node
+		 *
+		 * 	The list is positions is tried, in order, until a position is found where the tooltip fits
+		 * 	within the viewport.
+		 *
+		 * 	Be careful setting this parameter.  A value of "above-centered" may work fine until the user scrolls
+		 * 	the screen so that there's no room above the target node.   Nodes with drop downs, like
+		 * 	DropDownButton or FilteringSelect, are especially problematic, in that you need to be sure
+		 * 	that the drop down and tooltip don't overlap, even when the viewport is scrolled so that there
+		 * 	is only room below (or above) the target node, but not both.
+		 */
+		defaultPosition: [string];
+
+		/**
+		 * Static method to display tooltip w/specified contents in specified position.
+		 * See description of dijit/Tooltip.defaultPosition for details on position parameter.
+		 * If position is not specified then dijit/Tooltip.defaultPosition is used.
+		 */
+		show(innerHTML: string, aroundNode: PlaceRectangle, position?: [string], rtl?: boolean, textDir?: string, onMouseEnter?: Function, onMouseLeave?: Function): void;
+
+		/**
+		 * Hide the tooltip
+		 */
+		hide(aroundNode: PlaceRectangle): void;
+	}
+
 }
