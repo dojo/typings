@@ -1365,6 +1365,59 @@ declare namespace dijit {
 		close(popup?: _WidgetBase): void;
 	}
 
+	/* dijit/registry */
+
+	interface Registry {
+		/**
+		 * Number of registered widgets
+		 */
+		length: number;
+
+		/**
+		 * Add a widget to the registry. If a duplicate ID is detected, a error is thrown.
+		 */
+		add(widget: _WidgetBase): void;
+
+		/**
+		 * Remove a widget from the registry. Does not destroy the widget; simply
+		 * removes the reference.
+		 */
+		remove(id: string): void;
+
+		/**
+		 * Find a widget by it's id.
+		 * If passed a widget then just returns the widget.
+		 */
+		byId(id: string | _WidgetBase): _WidgetBase;
+
+		/**
+		 * Returns the widget corresponding to the given DOMNode
+		 */
+		byNode(node: Node): _WidgetBase;
+
+		/**
+		 * Convert registry into a true Array
+		 */
+		toArray(): _WidgetBase[];
+
+		/**
+		 * Generates a unique id for a given widgetType
+		 */
+		getUniqueId(widgetType: string): string;
+
+		/**
+		 * Search subtree under root returning widgets found.
+		 * Doesn't search for nested widgets (ie, widgets inside other widgets).
+		 */
+		findWidgets(root: Node, skipNode?: Node): _WidgetBase[];
+
+		/**
+		 * Returns the widget whose DOM tree contains the specified DOMNode, or null if
+		 * the node is not contained within the DOM tree of any widget
+		 */
+		getEnclosingWidgets(node: Node): _WidgetBase;
+	}
+
 	/* dijit/Tooltip */
 
 	interface Tooltip extends _Widget {
