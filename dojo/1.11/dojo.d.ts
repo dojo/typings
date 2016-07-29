@@ -356,7 +356,7 @@ declare namespace dojo {
 		/**
 		 * Inform the deferred it may cancel its asynchronous operation.
 		 */
-		cancel(reason: any, strict?: boolean): any;
+		cancel(reason?: any, strict?: boolean): any;
 
 		/**
 		 * Returns `[object Deferred]`.
