@@ -447,7 +447,7 @@ declare namespace dojo {
 		 * Returns DOM node with matching `id` attribute or falsy value (ex: null or undefined)
 		 * if not found. Internally if `id` is not a string then `id` returned.
 		 */
-		byId<E extends Element>(id: string, doc?: Document): E;
+		byId<E extends Element>(id: string | E, doc?: Document): E;
 
 		/**
 		 * Returns true if node is a descendant of ancestor
