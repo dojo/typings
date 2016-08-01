@@ -1583,4 +1583,3 @@ declare namespace dijit {
 		}
 	}
 }
-
