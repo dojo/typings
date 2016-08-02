@@ -1442,7 +1442,7 @@ declare namespace dojo {
 	/* dojo/on */
 
 	interface ExtensionEvent {
-		(target: Element | GenericObject, litener: EventListener): Handle;
+		(target: Element | GenericObject, listener: EventListener): Handle;
 	}
 
 	interface PauseHandle extends Handle {
