@@ -52,6 +52,12 @@ declare module 'dijit/popup' {
 	export = popup;
 }
 
+declare module 'dijit/Tooltip' {
+	type Tooltip = dijit.Tooltip;
+	const Tooltip: dijit.TooltipConstructor;
+	export = Tooltip;
+}
+
 declare module 'dijit/form/_FormMixin' {
 	const _FormMixin: dijit.form._FormMixin;
 	export = _FormMixin;
