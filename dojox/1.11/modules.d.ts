@@ -24,6 +24,12 @@ declare module 'dojox/layout/TableContainer' {
 	export = TableContainer;
 }
 
+declare module 'dojox/string/BidiEngine' {
+	type BidiEngine = dojox.string.BidiEngine;
+	const BidiEngine: dojox.string.BidiEngineConstructor;
+	export = BidiEngine;
+}
+
 declare module 'dojox/widget/DialogSimple' {
 	type DialogSimple = dojox.widget.DialogSimple;
 	const DialogSimple: dojox.widget.DialogSimpleConstructor;

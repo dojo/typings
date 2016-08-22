@@ -1,5 +1,5 @@
 {
-	"name": "dijit",
+	"name": "dojox",
 	"main": "modules.d.ts",
 	"version": "1.11.1",
 	"ambientDependencies": {
