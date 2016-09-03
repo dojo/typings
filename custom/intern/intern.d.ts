@@ -86,22 +86,22 @@ declare module 'intern!tdd' {
 }
 
 declare module 'intern/chai!' {
-	import * as chai from 'chai';
+	const chai: Chai.ChaiStatic;
 	export = chai;
 }
 
 declare module 'intern/chai!assert' {
-	import { assert } from 'chai';
+	const assert: Chai.AssertionStatic;
 	export = assert;
 }
 
 declare module 'intern/chai!expect' {
-	import { expect } from 'chai';
+	const expect: Chai.ExpectStatic;
 	export = expect;
 }
 
 declare module 'intern/chai!should' {
-	import { should } from 'chai';
+	const should: Chai.Should;
 	export = should;
 }
 
