@@ -1,5 +1,3 @@
-/// <reference path="../../typings/modules/chai/index.d.ts" />
-
 declare module 'intern' {
 	import main = require('intern/main');
 	export = main;

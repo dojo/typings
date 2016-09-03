@@ -5,15 +5,18 @@
 	"license": "BSD-3-Clause",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/dojo/typings"
+		"url": "https://github.com/dojo/typings/"
 	},
 	"typings": "index.d.ts",
 	"homepage": "https://www.sitepen.com/",
+	"dependencies": {
+		"@types/chai": "^3.4.32"
+	},
 	"devDependencies": {
 		"grunt": "^1.0.1",
 		"grunt-ts": "^5.3.2",
-		"grunt-tslint": "^3.0.3",
-		"tslint": "^3.5.0",
-		"typescript": "^1.8.2"
+		"grunt-tslint": "^3.2.1",
+		"tslint": "^3.15.1",
+		"typescript": "2.0.2"
 	}
 }

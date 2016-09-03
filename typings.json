@@ -1,7 +1,4 @@
 {
 	"name": "dojo-typings",
-	"main": "index.d.ts",
-	"devDependencies": {
-		"chai": "registry:npm/chai#3.5.0+20160415060238"
-	}
+	"main": "index.d.ts"
 }
