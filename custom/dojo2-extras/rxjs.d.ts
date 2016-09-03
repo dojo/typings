@@ -4,16 +4,16 @@
  */
 
 declare module 'rxjs/Rx' {
-	import * as RxJS from '@reactivex/RxJS';
+	import * as RxJS from '@reactivex/rxjs';
 	export = RxJS;
 }
 
 declare module 'rxjs/Observable' {
-	import * as Observable from '@reactivex/RxJS/dist/cjs/Observable';
+	import * as Observable from '@reactivex/rxjs/dist/cjs/Observable';
 	export = Observable;
 }
 
 declare module 'rxjs/Observer' {
-	import * as Observer from '@reactivex/RxJS/dist/cjs/Observer';
+	import * as Observer from '@reactivex/rxjs/dist/cjs/Observer';
 	export = Observer;
 }
