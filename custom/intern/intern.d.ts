@@ -91,7 +91,7 @@ declare module 'intern/chai!' {
 }
 
 declare module 'intern/chai!assert' {
-	const assert: Chai.AssertionStatic;
+	const assert: Chai.AssertStatic;
 	export = assert;
 }
 
