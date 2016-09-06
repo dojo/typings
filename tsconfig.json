@@ -11,7 +11,7 @@
 		"noImplicitThis": true,
 		"target": "es5"
 	},
-	"filesGlob": [
+	"include": [
 		"./dojo/**/*.ts",
 		"./dijit/**/*.ts",
 		"./dojox/**/*.ts",

@@ -1,22 +1,23 @@
 {
-	"name": "dojo-typings",
-	"version": "1.11.5-pre",
-	"description": "A set of Dojo 1 Typings for TypeScript",
-	"license": "BSD-3-Clause",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/dojo/typings/"
-	},
-	"typings": "index.d.ts",
-	"homepage": "https://www.sitepen.com/",
-	"dependencies": {
-		"@types/chai": "^3.4.32"
-	},
-	"devDependencies": {
-		"grunt": "^1.0.1",
-		"grunt-ts": "^5.3.2",
-		"grunt-tslint": "^3.2.1",
-		"tslint": "^3.15.1",
-		"typescript": "2.0.2"
-	}
+  "name": "dojo-typings",
+  "version": "1.11.5-pre",
+  "description": "A set of Dojo 1 Typings for TypeScript",
+  "license": "BSD-3-Clause",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dojo/typings/"
+  },
+  "typings": "index.d.ts",
+  "homepage": "https://www.sitepen.com/",
+  "dependencies": {
+    "@types/chai": "^3.4.32"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-dojo2": "^2.0.0-beta.16",
+    "grunt-ts": "^5.3.2",
+    "grunt-tslint": "^3.2.1",
+    "tslint": "^3.15.1",
+    "typescript": "2.0.2"
+  }
 }
