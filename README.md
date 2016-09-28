@@ -5,12 +5,12 @@
 
 This is a repository of Dojo 1 TypeScript Typings (including Dijit and DojoX).
 
-Currently, this reopsitory does not include all the typings for Dijit and DojoX, although
+Currently, this repository does not include all the typings for Dijit and DojoX, although
 Dojo is currently fully covered.  The aim is to cover all of Dijit and continue to accept
 any community contributions for DojoX.
 
-For other packages, because Dojo 2 is built on TypeScript and therefore its typings are
-inherit in its distrubution. The goal for affiliated Dojo 1 projects (like
+For other packages, because Dojo 2 is built on TypeScript its typings are
+inherent in its distrubution. The goal for affiliated Dojo 1 projects (like
 [dgrid](http://dgrid.io/) and [dstore](http://dstorejs.io/) is that they will include
 typings as part of their repository.
 
@@ -64,12 +64,12 @@ to change module resolution from `dojo/...` the `modules.d.ts` will need to be u
 
 ### String Literals
 
-The current typings are build around TypeScript 1.7.  TypeScript 1.8 introduced string
+The current typings are built around TypeScript 1.7.  TypeScript 1.8 introduced string
 literal types and there are improvements that can be made to the typings, several of
 them noted as comments in the existing typings.
 
-*Note* while the repository currently uses TypeScript 1.8 as its development dependency
-we haven't started using the string literals yet, as TypeScript 1.8 isn't yet GA.
+*Note*: while the repository currently uses TypeScript 1.8 as its development dependency
+we haven't started using the string literals yet.
 
 ### AMD Plugin Globbing
 
