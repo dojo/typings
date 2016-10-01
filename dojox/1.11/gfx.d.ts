@@ -1,9 +1,18 @@
+/// <reference path="gfx/arc.d.ts" />
+/// <reference path="gfx/bezierutils.d.ts" />
+/// <reference path="gfx/decompose.d.ts" />
+/// <reference path="gfx/filters.d.ts" />
 /// <reference path="gfx/matrix.d.ts" />
+/// <reference path="gfx/registry.d.ts" />
 /// <reference path="gfx/shape.d.ts" />
 
 declare namespace dojox {
 	namespace gfx {
-		interface fixTarget {
+		type CubicBezierCurve = [number, number, number, number, number, number, number, number];
+		type GfxElement = Group | Shape | Surface;
+		type QuadraticBezierCurve = [number, number, number, number, number, number];
+
+		interface FixTarget {
 			(event: Event, target: GfxElement): boolean;
 		}
 
@@ -13,18 +22,17 @@ declare namespace dojox {
 		}
 
 		interface Gfx extends Renderer {
-			defaultPath: {
+			readonly defaultPath: {
 				path: string;
 				type: string;
-			}
+			};
+			readonly defaultPolyline: Polyline;
+			readonly defaultRect: Rectangle;
 
-			defaultPolyline: Polyline;
-			defaultRect: Rectangle;
+			fixTarget: FixTarget;
 
 			Matrix2D: dojox.gfx.matrix.Matrix2D;
 		}
-
-		type GfxElement = Group | Shape | Surface;
 
 		interface GradientOffsetColor {
 			color: string;
@@ -59,7 +67,7 @@ declare namespace dojox {
 		interface Polyline extends Shape {
 			points: Point[];
 
-			//setShape(points: Point[] | { points: Point[] }, closed?: boolean): this;
+			// setShape(points: Point[] | { points: Point[] }, closed?: boolean): this;
 		}
 
 		interface Point {
@@ -114,15 +122,13 @@ declare namespace dojox {
 			getStroke(): Stroke;
 			getTransform(): dojox.gfx.matrix.Matrix2D;
 			getTransformedBoundingBox(): [number, number, number, number];
-			// if gfx/registry is loaded
-			getUid?(): number;
 			moveToBack(): this;
 			moveToFront(): this;
 			removeShape(silently?: boolean): this;
 			setClip(clip: dojox.gfx.shape.Clip): void;
 			setFill(fill: dojox.gfx.Fill): this;
 			setShape(shape: Shape): this;
-			// TODO: this is for Polyline, but causes errors there
+			// for Polyline
 			setShape(points: Point[] | { points: Point[] }, closed?: boolean): this;
 			setStroke(stroke: Stroke): this;
 			setTransform(matrix: dojox.gfx.matrix.Matrix2D): this;

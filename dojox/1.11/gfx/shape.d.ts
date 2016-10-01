@@ -41,7 +41,7 @@ declare namespace dojox {
 
 			// TODO: is this the best way to do this?
 			interface ShapeModule {
-				fixCallback(element: GfxElement, fixFunction: Function, scope: Object, method: string | Function): fixTarget;
+				fixCallback(element: GfxElement, fixFunction: Function, scope: Object, method: string | Function): FixTarget;
 			}
 		}
 	}

@@ -45,6 +45,8 @@ declare namespace dojox {
 				skewYgAt(degrees: number, x: number, y: number): Matrix2D;
 				translate(point: dojox.gfx.Point): Matrix2D;
 				translate(x: number, y: number): Matrix2D;
+
+				Matrix2D: Matrix2D;
 			}
 
 			type MatrixLike = number | [number, number] | Matrix2D;
