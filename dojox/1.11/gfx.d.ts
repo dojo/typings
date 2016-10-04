@@ -2,9 +2,17 @@
 /// <reference path="gfx/bezierutils.d.ts" />
 /// <reference path="gfx/decompose.d.ts" />
 /// <reference path="gfx/filters.d.ts" />
+/// <reference path="gfx/fx.d.ts" />
+/// <reference path="gfx/gradient.d.ts" />
+/// <reference path="gfx/gradutils.d.ts" />
 /// <reference path="gfx/matrix.d.ts" />
+/// <reference path="gfx/Moveable.d.ts" />
+/// <reference path="gfx/Mover.d.ts" />
+/// <reference path="gfx/path.d.ts" />
 /// <reference path="gfx/registry.d.ts" />
 /// <reference path="gfx/shape.d.ts" />
+/// <reference path="gfx/utils.d.ts" />
+/// <reference path="gfx/VectorText.d.ts" />
 
 declare namespace dojox {
 	namespace gfx {
@@ -16,9 +24,15 @@ declare namespace dojox {
 			(event: Event, target: GfxElement): boolean;
 		}
 
-		interface Fill {
-			color: string | dojo._base.Color;
+		type Fill = dojo._base.Color | LinearFill | RadialFill | Pattern;
+
+		interface Font {
+			family: string;
+			size: string;
+			style: string; // TODO: enum
 			type: string; // TODO: enum
+			variant: string; // TODO: enum
+			weight: string; // TODO: enum
 		}
 
 		interface Gfx extends Renderer {
@@ -30,6 +44,7 @@ declare namespace dojox {
 			readonly defaultRect: Rectangle;
 
 			fixTarget: FixTarget;
+			splitFontString(font: string): Font;
 
 			Matrix2D: dojox.gfx.matrix.Matrix2D;
 		}
@@ -46,7 +61,17 @@ declare namespace dojox {
 			setRawNode(node: Node): void;
 		}
 
+		interface LinearFill {
+			colors: string[] | dojo._base.Color[];
+			type: string; // TODO: enum
+			x1: number;
+			x2: number;
+			y1: number;
+			y2: number;
+		}
+
 		interface LinearGradient {
+			angle?: number;
 			colors: GradientOffsetColor[];
 			type: string; // TODO: enum
 			x1: number;
@@ -73,6 +98,14 @@ declare namespace dojox {
 		interface Point {
 			x: number;
 			y: number;
+		}
+
+		interface RadialFill {
+			colors: string[] | dojo._base.Color[];
+			cx: number;
+			cy: number;
+			r: number;
+			type: string; // TODO: enum
 		}
 
 		interface RadialGradient {
@@ -105,7 +138,7 @@ declare namespace dojox {
 			rawNode: Node;
 			shape: Shape;
 			strokeStyle: Stroke;
-			type: string;
+			type: string; // TODO: enum
 
 			new(): void;
 			applyLeftTransform(matrix: dojox.gfx.matrix.MatrixLike): this;
@@ -115,7 +148,7 @@ declare namespace dojox {
 			getBoundingBox(): Rectangle;
 			getClip(): dojox.gfx.shape.Clip;
 			getEventSource(): Node;
-			getFill(): dojox.gfx.Fill;
+			getFill(): Fill;
 			getNode(): Node;
 			getParent(): Surface;
 			getShape(): Shape;
@@ -128,6 +161,8 @@ declare namespace dojox {
 			setClip(clip: dojox.gfx.shape.Clip): void;
 			setFill(fill: dojox.gfx.Fill): this;
 			setShape(shape: Shape): this;
+			// for Path
+			setShape(shape: string | dojox.gfx.path.Path): this;
 			// for Polyline
 			setShape(points: Point[] | { points: Point[] }, closed?: boolean): this;
 			setStroke(stroke: Stroke): this;
@@ -163,6 +198,11 @@ declare namespace dojox {
 			width: number;
 			x: number;
 			y: number;
+		}
+
+		interface Translation {
+			dx: number;
+			dy: number;
 		}
 	}
 }
