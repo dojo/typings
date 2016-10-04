@@ -9,7 +9,7 @@ declare namespace dojox {
 				yx?: number;
 				yy?: number;
 
-				new(x: number): this;
+				new(matrix: MatrixLike): this;
 			}
 
 			type MatrixLike = number | [number, number] | Matrix2D;
