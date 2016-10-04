@@ -103,7 +103,7 @@ declare namespace dojo {
 			/**
 			 * Ensures the object has correct attributes
 			 */
-			sanatize(): Color;
+			sanitize(): Color;
 
 			/**
 			 * Returns 3 component array of rgb values
