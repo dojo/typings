@@ -21,10 +21,6 @@ declare namespace dojox {
 			];
 			tAtLength(points: number[], length: number): number;
 		}
-
-		interface Gfx {
-			bezierutils: BezierUtils;
-		}
 	}
 }
 

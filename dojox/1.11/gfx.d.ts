@@ -17,36 +17,37 @@
 declare namespace dojox {
 	namespace gfx {
 		type CubicBezierCurve = [number, number, number, number, number, number, number, number];
-		type GfxElement = Group | Shape | Surface;
+		type Fill = dojo._base.Color | LinearFill | RadialFill | Pattern;
+		type GfxElement = Group | dojox.gfx.shape.Shape | dojox.gfx.shape.Surface;
 		type QuadraticBezierCurve = [number, number, number, number, number, number];
+
+		interface CreateSurface {
+			(parentNode: Node, width: number | string, height: number | string): dojox.gfx.shape.Surface;
+		}
 
 		interface FixTarget {
 			(event: Event, target: GfxElement): boolean;
 		}
 
-		type Fill = dojo._base.Color | LinearFill | RadialFill | Pattern;
+		interface Circle extends SimpleShape {
+			cx: number,
+			cy: number,
+			r: number
+		}
 
-		interface Font {
+		interface SimpleEllipse extends SimpleShape {
+			cx: number,
+			cy: number,
+			rx: number,
+			ry: number
+		}
+
+		interface Font extends SimpleShape {
 			family: string;
 			size: string;
 			style: string; // TODO: enum
-			type: string; // TODO: enum
 			variant: string; // TODO: enum
 			weight: string; // TODO: enum
-		}
-
-		interface Gfx extends Renderer {
-			readonly defaultPath: {
-				path: string;
-				type: string;
-			};
-			readonly defaultPolyline: Polyline;
-			readonly defaultRect: Rectangle;
-
-			fixTarget: FixTarget;
-			splitFontString(font: string): Font;
-
-			Matrix2D: dojox.gfx.matrix.Matrix2D;
 		}
 
 		interface GradientOffsetColor {
@@ -54,11 +55,25 @@ declare namespace dojox {
 			offset: number;
 		}
 
-		interface Group extends Shape {
+		interface Group extends dojox.gfx.shape.ShapeConstructor {
 			nodeType: string;
 
-			new(): void;
 			setRawNode(node: Node): void;
+		}
+
+		interface Image extends SimpleShape {
+			height: number;
+			src: string;
+			width: number;
+			x: number;
+			y: number;
+		}
+
+		interface Line extends SimpleShape {
+			x1: number;
+			x2: number;
+			y1: number;
+			y2: number;
 		}
 
 		interface LinearFill {
@@ -70,29 +85,29 @@ declare namespace dojox {
 			y2: number;
 		}
 
-		interface LinearGradient {
+		interface LinearGradient extends SimpleShape {
 			angle?: number;
 			colors: GradientOffsetColor[];
-			type: string; // TODO: enum
 			x1: number;
 			x2: number;
 			y1: number;
 			y2: number;
 		}
 
-		interface Pattern {
+		interface Path extends SimpleShape {
+			path: string
+		}
+
+		interface Pattern extends SimpleShape {
 			height: number;
 			src: string;
-			type: string; // TODO: enum
 			width: number;
 			x: number;
 			y: number;
 		}
 
-		interface Polyline extends Shape {
+		interface Polyline extends SimpleShape {
 			points: Point[];
-
-			// setShape(points: Point[] | { points: Point[] }, closed?: boolean): this;
 		}
 
 		interface Point {
@@ -108,68 +123,31 @@ declare namespace dojox {
 			type: string; // TODO: enum
 		}
 
-		interface RadialGradient {
+		interface RadialGradient extends SimpleShape {
 			colors: GradientOffsetColor[];
 			cx: number;
 			cy: number;
 			r: number;
-			type: string; // TODO: enum
 		}
 
-		interface Rect extends Shape, Rectangle {}
-
-		interface Rectangle {
+		interface Rectangle extends SimpleShape {
 			height: number;
+			r: number;
 			width: number;
 			x: number;
 			y: number;
 		}
 
 		interface Renderer {
-			createSurface(parentNode: Node, width: number | string, height: number | string): dojox.gfx.Surface;
+			createSurface: CreateSurface;
+			fixTarget: FixTarget;
 		}
 
-		interface Shape {
-			bbox: Rectangle;
-			fillStyle: dojox.gfx.Fill;
-			matrix: dojox.gfx.matrix.Matrix2D;
-			parent: Surface;
-			parentMatrix: dojox.gfx.matrix.Matrix2D;
-			rawNode: Node;
-			shape: Shape;
-			strokeStyle: Stroke;
+		interface SimpleShape {
 			type: string; // TODO: enum
-
-			new(): void;
-			applyLeftTransform(matrix: dojox.gfx.matrix.MatrixLike): this;
-			applyRightTransform(matrix: dojox.gfx.matrix.MatrixLike): this;
-			applyTransform(matrix: dojox.gfx.matrix.MatrixLike): this;
-			destroy(): void;
-			getBoundingBox(): Rectangle;
-			getClip(): dojox.gfx.shape.Clip;
-			getEventSource(): Node;
-			getFill(): Fill;
-			getNode(): Node;
-			getParent(): Surface;
-			getShape(): Shape;
-			getStroke(): Stroke;
-			getTransform(): dojox.gfx.matrix.Matrix2D;
-			getTransformedBoundingBox(): [number, number, number, number];
-			moveToBack(): this;
-			moveToFront(): this;
-			removeShape(silently?: boolean): this;
-			setClip(clip: dojox.gfx.shape.Clip): void;
-			setFill(fill: dojox.gfx.Fill): this;
-			setShape(shape: Shape): this;
-			// for Path
-			setShape(shape: string | dojox.gfx.path.Path): this;
-			// for Polyline
-			setShape(points: Point[] | { points: Point[] }, closed?: boolean): this;
-			setStroke(stroke: Stroke): this;
-			setTransform(matrix: dojox.gfx.matrix.Matrix2D): this;
 		}
 
-		interface Stroke {
+		interface Stroke extends SimpleShape {
 			cap: string; // TODO: enum
 			color: string;
 			join: number;
@@ -177,27 +155,26 @@ declare namespace dojox {
 			width: number;
 		}
 
-		interface Surface {
-			isLoaded: boolean;
-			rawNode: Node;
-
-			new(): Surface;
-			destroy(): void;
-			getEventSource(): Node;
-			onLoad(surface: Surface): void;
-			whenLoaded(context: Object, method: string | Function): void;
-		}
-
-		interface Text {
+		interface Text extends SimpleShape {
 			align: string; // TODO: enum
 			decoration: string;
-			fitting: number; // TODO: enum
-			height: number;
-			leading: number;
+			fitting?: number; // TODO: enum
+			height?: number;
+			kerning: boolean;
+			leading?: number;
+			rotated: boolean;
 			text: string;
-			width: number;
+			width?: number;
 			x: number;
 			y: number;
+		}
+
+		interface TextPath extends SimpleShape {
+			align: string;
+			decoration: string;
+			kerning: boolean;
+			rotated: boolean;
+			text: string;
 		}
 
 		interface Translation {
@@ -208,11 +185,58 @@ declare namespace dojox {
 }
 
 declare module 'dojox/gfx' {
-	const gfx: dojox.gfx.Gfx;
-	export = gfx;
+	type Circle = dojox.gfx.Circle;
+	type CubicBezierCurve = dojox.gfx.CubicBezierCurve;
+	type Ellipse = dojox.gfx.shape.Ellipse;
+	type Fill = dojox.gfx.Fill;
+	type GfxElement = dojox.gfx.GfxElement;
+	type Group = dojox.gfx.Group;
+	const Group: dojox.gfx.Group;
+	type Path = dojox.gfx.Path;
+	type Polyline = dojox.gfx.Polyline;
+	type QuadraticBezierCurve = dojox.gfx.QuadraticBezierCurve;
+	type Rect = dojox.gfx.shape.Rect;
+	type Rectangle = dojox.gfx.Rectangle;
+	type SimpleEllipse = dojox.gfx.SimpleEllipse;
+	type SimpleShape = dojox.gfx.SimpleShape;
+	type Surface = dojox.gfx.shape.Surface;
+
+	const cm_in_pt: number;
+	const defaultCircle: dojox.gfx.Circle;
+	const defaultEllipse: dojox.gfx.SimpleEllipse;
+	const defaultFont: dojox.gfx.Font;
+	const defaultImage: dojox.gfx.Image;
+	const defaultLine: dojox.gfx.Line;
+	const defaultLinearGradient: dojox.gfx.LinearGradient;
+	const defaultPath: dojox.gfx.Path;
+	const defaultPattern: dojox.gfx.Pattern;
+	const defaultPolyline: dojox.gfx.Polyline;
+	const defaultRadialGradient: dojox.gfx.RadialGradient;
+	const defaultRect: dojox.gfx.Rectangle;
+	const defaultStroke: dojox.gfx.Stroke;
+	const defaultText: dojox.gfx.Text;
+	const defaultTextPath: dojox.gfx.TextPath;
+	const mm_in_pt: number;
+	const pathSvgRegExp: RegExp;
+	const pathVmlRegExp: RegExp;
+
+	const createSurface: dojox.gfx.CreateSurface;
+	const equalSources: (a: any, b: any) => boolean;
+	const fixTarget: dojox.gfx.FixTarget;
+	const formatNumber: (number: number, addSpace: boolean) => string;
+	const getDefault: (shapeType: string) => dojox.gfx.SimpleShape;
+	const makeFontString: (font: dojox.gfx.Font) => string;
+	const makeParameters: (defaults: Object, options: Object) => Object;
+	const normalizeColor: (color: dojo._base.ColorValue | dojo._base.ColorValueAlpha | dojo._base.ColorObject | string) => dojo._base.Color;
+	const normalizedLength: (cssLengthString: string) => number;
+	const normalizeParameters: (target: Object, source: Object) => Object;
+	const pt2px: (points: number) => number;
+	const px2pt: (pixels: number) => number;
+	const px_in_pt: () => number;
+	const splitFontString: (fontString: string) => dojox.gfx.Font;
+	const switchTo: (renderer: string | dojox.gfx.Renderer) => void;
 }
 
 declare module 'dojox/gfx/_base' {
-	const gfxBase: dojox.gfx.Gfx;
-	export = gfxBase;
+	export * from 'dojox/gfx';
 }
