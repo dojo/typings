@@ -1,18 +1,16 @@
 declare namespace dojox {
 	namespace gfx {
 		interface Decompose {
-			(matrix: dojox.gfx.matrix.MatrixLike): {
-				dx: number,
-				dy: number,
-				sx: number,
-				sy: number,
-				angle1: number,
-				angle2: number
-			};
+			(matrix: dojox.gfx.matrix.MatrixLike): MatrixDescriptor;
 		}
 
-		interface Gfx {
-			decompose: Decompose;
+		interface MatrixDescriptor {
+			dx: number;
+			dy: number;
+			sx: number;
+			sy: number;
+			angle1: number;
+			angle2: number;
 		}
 	}
 }

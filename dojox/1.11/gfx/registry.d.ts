@@ -3,7 +3,7 @@ declare namespace dojox {
 		interface Registry {
 			byId(id: string): dojox.gfx.shape.Shape;
 			dispose(shape: dojox.gfx.shape.Shape, recurse?: boolean): void;
-			register(shape: dojox.gfx.shape.Shape): number;
+			register(shape: dojox.gfx.shape.Shape): string;
 		}
 	}
 }

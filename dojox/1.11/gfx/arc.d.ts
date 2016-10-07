@@ -14,6 +14,7 @@ declare namespace dojox {
 declare module 'dojox/gfx/arc' {
 	type Arc = dojox.gfx.arc.Arc;
 
+	/* tslint:disable:no-unused-variable */
 	const curvePI4: Arc;
 
 	const arcAsBezier: (
@@ -27,4 +28,5 @@ declare module 'dojox/gfx/arc' {
 		y: number
 	) => dojox.gfx.QuadraticBezierCurve;
 	const unitArcAsBezier: (radians: number) => Arc;
+	/* tslint:enable */
 }

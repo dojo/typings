@@ -1,7 +1,7 @@
 declare namespace dojox {
 	namespace gfx {
 		namespace path {
-			interface Path extends Shape {
+			interface Path extends dojox.gfx.shape.Shape {
 				absolute: boolean;
 				last: Point;
 				segmented: boolean;
@@ -21,7 +21,7 @@ declare namespace dojox {
 				closePath(): this;
 				curveTo(x1: number, y1: number, x2: number, y2: number, x: number, y: number): this;
 				getAbsoluteMode(): boolean;
-				getBoundingBox(): Rectangle;
+				getBoundingBox(): SimpleRectangle;
 				getLastPosition(): Point;
 				hLineTo(x: number): this;
 				lineTo(x: number, y: number): this;
@@ -33,9 +33,9 @@ declare namespace dojox {
 				vLineTo(y: number): this;
 			}
 
-			interface PathModule {
-				Path: Path;
-				TextPath: TextPath;
+			interface PathConstructor extends dojox.gfx.shape.ShapeConstructor {
+				new(): Path;
+				prototype: Path;
 			}
 
 			interface Segment {
@@ -52,11 +52,20 @@ declare namespace dojox {
 				setFont(font: string | Font): this;
 				setText(text: string | TextPath): this;
 			}
+
+			interface TextPathConstructor extends PathConstructor {
+				new(): TextPath;
+				prototype: TextPath;
+			}
 		}
 	}
 }
 
 declare module 'dojox/gfx/path' {
-	const path: dojox.gfx.path.PathModule;
-	export = path;
+	/* tslint:disable:no-unused-variable */
+	type Path = dojox.gfx.path.Path;
+	const Path: dojox.gfx.path.PathConstructor;
+	type TextPath = dojox.gfx.path.TextPath;
+	const TextPath: dojox.gfx.path.TextPathConstructor;
+	/* tslint:enable */
 }

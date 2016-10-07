@@ -2,10 +2,19 @@
 
 import * as gfx from 'dojox/gfx';
 import * as shape from 'dojox/gfx/shape';
+import { Clip, Circle, Surface } from 'dojox/gfx/shape';
+
+let node: Node;
+let surface: Surface;
+surface = gfx.createSurface(node, 100, 100);
 
 let circle: shape.Circle;
 circle = new shape.Circle();
 circle = shape.Creator.createCircle();
+circle = surface.createCircle();
+
+let clip: Clip;
+circle.setClip(clip);
 
 let handle = circle.on('click', function(event: Event) {});
 handle.remove();
@@ -17,7 +26,12 @@ circle.disconnect(handle);
 shape.Container.add(circle);
 shape.Container.remove(circle, true);
 
-let box: gfx.Rectangle;
+// TODO: should these work?
+// let anyShape: shape.Shape;
+// anyShape = <Circle> circle;
+// anyShape.shape.cx;
+
+let box: gfx.SimpleRectangle;
 box = shape.Container.getBoundingBox();
 
 let myFixTarget: dojox.gfx.FixTarget;

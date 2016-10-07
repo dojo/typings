@@ -85,6 +85,7 @@ declare namespace dojox {
 }
 
 declare module 'dojox/gfx/matrix' {
+	/* tslint:disable:no-unused-variable */
 	type MatrixLike = dojox.gfx.matrix.MatrixLike;
 	type Matrix2D = dojox.gfx.matrix.Matrix2D;
 	const Matrix2D: dojox.gfx.matrix.Matrix2DConstructor;
@@ -99,7 +100,7 @@ declare module 'dojox/gfx/matrix' {
 	const isIdentity: (matrix: Matrix2D) => boolean;
 	const multiply: (...matrices: MatrixLike[]) => Matrix2D;
 	const multiplyPoint: dojox.gfx.matrix.MultiplyPoint;
-	const multiplyRectangle: (matrix: MatrixLike, rectangle: dojox.gfx.Rectangle) => dojox.gfx.Rectangle;
+	const multiplyRectangle: (matrix: MatrixLike, rectangle: dojox.gfx.SimpleRectangle) => dojox.gfx.SimpleRectangle;
 	const normalize: (matrix: MatrixLike) => Matrix2D;
 	const project: dojox.gfx.matrix.Project;
 	const reflect: dojox.gfx.matrix.Reflect;
@@ -118,4 +119,5 @@ declare module 'dojox/gfx/matrix' {
 	const skewYg: (degrees: number) => Matrix2D;
 	const skewYgAt: dojox.gfx.matrix.SkewYgAt;
 	const translate: dojox.gfx.matrix.Translate;
+	/* tslint:enable */
 }

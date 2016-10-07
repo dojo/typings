@@ -1,16 +1,20 @@
 declare namespace dojox {
 	namespace gfx {
 		interface Mover {
-			new(shape: Shape, event: MouseEvent, host: Moveable): Mover;
-
 			destroy(): void;
 			onFirstMove(): void;
 			onMouseMove(event: MouseEvent): void;
+		}
+
+		interface MoverConstructor extends dojo._base.DeclareConstructor<Mover> {
+			new(shape: dojox.gfx.shape.Shape, event: MouseEvent, host: Moveable): Mover;
+			prototype: Mover;
 		}
 	}
 }
 
 declare module 'dojox/gfx/Mover' {
-	const mover: dojox.gfx.Mover;
-	export = mover;
+	type Mover = dojox.gfx.Mover;
+	const Mover: dojox.gfx.MoverConstructor;
+	export = Mover;
 }

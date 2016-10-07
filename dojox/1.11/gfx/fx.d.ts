@@ -11,7 +11,7 @@ declare namespace dojox {
 	}
 }
 
-declare module 'dojo/gfx/fx' {
+declare module 'dojox/gfx/fx' {
 	const fx: dojox.gfx.fx.Fx;
 	export = fx;
 }

@@ -29,7 +29,7 @@ declare namespace dojox {
 				add(shape: Shape): this;
 				clear(destroy?: boolean): this;
 				closeBatch(): this;
-				getBoundingBox(): Rectangle;
+				getBoundingBox(): SimpleRectangle;
 				openBatch(): this;
 				remove(shape: Shape, silently?: boolean): this;
 			}
@@ -41,12 +41,12 @@ declare namespace dojox {
 				createImage(): Image;
 				createLine(): Line;
 				createObject(constructor: ShapeConstructor, simpleShape?: SimpleShape): Shape;
-				createPath(): Path;
+				createPath(): dojox.gfx.path.Path;
 				createPolyLine(): PolyLine;
 				createRect(): Rect;
 				createShape(shape: Shape | dojox.gfx.SimpleShape): Shape;
 				createText(): Text;
-				createTextPath(): TextPath;
+				createTextPath(): dojox.gfx.path.TextPath;
 			}
 
 			interface EventsProcessing {
@@ -58,39 +58,42 @@ declare namespace dojox {
 
 			interface Circle extends Shape {}
 			interface CircleConstructor extends ShapeConstructor {
+				new(): Circle;
 				prototype: Circle;
 			}
 			interface Ellipse extends Shape {}
 			interface EllipseConstructor extends ShapeConstructor {
+				new(): Ellipse;
 				prototype: Ellipse;
 			}
 			interface Image extends Shape {}
 			interface ImageConstructor extends ShapeConstructor {
+				new(): Image;
 				prototype: Image;
 			}
 			interface Line extends Shape {}
 			interface LineConstructor extends ShapeConstructor {
+				new(): Line;
 				prototype: Line;
-			}
-			interface Path extends Shape {}
-			interface PathConstructor extends ShapeConstructor {
-				prototype: Path;
 			}
 			interface PolyLine extends Shape {}
 			interface PolyLineConstructor extends ShapeConstructor {
+				new(): PolyLine;
 				prototype: PolyLine;
 			}
 			interface Rect extends Shape {}
 			interface RectConstructor extends ShapeConstructor {
+				new(): Rect;
 				prototype: Rect;
 			}
 			interface Text extends Shape {}
 			interface TextConstructor extends ShapeConstructor {
+				new(): Text;
 				prototype: Text;
 			}
 
 			interface Shape extends EventsProcessing {
-				bbox: Rectangle;
+				bbox: SimpleRectangle;
 				fillStyle: dojox.gfx.Fill;
 				matrix: dojox.gfx.matrix.Matrix2D;
 				parent: Surface;
@@ -104,7 +107,7 @@ declare namespace dojox {
 				applyRightTransform(matrix: dojox.gfx.matrix.MatrixLike): this;
 				applyTransform(matrix: dojox.gfx.matrix.MatrixLike): this;
 				destroy(): void;
-				getBoundingBox(): Rectangle;
+				getBoundingBox(): SimpleRectangle;
 				getClip(): dojox.gfx.shape.Clip;
 				getEventSource(): Node;
 				getFill(): Fill;
@@ -130,17 +133,21 @@ declare namespace dojox {
 			}
 
 			interface ShapeConstructor extends dojo._base.DeclareConstructor<Shape> {
+				nodeType: string;
+
 				new(rawNode?: Node): Shape;
 				prototype: Shape;
 			}
 
-			interface Surface extends EventsProcessing {
+			interface Surface extends Container, Creator, EventsProcessing {
 				isLoaded: boolean;
 				rawNode: Node;
 
 				destroy(): void;
+				getDimensions(): { height: number, width: number};
 				getEventSource(): Node;
 				onLoad(surface: Surface): void;
+				setDimensions(width: number | string, height: number | string): void;
 				whenLoaded(callback: SurfaceCallback): void;
 				whenLoaded(context: Object, callback: string | SurfaceCallback): void;
 			}
@@ -150,7 +157,7 @@ declare namespace dojox {
 			}
 
 			interface SurfaceConstructor extends dojo._base.DeclareConstructor<Surface> {
-				new (): this;
+				new(): Surface;
 				prototype: Surface;
 			}
 		}
@@ -158,6 +165,7 @@ declare namespace dojox {
 }
 
 declare module 'dojox/gfx/shape' {
+	/* tslint:disable:no-unused-variable */
 	type Circle = dojox.gfx.shape.Circle;
 	const Circle: dojox.gfx.shape.CircleConstructor;
 	type Clip = dojox.gfx.shape.Clip;
@@ -170,8 +178,8 @@ declare module 'dojox/gfx/shape' {
 	const Image: dojox.gfx.shape.ImageConstructor;
 	type Line = dojox.gfx.shape.Line;
 	const Line: dojox.gfx.shape.LineConstructor;
-	type Path = dojox.gfx.shape.Path;
-	const Path: dojox.gfx.shape.PathConstructor;
+	type Path = dojox.gfx.path.Path;
+	const Path: dojox.gfx.path.PathConstructor;
 	type PathClip = dojox.gfx.shape.PathClip;
 	type PolyLine = dojox.gfx.shape.PolyLine;
 	const PolyLine: dojox.gfx.shape.PolyLineConstructor;
@@ -185,6 +193,8 @@ declare module 'dojox/gfx/shape' {
 	const Surface: dojox.gfx.shape.SurfaceConstructor;
 	type Text = dojox.gfx.shape.Text;
 	const Text: dojox.gfx.shape.TextConstructor;
+	type TextPath = dojox.gfx.path.TextPath;
+	const TextPath: dojox.gfx.path.TextPathConstructor;
 
 	const fixCallback: (
 		element: dojox.gfx.GfxElement,
@@ -192,4 +202,5 @@ declare module 'dojox/gfx/shape' {
 		scope: Object,
 		method: string | Function
 	) => dojox.gfx.FixTarget;
+	/* tslint:enable */
 }

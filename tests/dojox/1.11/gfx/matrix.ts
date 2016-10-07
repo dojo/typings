@@ -31,8 +31,8 @@ flipX = matrix.flipX;
 let clone: Matrix2D;
 clone = matrix.clone(matrix1);
 
-//let point: gfx.Point;
-let point = matrix.multiplyPoint(5, {x: 1, y: 1});
+let point: gfx.Point;
+point = matrix.multiplyPoint(5, {x: 1, y: 1});
 x = point.x;
 
 point = matrix.multiplyPoint(5, 1, 1);
