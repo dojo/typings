@@ -36,6 +36,12 @@ declare module 'dijit/CalendarLite' {
 	export = CalendarLite;
 }
 
+declare module 'dijit/Destroyable' {
+	type Destroyable = dijit.Destroyable;
+	const Destroyable: dijit.DestroyableConstructor;
+	export = Destroyable;
+}
+
 declare module 'dijit/Dialog' {
 	type Dialog = dijit.Dialog;
 	const Dialog: dijit.DialogConstructor;
