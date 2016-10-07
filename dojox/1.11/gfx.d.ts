@@ -16,8 +16,9 @@
 
 declare namespace dojox {
 	namespace gfx {
+		type ColorLike = dojo._base.ColorValue | dojo._base.ColorValueAlpha | dojo._base.ColorObject | string;
 		type CubicBezierCurve = [number, number, number, number, number, number, number, number];
-		type Fill = dojo._base.Color | LinearFill | RadialFill | Pattern;
+		type Fill = ColorLike | LinearFill | RadialFill | Pattern;
 		type GfxElement = Group | dojox.gfx.shape.Shape | dojox.gfx.shape.Surface;
 		type QuadraticBezierCurve = [number, number, number, number, number, number];
 
@@ -30,11 +31,11 @@ declare namespace dojox {
 		}
 
 		interface Font extends SimpleShape {
-			family: string;
-			size: string;
-			style: string; // TODO: enum
-			variant: string; // TODO: enum
-			weight: string; // TODO: enum
+			family?: string;
+			size?: string;
+			style?: string; // TODO: enum
+			variant?: string; // TODO: enum
+			weight?: string; // TODO: enum
 		}
 
 		interface GradientOffsetColor {
@@ -62,7 +63,7 @@ declare namespace dojox {
 
 		interface LinearGradient extends SimpleShape {
 			angle?: number;
-			colors: GradientOffsetColor[];
+			colors?: GradientOffsetColor[];
 			x1: number;
 			x2: number;
 			y1: number;
@@ -70,11 +71,11 @@ declare namespace dojox {
 		}
 
 		interface Pattern extends SimpleShape {
-			height: number;
+			height?: number;
 			src: string;
-			width: number;
-			x: number;
-			y: number;
+			width?: number;
+			x?: number;
+			y?: number;
 		}
 
 		interface Point {
@@ -83,15 +84,15 @@ declare namespace dojox {
 		}
 
 		interface RadialFill {
-			colors: string[] | dojo._base.Color[];
-			cx: number;
-			cy: number;
-			r: number;
-			type: string; // TODO: enum
+			colors?: string[] | dojo._base.Color[];
+			cx?: number;
+			cy?: number;
+			r?: number;
+			type?: string; // TODO: enum
 		}
 
 		interface RadialGradient extends SimpleShape {
-			colors: GradientOffsetColor[];
+			colors?: GradientOffsetColor[];
 			cx: number;
 			cy: number;
 			r: number;
@@ -117,11 +118,11 @@ declare namespace dojox {
 		}
 
 		interface SimpleImage extends SimpleShape {
-			height: number;
+			height?: number;
 			src: string;
-			width: number;
-			x: number;
-			y: number;
+			width?: number;
+			x?: number;
+			y?: number;
 		}
 
 		interface SimpleLine extends SimpleShape {
@@ -141,44 +142,44 @@ declare namespace dojox {
 
 		interface SimpleRectangle extends SimpleShape {
 			height: number;
-			r: number;
+			r?: number;
 			width: number;
 			x: number;
 			y: number;
 		}
 
 		interface SimpleShape {
-			type: string; // TODO: enum
+			type?: string; // TODO: enum
 		}
 
 		interface SimpleText extends SimpleShape {
-			align: string; // TODO: enum
-			decoration: string;
+			align?: string; // TODO: enum
+			decoration?: string;
 			fitting?: number; // TODO: enum
 			height?: number;
 			kerning: boolean;
 			leading?: number;
-			rotated: boolean;
+			rotated?: boolean;
 			text: string;
 			width?: number;
-			x: number;
-			y: number;
+			x?: number;
+			y?: number;
 		}
 
 		interface SimpleTextPath extends SimpleShape {
-			align: string;
-			decoration: string;
-			kerning: boolean;
-			rotated: boolean;
+			align?: string;
+			decoration?: string;
+			kerning?: boolean;
+			rotated?: boolean;
 			text: string;
 		}
 
 		interface Stroke extends SimpleShape {
-			cap: string; // TODO: enum
-			color: string;
-			join: number;
-			style: string; // TODO: enum
-			width: number;
+			cap?: string; // TODO: enum
+			color?: string;
+			join?: number | string;
+			style?: string; // TODO: enum
+			width?: number;
 		}
 
 		interface Translation {
@@ -192,6 +193,7 @@ declare module 'dojox/gfx' {
 	/* tslint:disable:no-unused-variable */
 	type Circle = dojox.gfx.shape.Circle;
 	const Circle: dojox.gfx.shape.CircleConstructor;
+	type ColorLike = dojox.gfx.ColorLike;
 	type CubicBezierCurve = dojox.gfx.CubicBezierCurve;
 	type Ellipse = dojox.gfx.shape.Ellipse;
 	const Ellipse: dojox.gfx.shape.EllipseConstructor;
@@ -271,7 +273,7 @@ declare module 'dojox/gfx' {
 	const getVectorFont: (url: string) => dojox.gfx.VectorText; // from dojox/gfx/VectorText
 	const makeFontString: (font: dojox.gfx.Font) => string;
 	const makeParameters: (defaults: Object, options: Object) => Object;
-	const normalizeColor: (color: dojo._base.ColorValue | dojo._base.ColorValueAlpha | dojo._base.ColorObject | string) => dojo._base.Color;
+	const normalizeColor: (color: dojox.gfx.ColorLike) => dojo._base.Color;
 	const normalizedLength: (cssLengthString: string) => number;
 	const normalizeParameters: (target: Object, source: Object) => Object;
 	const pt2px: (points: number) => number;

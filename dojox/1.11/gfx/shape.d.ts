@@ -35,18 +35,18 @@ declare namespace dojox {
 			}
 
 			interface Creator {
-				createCircle(): Circle;
-				createEllipse(): Ellipse;
+				createCircle(options: dojox.gfx.SimpleCircle): Circle;
+				createEllipse(options: dojox.gfx.SimpleEllipse): Ellipse;
 				createGroup(): Group;
-				createImage(): Image;
-				createLine(): Line;
+				createImage(options: dojox.gfx.SimpleImage): Image;
+				createLine(options: dojox.gfx.SimpleLine): Line;
 				createObject(constructor: ShapeConstructor, simpleShape?: SimpleShape): Shape;
-				createPath(): dojox.gfx.path.Path;
-				createPolyLine(): PolyLine;
-				createRect(): Rect;
+				createPath(options: dojox.gfx.SimplePath): dojox.gfx.path.Path;
+				createPolyLine(options: dojox.gfx.SimplePolyline): PolyLine;
+				createRect(options: dojox.gfx.SimpleRectangle): Rect;
 				createShape(shape: Shape | dojox.gfx.SimpleShape): Shape;
-				createText(): Text;
-				createTextPath(): dojox.gfx.path.TextPath;
+				createText(options: dojox.gfx.SimpleText): Text;
+				createTextPath(options: dojox.gfx.SimpleTextPath): dojox.gfx.path.TextPath;
 			}
 
 			interface EventsProcessing {
