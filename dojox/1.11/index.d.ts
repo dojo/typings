@@ -6,3 +6,4 @@
 /// <reference path="layout.d.ts" />
 /// <reference path="string.d.ts" />
 /// <reference path="widget.d.ts" />
+/// <reference path="xml.d.ts" />
