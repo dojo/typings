@@ -7,6 +7,6 @@ declare namespace dojox {
 }
 
 declare module 'dojox/xml/DomParser' {
-	const DomParser: dojox.xml.DomParser;
-	export = DomParser;
+	const domParser: dojox.xml.DomParser;
+	export = domParser;
 }
