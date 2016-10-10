@@ -3,6 +3,7 @@
 /// <reference path="color.d.ts" />
 /// <reference path="dojox.d.ts" />
 /// <reference path="gfx.d.ts" />
+/// <reference path="html.d.ts" />
 /// <reference path="layout.d.ts" />
 /// <reference path="string.d.ts" />
 /// <reference path="widget.d.ts" />
