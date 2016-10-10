@@ -18,7 +18,7 @@ declare namespace dojox {
 			}
 
 			interface Metrics {
-				getCachedFontMeasurements(recalculate?: boolean) : FontMeasurements;
+				getCachedFontMeasurements(recalculate?: boolean): FontMeasurements;
 				getFontMeasurements(): FontMeasurements;
 				getScrollbar(): dojo.DomGeometryWidthHeight;
 				getTextBox(text: string, style?: Object, className?: string): dojo.DomGeometryXYBox;
