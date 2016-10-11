@@ -85,6 +85,21 @@ declare module 'intern!tdd' {
 	export = tdd;
 }
 
+declare module 'intern/lib/interfaces/bdd' {
+	import * as bdd from 'intern!bdd';
+	export = bdd;
+}
+
+declare module 'intern/lib/interfaces/object' {
+	import * as object from 'intern!object';
+	export = object;
+}
+
+declare module 'intern/lib/interfaces/tdd' {
+	import * as tdd from 'intern!tdd';
+	export = tdd;
+}
+
 declare module 'intern/chai!' {
 	const chai: Chai.ChaiStatic;
 	export = chai;
