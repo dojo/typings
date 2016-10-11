@@ -83,6 +83,8 @@ declare namespace dojox {
 			y: number;
 		}
 
+		// TODO: is this type necessary? It only matches the logic in 'dojox/gfx/gradutils.getColor',
+		// which itself is not actually called anywhere within 'dojox/gfx'.
 		interface RadialFill {
 			colors?: string[] | dojo._base.Color[];
 			cx?: number;
@@ -99,6 +101,9 @@ declare namespace dojox {
 		}
 
 		// TODO: maybe complete this? (probably not important)
+		// Missing methods: look in 'dojox/gfx/svg.js'
+		// These methods are all defined in each specific renderer, but copied to the base module by
+		// 'dojox/gfx/_base.switchTo', so the typings have been defined in this file (e.g. Group, Rect, Ellipse).
 		interface Renderer {
 			createSurface: CreateSurface;
 			fixTarget: FixTarget;
