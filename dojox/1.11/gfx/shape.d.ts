@@ -26,6 +26,8 @@ declare namespace dojox {
 			}
 
 			interface Container {
+				children: Shape[];
+
 				add(shape: Shape): this;
 				clear(destroy?: boolean): this;
 				closeBatch(): this;
@@ -41,7 +43,7 @@ declare namespace dojox {
 				createImage(options: dojox.gfx.SimpleImage): Image;
 				createLine(options: dojox.gfx.SimpleLine): Line;
 				createObject(constructor: ShapeConstructor, simpleShape?: SimpleShape): Shape;
-				createPath(options: dojox.gfx.SimplePath): dojox.gfx.path.Path;
+				createPath(options: string | dojox.gfx.SimplePath): dojox.gfx.path.Path;
 				createPolyLine(options: dojox.gfx.SimplePolyline): PolyLine;
 				createRect(options: dojox.gfx.SimpleRectangle): Rect;
 				createShape(shape: Shape | dojox.gfx.SimpleShape): Shape;
