@@ -181,7 +181,7 @@ declare namespace dojox {
 
 		interface Stroke extends SimpleShape {
 			cap?: string; // TODO: enum
-			color?: number | string | dojo._base.Color;
+			color?: ColorLike;
 			join?: number | string;
 			style?: string; // TODO: enum
 			width?: number;
