@@ -4,6 +4,7 @@
 import * as gfx from 'dojox/gfx/_base';
 import { CubicBezierCurve, defaultCircle, Group } from 'dojox/gfx/_base';
 import * as shape from 'dojox/gfx/shape';
+import SimpleEllipse = dojox.gfx.SimpleEllipse;
 
 let node: Node;
 let surface: gfx.Surface = gfx.createSurface(node, 100, 100);
@@ -21,7 +22,13 @@ curve2 = [1, 1, 1, 2, 2, 2];
 let group: Group;
 group = new Group();
 group.add(new shape.Circle(defaultCircle));
-group.add(group.createEllipse());
+const options: SimpleEllipse = {
+	cx: 1,
+	cy: 1,
+	rx: 10,
+	ry: 10
+};
+group.add(group.createEllipse(options));
 
 let nodeType: string;
 nodeType = Group.nodeType;

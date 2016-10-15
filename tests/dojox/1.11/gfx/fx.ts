@@ -11,4 +11,3 @@ anim = fx.animateFill({
 		b: 2
 	}
 });
-

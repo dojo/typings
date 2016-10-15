@@ -16,6 +16,7 @@
 		"./dijit/**/*.ts",
 		"./dojox/**/*.ts",
 		"./doh/**/*.ts",
+		"./tests/dojox/**/*.ts",
 		"./typings/index.d.ts"
 	]
 }

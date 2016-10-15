@@ -3,6 +3,7 @@
 import * as gfx from 'dojox/gfx';
 import * as shape from 'dojox/gfx/shape';
 import { Clip, Circle, Surface } from 'dojox/gfx/shape';
+import SimpleCircle = dojox.gfx.SimpleCircle;
 
 let node: Node;
 let surface: Surface;
@@ -10,8 +11,13 @@ surface = gfx.createSurface(node, 100, 100);
 
 let circle: shape.Circle;
 circle = new shape.Circle();
-circle = shape.Creator.createCircle();
-circle = surface.createCircle();
+const options: SimpleCircle = {
+	cx: 1,
+	cy: 1,
+	r: 10
+};
+circle = shape.Creator.createCircle(options);
+circle = surface.createCircle(options);
 
 let clip: Clip;
 circle.setClip(clip);
