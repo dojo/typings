@@ -477,6 +477,12 @@ declare namespace dijit {
 			 */
 			persist: boolean;
 
+			/**
+			 * References the currently selected child widget, if any.
+			 * Adjust selected child with selectChild() method.
+			 */
+			selectedChildWidget: _Widget;
+
 			selectChild<T extends _WidgetBase>(page: T | string, animate: boolean): dojo.promise.Promise<any>;
 
 			forward(): dojo.promise.Promise<any>;
