@@ -147,7 +147,7 @@ declare module 'dijit/form/RangeBoundTextBox' {
 	export = RangeBoundTextBox;
 }
 
-declare module 'dijit/form/Simpconstextarea' {
+declare module 'dijit/form/SimpleTextarea' {
 	type SimpleTextarea = dijit.form.SimpleTextarea;
 	const SimpleTextarea: dijit.form.SimpleTextareaConstructor;
 	export = SimpleTextarea;
