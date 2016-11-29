@@ -50,9 +50,9 @@ declare namespace dojox {
 			}
 
 			interface ScaleAt {
-				(factor: dojox.gfx.Point, point: dojox.gfx.Point): Matrix2D;
 				(factor: number | dojox.gfx.Point, point: dojox.gfx.Point): Matrix2D;
 				(factor: number | dojox.gfx.Point, x: number, y: number): Matrix2D;
+				(factorX: number, factorY: number, point: dojox.gfx.Point): Matrix2D;
 				(factorX: number, factorY: number, x: number, y: number): Matrix2D;
 			}
 
