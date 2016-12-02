@@ -19,6 +19,7 @@ interface SymbolConstructor {
 	isConcatSpreadable: symbol;
 	iterator: symbol;
 	match: symbol;
+	observable: symbol;
 	replace: symbol;
 	search: symbol;
 	species: symbol;
