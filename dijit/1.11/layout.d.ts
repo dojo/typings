@@ -408,6 +408,8 @@ declare namespace dijit {
 			resize(changeSize?: dojo.DomGeometryBox, resultSize?: dojo.DomGeometryWidthHeight): void;
 		}
 
+		interface _ContentPaneResizeMixinConstructor extends _WidgetBaseConstructor<_ContentPaneResizeMixin> { }
+
 		/* dijit/layout/LinkPane */
 
 		interface LinkPane extends ContentPane, _TemplatedMixin {

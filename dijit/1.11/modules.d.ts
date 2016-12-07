@@ -207,6 +207,12 @@ declare module 'dijit/layout/ContentPane' {
 	export = ContentPane;
 }
 
+declare module 'dijit/layout/_ContentPaneResizeMixin' {
+	type _ContentPaneResizeMixin = dijit.layout._ContentPaneResizeMixin;
+	const _ContentPaneResizeMixin: dijit.layout._ContentPaneResizeMixinConstructor;
+	export = _ContentPaneResizeMixin;
+}
+
 declare module 'dijit/layout/BorderContainer' {
 	type BorderContainer = dijit.layout.BorderContainer;
 	const BorderContainer: dijit.layout.BorderContainerConstructor;
