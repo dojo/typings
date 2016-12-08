@@ -1195,21 +1195,19 @@ declare namespace dijit {
 
 	interface PlaceRectangle extends PlacePosition, PlaceWidthHeight { }
 
-	/* TODO: uncomment for TS 1.8 */
-	/* type PlaceCorner = 'BL' | 'TR' | 'BR' | 'TL'; */
+	type PlaceCorner = 'BL' | 'TR' | 'BR' | 'TL';
 
-	/* TODO: uncomment for TS 1.8 */
-	/* type PlacePosistions = 'before' | 'after' | 'before-centered' | 'after-centered' | 'above-centered' | 'above' | 'above-alt' | 'below-centered' | 'below' | 'below-alt'; */
+	type PlacePositions = 'before' | 'after' | 'before-centered' | 'after-centered' | 'above-centered' | 'above' | 'above-alt' | 'below-centered' | 'below' | 'below-alt';
 
 	interface PlaceChoice {
-		corner: /* PlaceCorner */ string;
+		corner: PlaceCorner;
 		pos: PlacePosition;
-		aroundCorner?: /* PlaceCorner */ string;
+		aroundCorner?: PlaceCorner;
 	}
 
 	interface PlaceLocation extends PlaceRectangle {
-		corner: /* PlaceCorner */ string;
-		aroundCorner: /* PlaceCorner */ string;
+		corner: PlaceCorner;
+		aroundCorner: PlaceCorner;
 		overflow: number;
 		spaceAvailable: PlaceWidthHeight;
 	}
@@ -1226,13 +1224,13 @@ declare namespace dijit {
 		 *
 		 * Node is assumed to be absolutely or relatively positioned.
 		 */
-		at(node: Element, pos?: PlacePosition, corners?: /* PlaceCorner */ string[], padding?: PlacePosition, layoutNode?: LayoutNodeFunction): PlaceLocation;
+		at(node: Element, pos?: PlacePosition, corners?: PlaceCorner[], padding?: PlacePosition, layoutNode?: LayoutNodeFunction): PlaceLocation;
 
 		/**
 		 * Position node adjacent or kitty-corner to anchor
 		 * such that it's fully visible in viewport.
 		 */
-		around(node: Element, anchor: Element | PlaceRectangle, positions: /* PlacePositions */ string[], leftToRight?: boolean, layoutNode?: LayoutNodeFunction): PlaceLocation;
+		around(node: Element, anchor: Element | PlaceRectangle, positions: PlacePositions[], leftToRight?: boolean, layoutNode?: LayoutNodeFunction): PlaceLocation;
 	}
 
 	/* dijit/popup */
@@ -1571,7 +1569,7 @@ declare namespace dijit {
 		 *
 		 * This is called from the dijit.popup code, and should not be called directly.
 		 */
-		orient(node: Node | HTMLElement, aroundCorner: string, tooltipCorner: string): void;
+		orient(node: Node | HTMLElement, aroundCorner: PlaceCorner, tooltipCorner: PlaceCorner): void;
 
 		/**
 		 * Focus on first field
@@ -1584,12 +1582,9 @@ declare namespace dijit {
 		 * This is called from the dijit.popup code, and should not be called directly.
 		 */
 		onOpen(pos: {
-			aroundCorner: string
-			aroundNodePos: {
-				x: number
-				y: number
-			}
-			corner: string
+			aroundCorner: PlaceCorner
+			aroundNodePos: PlacePosition
+			corner: PlaceCorner
 			x: number
 			y: number
 		}): void;
