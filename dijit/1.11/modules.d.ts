@@ -6,6 +6,11 @@ declare module 'dijit/_WidgetBase' {
 	export = _WidgetBase;
 }
 
+declare module 'dijit/_AttachMixin' {
+	const _AttachMixin: dijit._AttachMixin;
+	export = _AttachMixin;
+}
+
 declare module 'dijit/_TemplatedMixin' {
 	type _TemplatedMixin = dijit._TemplatedMixin;
 	const _TemplatedMixin: dijit._TemplatedMixinConstructor;
