@@ -1,6 +1,6 @@
 declare namespace dijit {
 	/* Global Dijit Interface */
-	interface Dijit {}
+	interface Dijit { }
 
 	/* dijit/_AttachMixin */
 
@@ -11,7 +11,7 @@ declare namespace dijit {
 		dojoAttachPoint: string;
 	}
 
-	interface _AttachMixin {}
+	interface _AttachMixin { }
 
 	/* dijit/_BidiMixin */
 
@@ -153,7 +153,7 @@ declare namespace dijit {
 	}
 
 	/* dijit/_FocusMixin */
-	interface _FocusMixin {}
+	interface _FocusMixin { }
 
 	interface _WidgetBase extends dojo.Stateful, Destroyable {
 		/**
@@ -361,7 +361,7 @@ declare namespace dijit {
 		 * Static method to get a template based on the templatePath or
 		 * templateString key
 		 */
-		getCachedTemplate(templateString: string, alwaysUseString: string, doc?: Document): string|HTMLElement;
+		getCachedTemplate(templateString: string, alwaysUseString: string, doc?: Document): string | HTMLElement;
 	}
 
 	/* dijit/_Widget */
@@ -756,7 +756,7 @@ declare namespace dijit {
 		set(values: Object): this;
 	}
 
-	interface _MonthDropDownButtonConstructor extends _WidgetBaseConstructor<_MonthDropDownButton> {}
+	interface _MonthDropDownButtonConstructor extends _WidgetBaseConstructor<_MonthDropDownButton> { }
 
 	interface _MonthDropDown extends _Widget, _TemplatedMixin, _CssStateMixin {
 		months: string[];
@@ -773,7 +773,7 @@ declare namespace dijit {
 		set(values: Object): this;
 	}
 
-	interface _MonthDropDownConstructor extends _WidgetBaseConstructor<_MonthDropDown> {}
+	interface _MonthDropDownConstructor extends _WidgetBaseConstructor<_MonthDropDown> { }
 
 	interface Calendar extends CalendarLite, _Widget, _CssStateMixin {
 
@@ -1121,7 +1121,7 @@ declare namespace dijit {
 		 */
 		resize(dim?: dojo.DomGeometryWidthHeight): void;
 
-		destroy(): void;
+		destroy(preserveDom?: boolean): void;
 	}
 
 	interface _DialogBaseConstructor extends _WidgetBaseConstructor<_DialogBase> { }
@@ -1195,21 +1195,19 @@ declare namespace dijit {
 
 	interface PlaceRectangle extends PlacePosition, PlaceWidthHeight { }
 
-	/* TODO: uncomment for TS 1.8 */
-	/* type PlaceCorner = 'BL' | 'TR' | 'BR' | 'TL'; */
+	type PlaceCorner = 'BL' | 'TR' | 'BR' | 'TL';
 
-	/* TODO: uncomment for TS 1.8 */
-	/* type PlacePosistions = 'before' | 'after' | 'before-centered' | 'after-centered' | 'above-centered' | 'above' | 'above-alt' | 'below-centered' | 'below' | 'below-alt'; */
+	type PlacePositions = 'before' | 'after' | 'before-centered' | 'after-centered' | 'above-centered' | 'above' | 'above-alt' | 'below-centered' | 'below' | 'below-alt';
 
 	interface PlaceChoice {
-		corner: /* PlaceCorner */ string;
+		corner: PlaceCorner;
 		pos: PlacePosition;
-		aroundCorner?: /* PlaceCorner */ string;
+		aroundCorner?: PlaceCorner;
 	}
 
 	interface PlaceLocation extends PlaceRectangle {
-		corner: /* PlaceCorner */ string;
-		aroundCorner: /* PlaceCorner */ string;
+		corner: PlaceCorner;
+		aroundCorner: PlaceCorner;
 		overflow: number;
 		spaceAvailable: PlaceWidthHeight;
 	}
@@ -1226,13 +1224,13 @@ declare namespace dijit {
 		 *
 		 * Node is assumed to be absolutely or relatively positioned.
 		 */
-		at(node: Element, pos?: PlacePosition, corners?: /* PlaceCorner */ string[], padding?: PlacePosition, layoutNode?: LayoutNodeFunction): PlaceLocation;
+		at(node: Element, pos?: PlacePosition, corners?: PlaceCorner[], padding?: PlacePosition, layoutNode?: LayoutNodeFunction): PlaceLocation;
 
 		/**
 		 * Position node adjacent or kitty-corner to anchor
 		 * such that it's fully visible in viewport.
 		 */
-		around(node: Element, anchor: Element | PlaceRectangle, positions: /* PlacePositions */ string[], leftToRight?: boolean, layoutNode?: LayoutNodeFunction): PlaceLocation;
+		around(node: Element, anchor: Element | PlaceRectangle, positions: PlacePositions[], leftToRight?: boolean, layoutNode?: LayoutNodeFunction): PlaceLocation;
 	}
 
 	/* dijit/popup */
@@ -1533,4 +1531,71 @@ declare namespace dijit {
 		hide(aroundNode: PlaceRectangle): void;
 	}
 
+	/* dijit/TooltipDialog */
+
+	interface TooltipDialog extends layout.ContentPane, _TemplatedMixin, form._FormMixin, _DialogMixin {
+		/**
+		 * Description of tooltip dialog (required for a11y)
+		 */
+		title: string;
+
+		/**
+		 * Don't change this parameter from the default value.
+		 * This ContentPane parameter doesn't make sense for TooltipDialog, since TooltipDialog
+		 * is never a child of a layout container, nor can you specify the size of
+		 * TooltipDialog in order to control the size of an inner widget.
+		 */
+		doLayout: boolean;
+
+		/**
+		 * A Toggle to modify the default focus behavior of a Dialog, which
+		 * is to focus on the first dialog element after opening the dialog.
+		 * False will disable autofocusing.  Default: true.
+		 */
+		autofocus: boolean;
+
+		/**
+		 * The pointer to the first focusable node in the dialog.
+		 */
+		_firstFocusItem: any;
+
+		/**
+		 * The pointer to which node has focus prior to our dialog.
+		 */
+		_lastFocusItem: any;
+
+		/**
+		 * Configure widget to be displayed in given position relative to the button.
+		 *
+		 * This is called from the dijit.popup code, and should not be called directly.
+		 */
+		orient(node: Node | HTMLElement, aroundCorner: PlaceCorner, tooltipCorner: PlaceCorner): void;
+
+		/**
+		 * Focus on first field
+		 */
+		focus(): void;
+
+		/**
+		 * Called when dialog is displayed.
+		 *
+		 * This is called from the dijit.popup code, and should not be called directly.
+		 */
+		onOpen(pos: {
+			aroundCorner: PlaceCorner
+			aroundNodePos: PlacePosition
+			corner: PlaceCorner
+			x: number
+			y: number
+		}): void;
+
+		/**
+		 * Handler for keydown events
+		 *
+		 * Keep keyboard focus in dialog; close dialog on escape key
+		 */
+		_onKey(evt: KeyboardEvent): void;
+	}
+
+	interface TooltipDialogConstructor extends _WidgetBaseConstructor<TooltipDialog> { }
 }

@@ -64,6 +64,12 @@ declare module 'dijit/Tooltip' {
 	export = Tooltip;
 }
 
+declare module 'dijit/TooltipDialog' {
+	type TooltipDialog = dijit.TooltipDialog;
+	const TooltipDialog: dijit.TooltipDialogConstructor;
+	export = TooltipDialog;
+}
+
 declare module 'dijit/form/_FormMixin' {
 	const _FormMixin: dijit.form._FormMixin;
 	export = _FormMixin;

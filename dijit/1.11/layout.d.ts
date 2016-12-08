@@ -318,8 +318,6 @@ declare namespace dijit {
 			 */
 			cancel(): void;
 
-			destroy(): void;
-
 			/**
 			 * Destroy the ContentPane and its contents
 			 */
