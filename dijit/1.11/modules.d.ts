@@ -58,6 +58,11 @@ declare module 'dijit/popup' {
 	export = popup;
 }
 
+declare module 'dijit/registry' {
+	const registry: dijit.Registry;
+	export = registry;
+}
+
 declare module 'dijit/Tooltip' {
 	type Tooltip = dijit.Tooltip;
 	const Tooltip: dijit.TooltipConstructor;
