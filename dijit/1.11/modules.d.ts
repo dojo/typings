@@ -1,5 +1,11 @@
 /// <reference path="index.d.ts" />
 
+declare module 'dijit/_Widget' {
+	type _Widget = dijit._Widget;
+	const _Widget: dijit._WidgetBaseConstructor<_Widget>;
+	export = _Widget;
+}
+
 declare module 'dijit/_WidgetBase' {
 	type _WidgetBase = dijit._WidgetBase;
 	const _WidgetBase: dijit._WidgetBaseConstructor<any>;
