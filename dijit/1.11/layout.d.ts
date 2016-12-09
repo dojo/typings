@@ -294,7 +294,6 @@ declare namespace dijit {
 			template: boolean;
 
 			markupFactory<T>(params: any, node: HTMLElement, ctor: dojo.GenericConstructor<T>): T;
-			create(params: any, srcNodeRef: HTMLElement): void;
 			postMixInProperties(): void;
 			buildRendering(): void;
 
@@ -317,11 +316,6 @@ declare namespace dijit {
 			 * Cancels an in-flight download of content
 			 */
 			cancel(): void;
-
-			/**
-			 * Destroy the ContentPane and its contents
-			 */
-			destroyRecursive(): void;
 
 			/**
 			 * [Re]download contents of href and display

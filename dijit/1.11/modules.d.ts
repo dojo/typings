@@ -79,6 +79,12 @@ declare module 'dijit/registry' {
 	export = registry;
 }
 
+declare module 'dijit/TitlePane' {
+	type TitlePane = dijit.TitlePane;
+	const TitlePane: dijit.TitlePaneConstructor;
+	export = TitlePane;
+}
+
 declare module 'dijit/Tooltip' {
 	type Tooltip = dijit.Tooltip;
 	const Tooltip: dijit.TooltipConstructor;

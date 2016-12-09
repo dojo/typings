@@ -1416,6 +1416,59 @@ declare namespace dijit {
 		getEnclosingWidgets(node: Node): _WidgetBase;
 	}
 
+	/* dijit/TitlePane */
+
+	interface TitlePane extends dijit.layout.ContentPane, _TemplatedMixin, _CssStateMixin {
+		/**
+		 * Whether pane can be opened or closed by clicking the title bar.
+		 */
+		toggleable: boolean;
+
+		/**
+		 * Tabindex setting for the title (so users can tab to the title then use space/enter to open/close the title pane)
+		 */
+		tabIndex: string;
+
+		/**
+		 * Time in milliseconds to fade in/fade out
+		 */
+		duration: number;
+
+		/**
+		 * Don't change this parameter from the default value.
+		 *
+		 * This ContentPane parameter doesn't make sense for TitlePane, since TitlePane is never a child of a layout container, nor should TitlePane try to control the size of an inner widget.
+		 */
+		doLayout: boolean;
+
+		/**
+		 * Switches between opened and closed state
+		 */
+		toggle(): void;
+
+		/**
+		 * Set the open/close css state for the TitlePane
+		 */
+		_setCss(): void;
+
+		/**
+		 * Handler for when user hits a key
+		 */
+		_onTitleKey(e: Event): void;
+
+		/**
+		 * Handler when user clicks the title bar
+		 */
+		_onTitleClick(): void;
+
+		/**
+		 * Deprecated. Use set('title', ...) instead.
+		 */
+		setTitle(): void;
+	}
+
+	interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> {}
+
 	/* dijit/Tooltip */
 
 	interface Tooltip extends _Widget {
