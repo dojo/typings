@@ -464,7 +464,7 @@ declare namespace dojo {
 		}
 
 		interface Observable {
-			<T, Q extends api.BaseQueryType, O extends api.QueryOptions, S extends api.Store<T, Q, O>>(store: S): ObservableMixin<T, Q, O> & S;
+			new <T, Q extends api.BaseQueryType, O extends api.QueryOptions, S extends api.Store<T, Q, O>>(store: S): ObservableMixin<T, Q, O> & S;
 		}
 
 	}
