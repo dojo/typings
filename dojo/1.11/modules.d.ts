@@ -5,6 +5,11 @@ declare module 'dojo/_base/array' {
 	export = dojoArray;
 }
 
+declare module 'dojo/_base/browser' {
+	const ready: dojo.Ready;
+	export = ready;
+}
+
 declare module 'dojo/_base/Color' {
 	type Color = dojo._base.Color;
 	const Color: dojo._base.ColorConstructor;
