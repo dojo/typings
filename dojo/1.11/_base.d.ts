@@ -540,10 +540,10 @@ declare namespace dojo {
 			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
 			<A, B>(className: string, superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
 			<A, B>(superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
-			<A>(className: string, superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: any): DeclareConstructor<A>;
-			<A>(superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: any): DeclareConstructor<A>;
-			(className: string, superClass: any[], props: any): DeclareConstructor<any>;
-			(superClass: any[], props: any): DeclareConstructor<any>;
+			<A>(className: string, superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: A): DeclareConstructor<A>;
+			<A>(superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: A): DeclareConstructor<A>;
+			(className: string, superClass: any | any[], props: any): DeclareConstructor<any>;
+			(superClass: any | any[], props: any): DeclareConstructor<any>;
 
 			/**
 			 * Mix in properties skipping a constructor and decorating functions
