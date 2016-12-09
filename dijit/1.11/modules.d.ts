@@ -11,6 +11,11 @@ declare module 'dijit/_AttachMixin' {
 	export = _AttachMixin;
 }
 
+declare module 'dijit/_CssStateMixin' {
+	const _CssStateMixin: dijit._CssStateMixin;
+	export = _CssStateMixin;
+}
+
 declare module 'dijit/_TemplatedMixin' {
 	type _TemplatedMixin = dijit._TemplatedMixin;
 	const _TemplatedMixin: dijit._TemplatedMixinConstructor;
