@@ -64,6 +64,12 @@ declare module 'dijit/Dialog' {
 	export = Dialog;
 }
 
+declare module 'dijit/MenuItem' {
+	type MenuItem = dijit.MenuItem;
+	const MenuItem: dijit.MenuItemConstructor;
+	export = MenuItem;
+}
+
 declare module 'dijit/place' {
 	const place: dijit.Place;
 	export = place;
