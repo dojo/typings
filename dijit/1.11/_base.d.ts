@@ -80,5 +80,22 @@ declare namespace dijit {
 			 */
 			unregisterWin(handle?: RemoveHandle): void;
 		}
+
+		/* dijit/_base/manager */
+
+		/**
+		 * Deprecated.  Shim to methods on registry, plus a few other declarations.
+		 *
+		 * New code should access dijit/registry directly when possible.
+		 */
+		interface manager {
+			// byId: typeof dijit.Registry.byId;
+			// getUniqueId: typeof dijit.Registry.getUniqueId;
+			// findWidgets: typeof dijit.Registry.findWidgets;
+			// _destroyAll: typeof dijit.Registry._destroyAll;
+			// byNode: typeof dijit.Registry.byNode;
+			// getEnclosingWidget: typeof Registry.getEnclosingWidget;
+			defaultDuration: number;
+		}
 	}
 }
