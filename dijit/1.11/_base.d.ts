@@ -12,7 +12,7 @@ declare namespace dijit {
 		 *
 		 * New code should access dijit/focus directly.
 		 */
-		interface focus {
+		interface Focus {
 			/**
 			 * Currently focused item on screen
 			 */
@@ -88,7 +88,7 @@ declare namespace dijit {
 		 *
 		 * New code should access dijit/registry directly when possible.
 		 */
-		interface manager {
+		interface Manager {
 			byId: typeof dijit.Registry.byId;
 			getUniqueId: typeof dijit.Registry.getUniqueId;
 			findWidgets: typeof dijit.Registry.findWidgets;
@@ -105,7 +105,7 @@ declare namespace dijit {
 		/**
 		 * Deprecated back compatibility module, new code should use dijit/place directly instead of using this module.
 		 */
-		interface place {
+		interface Place {
 			/**
 			 * Deprecated method to return the dimensions and scroll position of the viewable area of a browser window.
 			 *
@@ -149,28 +149,28 @@ declare namespace dijit {
 		/**
 		 * Deprecated.   Old module for popups, new code should use dijit/popup directly.
 		 */
-		interface popup extends dijit.popup { }
+		interface Popup extends dijit.popup { }
 
 		/* dijit/_base/scroll */
 
 		/**
 		 * Back compatibility module, new code should use windowUtils directly instead of using this module.
 		 */
-		interface scroll { }
+		interface Scroll { }
 
 		/* dijit/_base/sniff */
 
 		/**
 		 * Deprecated, back compatibility module, new code should require dojo/uacss directly instead of this module.
 		 */
-		interface sniff { }
+		interface Sniff { }
 
 		/* dijit/_base/typematic */
 
 		/**
 		 * Deprecated, for back-compat, just loads top level module
 		 */
-		interface typematic { }
+		interface Typematic { }
 
 		/* dijit/_base/wai */
 
@@ -180,7 +180,7 @@ declare namespace dijit {
 		 *
 		 * Also loads hccss to apply dj_a11y class to root node if machine is in high-contrast mode.
 		 */
-		interface wai {
+		interface Wai {
 			/**
 			 * Determines if an element has a particular role.
 			 */
@@ -236,6 +236,6 @@ declare namespace dijit {
 		/**
 		 * Back compatibility module, new code should use windowUtils directly instead of using this module.
 		 */
-		interface window { }
+		interface Window { }
 	}
 }
