@@ -164,5 +164,12 @@ declare namespace dijit {
 		 * Deprecated, back compatibility module, new code should require dojo/uacss directly instead of this module.
 		 */
 		interface sniff { }
+
+		/* dijit/_base/typematic */
+
+		/**
+		 * Deprecated, for back-compat, just loads top level module
+		 */
+		interface typematic { }
 	}
 }
