@@ -91,6 +91,51 @@ declare module 'dijit/TooltipDialog' {
 	export = TooltipDialog;
 }
 
+declare module 'dijit/_base/focus' {
+	const focus: dijit._base.focus;
+	export = focus;
+}
+
+declare module 'dijit/_base/manager' {
+	const manager: dijit._base.manager;
+	export = manager;
+}
+
+declare module 'dijit/_base/place' {
+	const place: dijit._base.place;
+	export = place;
+}
+
+declare module 'dijit/_base/popup' {
+	const popup: dijit._base.popup;
+	export = popup;
+}
+
+declare module 'dijit/_base/scroll' {
+	const scroll: dijit._base.scroll;
+	export = scroll;
+}
+
+declare module 'dijit/_base/sniff' {
+	const sniff: dijit._base.sniff;
+	export = sniff;
+}
+
+declare module 'dijit/_base/typematic' {
+	const typematic: dijit._base.typematic;
+	export = typematic;
+}
+
+declare module 'dijit/_base/wai' {
+	const wai: dijit._base.wai;
+	export = wai;
+}
+
+declare module 'dijit/_base/window' {
+	const window: dijit._base.window;
+	export = window;
+}
+
 declare module 'dijit/form/_FormMixin' {
 	const _FormMixin: dijit.form._FormMixin;
 	export = _FormMixin;
