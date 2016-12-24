@@ -97,5 +97,51 @@ declare namespace dijit {
 			// getEnclosingWidget: typeof Registry.getEnclosingWidget;
 			defaultDuration: number;
 		}
+
+		/* dijit/_base/place */
+
+		type placeOnScreenAround = (node: Element, aroundNode: Element, aroundCorners: Object | any[], layoutNode?: dijit.LayoutNodeFunction) => void;
+
+		/**
+		 * Deprecated back compatibility module, new code should use dijit/place directly instead of using this module.
+		 */
+		interface place {
+			/**
+			 * Deprecated method to return the dimensions and scroll position of the viewable area of a browser window.
+			 *
+			 * New code should use windowUtils.getBox()
+			 */
+			getViewport(): dojo.DomGeometryBox;
+
+			placeOnScreen: typeof dijit.Place.at;
+
+			/**
+			 * Like dijit.placeOnScreenAroundNode(), except it accepts an arbitrary object for the "around" argument and finds a proper processor to place a node.
+			 *
+			 * Deprecated, new code should use dijit/place.around() instead.
+			 */
+			placeOnScreenAroundElement: placeOnScreenAround;
+
+			/**
+			 * Position node adjacent or kitty-corner to aroundNode such that it's fully visible in viewport.
+			 *
+			 * Deprecated, new code should use dijit/place.around() instead.
+			 */
+			placeOnScreenAroundNode: placeOnScreenAround;
+
+			/**
+			 * Like dijit.placeOnScreenAroundNode(), except that the "around" parameter is an arbitrary rectangle on the screen (x, y, width, height) instead of a dom node.
+			 *
+			 * Deprecated, new code should use dijit/place.around() instead.
+			 */
+			placeOnScreenAroundRectangle: placeOnScreenAround;
+
+			/**
+			 * Deprecated method, unneeded when using dijit/place directly.
+			 *
+			 * Transforms the passed array of preferred positions into a format suitable for passing as the aroundCorners argument to dijit/place.placeOnScreenAroundElement.
+			 */
+			getPopupAroundAlignment(position: string[], leftToRight?: boolean): { [s: dijit.PlaceCorner]: dijit.PlaceCorner };
+		}
 	}
 }
