@@ -171,5 +171,64 @@ declare namespace dijit {
 		 * Deprecated, for back-compat, just loads top level module
 		 */
 		interface typematic { }
+
+		/* dijit/_base/wai */
+
+		/**
+		 * Deprecated methods for setting/getting wai roles and states.
+		 * New code should call setAttribute()/getAttribute() directly.
+		 *
+		 * Also loads hccss to apply dj_a11y class to root node if machine is in high-contrast mode.
+		 */
+		interface wai {
+			/**
+			 * Determines if an element has a particular role.
+			 */
+			hasWaiRole(elem: Element, role: string): boolean;
+
+			/**
+			 * Gets the role for an element (which should be a wai role).
+			 */
+			getWaiRole(elem: Element): string;
+
+			/**
+			 * Sets the role on an element.
+			 */
+			setWaiRole(elem: Element, role: string): void;
+
+			/**
+			 * Removes the specified role from an element.
+			 * Removes role attribute if no specific role provided (for backwards compat.)
+			 */
+			removeWaiRole(elem: Element, role: string): void;
+
+			/**
+			 * Determines if an element has a given state.
+			 *
+			 * Checks for an attribute called "aria-"+state.
+			 */
+			hasWaiState(elem: Element, state: string): boolean;
+
+			/**
+			 * Gets the value of a state on an element.
+			 *
+			 * Checks for an attribute called "aria-"+state.
+			 */
+			getWaiState(elem: Element, state: string): string;
+
+			/**
+			 * Sets a state on an element.
+			 *
+			 * Sets an attribute called "aria-"+state.
+			 */
+			setWaiState(elem: Element, state: string, value: string): void;
+
+			/**
+			 * Removes a state from an element.
+			 *
+			 * Sets an attribute called "aria-"+state.
+			 */
+			removeWaiState(elem: Element, state: string): void;
+		}
 	}
 }
