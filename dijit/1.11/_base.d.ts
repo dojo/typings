@@ -89,12 +89,12 @@ declare namespace dijit {
 		 * New code should access dijit/registry directly when possible.
 		 */
 		interface manager {
-			// byId: typeof dijit.Registry.byId;
-			// getUniqueId: typeof dijit.Registry.getUniqueId;
-			// findWidgets: typeof dijit.Registry.findWidgets;
-			// _destroyAll: typeof dijit.Registry._destroyAll;
-			// byNode: typeof dijit.Registry.byNode;
-			// getEnclosingWidget: typeof Registry.getEnclosingWidget;
+			byId: typeof dijit.Registry.byId;
+			getUniqueId: typeof dijit.Registry.getUniqueId;
+			findWidgets: typeof dijit.Registry.findWidgets;
+			_destroyAll: typeof dijit.Registry._destroyAll;
+			byNode: typeof dijit.Registry.byNode;
+			getEnclosingWidget: typeof Registry.getEnclosingWidget;
 			defaultDuration: number;
 		}
 
@@ -230,5 +230,12 @@ declare namespace dijit {
 			 */
 			removeWaiState(elem: Element, state: string): void;
 		}
+
+		/* dijit/_base/window */
+
+		/**
+		 * Back compatibility module, new code should use windowUtils directly instead of using this module.
+		 */
+		interface window { }
 	}
 }
