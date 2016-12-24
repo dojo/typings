@@ -96,6 +96,12 @@ declare module 'dijit/form/_FormMixin' {
 	export = _FormMixin;
 }
 
+declare module 'dijit/form/_FormValueWidget' {
+	type _FormValueWidget = dijit.form._FormValueWidget;
+	const _FormValueWidget: dijit.form._FormValueWidgetConstructor;
+	export = _FormValueWidget;
+}
+
 declare module 'dijit/form/Button' {
 	type Button = dijit.form.Button;
 	const Button: dijit.form.ButtonConstructor;
