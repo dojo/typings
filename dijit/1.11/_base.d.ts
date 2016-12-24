@@ -150,5 +150,12 @@ declare namespace dijit {
 		 * Deprecated.   Old module for popups, new code should use dijit/popup directly.
 		 */
 		interface popup extends dijit.popup { }
+
+		/* dijit/_base/scroll */
+
+		/**
+		 * Back compatibility module, new code should use windowUtils directly instead of using this module.
+		 */
+		interface scroll { }
 	}
 }
