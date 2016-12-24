@@ -157,5 +157,12 @@ declare namespace dijit {
 		 * Back compatibility module, new code should use windowUtils directly instead of using this module.
 		 */
 		interface scroll { }
+
+		/* dijit/_base/sniff */
+
+		/**
+		 * Deprecated, back compatibility module, new code should require dojo/uacss directly instead of this module.
+		 */
+		interface sniff { }
 	}
 }
