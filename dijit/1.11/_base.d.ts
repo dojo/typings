@@ -143,5 +143,12 @@ declare namespace dijit {
 			 */
 			getPopupAroundAlignment(position: string[], leftToRight?: boolean): { [s: dijit.PlaceCorner]: dijit.PlaceCorner };
 		}
+
+		/* dijit/_base/popup */
+
+		/**
+		 * Deprecated.   Old module for popups, new code should use dijit/popup directly.
+		 */
+		interface popup extends dijit.popup { }
 	}
 }
