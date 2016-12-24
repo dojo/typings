@@ -1041,6 +1041,165 @@ declare namespace dijit {
 		new (): Destroyable;
 	}
 
+	/** dijit/_KeyNavMixin */
+
+	/**
+	 * A mixin to allow arrow key and letter key navigation of child or descendant widgets.
+	 * It can be used by dijit/_Container based widgets with a flat list of children, or more complex widgets like dijit/Tree.
+	 *
+	 * To use this mixin, the subclass must:
+	 *
+	 * 	- Implement  _getNext(), _getFirst(), _getLast(), _onLeftArrow(), _onRightArrow() _onDownArrow(), _onUpArrow() methods to handle home/end/left/right/up/down keystrokes. Next and previous in this context refer to a linear ordering of the descendants used by letter key search.
+	 * 	- Set all descendants' initial tabIndex to "-1"; both initial descendants and any descendants added later, by for example addChild()
+	 * 	- Define childSelector to a function or string that identifies focusable descendant widgets
+	 *
+	 * Also, child widgets must implement a focus() method.
+	 */
+	interface _KeyNavMixin extends _FocusMixin {
+		/**
+		 * Tab index of the container; same as HTML tabIndex attribute.
+		 * Note then when user tabs into the container, focus is immediately moved to the first item in the container.
+		 */
+		tabIndex: string;
+
+		/**
+		 * Selector (passed to on.selector()) used to identify what to treat as a child widget.   Used to monitor focus events and set this.focusedChild.   Must be set by implementing class.   If this is a string (ex: "> *") then the implementing class must require dojo/query.
+		 */
+		childSelector: string | Function | null;
+
+		/**
+		 * Called on left arrow key, or right arrow key if widget is in RTL mode.
+		 * Should go back to the previous child in horizontal container widgets like Toolbar.
+		 */
+		_onLeftArrow(): void;
+
+		/**
+		 * Called on right arrow key, or left arrow key if widget is in RTL mode.
+		 * Should go to the next child in horizontal container widgets like Toolbar.
+		 */
+		_onRightArrow(): void;
+
+		/**
+		 * Called on up arrow key. Should go to the previous child in vertical container widgets like Menu.
+		 */
+		_onUpArrow(): void;
+
+		/**
+		 * Called on down arrow key. Should go to the next child in vertical container widgets like Menu.
+		 */
+		_onDownArrow(): void;
+
+		/**
+		 * Default focus() implementation: focus the first child.
+		 */
+		focus(): void;
+
+		/**
+		 * Returns first child that can be focused.
+		 */
+		_getFirstFocusableChild(): _WidgetBase;
+
+		/**
+		 * Returns last child that can be focused.
+		 */
+		_getLastFocusableChild(): _WidgetBase;
+
+		/**
+		 * Focus the first focusable child in the container.
+		 */
+		focusFirstChild(): void;
+
+		/**
+		 * Focus the last focusable child in the container.
+		 */
+		focusLastChild(): void;
+
+		/**
+		 * Focus specified child widget.
+		 *
+		 * @param widget Reference to container's child widget
+		 * @param last If true and if widget has multiple focusable nodes, focus the last one instead of the first one
+		 */
+		focusChild(widget: _WidgetBase, last?: boolean): void;
+
+		/**
+		 * Handler for when the container itself gets focus.
+		 *
+		 * Initially the container itself has a tabIndex, but when it gets focus, switch focus to first child.
+		 */
+		_onContainerFocus(evt: Event): void;
+
+		/**
+		 * Called when a child widget gets focus, either by user clicking it, or programatically by arrow key handling code.
+		 *
+		 * It marks that the current node is the selected one, and the previously selected node no longer is.
+		 */
+		_onChildFocus(child?: _WidgetBase): void;
+
+		_searchString: string;
+
+		multiCharSearchDuration: number;
+
+		/**
+		 * When a key is pressed that matches a child item, this method is called so that a widget can take appropriate action is necessary.
+		 */
+		onKeyboardSearch(tem: _WidgetBase, evt: Event, searchString: string, numMatches: number): void;
+
+		/**
+		 * Compares the searchString to the widget's text label, returning:
+		 *
+		 * 	* -1: a high priority match  and stop searching
+		 * 	* 0: not a match
+		 * 	* 1: a match but keep looking for a higher priority match
+		 */
+		_keyboardSearchCompare(item: _WidgetBase, searchString: string): -1 | 0 | 1;
+
+		/**
+		 * When a key is pressed, if it's an arrow key etc. then it's handled here.
+		 */
+		_onContainerKeydown(evt: Event): void;
+
+		/**
+		 * When a printable key is pressed, it's handled here, searching by letter.
+		 */
+		_onContainerKeypress(evt: Event): void;
+
+		/**
+		 * Perform a search of the widget's options based on the user's keyboard activity
+		 *
+		 * Called on keypress (and sometimes keydown), searches through this widget's children looking for items that match the user's typed search string.  Multiple characters typed within 1 sec of each other are combined for multicharacter searching.
+		 */
+		_keyboardSearch(evt: Event, keyChar: string): void;
+
+		/**
+		 * Called when focus leaves a child widget to go to a sibling widget.
+		 */
+		_onChildBlur(widget: _WidgetBase): void;
+
+		/**
+		 * Returns the next or previous focusable descendant, compared to "child".
+		 * Implements and extends _KeyNavMixin._getNextFocusableChild() for a _Container.
+		 */
+		_getNextFocusableChild(child: _WidgetBase, dir: 1 | -1): _WidgetBase | null;
+
+		/**
+		 * Returns the first child.
+		 */
+		_getFirst(): _WidgetBase | null;
+
+		/**
+		 * Returns the last descendant.
+		 */
+		_getLast(): _WidgetBase | null;
+
+		/**
+		 * Returns the next descendant, compared to "child".
+		 */
+		_getNext(child: _WidgetBase, dir: 1 | -1): _WidgetBase | null;
+	}
+
+	interface _KeyNavMixinConstructor extends dojo._base.DeclareConstructor<_KeyNavMixin> {}
+
 	/* dijit/_KeyNavContainer */
 
 	/**
@@ -1062,7 +1221,7 @@ declare namespace dijit {
 		/**
 		 * @deprecated
 		 */
-		startupKeyNavChildren(): void
+		startupKeyNavChildren(): void;
 
 		/**
 		 * Setup for each child widget.
@@ -1105,6 +1264,7 @@ declare namespace dijit {
 		childSelector(node: Element | Node): boolean | void;
 	}
 
+	interface _KeyNavContainerConstructor extends dojo._base.DeclareConstructor<_KeyNavContainer> {}
 
 	/* dijit/Dialog */
 
