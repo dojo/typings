@@ -1041,6 +1041,71 @@ declare namespace dijit {
 		new (): Destroyable;
 	}
 
+	/* dijit/_KeyNavContainer */
+
+	/**
+	 * A _Container with keyboard navigation of its children.
+	 *
+	 * Provides normalized keyboard and focusing code for Container widgets.
+	 * To use this mixin, call connectKeyNavHandlers() in postCreate().
+	 * Also, child widgets must implement a focus() method.
+	 */
+	interface _KeyNavContainer extends _FocusMixin, _KeyNavMixin, _Container {
+		/**
+		 * Deprecated.  You can call this in postCreate() to attach the keyboard handlers to the container, but the preferred method is to override _onLeftArrow() and _onRightArrow(), or _onUpArrow() and _onDownArrow(), to call focusPrev() and focusNext().
+		 *
+		 * @param prevKeyCodes Key codes for navigating to the previous child.
+		 * @param nextKeyCodes Key codes for navigating to the next child.
+		 */
+		connectKeyNavHandlers(prevKeyCodes: number[], nextKeyCodes: number[]): void;
+
+		/**
+		 * @deprecated
+		 */
+		startupKeyNavChildren(): void
+
+		/**
+		 * Setup for each child widget.
+		 *
+		 * Sets tabIndex=-1 on each child, so that the tab key will leave the container rather than visiting each child.
+		 *
+		 * Note: if you add children by a different method than addChild(), then need to call this manually or at least make sure the child's tabIndex is -1.
+		 *
+		 * Note: see also _LayoutWidget.setupChild(), which is also called for each child widget.
+		 */
+		_startupChild(widget: _WidgetBase): void;
+
+		/**
+		 * Returns the first child.
+		 */
+		_getFirst(): _Widget | null;
+
+		/**
+		 * Returns the last descendant.
+		 */
+		_getLast(): _Widget | null;
+
+		/**
+		 * Focus the next widget
+		 */
+		focusNext(): void;
+
+		/**
+		 * Focus the last focusable node in the previous widget
+		 *
+		 * (ex: go to the ComboButton icon section rather than button section)
+		 */
+		focusPrev(): void;
+
+		/**
+		 * Implement _KeyNavMixin.childSelector, to identify focusable child nodes.
+		 *
+		 * If we allowed a dojo/query dependency from this module this could more simply be a string "> *" instead of this function.
+		 */
+		childSelector(node: Element | Node): boolean | void;
+	}
+
+
 	/* dijit/Dialog */
 
 	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStateMixin {

@@ -22,6 +22,11 @@ declare module 'dijit/_CssStateMixin' {
 	export = _CssStateMixin;
 }
 
+declare module 'dijit/_KeyNavContainer' {
+	const _KeyNavContainer: dijit._KeyNavContainer;
+	export = _KeyNavContainer;
+}
+
 declare module 'dijit/_TemplatedMixin' {
 	type _TemplatedMixin = dijit._TemplatedMixin;
 	const _TemplatedMixin: dijit._TemplatedMixinConstructor;
