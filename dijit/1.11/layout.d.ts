@@ -663,6 +663,8 @@ declare namespace dijit {
 			buttonWidgetCloseClass: string;
 		}
 
-		interface TabControllerConstructor extends _WidgetBaseConstructor<TabController> { }
+		interface TabControllerConstructor extends _WidgetBaseConstructor<TabController> {
+			TabButton: _TabButton;
+		}
 	}
 }
