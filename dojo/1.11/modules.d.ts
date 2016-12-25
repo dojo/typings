@@ -802,3 +802,14 @@ declare module 'dojo/window' {
 	const window: dojo.WindowModule;
 	export = window;
 }
+
+declare module 'dojo/Stateful' {
+	const stateful: dojo.StatefulConstructor;
+	export = stateful;
+}
+
+declare module 'dojo/store/Observable' {
+	const observable: dojo.store.ObservableConstructor;
+	export = observable;
+}
+

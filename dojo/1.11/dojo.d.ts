@@ -402,7 +402,7 @@ declare namespace dojo {
 	}
 
 	interface Require {
-		(config: GenericObject, dependencies: string[], callback?: GenericFunction<void>): Require;
+		(config: GenericObject, dependencies?: string[], callback?: GenericFunction<void>): Require;
 		(dependencies: string[], callback: GenericFunction<void>): Require;
 		async: number| boolean;
 		has: dojo.Has;
@@ -1872,6 +1872,10 @@ declare namespace dojo {
 		unwatch(): void;
 	}
 
+	interface StatefulConstructor {
+		new<T>(options?: T): T & Stateful;
+	}
+
 	interface Stateful {
 		/**
 		 * Used across all instances a hash to cache attribute names and their getter
@@ -1985,7 +1989,7 @@ declare namespace dojo {
 		 * the first will be passed to the subscribers, so any number of arguments
 		 * can be provided (not just event).
 		 */
-		publish(topic: string | ExtensionEvent, event: any): boolean;
+		publish(topic: string | ExtensionEvent, ...event: any[]): boolean;
 
 		/**
 		 * Subscribes to a topic on the pub/sub hub

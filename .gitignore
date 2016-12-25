@@ -1,4 +1,5 @@
 _build
+**/*.js
 node_modules
 **/node_modules
 tests/**/*.js

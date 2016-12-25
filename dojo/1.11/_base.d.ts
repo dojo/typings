@@ -1275,7 +1275,7 @@ declare namespace dojo {
 			/**
 			 * Copies/adds all properties of one or more sources to dest; returns dest.
 			 */
-			_mixin<T, U>(dest: T, source: U, copyFunc?: (s: any) => any): T & U;
+			mixin<T, U>(dest: T, source: U, copyFunc?: (s: any) => any): T & U;
 
 			/**
 			 * Copies/adds all properties of one or more sources to dest; returns dest.
@@ -1887,6 +1887,7 @@ declare namespace dojo {
 		onchange(method: string, objOrFunc: EventListener | string): this;
 		onchange(method: string, objOrFunc: Object, funcName: string): this;
 
+		onclick(objOrFunc: EventListener | string): this;
 		onclick(method: string, objOrFunc: EventListener | string): this;
 		onclick(method: string, objOrFunc: Object, funcName: string): this;
 

@@ -287,3 +287,18 @@ declare module 'dijit/layout/TabController' {
 	const TabController: dijit.layout.TabControllerConstructor;
 	export = TabController;
 }
+
+declare module 'dijit/TitlePane' {
+	const TitlePane: dijit.TitlePaneConstructor;
+	export = TitlePane;
+}
+
+declare module 'dijit/ToolbarSeparator' {
+	const x: dijit.ToolbarSeparator;
+	export = x;
+}
+
+declare module 'dijit/form/Select' {
+	const Button: dijit.form.ButtonConstructor;
+	export = Button;
+}

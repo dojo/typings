@@ -82,7 +82,7 @@ declare namespace dojo {
 			}
 
 			interface QueryResults<T extends Object> extends ArrayLike<T> {
-
+				sort(sort: Function): QueryResults<T>;
 				/**
 				 * Iterates over the query results, based on
 				 * https://developer.mozilla.org/en/Core_JavaScript_1.5_Reference/Objects/Array/forEach.
@@ -136,7 +136,7 @@ declare namespace dojo {
 				abort(): void;
 			}
 
-			interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions>{
+			interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions> {
 
 				/**
 				 * If the store has a single primary key, this indicates the property to use as the
@@ -228,7 +228,7 @@ declare namespace dojo {
 			}
 
 			/* dojo/store/util/SimpleQueryEngine */
-			interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> {}
+			interface SimpleQueryEngine extends api.QueryEngine<Object, api.BaseQueryType> { }
 		}
 
 		/* dojo/store/Cache */
@@ -438,7 +438,19 @@ declare namespace dojo {
 			/**
 			 * This is a basic in-memory object store. It implements dojo/store/api/Store.
 			 */
-			new <T extends Object>(options?: MemoryOptions<T>): Memory<T>;
+			new <T extends Object>(options?: MemoryOptions<T>): T & Memory<T>;
+		}
+
+		interface Observable<T> extends dojo.Stateful {
+			observe(cb: Function): any;
+			query(filter?: any): (T & Observable<T>)[] & { observe: Function };
+			// set(pair: any);
+			// set(name: string, value: any): T;
+			// get(name: string): any;
+		}
+
+		interface ObservableConstructor {
+			new <T>(options?: T): T & Observable<T>;
 		}
 
 		/* dojo/store/Observable */
