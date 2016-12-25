@@ -104,7 +104,7 @@ declare namespace dojo {
 		 * will be presattach
 		 * If there are multiple "before" advisors, they are executed in the reverse order they were registered.
 		 */
-		before<T>(target: GenericObject, methodName: string, advice: BeforeAdvice): Handle;
+		before<T>(target: GenericObject, methodName: string, advice: BeforeAdvice | Function): Handle;
 
 		/**
 		 * The "around" export of the aspect module is a function that can be used to attach
@@ -115,7 +115,7 @@ declare namespace dojo {
 		 * the method is called. It will be called with the arguments used to call the mattach
 		 * Whatever this function returns will be returned as the result of the method call (unless after advise changes it).
 		 */
-		around<T>(target: GenericObject, methodName: string, advice: AroundAdvice<T>): Handle;
+		around<T>(target: GenericObject, methodName: string, advice: AroundAdvice<T> | Function): Handle;
 
 		/**
 		 * The "after" export of the aspect module is a function that can be used to attach
@@ -126,7 +126,7 @@ declare namespace dojo {
 		 * arguments (from when the original method was called) rather than the return value.
 		 * If there are multiple "after" advisors, they are executed in the order they were registered.
 		 */
-		after<T>(target: GenericObject, methodName: string, advice: AfterAdvice<T>, receiveArguments?: boolean): Handle;
+		after<T>(target: GenericObject, methodName: string, advice: AfterAdvice<T> | Function, receiveArguments?: boolean): Handle;
 	}
 
 	/* dojo/back */
