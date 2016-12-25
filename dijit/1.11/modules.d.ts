@@ -150,6 +150,12 @@ declare module 'dijit/form/Form' {
 	export = Form;
 }
 
+declare module 'dijit/form/HorizontalRule' {
+	type HorizontalRule = dijit.form.HorizontalRule;
+	const HorizontalRule: dijit.form.HorizontalRuleConstructor;
+	export = HorizontalRule;
+}
+
 declare module 'dijit/form/MappedTextBox' {
 	type MappedTextBox<C extends dijit.form.Constraints> = dijit.form.MappedTextBox<C>;
 	const MappedTextBox: dijit.form.MappedTextBoxConstructor;

@@ -1362,6 +1362,41 @@ declare namespace dijit {
 
 		interface FormConstructor extends _WidgetBaseConstructor<Form> { }
 
+		/* dijit/form/HorizontalRule */
+
+		/**
+		 * Hash marks for `dijit/form/HorizontalSlider`
+		 */
+		interface HorizontalRule extends _Widget, _TemplatedMixin {
+			/**
+			 * Number of hash marks to generate
+			 */
+			count: number;
+
+			/**
+			 * For HorizontalSlider, this is either "topDecoration" or "bottomDecoration", and indicates whether this rule goes above or below the slider.
+			 */
+			container: string;
+
+			/**
+			 * CSS style to apply to individual hash marks
+			 */
+			ruleStyle: string;
+
+			_positionPrefix: string;
+			_positionSuffix: string;
+			_suffix: string;
+
+			_genHTML(pos: number): string;
+
+			/**
+			 * VerticalRule will override this...
+			 */
+			_isHorizontal: boolean;
+		}
+
+		interface HorizontalRuleConstructor extends _WidgetBaseConstructor<HorizontalRule> { }
+
 		/* dijit/form/MappedTextBox */
 
 		interface MappedTextBox<C extends Constraints> extends ValidationTextBox<C> {
