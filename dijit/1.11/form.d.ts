@@ -1455,6 +1455,97 @@ declare namespace dijit {
 
 		interface HorizontalRuleLabelsConstructor extends _WidgetBaseConstructor<HorizontalRuleLabels> { }
 
+		/* dijit/form/HorizontalSlider */
+
+		interface _SliderMover extends dojo.dnd.Mover { }
+
+		/**
+		 * A form widget that allows one to select a value with a horizontally draggable handle
+		 */
+		interface HorizontalSlider extends _FormValueWidget, _Container {
+			/**
+			 * Show increment/decrement buttons at the ends of the slider?
+			 */
+			showButtons: boolean;
+
+			/**
+			 * The minimum value the slider can be set to.
+			 */
+			minimum: number;
+
+			/**
+			 * The maximum value the slider can be set to.
+			 */
+			maximum: number;
+
+			/**
+			 * If specified, indicates that the slider handle has only 'discreteValues' possible positions, and that after dragging the handle, it will snap to the nearest possible position.
+			 * Thus, the slider has only 'discreteValues' possible values.
+			 *
+			 * For example, if minimum=10, maxiumum=30, and discreteValues=3, then the slider handle has three possible positions, representing values 10, 20, or 30.
+			 *
+			 * If discreteValues is not specified or if it's value is higher than the number of pixels in the slider bar, then the slider handle can be moved freely, and the slider's value will be computed/reported based on pixel position (in this case it will likely be fractional, such as 123.456789).
+			 */
+			discreteValues: number;
+
+			/**
+			 * If discreteValues is also specified, this indicates the amount of clicks (ie, snap positions) that the slider handle is moved via pageup/pagedown keys.
+			 * If discreteValues is not specified, it indicates the number of pixels.
+			 */
+			pageIncrement: number;
+
+			/**
+			 * If clicking the slider bar changes the value or not
+			 */
+			clickSelect: boolean;
+
+			/**
+			 * The time in ms to take to animate the slider handle from 0% to 100%, when clicking the slider bar to make the handle move.
+			 */
+			slideDuration: number;
+
+			_mousePixelCoord: string;
+			_pixelCount: string;
+			_startingPixelCoord: string;
+			_handleOffsetCoord: string;
+			_progressPixelSize: string;
+
+			_onKeyUp(e: Event): void;
+			_onKeyDown(e: Event): void;
+			_onHandleClick(e: Event): void;
+
+			/**
+			 * Returns true if direction is from right to left
+			 */
+			_isReversed(): boolean;
+
+			_onBarClick(e: Event): void;
+
+			_setPixelValue(pixelValue: number, maxPixels: number, priorityChange?: boolean): void;
+
+			_setValueAttr(value: number, priorityChange?: boolean): void;
+
+			_bumpValue(signedChange: number, priorityChange: boolean): void;
+
+			_onClkBumper(val: any): void;
+			_onClkIncBumper(): void;
+			_onClkDecBumper(): void;
+
+			decrement(e: Event): void;
+			increment(e: Event): void;
+
+			_mouseWheeled(evt: Event): void;
+
+			_typematicCallback(count: number, button: Element, e: Event): void;
+		}
+
+		interface HorizontalSliderConstructor extends _WidgetBaseConstructor<HorizontalSlider> {
+			/**
+			 * for monkey patching
+			 */
+			_Mover: _SliderMover;
+		}
+
 		/* dijit/form/MappedTextBox */
 
 		interface MappedTextBox<C extends Constraints> extends ValidationTextBox<C> {

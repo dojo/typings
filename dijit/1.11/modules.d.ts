@@ -162,6 +162,12 @@ declare module 'dijit/form/HorizontalRuleLabels' {
 	export = HorizontalRuleLabels;
 }
 
+declare module 'dijit/form/HorizontalSlider' {
+	type HorizontalSlider = dijit.form.HorizontalSlider;
+	const HorizontalSlider: dijit.form.HorizontalSliderConstructor;
+	export = HorizontalSlider;
+}
+
 declare module 'dijit/form/MappedTextBox' {
 	type MappedTextBox<C extends dijit.form.Constraints> = dijit.form.MappedTextBox<C>;
 	const MappedTextBox: dijit.form.MappedTextBoxConstructor;
