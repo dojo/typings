@@ -104,7 +104,7 @@ declare namespace dojo {
 		 * will be presattach
 		 * If there are multiple "before" advisors, they are executed in the reverse order they were registered.
 		 */
-		before<T>(target: GenericObject, methodName: string, advice: BeforeAdvice): Handle;
+		before<T>(target: GenericObject, methodName: string, advice: BeforeAdvice | Function): Handle;
 
 		/**
 		 * The "around" export of the aspect module is a function that can be used to attach
@@ -115,7 +115,7 @@ declare namespace dojo {
 		 * the method is called. It will be called with the arguments used to call the mattach
 		 * Whatever this function returns will be returned as the result of the method call (unless after advise changes it).
 		 */
-		around<T>(target: GenericObject, methodName: string, advice: AroundAdvice<T>): Handle;
+		around<T>(target: GenericObject, methodName: string, advice: AroundAdvice<T> | Function): Handle;
 
 		/**
 		 * The "after" export of the aspect module is a function that can be used to attach
@@ -126,7 +126,7 @@ declare namespace dojo {
 		 * arguments (from when the original method was called) rather than the return value.
 		 * If there are multiple "after" advisors, they are executed in the order they were registered.
 		 */
-		after<T>(target: GenericObject, methodName: string, advice: AfterAdvice<T>, receiveArguments?: boolean): Handle;
+		after<T>(target: GenericObject, methodName: string, advice: AfterAdvice<T> | Function, receiveArguments?: boolean): Handle;
 	}
 
 	/* dojo/back */
@@ -1461,23 +1461,23 @@ declare namespace dojo {
 		 * you can provide a target, event type, and listener to be notified of
 		 * future matching events that are fired.
 		 */
-		(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix?: boolean): Handle;
+		(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
 
 		/**
 		 * This function acts the same as on(), but with pausable functionality. The
 		 * returned signal object has pause() and resume() functions. Calling the
 		 * pause() method will cause the listener to not be called for future events.
 		 */
-		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix?: boolean): Handle;
+		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
 
 		/**
 		 * This function acts the same as on(), but will only call the listener once. The
 		 * listener will be called for the first
 		 * event that takes place and then listener will automatically be removed.
 		 */
-		once(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix?: boolean): Handle;
+		once(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
 
-		parse(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix: boolean, matchesTarget: Element | GenericObject): Handle;
+		parse(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix: boolean, matchesTarget: Element | GenericObject): Handle;
 
 		/**
 		 * Check if a node match the current selector within the constraint of a context
@@ -1985,12 +1985,12 @@ declare namespace dojo {
 		 * the first will be passed to the subscribers, so any number of arguments
 		 * can be provided (not just event).
 		 */
-		publish(topic: string | ExtensionEvent, event: any): boolean;
+		publish(topic: string | ExtensionEvent, ...event: any[]): boolean;
 
 		/**
 		 * Subscribes to a topic on the pub/sub hub
 		 */
-		subscribe(topic: string | ExtensionEvent, listener: EventListener): Handle;
+		subscribe(topic: string | ExtensionEvent, listener: EventListener | Function): Handle;
 	}
 
 	/* dojo/touch */
