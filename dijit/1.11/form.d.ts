@@ -1397,6 +1397,64 @@ declare namespace dijit {
 
 		interface HorizontalRuleConstructor extends _WidgetBaseConstructor<HorizontalRule> { }
 
+		/* dijit/form/HorizontalRuleLabels */
+
+		/**
+		 * Labels for `dijit/form/HorizontalSlider`
+		 */
+		interface HorizontalRuleLabels extends HorizontalRule {
+			/**
+			 * CSS style to apply to individual text labels
+			 */
+			labelStyle: string;
+
+			/**
+			 * Array of text labels to render - evenly spaced from left-to-right or bottom-to-top.
+			 * Alternately, minimum and maximum can be specified, to get numeric labels.
+			 */
+			labels: string[];
+
+			/**
+			 * Number of generated numeric labels that should be rendered as '' on the ends when labels[] are not specified
+			 */
+			numericMargin: number;
+
+			/**
+			 * Leftmost label value for generated numeric labels when labels[] are not specified
+			 */
+			minimum: number;
+
+			/**
+			 * Rightmost label value for generated numeric labels when labels[] are not specified
+			 */
+			maximum: number;
+
+			/**
+			 * pattern, places, lang, et al (see dojo.number) for generated numeric labels when labels[] are not specified
+			 */
+			constraints: { pattern: string };
+
+			/**
+			 * Returns the value to be used in HTML for the label as part of the left: attribute
+			 */
+			_calcPosition(pos: number): number;
+
+			_genHTML(pos: number, ndx?: number): string;
+
+			/**
+			 * extension point for bidi code
+			 */
+			_genDirectionHTML(label: string): string;
+
+			/**
+			 * Overridable function to return array of labels to use for this slider.
+			 * Can specify a getLabels() method instead of a labels[] array, or min/max attributes.
+			 */
+			getLabels(): string[];
+		}
+
+		interface HorizontalRuleLabelsConstructor extends _WidgetBaseConstructor<HorizontalRuleLabels> { }
+
 		/* dijit/form/MappedTextBox */
 
 		interface MappedTextBox<C extends Constraints> extends ValidationTextBox<C> {
