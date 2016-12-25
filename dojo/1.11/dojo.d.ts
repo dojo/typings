@@ -1461,23 +1461,23 @@ declare namespace dojo {
 		 * you can provide a target, event type, and listener to be notified of
 		 * future matching events that are fired.
 		 */
-		(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix?: boolean): Handle;
+		(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
 
 		/**
 		 * This function acts the same as on(), but with pausable functionality. The
 		 * returned signal object has pause() and resume() functions. Calling the
 		 * pause() method will cause the listener to not be called for future events.
 		 */
-		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix?: boolean): Handle;
+		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
 
 		/**
 		 * This function acts the same as on(), but will only call the listener once. The
 		 * listener will be called for the first
 		 * event that takes place and then listener will automatically be removed.
 		 */
-		once(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix?: boolean): Handle;
+		once(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
 
-		parse(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener, dontFix: boolean, matchesTarget: Element | GenericObject): Handle;
+		parse(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix: boolean, matchesTarget: Element | GenericObject): Handle;
 
 		/**
 		 * Check if a node match the current selector within the constraint of a context
