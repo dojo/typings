@@ -1985,12 +1985,12 @@ declare namespace dojo {
 		 * the first will be passed to the subscribers, so any number of arguments
 		 * can be provided (not just event).
 		 */
-		publish(topic: string | ExtensionEvent, event: any): boolean;
+		publish(topic: string | ExtensionEvent, ...event: any[]): boolean;
 
 		/**
 		 * Subscribes to a topic on the pub/sub hub
 		 */
-		subscribe(topic: string | ExtensionEvent, listener: EventListener): Handle;
+		subscribe(topic: string | ExtensionEvent, listener: EventListener | Function): Handle;
 	}
 
 	/* dojo/touch */
