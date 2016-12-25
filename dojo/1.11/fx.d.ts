@@ -1,4 +1,4 @@
-/// <reference path="_base" />
+/// <reference path="_base.d.ts" />
 
 /* dojo/fx */
 
