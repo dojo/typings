@@ -213,6 +213,11 @@ declare module 'dijit/form/ComboBox' {
 	export = ComboBox;
 }
 
+declare module 'dijit/form/ComboBoxMixin' {
+	const ComboBox: dijit.form.ComboBoxMixin<any, any, any>;
+	export = ComboBox;
+}
+
 declare module 'dijit/form/CurrencyTextBox' {
 	type CurrencyTextBox = dijit.form.CurrencyTextBox;
 	const CurrencyTextBox: dijit.form.CurrencyTextBoxConstructor;
