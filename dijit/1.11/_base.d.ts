@@ -89,12 +89,13 @@ declare namespace dijit {
 		 * New code should access dijit/registry directly when possible.
 		 */
 		interface Manager {
-			byId: typeof dijit.Registry.byId;
-			getUniqueId: typeof dijit.Registry.getUniqueId;
-			findWidgets: typeof dijit.Registry.findWidgets;
-			_destroyAll: typeof dijit.Registry._destroyAll;
-			byNode: typeof dijit.Registry.byNode;
-			getEnclosingWidget: typeof Registry.getEnclosingWidget;
+			// copied from dijit.Registry
+			byId(id: string | _WidgetBase): _WidgetBase;
+			getUniqueId(widgetType: string): string;
+			findWidgets(root: Node, skipNode?: Node): _WidgetBase[];
+			byNode(node: Node): _WidgetBase;
+			getEnclosingWidgets(node: Node): _WidgetBase;
+
 			defaultDuration: number;
 		}
 
@@ -113,7 +114,7 @@ declare namespace dijit {
 			 */
 			getViewport(): dojo.DomGeometryBox;
 
-			placeOnScreen: typeof dijit.Place.at;
+			placeOnScreen(node: Element, pos?: dijit.PlacePosition, corners?: dijit.PlaceCorner[], padding?: dijit.PlacePosition, layoutNode?: dijit.LayoutNodeFunction): PlaceLocation;
 
 			/**
 			 * Like dijit.placeOnScreenAroundNode(), except it accepts an arbitrary object for the "around" argument and finds a proper processor to place a node.
@@ -141,7 +142,7 @@ declare namespace dijit {
 			 *
 			 * Transforms the passed array of preferred positions into a format suitable for passing as the aroundCorners argument to dijit/place.placeOnScreenAroundElement.
 			 */
-			getPopupAroundAlignment(position: string[], leftToRight?: boolean): { [s: dijit.PlaceCorner]: dijit.PlaceCorner };
+			getPopupAroundAlignment(position: string[], leftToRight?: boolean): { [s: string]: dijit.PlaceCorner };
 		}
 
 		/* dijit/_base/popup */
@@ -149,7 +150,7 @@ declare namespace dijit {
 		/**
 		 * Deprecated.   Old module for popups, new code should use dijit/popup directly.
 		 */
-		interface Popup extends dijit.popup { }
+		interface Popup extends dijit.PopupManager { }
 
 		/* dijit/_base/scroll */
 
