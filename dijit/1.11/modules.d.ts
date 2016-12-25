@@ -150,6 +150,24 @@ declare module 'dijit/form/Form' {
 	export = Form;
 }
 
+declare module 'dijit/form/HorizontalRule' {
+	type HorizontalRule = dijit.form.HorizontalRule;
+	const HorizontalRule: dijit.form.HorizontalRuleConstructor;
+	export = HorizontalRule;
+}
+
+declare module 'dijit/form/HorizontalRuleLabels' {
+	type HorizontalRuleLabels = dijit.form.HorizontalRuleLabels;
+	const HorizontalRuleLabels: dijit.form.HorizontalRuleLabelsConstructor;
+	export = HorizontalRuleLabels;
+}
+
+declare module 'dijit/form/HorizontalSlider' {
+	type HorizontalSlider = dijit.form.HorizontalSlider;
+	const HorizontalSlider: dijit.form.HorizontalSliderConstructor;
+	export = HorizontalSlider;
+}
+
 declare module 'dijit/form/MappedTextBox' {
 	type MappedTextBox<C extends dijit.form.Constraints> = dijit.form.MappedTextBox<C>;
 	const MappedTextBox: dijit.form.MappedTextBoxConstructor;
