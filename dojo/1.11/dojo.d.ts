@@ -402,7 +402,7 @@ declare namespace dojo {
 	}
 
 	interface Require {
-		(config: GenericObject, dependencies: string[], callback?: GenericFunction<void>): Require;
+		(config: GenericObject, dependencies?: string[], callback?: GenericFunction<void>): Require;
 		(dependencies: string[], callback: GenericFunction<void>): Require;
 		async: number| boolean;
 		has: dojo.Has;
@@ -1870,6 +1870,10 @@ declare namespace dojo {
 
 	interface WatchHandle extends Handle {
 		unwatch(): void;
+	}
+
+	interface StatefulConstructor {
+		new<T>(options?: T): T & Stateful;
 	}
 
 	interface Stateful {
