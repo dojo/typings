@@ -1406,6 +1406,68 @@ declare namespace dijit {
 
 	interface ConfirmDialogConstructor extends DialogConstructor { }
 
+	/* dijit/MenuItem */
+	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {
+		/**
+		 * Text for the accelerator (shortcut) key combination, a control, alt, etc. modified keystroke meant to execute the menu item regardless of where the focus is on the page.
+		 *
+		 * Note that although Menu can display accelerator keys, there is no infrastructure to actually catch and execute those accelerators.
+		 */
+		accelKey: string;
+
+		/**
+		 * If true, the menu item is disabled.
+		 * If false, the menu item is enabled.
+		 */
+		disabled: boolean;
+
+		/** Menu text as HTML */
+		label: string;
+
+		/**
+		 * Class to apply to DOMNode to make it display an icon.
+		 */
+		iconClass: string;
+
+		/**
+		 * Hook for attr('accelKey', ...) to work.
+		 * Set accelKey on this menu item.
+		 */
+		_setAccelKeyAttr(value: string): void;
+
+		/**
+		 * Hook for attr('disabled', ...) to work.
+		 * Enable or disable this menu item.
+		 */
+		_setDisabledAttr(value: boolean): void;
+
+		_setLabelAttr(val: string): void;
+		_setIconClassAttr(val: string): void;
+
+		_fillContent(source: Element): void;
+
+		/**
+		 * Indicate that this node is the currently selected one
+		 */
+		_setSelected(selected: boolean): void;
+
+		focus(): void;
+
+		/**
+		 * Deprecated.
+		 * Use set('disabled', bool) instead.
+		 */
+		setDisabled(disabled: boolean): void;
+
+		/**
+		 * Deprecated.
+		 * Use set('label', ...) instead.
+		 */
+		setLabel(content: string): void;
+	}
+
+	interface MenuItemConstructor extends _WidgetBaseConstructor<MenuItem> { }
+
 	/* dijit/place */
 
 	interface PlacePosition {
