@@ -1355,7 +1355,7 @@ declare namespace dojo {
 			 * for the hitched function.
 			 */
 			hitch<T extends Function>(scope: any, method: T): T;
-			hitch<T extends Function>(scope: any, method: Function, ...args: any[]): T;
+			hitch<T extends Function>(scope: any, method: string | Function, ...args: any[]): T;
 
 			/**
 			 * Returns a new object which "looks" to obj for properties which it
