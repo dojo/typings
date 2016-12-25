@@ -1241,7 +1241,7 @@ declare namespace dojo {
 			 * Log a debug message to indicate that a behavior has been
 			 * deprecated.
 			 */
-			deprectated(behaviour: string, extra?: string, removal?: string): void;
+			deprecated(behaviour: string, extra?: string, removal?: string): void;
 
 			/**
 			 * Marks code as experimental.
