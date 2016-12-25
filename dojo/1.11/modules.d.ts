@@ -604,6 +604,11 @@ declare module 'dojo/request/handlers' {
 	export = handlers;
 }
 
+declare module 'dojo/request/iframe' {
+	const iframe: dojo.request.IFrame;
+	export = iframe;
+}
+
 declare module 'dojo/request/node' {
 	const node: dojo.request.Node;
 	export = node;
