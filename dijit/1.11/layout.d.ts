@@ -674,4 +674,3 @@ declare namespace dijit {
 		}
 	}
 }
-
