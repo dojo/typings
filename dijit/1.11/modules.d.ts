@@ -105,8 +105,8 @@ declare module 'dijit/TitlePane' {
 
 declare module 'dijit/ToolbarSeparator' {
 	type ToolbarSeparator = dijit.ToolbarSeparator;
-    const ToolbarSeparator: dijit.ToolbarSeparator;
-    export = ToolbarSeparator;
+	const ToolbarSeparator: dijit.ToolbarSeparator;
+	export = ToolbarSeparator;
 }
 
 declare module 'dijit/Tooltip' {
@@ -236,8 +236,8 @@ declare module 'dijit/form/RangeBoundTextBox' {
 
 declare module 'dijit/form/Select' {
 	type Select = dijit.form.Select;
-    const Select: dijit.form.Select;
-    export = Select;
+	const Select: dijit.form.Select;
+	export = Select;
 }
 
 declare module 'dijit/form/SimpleTextarea' {
