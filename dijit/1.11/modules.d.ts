@@ -104,7 +104,7 @@ declare module 'dijit/TitlePane' {
 }
 
 declare module 'dijit/ToolbarSeparator' {
-	type ToolbarSeparate = dijit.ToolbarSeparator;
+	type ToolbarSeparator = dijit.ToolbarSeparator;
     const ToolbarSeparator: dijit.ToolbarSeparator;
     export = ToolbarSeparator;
 }
