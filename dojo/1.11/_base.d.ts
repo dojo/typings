@@ -832,7 +832,7 @@ declare namespace dojo {
 		}
 
 		interface AnimationArguments extends FadeArguments {
-			properties: AnimationArgumentsProperties;
+			properties?: AnimationArgumentsProperties;
 			onEnd?: AnimationCallback;
 		}
 
