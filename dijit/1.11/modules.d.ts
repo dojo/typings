@@ -92,6 +92,12 @@ declare module 'dijit/popup' {
 	export = popup;
 }
 
+declare module 'dijit/PopupMenuItem' {
+	type PopupMenuItem = dijit.PopupMenuItem;
+	const PopupMenuItem: dijit.PopupMenuItemConstructor;
+	export = PopupMenuItem;
+}
+
 declare module 'dijit/registry' {
 	const registry: dijit.Registry;
 	export = registry;
