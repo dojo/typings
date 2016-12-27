@@ -119,7 +119,7 @@ declare module 'dijit/form/_FormMixin' {
 	const _FormMixin: dijit.form._FormMixin;
 	export = _FormMixin;
 }
-               
+
 declare module 'dijit/form/_FormValueWidget' {
 	type _FormValueWidget = dijit.form._FormValueWidget;
 	const _FormValueWidget: dijit.form._FormValueWidgetConstructor;
@@ -130,6 +130,7 @@ declare module 'dijit/form/_FormWidget' {
 	type _FormWidget = dijit.form._FormWidget;
 	const _FormWidget: dijit.form._FormWidgetConstructor;
 	export = _FormWidget;
+}
 
 declare module 'dijit/form/Button' {
 	type Button = dijit.form.Button;
