@@ -34,6 +34,12 @@ declare module 'dijit/_KeyNavMixin' {
 	export = _KeyNavMixin;
 }
 
+declare module 'dijit/_MenuBase' {
+	type _MenuBase = dijit._MenuBase;
+	const _MenuBase: dijit._MenuBaseConstructor;
+	export = _MenuBase;
+}
+
 declare module 'dijit/_TemplatedMixin' {
 	type _TemplatedMixin = dijit._TemplatedMixin;
 	const _TemplatedMixin: dijit._TemplatedMixinConstructor;
