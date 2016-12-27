@@ -82,6 +82,12 @@ declare module 'dijit/Dialog' {
 	export = Dialog;
 }
 
+declare module 'dijit/DropDownMenu' {
+	type DropDownMenu = dijit.DropDownMenu;
+	const DropDownMenu: dijit.DropDownMenuConstructor;
+	export = DropDownMenu;
+}
+
 declare module 'dijit/MenuItem' {
 	type MenuItem = dijit.MenuItem;
 	const MenuItem: dijit.MenuItemConstructor;

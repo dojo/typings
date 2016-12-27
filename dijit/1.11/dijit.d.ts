@@ -1552,6 +1552,15 @@ declare namespace dijit {
 
 	interface ConfirmDialogConstructor extends DialogConstructor { }
 
+	/* dijit/DropDownMenu */
+
+	/**
+	 * A menu, without features for context menu (Meaning, drop down menu)
+	 */
+	interface DropDownMenu extends _MenuBase { }
+
+	interface DropDownMenuConstructor extends _WidgetBaseConstructor<DropDownMenu> { }
+
 	/* dijit/MenuItem */
 	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {
 		/**
