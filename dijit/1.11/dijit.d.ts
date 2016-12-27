@@ -1071,23 +1071,23 @@ declare namespace dijit {
 		 * Called on left arrow key, or right arrow key if widget is in RTL mode.
 		 * Should go back to the previous child in horizontal container widgets like Toolbar.
 		 */
-		_onLeftArrow(): void;
+		_onLeftArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Called on right arrow key, or left arrow key if widget is in RTL mode.
 		 * Should go to the next child in horizontal container widgets like Toolbar.
 		 */
-		_onRightArrow(): void;
+		_onRightArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Called on up arrow key. Should go to the previous child in vertical container widgets like Menu.
 		 */
-		_onUpArrow(): void;
+		_onUpArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Called on down arrow key. Should go to the next child in vertical container widgets like Menu.
 		 */
-		_onDownArrow(): void;
+		_onDownArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Default focus() implementation: focus the first child.
@@ -1261,7 +1261,7 @@ declare namespace dijit {
 		 *
 		 * If we allowed a dojo/query dependency from this module this could more simply be a string "> *" instead of this function.
 		 */
-		childSelector(node: Element | Node): boolean | void;
+		childSelector(node: Element | Node): boolean | void | any;
 	}
 
 	interface _KeyNavContainerConstructor extends dojo._base.DeclareConstructor<_KeyNavContainer> {}
