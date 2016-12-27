@@ -34,6 +34,18 @@ declare module 'dijit/_Container' {
 	export = _Container;
 }
 
+declare module 'dijit/_KeyNavContainer' {
+	type _KeyNavContainer = dijit._KeyNavContainer;
+	const _KeyNavContainer: dijit._KeyNavContainerConstructor;
+	export = _KeyNavContainer;
+}
+
+declare module 'dijit/_KeyNavMixin' {
+	type _KeyNavMixin = dijit._KeyNavMixin;
+	const _KeyNavMixin: dijit._KeyNavMixinConstructor;
+	export = _KeyNavMixin;
+}
+
 declare module 'dijit/_TemplatedMixin' {
 	type _TemplatedMixin = dijit._TemplatedMixin;
 	const _TemplatedMixin: dijit._TemplatedMixinConstructor;
@@ -76,6 +88,12 @@ declare module 'dijit/Dialog' {
 	export = Dialog;
 }
 
+declare module 'dijit/MenuItem' {
+	type MenuItem = dijit.MenuItem;
+	const MenuItem: dijit.MenuItemConstructor;
+	export = MenuItem;
+}
+
 declare module 'dijit/place' {
 	const place: dijit.Place;
 	export = place;
@@ -89,6 +107,12 @@ declare module 'dijit/popup' {
 declare module 'dijit/registry' {
 	const registry: dijit.Registry;
 	export = registry;
+}
+
+declare module 'dijit/TitlePane' {
+	type TitlePane = dijit.TitlePane;
+	const TitlePane: dijit.TitlePaneConstructor;
+	export = TitlePane;
 }
 
 declare module 'dijit/Tooltip' {
@@ -106,6 +130,12 @@ declare module 'dijit/TooltipDialog' {
 declare module 'dijit/form/_FormMixin' {
 	const _FormMixin: dijit.form._FormMixin;
 	export = _FormMixin;
+}
+
+declare module 'dijit/form/_FormValueWidget' {
+	type _FormValueWidget = dijit.form._FormValueWidget;
+	const _FormValueWidget: dijit.form._FormValueWidgetConstructor;
+	export = _FormValueWidget;
 }
 
 declare module 'dijit/form/Button' {
@@ -160,6 +190,24 @@ declare module 'dijit/form/Form' {
 	type Form = dijit.form.Form;
 	const Form: dijit.form.FormConstructor;
 	export = Form;
+}
+
+declare module 'dijit/form/HorizontalRule' {
+	type HorizontalRule = dijit.form.HorizontalRule;
+	const HorizontalRule: dijit.form.HorizontalRuleConstructor;
+	export = HorizontalRule;
+}
+
+declare module 'dijit/form/HorizontalRuleLabels' {
+	type HorizontalRuleLabels = dijit.form.HorizontalRuleLabels;
+	const HorizontalRuleLabels: dijit.form.HorizontalRuleLabelsConstructor;
+	export = HorizontalRuleLabels;
+}
+
+declare module 'dijit/form/HorizontalSlider' {
+	type HorizontalSlider = dijit.form.HorizontalSlider;
+	const HorizontalSlider: dijit.form.HorizontalSliderConstructor;
+	export = HorizontalSlider;
 }
 
 declare module 'dijit/form/MappedTextBox' {

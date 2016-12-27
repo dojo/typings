@@ -1045,6 +1045,231 @@ declare namespace dijit {
 		new (): Destroyable;
 	}
 
+	/** dijit/_KeyNavMixin */
+
+	/**
+	 * A mixin to allow arrow key and letter key navigation of child or descendant widgets.
+	 * It can be used by dijit/_Container based widgets with a flat list of children, or more complex widgets like dijit/Tree.
+	 *
+	 * To use this mixin, the subclass must:
+	 *
+	 * 	- Implement  _getNext(), _getFirst(), _getLast(), _onLeftArrow(), _onRightArrow() _onDownArrow(), _onUpArrow() methods to handle home/end/left/right/up/down keystrokes. Next and previous in this context refer to a linear ordering of the descendants used by letter key search.
+	 * 	- Set all descendants' initial tabIndex to "-1"; both initial descendants and any descendants added later, by for example addChild()
+	 * 	- Define childSelector to a function or string that identifies focusable descendant widgets
+	 *
+	 * Also, child widgets must implement a focus() method.
+	 */
+	interface _KeyNavMixin extends _FocusMixin {
+		/**
+		 * Tab index of the container; same as HTML tabIndex attribute.
+		 * Note then when user tabs into the container, focus is immediately moved to the first item in the container.
+		 */
+		tabIndex: string;
+
+		/**
+		 * Selector (passed to on.selector()) used to identify what to treat as a child widget.   Used to monitor focus events and set this.focusedChild.   Must be set by implementing class.   If this is a string (ex: "> *") then the implementing class must require dojo/query.
+		 */
+		childSelector: string | Function | null;
+
+		/**
+		 * Called on left arrow key, or right arrow key if widget is in RTL mode.
+		 * Should go back to the previous child in horizontal container widgets like Toolbar.
+		 */
+		_onLeftArrow(): void;
+
+		/**
+		 * Called on right arrow key, or left arrow key if widget is in RTL mode.
+		 * Should go to the next child in horizontal container widgets like Toolbar.
+		 */
+		_onRightArrow(): void;
+
+		/**
+		 * Called on up arrow key. Should go to the previous child in vertical container widgets like Menu.
+		 */
+		_onUpArrow(): void;
+
+		/**
+		 * Called on down arrow key. Should go to the next child in vertical container widgets like Menu.
+		 */
+		_onDownArrow(): void;
+
+		/**
+		 * Default focus() implementation: focus the first child.
+		 */
+		focus(): void;
+
+		/**
+		 * Returns first child that can be focused.
+		 */
+		_getFirstFocusableChild(): _WidgetBase;
+
+		/**
+		 * Returns last child that can be focused.
+		 */
+		_getLastFocusableChild(): _WidgetBase;
+
+		/**
+		 * Focus the first focusable child in the container.
+		 */
+		focusFirstChild(): void;
+
+		/**
+		 * Focus the last focusable child in the container.
+		 */
+		focusLastChild(): void;
+
+		/**
+		 * Focus specified child widget.
+		 *
+		 * @param widget Reference to container's child widget
+		 * @param last If true and if widget has multiple focusable nodes, focus the last one instead of the first one
+		 */
+		focusChild(widget: _WidgetBase, last?: boolean): void;
+
+		/**
+		 * Handler for when the container itself gets focus.
+		 *
+		 * Initially the container itself has a tabIndex, but when it gets focus, switch focus to first child.
+		 */
+		_onContainerFocus(evt: Event): void;
+
+		/**
+		 * Called when a child widget gets focus, either by user clicking it, or programatically by arrow key handling code.
+		 *
+		 * It marks that the current node is the selected one, and the previously selected node no longer is.
+		 */
+		_onChildFocus(child?: _WidgetBase): void;
+
+		_searchString: string;
+
+		multiCharSearchDuration: number;
+
+		/**
+		 * When a key is pressed that matches a child item, this method is called so that a widget can take appropriate action is necessary.
+		 */
+		onKeyboardSearch(tem: _WidgetBase, evt: Event, searchString: string, numMatches: number): void;
+
+		/**
+		 * Compares the searchString to the widget's text label, returning:
+		 *
+		 * 	* -1: a high priority match  and stop searching
+		 * 	* 0: not a match
+		 * 	* 1: a match but keep looking for a higher priority match
+		 */
+		_keyboardSearchCompare(item: _WidgetBase, searchString: string): -1 | 0 | 1;
+
+		/**
+		 * When a key is pressed, if it's an arrow key etc. then it's handled here.
+		 */
+		_onContainerKeydown(evt: Event): void;
+
+		/**
+		 * When a printable key is pressed, it's handled here, searching by letter.
+		 */
+		_onContainerKeypress(evt: Event): void;
+
+		/**
+		 * Perform a search of the widget's options based on the user's keyboard activity
+		 *
+		 * Called on keypress (and sometimes keydown), searches through this widget's children looking for items that match the user's typed search string.  Multiple characters typed within 1 sec of each other are combined for multicharacter searching.
+		 */
+		_keyboardSearch(evt: Event, keyChar: string): void;
+
+		/**
+		 * Called when focus leaves a child widget to go to a sibling widget.
+		 */
+		_onChildBlur(widget: _WidgetBase): void;
+
+		/**
+		 * Returns the next or previous focusable descendant, compared to "child".
+		 * Implements and extends _KeyNavMixin._getNextFocusableChild() for a _Container.
+		 */
+		_getNextFocusableChild(child: _WidgetBase, dir: 1 | -1): _WidgetBase | null;
+
+		/**
+		 * Returns the first child.
+		 */
+		_getFirst(): _WidgetBase | null;
+
+		/**
+		 * Returns the last descendant.
+		 */
+		_getLast(): _WidgetBase | null;
+
+		/**
+		 * Returns the next descendant, compared to "child".
+		 */
+		_getNext(child: _WidgetBase, dir: 1 | -1): _WidgetBase | null;
+	}
+
+	interface _KeyNavMixinConstructor extends dojo._base.DeclareConstructor<_KeyNavMixin> {}
+
+	/* dijit/_KeyNavContainer */
+
+	/**
+	 * A _Container with keyboard navigation of its children.
+	 *
+	 * Provides normalized keyboard and focusing code for Container widgets.
+	 * To use this mixin, call connectKeyNavHandlers() in postCreate().
+	 * Also, child widgets must implement a focus() method.
+	 */
+	interface _KeyNavContainer extends _FocusMixin, _KeyNavMixin, _Container {
+		/**
+		 * Deprecated.  You can call this in postCreate() to attach the keyboard handlers to the container, but the preferred method is to override _onLeftArrow() and _onRightArrow(), or _onUpArrow() and _onDownArrow(), to call focusPrev() and focusNext().
+		 *
+		 * @param prevKeyCodes Key codes for navigating to the previous child.
+		 * @param nextKeyCodes Key codes for navigating to the next child.
+		 */
+		connectKeyNavHandlers(prevKeyCodes: number[], nextKeyCodes: number[]): void;
+
+		/**
+		 * @deprecated
+		 */
+		startupKeyNavChildren(): void;
+
+		/**
+		 * Setup for each child widget.
+		 *
+		 * Sets tabIndex=-1 on each child, so that the tab key will leave the container rather than visiting each child.
+		 *
+		 * Note: if you add children by a different method than addChild(), then need to call this manually or at least make sure the child's tabIndex is -1.
+		 *
+		 * Note: see also _LayoutWidget.setupChild(), which is also called for each child widget.
+		 */
+		_startupChild(widget: _WidgetBase): void;
+
+		/**
+		 * Returns the first child.
+		 */
+		_getFirst(): _Widget | null;
+
+		/**
+		 * Returns the last descendant.
+		 */
+		_getLast(): _Widget | null;
+
+		/**
+		 * Focus the next widget
+		 */
+		focusNext(): void;
+
+		/**
+		 * Focus the last focusable node in the previous widget
+		 *
+		 * (ex: go to the ComboButton icon section rather than button section)
+		 */
+		focusPrev(): void;
+
+		/**
+		 * Implement _KeyNavMixin.childSelector, to identify focusable child nodes.
+		 *
+		 * If we allowed a dojo/query dependency from this module this could more simply be a string "> *" instead of this function.
+		 */
+		childSelector(node: Element | Node): boolean | void;
+	}
+
+	interface _KeyNavContainerConstructor extends dojo._base.DeclareConstructor<_KeyNavContainer> {}
+
 	/* dijit/Dialog */
 
 	interface _DialogBase extends _TemplatedMixin, form._FormMixin, _DialogMixin, _CssStateMixin {
@@ -1184,6 +1409,68 @@ declare namespace dijit {
 	interface ConfirmDialog extends _ConfirmDialogMixin { }
 
 	interface ConfirmDialogConstructor extends DialogConstructor { }
+
+	/* dijit/MenuItem */
+	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {
+		/**
+		 * Text for the accelerator (shortcut) key combination, a control, alt, etc. modified keystroke meant to execute the menu item regardless of where the focus is on the page.
+		 *
+		 * Note that although Menu can display accelerator keys, there is no infrastructure to actually catch and execute those accelerators.
+		 */
+		accelKey: string;
+
+		/**
+		 * If true, the menu item is disabled.
+		 * If false, the menu item is enabled.
+		 */
+		disabled: boolean;
+
+		/** Menu text as HTML */
+		label: string;
+
+		/**
+		 * Class to apply to DOMNode to make it display an icon.
+		 */
+		iconClass: string;
+
+		/**
+		 * Hook for attr('accelKey', ...) to work.
+		 * Set accelKey on this menu item.
+		 */
+		_setAccelKeyAttr(value: string): void;
+
+		/**
+		 * Hook for attr('disabled', ...) to work.
+		 * Enable or disable this menu item.
+		 */
+		_setDisabledAttr(value: boolean): void;
+
+		_setLabelAttr(val: string): void;
+		_setIconClassAttr(val: string): void;
+
+		_fillContent(source: Element): void;
+
+		/**
+		 * Indicate that this node is the currently selected one
+		 */
+		_setSelected(selected: boolean): void;
+
+		focus(): void;
+
+		/**
+		 * Deprecated.
+		 * Use set('disabled', bool) instead.
+		 */
+		setDisabled(disabled: boolean): void;
+
+		/**
+		 * Deprecated.
+		 * Use set('label', ...) instead.
+		 */
+		setLabel(content: string): void;
+	}
+
+	interface MenuItemConstructor extends _WidgetBaseConstructor<MenuItem> { }
 
 	/* dijit/place */
 
@@ -1419,6 +1706,59 @@ declare namespace dijit {
 		 */
 		getEnclosingWidgets(node: Node): _WidgetBase;
 	}
+
+	/* dijit/TitlePane */
+
+	interface TitlePane extends dijit.layout.ContentPane, _TemplatedMixin, _CssStateMixin {
+		/**
+		 * Whether pane can be opened or closed by clicking the title bar.
+		 */
+		toggleable: boolean;
+
+		/**
+		 * Tabindex setting for the title (so users can tab to the title then use space/enter to open/close the title pane)
+		 */
+		tabIndex: string;
+
+		/**
+		 * Time in milliseconds to fade in/fade out
+		 */
+		duration: number;
+
+		/**
+		 * Don't change this parameter from the default value.
+		 *
+		 * This ContentPane parameter doesn't make sense for TitlePane, since TitlePane is never a child of a layout container, nor should TitlePane try to control the size of an inner widget.
+		 */
+		doLayout: boolean;
+
+		/**
+		 * Switches between opened and closed state
+		 */
+		toggle(): void;
+
+		/**
+		 * Set the open/close css state for the TitlePane
+		 */
+		_setCss(): void;
+
+		/**
+		 * Handler for when user hits a key
+		 */
+		_onTitleKey(e: Event): void;
+
+		/**
+		 * Handler when user clicks the title bar
+		 */
+		_onTitleClick(): void;
+
+		/**
+		 * Deprecated. Use set('title', ...) instead.
+		 */
+		setTitle(): void;
+	}
+
+	interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> {}
 
 	/* dijit/Tooltip */
 

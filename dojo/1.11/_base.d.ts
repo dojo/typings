@@ -540,10 +540,10 @@ declare namespace dojo {
 			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
 			<A, B>(className: string, superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
 			<A, B>(superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
-			<A>(className: string, superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: any): DeclareConstructor<A>;
-			<A>(superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: any): DeclareConstructor<A>;
-			(className: string, superClass: any[], props: any): DeclareConstructor<any>;
-			(superClass: any[], props: any): DeclareConstructor<any>;
+			<A>(className: string, superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: A): DeclareConstructor<A>;
+			<A>(superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: A): DeclareConstructor<A>;
+			(className: string, superClass: any | any[], props: any): DeclareConstructor<any>;
+			(superClass: any | any[], props: any): DeclareConstructor<any>;
 
 			/**
 			 * Mix in properties skipping a constructor and decorating functions
@@ -832,7 +832,7 @@ declare namespace dojo {
 		}
 
 		interface AnimationArguments extends FadeArguments {
-			properties: AnimationArgumentsProperties;
+			properties?: AnimationArgumentsProperties;
 			onEnd?: AnimationCallback;
 		}
 
@@ -1241,7 +1241,7 @@ declare namespace dojo {
 			 * Log a debug message to indicate that a behavior has been
 			 * deprecated.
 			 */
-			deprectated(behaviour: string, extra?: string, removal?: string): void;
+			deprecated(behaviour: string, extra?: string, removal?: string): void;
 
 			/**
 			 * Marks code as experimental.
@@ -1355,7 +1355,7 @@ declare namespace dojo {
 			 * for the hitched function.
 			 */
 			hitch<T extends Function>(scope: any, method: T): T;
-			hitch<T extends Function>(scope: any, method: Function, ...args: any[]): T;
+			hitch<T extends Function>(scope: any, method: string | Function, ...args: any[]): T;
 
 			/**
 			 * Returns a new object which "looks" to obj for properties which it
