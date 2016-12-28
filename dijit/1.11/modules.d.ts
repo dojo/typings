@@ -23,13 +23,13 @@ declare module 'dijit/_CssStateMixin' {
 }
 
 declare module 'dijit/_Contained' {
-	type _Contained = dijit._Contained
+	type _Contained = dijit._Contained;
 	const _Contained: dijit._ContainedConstructor;
 	export = _Contained;
 }
 
 declare module 'dijit/_Container' {
-	type _Container = dijit._Contained
+	type _Container = dijit._Contained;
 	const _Container: dijit._ContainerConstructor;
 	export = _Container;
 }
