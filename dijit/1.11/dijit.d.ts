@@ -1071,23 +1071,23 @@ declare namespace dijit {
 		 * Called on left arrow key, or right arrow key if widget is in RTL mode.
 		 * Should go back to the previous child in horizontal container widgets like Toolbar.
 		 */
-		_onLeftArrow(): void;
+		_onLeftArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Called on right arrow key, or left arrow key if widget is in RTL mode.
 		 * Should go to the next child in horizontal container widgets like Toolbar.
 		 */
-		_onRightArrow(): void;
+		_onRightArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Called on up arrow key. Should go to the previous child in vertical container widgets like Menu.
 		 */
-		_onUpArrow(): void;
+		_onUpArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Called on down arrow key. Should go to the next child in vertical container widgets like Menu.
 		 */
-		_onDownArrow(): void;
+		_onDownArrow(evt?: KeyboardEvent): void;
 
 		/**
 		 * Default focus() implementation: focus the first child.
@@ -1261,10 +1261,156 @@ declare namespace dijit {
 		 *
 		 * If we allowed a dojo/query dependency from this module this could more simply be a string "> *" instead of this function.
 		 */
-		childSelector(node: Element | Node): boolean | void;
+		childSelector(node: Element | Node): boolean | void | any;
 	}
 
 	interface _KeyNavContainerConstructor extends dojo._base.DeclareConstructor<_KeyNavContainer> {}
+
+	/* dijit/_MenuBase */
+
+	/**
+	 * Abstract base class for Menu and MenuBar.
+	 * Subclass should implement _onUpArrow(), _onDownArrow(), _onLeftArrow(), and _onRightArrow().
+	 */
+	interface _MenuBase extends _Widget, _TemplatedMixin, _KeyNavContainer, _CssStateMixin {
+		selected: MenuItem | null;
+
+		_setSelectedAttr(item?: MenuItem | null): void;
+
+		/**
+		 * This Menu has been clicked (mouse or via space/arrow key) or opened as a submenu, so mere mouseover will open submenus.  Focusing a menu via TAB does NOT automatically make it active since TAB is a navigation operation and not a selection one.
+		 *
+		 * For Windows apps, pressing the ALT key focuses the menubar menus (similar to TAB navigation) but the menu is not active (ie no dropdown) until an item is clicked.
+		 */
+		activated: boolean;
+
+		_setActivatedAttr(val: boolean): void;
+
+		/**
+		 * pointer to menu that displayed me
+		 */
+		parentMenu: _Widget | null;
+
+		/**
+		 * After a menu has been activated (by clicking on it etc.), number of milliseconds before hovering (without clicking) another MenuItem causes that MenuItem's popup to automatically open.
+		 */
+		popupDelay: number;
+
+		/**
+		 * For a passive (unclicked) Menu, number of milliseconds before hovering (without clicking) will cause the popup to open.  Default is Infinity, meaning you need to click the menu to open it.
+		 */
+		passivePopupDelay: number;
+
+		/**
+		 * A toggle to control whether or not a Menu gets focused when opened as a drop down from a MenuBar or DropDownButton/ComboButton.   Note though that it always get focused when opened via the keyboard.
+		 */
+		autoFocus: boolean;
+
+		/**
+		 * Selector (passed to on.selector()) used to identify MenuItem child widgets, but exclude inert children like MenuSeparator.  If subclass overrides to a string (ex: "> *"), the subclass must require dojo/query.
+		 */
+		childSelector(node: Element | Node): boolean | void | Function;
+
+		/**
+		 * Attach point for notification about when a menu item has been executed. This is an internal mechanism used for Menus to signal to their parent to close them, because they are about to execute the onClick handler.  In general developers should not attach to or override this method.
+		 */
+		onExecute(): void;
+
+		/**
+		 * Attach point for notification about when the user cancels the current menu
+		 * This is an internal mechanism used for Menus to signal to their parent to close them.  In general developers should not attach to or override this method.
+		 */
+		onCancel(): void;
+
+		/**
+		 * This handles the right arrow key (left arrow key on RTL systems), which will either open a submenu, or move to the next item in the ancestor MenuBar
+		 */
+		_moveToPopup(evt: Event): void;
+
+		/**
+		 * This handler is called when the mouse moves over the popup.
+		 */
+		_onPopupHover(evt?: MouseEvent): void;
+
+		/**
+		 * Called when cursor is over a MenuItem.
+		 */
+		onItemHover(item: MenuItem): void;
+
+		/**
+		 * Called when a child MenuItem becomes deselected.   Setup timer to close its popup.
+		 */
+		_onChildDeselect(item: MenuItem): void;
+
+		/**
+		 * Callback fires when mouse exits a MenuItem
+		 */
+		onItemUnhover(item: MenuItem): void;
+
+		/**
+		 * Cancels the popup timer because the user has stop hovering on the MenuItem, etc.
+		 */
+		_stopPopupTimer(): void;
+
+		/**
+		 * Cancels the pending-close timer because the close has been preempted
+		 */
+		_stopPendingCloseTimer(): void;
+
+		/**
+		 * Returns the top menu in this chain of Menus
+		 */
+		_getTopMenu(): void;
+
+		/**
+		 * Handle clicks on an item.
+		 */
+		onItemClick(item: _WidgetBase, evt: Event): void;
+
+		/**
+		 * Open the popup to the side of/underneath the current menu item, and optionally focus first item
+		 */
+		_openItemPopup(from_item: MenuItem, focus: boolean): void;
+
+		/**
+		 * Callback when this menu is opened.
+		 * This is called by the popup manager as notification that the menu was opened.
+		 */
+		onOpen(evt?: Event): void;
+
+		/**
+		 * Callback when this menu is closed.
+		 * This is called by the popup manager as notification that the menu was closed.
+		 */
+		onClose(): boolean;
+
+		/**
+		 * Called when submenu is clicked or focus is lost.  Close hierarchy of menus.
+		 */
+		_closeChild(): void;
+		/**
+		 * Called when child of this Menu gets focus from:
+		 *
+		 *  1. clicking it
+		 *  2. tabbing into it
+		 *  3. being opened by a parent menu.
+		 *
+		 * This is not called just from mouse hover.
+		 */
+		_onItemFocus(item: MenuItem): void;
+
+		/**
+		 * Called when focus is moved away from this Menu and it's submenus.
+		 */
+		_onBlur(): void;
+
+		/**
+		 * Called when the user is done with this menu.  Closes hierarchy of menus.
+		 */
+		_cleanUp(clearSelectedItem?: boolean): void;
+	}
+
+	interface _MenuBaseConstructor extends _WidgetBaseConstructor<_MenuBase> {}
 
 	/* dijit/Dialog */
 
@@ -1405,6 +1551,15 @@ declare namespace dijit {
 	interface ConfirmDialog extends _ConfirmDialogMixin { }
 
 	interface ConfirmDialogConstructor extends DialogConstructor { }
+
+	/* dijit/DropDownMenu */
+
+	/**
+	 * A menu, without features for context menu (Meaning, drop down menu)
+	 */
+	interface DropDownMenu extends _MenuBase { }
+
+	interface DropDownMenuConstructor extends _WidgetBaseConstructor<DropDownMenu> { }
 
 	/* dijit/MenuItem */
 	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {

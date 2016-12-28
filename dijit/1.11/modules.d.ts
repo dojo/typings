@@ -34,6 +34,12 @@ declare module 'dijit/_KeyNavMixin' {
 	export = _KeyNavMixin;
 }
 
+declare module 'dijit/_MenuBase' {
+	type _MenuBase = dijit._MenuBase;
+	const _MenuBase: dijit._MenuBaseConstructor;
+	export = _MenuBase;
+}
+
 declare module 'dijit/_TemplatedMixin' {
 	type _TemplatedMixin = dijit._TemplatedMixin;
 	const _TemplatedMixin: dijit._TemplatedMixinConstructor;
@@ -74,6 +80,12 @@ declare module 'dijit/Dialog' {
 	type Dialog = dijit.Dialog;
 	const Dialog: dijit.DialogConstructor;
 	export = Dialog;
+}
+
+declare module 'dijit/DropDownMenu' {
+	type DropDownMenu = dijit.DropDownMenu;
+	const DropDownMenu: dijit.DropDownMenuConstructor;
+	export = DropDownMenu;
 }
 
 declare module 'dijit/MenuItem' {
