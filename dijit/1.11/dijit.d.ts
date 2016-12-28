@@ -1805,6 +1805,30 @@ declare namespace dijit {
 		close(popup?: _WidgetBase): void;
 	}
 
+	/** dijit/PopupMenuItem */
+
+	/**
+	 * An item in a Menu that spawn a drop down (usually a drop down menu)
+	 */
+	interface PopupMenuItem extends MenuItem {
+		/**
+		 * When Menu is declared in markup, this code gets the menu label and the popup widget from the srcNodeRef.
+		 *
+		 * srcNodeRef.innerHTML contains both the menu item text and a popup widget
+		 * The first part holds the menu item text and the second part is the popup
+		 */
+		_fillContent(source: Element): void;
+
+		/**
+		 * Open the popup to the side of/underneath this MenuItem, and optionally focus first item
+		 */
+		_openPopup(params: { around?: Element; popup?: Function }, focus?: boolean): void;
+
+		_closePopup(): void;
+	}
+
+	interface PopupMenuItemConstructor extends _WidgetBaseConstructor<PopupMenuItem> { }
+
 	/* dijit/registry */
 
 	interface Registry {
