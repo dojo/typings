@@ -278,7 +278,7 @@ declare namespace dijit {
 
 		/* dijit/form/_DateTimeTextBox */
 
-		interface DateTimeConstraints extends Constraints, dojo.date.DateLocaleFormatOptions {}
+		interface DateTimeConstraints extends Constraints, dojo.date.DateLocaleFormatOptions { }
 
 		interface _DateTimeTextBox<T extends _WidgetBase> extends RangeBoundTextBox, _HasDropDown<T> {
 			templateString: string;
@@ -1181,6 +1181,8 @@ declare namespace dijit {
 			postMixInProperties(): void;
 			buildRendering(): void;
 		}
+
+		interface ComboBoxMixinConstructor<T, U, V> extends _WidgetBaseConstructor<ComboBoxMixin<T, U, V>> { }
 
 		/* dijit/form/CurrencyTextBox */
 
