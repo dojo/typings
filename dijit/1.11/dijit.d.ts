@@ -1883,7 +1883,7 @@ declare namespace dijit {
 		 * Returns the widget whose DOM tree contains the specified DOMNode, or null if
 		 * the node is not contained within the DOM tree of any widget
 		 */
-		getEnclosingWidgets(node: Node): _WidgetBase;
+		getEnclosingWidget(node: Node): _WidgetBase;
 	}
 
 	/* dijit/TitlePane */
