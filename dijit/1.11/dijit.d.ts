@@ -80,6 +80,8 @@ declare namespace dijit {
 		getIndexInParent(): number;
 	}
 
+	interface _ContainedConstructor extends dojo._base.DeclareConstructor<_Contained> {}
+
 	/* dijit/_Container */
 
 	interface _Container {
@@ -107,6 +109,8 @@ declare namespace dijit {
 		 */
 		getIndexOfChild<T extends _WidgetBase>(widget: T): number;
 	}
+
+	interface _ContainerConstructor extends dojo._base.DeclareConstructor<_Container> {}
 
 	/* dijit/_CssStateMixin */
 

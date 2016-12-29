@@ -22,6 +22,18 @@ declare module 'dijit/_CssStateMixin' {
 	export = _CssStateMixin;
 }
 
+declare module 'dijit/_Contained' {
+	type _Contained = dijit._Contained;
+	const _Contained: dijit._ContainedConstructor;
+	export = _Contained;
+}
+
+declare module 'dijit/_Container' {
+	type _Container = dijit._Contained;
+	const _Container: dijit._ContainerConstructor;
+	export = _Container;
+}
+
 declare module 'dijit/_KeyNavContainer' {
 	type _KeyNavContainer = dijit._KeyNavContainer;
 	const _KeyNavContainer: dijit._KeyNavContainerConstructor;
@@ -47,7 +59,7 @@ declare module 'dijit/_TemplatedMixin' {
 }
 
 declare module 'dijit/_WidgetsInTemplateMixin' {
-	type _WidgetsInTemplateMixin = dijit._WidgetsInTemplateMixin
+	type _WidgetsInTemplateMixin = dijit._WidgetsInTemplateMixin;
 	const _WidgetsInTemplateMixin: dijit._WidgetsInTemplateMixinConstructor;
 	export = _WidgetsInTemplateMixin;
 }
