@@ -1354,6 +1354,8 @@ declare namespace dojo {
 			 * Each of these values will be used to "placehold" (similar to curry)
 			 * for the hitched function.
 			 */
+			hitch(method: string): Function;
+			hitch<T extends Function>(method: T): T;
 			hitch<T extends Function>(scope: any, method: T): T;
 			hitch<T extends Function>(scope: any, method: string | Function, ...args: any[]): T;
 
