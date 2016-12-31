@@ -1861,7 +1861,7 @@ declare namespace dijit {
 		/**
 		 * Returns the widget corresponding to the given DOMNode
 		 */
-		byNode(node: Node): _WidgetBase;
+		byNode(node: Element | Node): _WidgetBase;
 
 		/**
 		 * Convert registry into a true Array
@@ -1883,7 +1883,7 @@ declare namespace dijit {
 		 * Returns the widget whose DOM tree contains the specified DOMNode, or null if
 		 * the node is not contained within the DOM tree of any widget
 		 */
-		getEnclosingWidgets(node: Node): _WidgetBase;
+		getEnclosingWidget(node: Element | Node): _WidgetBase;
 	}
 
 	/* dijit/TitlePane */
