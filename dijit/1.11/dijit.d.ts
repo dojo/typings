@@ -11,7 +11,73 @@ declare namespace dijit {
 		dojoAttachPoint: string;
 	}
 
-	interface _AttachMixin { }
+	interface _AttachMixin {
+		/**
+		 * List of widget attribute names associated with data-dojo-attach-point=... in the template, ex: ["containerNode", "labelNode"]
+		 */
+		_attachPoints: string[];
+
+		/**
+		 * List of connections associated with data-dojo-attach-event=... in the template
+		 */
+		_attachEvents: dojo.Handle[];
+
+		/**
+		 * Object to which attach points and events will be scoped.  Defaults to 'this'.
+		 */
+		attachScope: any;
+
+		/**
+		 * Search descendants of this.containerNode for data-dojo-attach-point and data-dojo-attach-event.
+		 *
+		 * Should generally be left false (the default value) both for performance and to avoid failures when this.containerNode holds other _AttachMixin instances with their own attach points and events.
+		 */
+		searchContainerNode: boolean;
+
+		/**
+		 * Attach to DOM nodes marked with special attributes.
+		 */
+		buildRendering(): void;
+
+		/**
+		 * hook for _WidgetsInTemplateMixin
+		 */
+		_beforeFillContent(): void;
+
+		/**
+		 * Iterate through the dom nodes and attach functions and nodes accordingly.
+		 *
+		 * Map widget properties and functions to the handlers specified in the dom node and it's descendants. This function iterates over all nodes and looks for these properties:
+		 * - dojoAttachPoint/data-dojo-attach-point
+		 * - dojoAttachEvent/data-dojo-attach-event
+		 */
+		_attachTemplateNodes(rootNode: Element | Node): void;
+
+		/**
+		 * Process data-dojo-attach-point and data-dojo-attach-event for given node or widget.
+		 *
+		 * Returns true if caller should process baseNode's children too.
+		 */
+		_processTemplateNode<T extends (Element | Node | _WidgetBase)>(
+			baseNode: T,
+			getAttrFunc: (baseNode: T, attr: string) => string,
+			attachFunc: (node: T, type: string, func?: Function) => dojo.Handle
+		): boolean;
+
+		/**
+		 * Roughly corresponding to dojo/on, this is the default function for processing a data-dojo-attach-event.  Meant to attach to DOMNodes, not to widgets.
+		 */
+		_attach(node: Element | Node, type: string, func?: Function): dojo.Handle;
+
+		/**
+		 * Detach and clean up the attachments made in _attachtempalteNodes.
+		 */
+		_detachTemplateNodes(): void;
+
+		destroyRendering(preserveDom?: boolean): void;
+	}
+
+	interface _AttachMixinConstructor extends dojo._base.DeclareConstructor<_AttachMixin> { }
 
 	/* dijit/_BidiMixin */
 
@@ -80,7 +146,7 @@ declare namespace dijit {
 		getIndexInParent(): number;
 	}
 
-	interface _ContainedConstructor extends dojo._base.DeclareConstructor<_Contained> {}
+	interface _ContainedConstructor extends dojo._base.DeclareConstructor<_Contained> { }
 
 	/* dijit/_Container */
 
@@ -110,7 +176,7 @@ declare namespace dijit {
 		getIndexOfChild<T extends _WidgetBase>(widget: T): number;
 	}
 
-	interface _ContainerConstructor extends dojo._base.DeclareConstructor<_Container> {}
+	interface _ContainerConstructor extends dojo._base.DeclareConstructor<_Container> { }
 
 	/* dijit/_CssStateMixin */
 
@@ -1202,7 +1268,7 @@ declare namespace dijit {
 		_getNext(child: _WidgetBase, dir: 1 | -1): _WidgetBase | null;
 	}
 
-	interface _KeyNavMixinConstructor extends dojo._base.DeclareConstructor<_KeyNavMixin> {}
+	interface _KeyNavMixinConstructor extends dojo._base.DeclareConstructor<_KeyNavMixin> { }
 
 	/* dijit/_KeyNavContainer */
 
@@ -1268,7 +1334,7 @@ declare namespace dijit {
 		childSelector(node: Element | Node): boolean | void | any;
 	}
 
-	interface _KeyNavContainerConstructor extends dojo._base.DeclareConstructor<_KeyNavContainer> {}
+	interface _KeyNavContainerConstructor extends dojo._base.DeclareConstructor<_KeyNavContainer> { }
 
 	/* dijit/_MenuBase */
 
@@ -1414,7 +1480,7 @@ declare namespace dijit {
 		_cleanUp(clearSelectedItem?: boolean): void;
 	}
 
-	interface _MenuBaseConstructor extends _WidgetBaseConstructor<_MenuBase> {}
+	interface _MenuBaseConstructor extends _WidgetBaseConstructor<_MenuBase> { }
 
 	/* dijit/Dialog */
 
@@ -1937,7 +2003,7 @@ declare namespace dijit {
 		setTitle(): void;
 	}
 
-	interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> {}
+	interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> { }
 
 	/* dijit/Tooltip */
 

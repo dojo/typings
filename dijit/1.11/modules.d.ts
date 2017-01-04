@@ -13,7 +13,8 @@ declare module 'dijit/_WidgetBase' {
 }
 
 declare module 'dijit/_AttachMixin' {
-	const _AttachMixin: dijit._AttachMixin;
+	type _AttachMixin = dijit._AttachMixin;
+	const _AttachMixin: dijit._AttachMixinConstructor;
 	export = _AttachMixin;
 }
 
