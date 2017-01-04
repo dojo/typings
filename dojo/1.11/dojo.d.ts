@@ -829,6 +829,7 @@ declare namespace dojo {
 		 * Register a new feature test for some named feature.
 		 */
 		add(name: string | number, test: HasTestFunction, now?: boolean, force?: boolean): any;
+		add<T extends (Object | string | number | boolean | null | void)>(name: string | number, test: T, now?: boolean, force?: boolean): any;
 
 		/**
 		 * Deletes the contents of the element passed to test functions.
