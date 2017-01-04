@@ -822,6 +822,23 @@ declare namespace dojo {
 		 * @param {string | number} name The name (if a string) or identifier (if an integer) of the feature to test.
 		 */
 		(name: string | number): any;
+		(name: 'host-browser'): boolean;
+		(name: 'host-node'): any;
+		(name: 'host-rhino'): boolean;
+		(name: 'dom'): boolean;
+		(name: 'dojo-dom-ready-api'): 1;
+		(name: 'dojo-sniff'): 1;
+		// if host-browser is true
+		(name: 'dom-addeventlistener'): void | boolean;
+		(name: 'touch'): void | boolean;
+		(name: 'touch-events'): void | boolean;
+		(name: 'pointer-events'): void | boolean;
+		(name: 'MSPointer'): void | boolean;
+		(name: 'device-width'): void | number;
+		(name: 'dom-attributes-explicit'): void | boolean;
+		(name: 'dom-attributes-specified-flag'): void | boolean;
+		// dojo/_base/browser
+		(name: 'config-selectorEngine'): string;
 
 		cache: HasCache;
 
@@ -829,6 +846,7 @@ declare namespace dojo {
 		 * Register a new feature test for some named feature.
 		 */
 		add(name: string | number, test: HasTestFunction, now?: boolean, force?: boolean): any;
+		add<T extends (Object | string | number | boolean | null | void)>(name: string | number, test: T, now?: boolean, force?: boolean): any;
 
 		/**
 		 * Deletes the contents of the element passed to test functions.
@@ -855,6 +873,9 @@ declare namespace dojo {
 	/* dojo/hccss */
 
 	/* this only does has.add and re-exports the has interface */
+	interface Has {
+		(name: 'highcontrast'): void | boolean;
+	}
 
 	/* dojo/html */
 
@@ -1863,6 +1884,33 @@ declare namespace dojo {
 	/* Module just exports instance of dojo.router.BaseRouter */
 
 	/* dojo/sniff */
+
+	interface Has {
+		(name: 'air'): boolean;
+		(name: 'wp'): void | number;
+		(name: 'msapp'): void | number;
+		(name: 'khtml'): void | number;
+		(name: 'edge'): void | number;
+		(name: 'opr'): void | number;
+		(name: 'webkit'): void | number;
+		(name: 'chrome'): void | number;
+		(name: 'android'): void | number;
+		(name: 'safari'): void | number;
+		(name: 'mac'): boolean;
+		(name: 'quirks'): boolean;
+		(name: 'iphone'): void | number;
+		(name: 'ipod'): void | number;
+		(name: 'ipad'): void | number;
+		(name: 'ios'): void | number;
+		(name: 'bb'): void | number | boolean;
+		(name: 'trident'): void | number;
+		(name: 'svg'): boolean;
+		(name: 'opera'): void | number;
+		(name: 'mozilla'): void | number;
+		(name: 'ff'): void | number;
+		(name: 'ie'): void | number;
+		(name: 'wii'): boolean | any;
+	}
 
 	/* Just rexports has after adding features */
 
