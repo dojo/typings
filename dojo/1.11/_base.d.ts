@@ -509,20 +509,33 @@ declare namespace dojo {
 
 		/* dojo/_base/declare */
 
-		interface DeclareConstructor<T> {
-			new (...args: any[]): T;
-			prototype: T;
-
+		interface DeclareShared<T> {
 			/**
 			 * Adds all properties and methods of source to constructor's
 			 * prototype, making them available to all instances created with
 			 * constructor. This method is specific to constructors created with
 			 * declare().
+			 *
+			 * Adds source properties to the constructor's prototype. It can
+			 * override existing properties.
+			 *
+			 * This method is similar to dojo.extend function, but it is specific
+			 * to constructors produced by declare(). It is implemented
+			 * using dojo.safeMixin, and it skips a constructor property,
+			 * and properly decorates copied functions.
 			 */
 			extend<U>(source: U): DeclareConstructor<T & U>;
 
 			/**
 			 * Create a subclass of the declared class from a list of base classes.
+			 *
+			 * Create a constructor using a compact notation for inheritance and
+			 * prototype extension.
+			 *
+			 * Mixin ancestors provide a type of multiple inheritance.
+			 * Prototypes of mixin ancestors are copied to the new class:
+			 * changes to mixin prototypes will not affect classes to which
+			 * they have been mixed in.
 			 */
 			createSubclass<U, V, X>(mixins: [DeclareConstructor<U>, DeclareConstructor<V>], props: X): DeclareConstructor<T & U & V & X>;
 			createSubclass<U, V>(mixins: [DeclareConstructor<U>], props: V): DeclareConstructor<T & U & V>;
@@ -530,6 +543,68 @@ declare namespace dojo {
 			createSubclass<U>(mixins: [DeclareConstructor<U>]): DeclareConstructor<T & U>;
 			createSubclass<U>(mixins: DeclareConstructor<U>): DeclareConstructor<T & U>;
 			createSubclass<U>(mixins: any, props: U): DeclareConstructor<T & U>;
+		}
+
+		/**
+		 * dojo/_base/declare() returns a constructor `C`.   `new C()` returns an Object with the following
+		 * methods, in addition to the methods and properties specified via the arguments passed to declare().
+		 */
+		interface DeclareCreatedObject<T> extends DeclareShared<T> {
+			/**
+			 * Calls a super method.
+			 *
+			 * This method is used inside method of classes produced with
+			 * declare() to call a super method (next in the chain). It is
+			 * used for manually controlled chaining. Consider using the regular
+			 * chaining, because it is faster. Use "this.inherited()" only in
+			 * complex cases.
+			 *
+			 * This method cannot me called from automatically chained
+			 * constructors including the case of a special (legacy)
+			 * constructor chaining. It cannot be called from chained methods.
+			 *
+			 * If "this.inherited()" cannot find the next-in-chain method, it
+			 * does nothing and returns "undefined". The last method in chain
+			 * can be a default method implemented in Object, which will be
+			 * called last.
+			 *
+			 * If "name" is specified, it is assumed that the method that
+			 * received "args" is the parent method for this call. It is looked
+			 * up in the chain list and if it is found the next-in-chain method
+			 * is called. If it is not found, the first-in-chain method is
+			 * called.
+			 *
+			 * If "name" is not specified, it will be derived from the calling
+			 * method (using a methoid property "nom").
+			 */
+			inherited<U>(args: IArguments, newArgs?: any[]): U;
+			inherited(args: IArguments, newArgs?: true): Function | void;
+			inherited<U>(name: string, args: IArguments, newArgs?: any[]): U;
+			inherited(name: string, args: IArguments, newArgs?: true): Function | void;
+
+			/**
+			 * Returns a super method.
+			 *
+			 * This method is a convenience method for "this.inherited()".
+			 * It uses the same algorithm but instead of executing a super
+			 * method, it returns it, or "undefined" if not found.
+			 */
+			getInherited(args: IArguments): Function | void;
+			getInherited(name: string, args: IArguments): Function | void;
+
+			/**
+			 * Checks the inheritance chain to see if it is inherited from this class.
+			 *
+			 * This method is used with instances of classes produced with
+			 * declare() to determine of they support a certain interface or
+			 * not. It models "instanceof" operator.
+			 */
+			isInstanceOf(cls: any): boolean;
+		}
+
+		interface DeclareConstructor<T> extends DeclareShared<T> {
+			new (...args: any[]): T & DeclareCreatedObject<T>;
+			prototype: T;
 		}
 
 		/**
