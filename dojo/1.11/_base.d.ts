@@ -536,14 +536,30 @@ declare namespace dojo {
 		 * Create a feature-rich constructor from compact notation.
 		 */
 		interface Declare {
-			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
+			<A, B, C, D>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>]): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>]): DeclareConstructor<A & B & C>;
+			<A, B>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>]): DeclareConstructor<A & B>;
+			<A>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>]): DeclareConstructor<A>;
+
+			<A, B, C, D, E>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E): DeclareConstructor<A & B & C & D & E>;
+			<A, B, C, D>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D): DeclareConstructor<A & B & C & D>;
 			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
-			<A, B>(className: string, superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
-			<A, B>(superClass: DeclareConstructor<A>, props: B): DeclareConstructor<A & B>;
-			<A>(className: string, superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: A): DeclareConstructor<A>;
-			<A>(superClass: DeclareConstructor<any> | DeclareConstructor<any>[], props: A): DeclareConstructor<A>;
-			(className: string, superClass: any | any[], props: any): DeclareConstructor<any>;
-			(superClass: any | any[], props: any): DeclareConstructor<any>;
+			<A, B>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B): DeclareConstructor<A & B>;
+
+			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>]): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>]): DeclareConstructor<A & B & C>;
+			<A, B>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>]): DeclareConstructor<A & B>;
+			<A>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>]): DeclareConstructor<A>;
+
+			<A, B, C, D, E>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E): DeclareConstructor<A & B & C & D & E>;
+			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
+			<A, B>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B): DeclareConstructor<A & B>;
+
+			<A>(className: string, superClass: any, props: A): DeclareConstructor<A>;
+			(className: string, superClass: any): DeclareConstructor<any>;
+			<A>(superClass: any, props: A): DeclareConstructor<A>;
+			(superClass: any): DeclareConstructor<any>;
 
 			/**
 			 * Mix in properties skipping a constructor and decorating functions
