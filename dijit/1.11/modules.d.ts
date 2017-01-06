@@ -8,7 +8,7 @@ declare module 'dijit/_Widget' {
 
 declare module 'dijit/_WidgetBase' {
 	type _WidgetBase = dijit._WidgetBase;
-	const _WidgetBase: dijit._WidgetBaseConstructor<any>;
+	const _WidgetBase: dijit._WidgetBaseConstructor<_WidgetBase>;
 	export = _WidgetBase;
 }
 
