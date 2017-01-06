@@ -701,7 +701,7 @@ declare namespace dijit {
 		 * Used by widgets to signal that a synthetic event occurred, ex:
 		 * |	myWidget.emit("attrmodified-selectedChildWidget", {}).
 		 */
-		emit(type: string, eventObj: any, callbackArgs: any[]): any;
+		emit(type: string, eventObj?: any, callbackArgs?: any[]): any;
 
 		/**
 		 * Call specified function when event occurs, ex: myWidget.on("click", function(){ ... }).
