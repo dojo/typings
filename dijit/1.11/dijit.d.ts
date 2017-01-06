@@ -196,6 +196,8 @@ declare namespace dijit {
 		active: boolean;
 	}
 
+	interface _CssStateMixinConstructor extends dojo._base.DeclareConstructor<_CssStateMixin> { }
+
 	/* dijit/_DialogMixin */
 
 	interface _DialogMixin {

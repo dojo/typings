@@ -19,7 +19,8 @@ declare module 'dijit/_AttachMixin' {
 }
 
 declare module 'dijit/_CssStateMixin' {
-	const _CssStateMixin: dijit._CssStateMixin;
+	type _CssStateMixin = dijit._CssStateMixin;
+	const _CssStateMixin: dijit._CssStateMixinConstructor;
 	export = _CssStateMixin;
 }
 
