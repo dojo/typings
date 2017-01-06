@@ -193,7 +193,8 @@ declare module 'dijit/_base/window' {
 }
 
 declare module 'dijit/form/_FormMixin' {
-	const _FormMixin: dijit.form._FormMixin;
+	type _FormMixin = dijit.form._FormMixin;
+	const _FormMixin: dijit.form._FormMixinConstructor;
 	export = _FormMixin;
 }
 
