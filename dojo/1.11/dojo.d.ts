@@ -759,7 +759,8 @@ declare namespace dojo {
 		/**
 		 * Sets styles on a node.
 		 */
-		set(node: ElementOrString, name: string | DomComputedStyle, value?: string | number): DomComputedStyle;
+		set(node: ElementOrString, name: DomComputedStyle): DomComputedStyle;
+		set(node: ElementOrString, name: string, value: string | number): DomComputedStyle;
 
 		/**
 		 * converts style value to pixels on IE or return a numeric value.
