@@ -678,6 +678,8 @@ declare namespace dijit {
 			 * Reset the widget's value to what it was at initialization time
 			 */
 			reset(): void;
+
+			_hasBeenBlurred?: boolean;
 		}
 
 		/* dijit/form/_FormValueWidget */
@@ -1088,6 +1090,8 @@ declare namespace dijit {
 			 * Reset the widget's value to what it was at initialization time
 			 */
 			reset(): void;
+
+			_hasBeenBlurred?: boolean;
 		}
 
 		/* dijit/form/Button */
