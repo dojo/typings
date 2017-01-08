@@ -497,7 +497,6 @@ declare namespace dijit {
 		onMouseUp(event: DocumentEvent): void;
 
 		postCreate(): void;
-		on(type: string | dojo.ExtensionEvent, func: dojo.EventListener): dojo.WatchHandle;
 
 		/**
 		 * Deprecated.  Use set() instead.
@@ -706,7 +705,7 @@ declare namespace dijit {
 		/**
 		 * Call specified function when event occurs, ex: myWidget.on("click", function(){ ... }).
 		 */
-		on(type: string | dojo.ExtensionEvent, func: dojo.EventListener): dojo.WatchHandle;
+		on(type: string | dojo.ExtensionEvent, func: dojo.EventListener | Function): dojo.WatchHandle;
 
 		/**
 		 * Returns a string that represents the widget.
