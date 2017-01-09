@@ -19,7 +19,8 @@ declare module 'dijit/_AttachMixin' {
 }
 
 declare module 'dijit/_CssStateMixin' {
-	const _CssStateMixin: dijit._CssStateMixin;
+	type _CssStateMixin = dijit._CssStateMixin;
+	const _CssStateMixin: dijit._CssStateMixinConstructor;
 	export = _CssStateMixin;
 }
 
@@ -192,7 +193,8 @@ declare module 'dijit/_base/window' {
 }
 
 declare module 'dijit/form/_FormMixin' {
-	const _FormMixin: dijit.form._FormMixin;
+	type _FormMixin = dijit.form._FormMixin;
+	const _FormMixin: dijit.form._FormMixinConstructor;
 	export = _FormMixin;
 }
 

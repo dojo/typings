@@ -442,6 +442,8 @@ declare namespace dijit {
 			destroy(preserveDom?: boolean): void;
 		}
 
+		interface _FormMixinConstructor extends dojo._base.DeclareConstructor<_FormMixin> { }
+
 		/* dijit/form/_FormSelectWidget */
 
 		interface SelectOption {
