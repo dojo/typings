@@ -454,7 +454,7 @@ declare namespace dojo {
 		}
 
 		interface ObservableMixin<T, Q extends api.BaseQueryType, O extends api.QueryOptions> {
-			notify(object: T, existingId: string | number): void;
+			notify(object: T, existingId?: string | number): void;
 
 			/**
 			 * Queries the store for objects. This does not alter the store, but returns a
