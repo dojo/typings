@@ -556,6 +556,8 @@ declare namespace dojo {
 
 		interface Deferred<T> {
 
+			promise: promise.Promise<T>;
+
 			/**
 			 * Checks whether the deferred has been resolved.
 			 */
@@ -584,12 +586,12 @@ declare namespace dojo {
 			/**
 			 * Resolve the deferred.
 			 */
-			resolve(value?: T): void;
+			resolve(value?: T, strict?: boolean): promise.Promise<T>;
 
 			/**
 			 * Reject the deferred.
 			 */
-			reject(error?: any): void;
+			reject(error?: any, strict?: boolean): promise.Promise<T>;
 
 			/**
 			 * The results of the Defereed
