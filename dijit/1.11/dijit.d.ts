@@ -1105,12 +1105,10 @@ declare namespace dijit {
 		own(...args: any[]): any[];
 	}
 
-	interface DestroyableConstructor {
-		/**
-		 * Mixin to track handles and release them when instance is destroyed.
-		 */
-		new (): Destroyable;
-	}
+	/**
+	 * Mixin to track handles and release them when instance is destroyed.
+	 */
+	interface DestroyableConstructor extends dojo._base.DeclareConstructor<Destroyable> { }
 
 	/** dijit/_KeyNavMixin */
 
