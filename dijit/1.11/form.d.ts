@@ -1560,7 +1560,7 @@ declare namespace dijit {
 			postMixInProperties(): void;
 			serialize: SerializationFunction;
 			toString(): string;
-			validate(isFocused: boolean): boolean;
+			validate(isFocused?: boolean): boolean;
 			buildRendering(): void;
 			reset(): void;
 		}
