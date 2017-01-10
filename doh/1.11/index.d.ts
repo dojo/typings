@@ -1,1 +1,1 @@
-/// <reference path="doh" />
+/// <reference path="doh.d.ts" />
