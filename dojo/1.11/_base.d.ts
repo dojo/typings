@@ -557,6 +557,8 @@ declare namespace dojo {
 		 * methods, in addition to the methods and properties specified via the arguments passed to declare().
 		 */
 		interface DeclareCreatedObject<T> extends DeclareShared<T> {
+			declaredClass: string;
+
 			/**
 			 * Calls a super method.
 			 *
