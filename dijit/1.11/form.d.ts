@@ -395,7 +395,12 @@ declare namespace dijit {
 			 * "Incomplete" if not all of the required child widgets are filled in.  Otherwise, "",
 			 * which indicates that the form is ready to be submitted.
 			 */
-			state: string;
+			state: '' | 'Error' | 'Incomplete';
+
+			/**
+			 * Returns all form widget descendants, searching through non-form child widgets like BorderContainer
+			 */
+			_getDescendantFormWidgets(children?: _WidgetBase[]): _FormWidget[];
 
 			reset(): void;
 
@@ -427,6 +432,11 @@ declare namespace dijit {
 			onValidStateChange: OnValidStateChange;
 
 			/**
+			 * Compute what this.state should be based on state of children
+			 */
+			_getState(): '' | 'Error' | 'Incomplete';
+
+			/**
 			 * Deprecated method.   Applications no longer need to call this.   Remove for 2.0.
 			 */
 			disconnectChildren(): void;
@@ -437,6 +447,11 @@ declare namespace dijit {
 			 * initialized.
 			 */
 			connectChildren(inStartup?: boolean): void;
+
+			/**
+			 * Called when child's value or disabled state changes
+			 */
+			_onChildChange(attr?: string): void;
 
 			startup(): void;
 			destroy(preserveDom?: boolean): void;
