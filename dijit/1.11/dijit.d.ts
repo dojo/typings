@@ -760,7 +760,7 @@ declare namespace dijit {
 		 * Place this widget somewhere in the DOM based
 		 * on standard domConstruct.place() conventions.
 		 */
-		placeAt<T extends _WidgetBase>(reference: dojo.NodeFragmentOrString | T, position?: string | number): _WidgetBase;
+		placeAt<T extends _WidgetBase>(reference: dojo.NodeFragmentOrString | T, position?: string | number): this;
 
 		/**
 		 * Wrapper to setTimeout to avoid deferred functions executing
