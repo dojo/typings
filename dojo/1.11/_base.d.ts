@@ -87,7 +87,6 @@ declare namespace dojo {
 		}
 
 		interface Color {
-			named: ColorNamed;
 			r: number;
 			g: number;
 			b: number;
@@ -130,6 +129,16 @@ declare namespace dojo {
 			 * Returns a visual representation of the color
 			 */
 			toString(): string;
+		}
+
+		interface ColorConstructor {
+			new (color: ColorValue | ColorValueAlpha | ColorObject | string): Color;
+			prototype: Color;
+
+			/**
+			 * Dictionary list of all CSS named colors, by name. Values are 3-item arrays with corresponding RG and B values.
+			 */
+			named: ColorNamed;
 
 			/**
 			 * Blend colors end and start with weight from 0 to 1, 0.5 being a 50/50 blend,
@@ -163,11 +172,6 @@ declare namespace dojo {
 			 * style color values.
 			 */
 			fromString(str: string, obj?: Color): Color;
-		}
-
-		interface ColorConstructor {
-			new (color: ColorValue | ColorValueAlpha | ColorObject | string): Color;
-			prototype: Color;
 		}
 
 		/* dojo/colors */
@@ -306,7 +310,10 @@ declare namespace dojo {
 			'yellowgreen':	ColorValue;
 		}
 
-		interface Color {
+		interface ColorConstructor {
+			/**
+			 * creates a greyscale color with an optional alpha
+			 */
 			makeGrey(g: number, a?: number): Color;
 		}
 
