@@ -1092,6 +1092,7 @@ declare namespace dijit {
 	/* dijit/Destroyable */
 
 	interface Destroyable {
+		_destroyed?: true;
 
 		/**
 		 * Destroy this class, releasing any resources registered via own().
