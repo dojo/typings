@@ -516,47 +516,11 @@ declare namespace dojo {
 
 		/* dojo/_base/declare */
 
-		interface DeclareShared<T> {
-			/**
-			 * Adds all properties and methods of source to constructor's
-			 * prototype, making them available to all instances created with
-			 * constructor. This method is specific to constructors created with
-			 * declare().
-			 *
-			 * Adds source properties to the constructor's prototype. It can
-			 * override existing properties.
-			 *
-			 * This method is similar to dojo.extend function, but it is specific
-			 * to constructors produced by declare(). It is implemented
-			 * using dojo.safeMixin, and it skips a constructor property,
-			 * and properly decorates copied functions.
-			 */
-			extend<U>(source: U): DeclareConstructor<T & U>;
-
-			/**
-			 * Create a subclass of the declared class from a list of base classes.
-			 *
-			 * Create a constructor using a compact notation for inheritance and
-			 * prototype extension.
-			 *
-			 * Mixin ancestors provide a type of multiple inheritance.
-			 * Prototypes of mixin ancestors are copied to the new class:
-			 * changes to mixin prototypes will not affect classes to which
-			 * they have been mixed in.
-			 */
-			createSubclass<U, V, X>(mixins: [DeclareConstructor<U>, DeclareConstructor<V>], props: X): DeclareConstructor<T & U & V & X>;
-			createSubclass<U, V>(mixins: [DeclareConstructor<U>], props: V): DeclareConstructor<T & U & V>;
-			createSubclass<U, V>(mixins: DeclareConstructor<U>, props: V): DeclareConstructor<T & U & V>;
-			createSubclass<U>(mixins: [DeclareConstructor<U>]): DeclareConstructor<T & U>;
-			createSubclass<U>(mixins: DeclareConstructor<U>): DeclareConstructor<T & U>;
-			createSubclass<U>(mixins: any, props: U): DeclareConstructor<T & U>;
-		}
-
 		/**
 		 * dojo/_base/declare() returns a constructor `C`.   `new C()` returns an Object with the following
 		 * methods, in addition to the methods and properties specified via the arguments passed to declare().
 		 */
-		interface DeclareCreatedObject<T> extends DeclareShared<T> {
+		interface DeclareCreatedObject {
 			declaredClass: string;
 
 			/**
@@ -611,9 +575,43 @@ declare namespace dojo {
 			isInstanceOf(cls: any): boolean;
 		}
 
-		interface DeclareConstructor<T> extends DeclareShared<T> {
-			new (...args: any[]): T & DeclareCreatedObject<T>;
+		interface DeclareConstructor<T> {
+			new (...args: any[]): T & DeclareCreatedObject;
 			prototype: T;
+
+			/**
+			 * Adds all properties and methods of source to constructor's
+			 * prototype, making them available to all instances created with
+			 * constructor. This method is specific to constructors created with
+			 * declare().
+			 *
+			 * Adds source properties to the constructor's prototype. It can
+			 * override existing properties.
+			 *
+			 * This method is similar to dojo.extend function, but it is specific
+			 * to constructors produced by declare(). It is implemented
+			 * using dojo.safeMixin, and it skips a constructor property,
+			 * and properly decorates copied functions.
+			 */
+			extend<U>(source: U): DeclareConstructor<T & U>;
+
+			/**
+			 * Create a subclass of the declared class from a list of base classes.
+			 *
+			 * Create a constructor using a compact notation for inheritance and
+			 * prototype extension.
+			 *
+			 * Mixin ancestors provide a type of multiple inheritance.
+			 * Prototypes of mixin ancestors are copied to the new class:
+			 * changes to mixin prototypes will not affect classes to which
+			 * they have been mixed in.
+			 */
+			createSubclass<U, V, X>(mixins: [DeclareConstructor<U>, DeclareConstructor<V>], props: X): DeclareConstructor<T & U & V & X>;
+			createSubclass<U, V>(mixins: [DeclareConstructor<U>], props: V): DeclareConstructor<T & U & V>;
+			createSubclass<U, V>(mixins: DeclareConstructor<U>, props: V): DeclareConstructor<T & U & V>;
+			createSubclass<U>(mixins: [DeclareConstructor<U>]): DeclareConstructor<T & U>;
+			createSubclass<U>(mixins: DeclareConstructor<U>): DeclareConstructor<T & U>;
+			createSubclass<U>(mixins: any, props: U): DeclareConstructor<T & U>;
 		}
 
 		/**
