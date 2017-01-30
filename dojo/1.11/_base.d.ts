@@ -1989,6 +1989,7 @@ declare namespace dojo {
 		onchange(method: string, objOrFunc: EventListener | string): this;
 		onchange(method: string, objOrFunc: Object, funcName: string): this;
 
+		onclick(objOrFunc: EventListener | string): this;
 		onclick(method: string, objOrFunc: EventListener | string): this;
 		onclick(method: string, objOrFunc: Object, funcName: string): this;
 
