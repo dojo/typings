@@ -2005,6 +2005,18 @@ declare namespace dijit {
 
 	interface TitlePaneConstructor extends _WidgetBaseConstructor<TitlePane> { }
 
+	/* dijit/Toolbar */
+
+	interface Toolbar extends dijit._Widget, dijit._TemplatedMixin, dijit._KeyNavContainer { }
+
+	interface ToolbarConstructor extends _WidgetBaseConstructor<Toolbar> { }
+
+	/* dijit/ToolbarSeparator */
+
+	interface ToolbarSeparator extends dijit._Widget, dijit._TemplatedMixin { }
+
+	interface ToolbarSeparatorConstructor extends _WidgetBaseConstructor<ToolbarSeparator> { }
+
 	/* dijit/Tooltip */
 
 	interface Tooltip extends _Widget {
