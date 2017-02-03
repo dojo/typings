@@ -135,6 +135,18 @@ declare module 'dijit/TitlePane' {
 	export = TitlePane;
 }
 
+declare module 'dijit/Toolbar' {
+	type Toolbar = dijit.Toolbar;
+	const Toolbar: dijit.ToolbarConstructor;
+	export = Toolbar;
+}
+
+declare module 'dijit/ToolbarSeparator' {
+	type ToolbarSeparator = dijit.ToolbarSeparator;
+	const ToolbarSeparator: dijit.ToolbarSeparatorConstructor;
+	export = ToolbarSeparator;
+}
+
 declare module 'dijit/Tooltip' {
 	type Tooltip = dijit.Tooltip;
 	const Tooltip: dijit.TooltipConstructor;
