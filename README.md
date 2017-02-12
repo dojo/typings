@@ -71,21 +71,6 @@ them noted as comments in the existing typings.
 *Note*: while the repository currently uses TypeScript 1.8 as its development dependency
 we haven't started using the string literals yet.
 
-### AMD Plugin Globbing
-
-Currently, TypeScript does not support globbing of AMD modules.  There is an open ticket
-for this type of support (see [Microsoft/TypeScript#5787](https://github.com/Microsoft/TypeScript/issues/5787)).
-Until that is done, in order to use a plugin properly, you will have to declare the
-ambient module in a projects `.d.ts`.  For example to use `dojo/text` you would want
-to do something like this:
-
-```typescript
-declare module 'dojo/text!./path/to/some.html' {
-    const some: string;
-    export = some;
-}
-```
-
 ## Contributing
 
 Contributions to this repository are very much welcomed! If you wish to contribute to this repository,
