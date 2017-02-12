@@ -807,3 +807,13 @@ declare module 'dojo/window' {
 	const window: dojo.WindowModule;
 	export = window;
 }
+
+declare module 'dojo/i18n!*' {
+	const value: any;
+	export = value;
+}
+				
+declare module 'dojo/text!*' {
+	const content: string;
+	export = content;
+}
