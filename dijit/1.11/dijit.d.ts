@@ -1637,7 +1637,11 @@ declare namespace dijit {
 	 * A context menu you can assign to multiple elements
 	 */
 	interface Menu extends dijit.DropDownMenu {
-		targetNodeIds: any[];
+		/**
+		 * Array of dom node ids of nodes to attach to.
+		 * Fill this with nodeIds upon widget creation and it becomes context menu for those nodes.
+		 */
+		targetNodeIds: string[];
 
 		/**
 		 * CSS expression to apply this Menu to descendants of targetNodeIds, rather than to
