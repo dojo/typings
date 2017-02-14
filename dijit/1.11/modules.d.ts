@@ -102,6 +102,12 @@ declare module 'dijit/DropDownMenu' {
 	export = DropDownMenu;
 }
 
+declare module 'dijit/Menu' {
+	type Menu = dijit.Menu;
+	const Menu: dijit.MenuConstructor;
+	export = Menu;
+}
+
 declare module 'dijit/MenuItem' {
 	type MenuItem = dijit.MenuItem;
 	const MenuItem: dijit.MenuItemConstructor;

@@ -1631,6 +1631,52 @@ declare namespace dijit {
 
 	interface DropDownMenuConstructor extends _WidgetBaseConstructor<DropDownMenu> { }
 
+	/* dijit/Menu */
+
+	/**
+	 * A context menu you can assign to multiple elements
+	 */
+	interface Menu extends dijit.DropDownMenu {
+		targetNodeIds: any[];
+
+		/**
+		 * CSS expression to apply this Menu to descendants of targetNodeIds, rather than to
+		 * the nodes specified by targetNodeIds themselves.  Useful for applying a Menu to
+		 * a range of rows in a table, tree, etc.
+		 *
+		 * The application must require() an appropriate level of dojo/query to handle the selector.
+		 */
+		selector: string;
+
+		/**
+		 * If true, right clicking anywhere on the window will cause this context menu to open.
+		 * If false, must specify targetNodeIds.
+		 */
+		contextMenuForWindow: boolean;
+
+		/**
+		 * If true, menu will open on left click instead of right click, similar to a file menu.
+		 */
+		leftClickToOpen: boolean;
+
+		/**
+		 * When this menu closes, re-focus the element which had focus before it was opened.
+		 */
+		refocus: boolean;
+
+		/**
+		 * Attach menu to given node
+		 */
+		bindDomNode(node: string | Node): void;
+
+		/**
+		 * Detach menu from given node
+		 */
+		unBindDomNode(nodeName: string | Node): void;
+	}
+
+	interface MenuConstructor extends _WidgetBaseConstructor<Menu> { }
+
 	/* dijit/MenuItem */
 	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {
 		/**
