@@ -6,11 +6,6 @@ declare namespace dijit {
 
 	/* tslint:disable:class-name */
 
-	interface _WidgetBase extends dojo.Stateful, Destroyable {
-		dojoAttachEvent: string;
-		dojoAttachPoint: string;
-	}
-
 	interface _AttachMixin {
 		/**
 		 * List of widget attribute names associated with data-dojo-attach-point=... in the template, ex: ["containerNode", "labelNode"]
@@ -81,8 +76,7 @@ declare namespace dijit {
 
 	/* dijit/_BidiMixin */
 
-	interface _WidgetBase extends dojo.Stateful, Destroyable {
-
+	interface _BidiMixin {
 		/**
 		 * Gets the right direction of text.
 		 */
@@ -225,9 +219,7 @@ declare namespace dijit {
 	}
 
 	/* dijit/_FocusMixin */
-	interface _FocusMixin { }
-
-	interface _WidgetBase extends dojo.Stateful, Destroyable {
+	interface _FocusMixin extends _WidgetBase {
 		/**
 		 * Called when the widget becomes "active" because
 		 * it or a widget inside of it either has focus, or has recently
@@ -546,6 +538,15 @@ declare namespace dijit {
 
 	/* dijit/_WidgetBase */
 	interface _WidgetBase extends dojo.Stateful, Destroyable {
+		/**
+		 * This comes from the _AttachMixin extending _WidgetBase
+		 */
+		dojoAttachEvent?: string;
+
+		/**
+		 * This comes from the _AttachMixin extending _WidgetBase
+		 */
+		dojoAttachPoint?: string;
 
 		/**
 		 * A unique, opaque ID string that can be assigned by users or by the
