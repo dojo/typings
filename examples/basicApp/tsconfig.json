@@ -5,7 +5,8 @@
 		"outDir": "_build",
 		"removeComments": false,
 		"sourceMap": true,
-		"target": "ES5"
+		"target": "ES5",
+		"experimentalDecorators": true
 	},
 	"include": [
 		"./src/**/*.ts"

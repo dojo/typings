@@ -1,7 +1,7 @@
 import Dialog from './Dialog';
 import 'dojo/domReady!';
 
-/* So others can consume our application module better under TypeScript, lets
+/* So others can consume our application module better under TypeScript, let's
  * specify an interface for our application and export it
  */
 export interface App {

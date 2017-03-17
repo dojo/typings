@@ -15,7 +15,7 @@ interface Dialog extends DijitDialog {}
  * required to use merged declarations to define our interface, so the widget
  * class has to be declared as the default export in a separate statement.
  */
-declare(DijitDialog)
+@declare(DijitDialog)
 class Dialog {
 	title: string = messages.dialogTitle;
 	content: string = messages.dialogContent;
