@@ -7,9 +7,10 @@
 		"sourceMap": true,
 		"target": "ES5"
 	},
+	"include": [
+		"./src/**/*.ts"
+	],
 	"files": [
-		"./src/app/main.ts",
-		"./src/app/Dialog.ts",
 		"../../dojo/1.11/modules.d.ts",
 		"../../dijit/1.11/modules.d.ts"
 	]
