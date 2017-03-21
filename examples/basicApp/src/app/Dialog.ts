@@ -25,7 +25,7 @@ class Dialog {
  * We are using `export default` here, which is part of the ES6 module format.
  * If other consumers of the module are compatible with default exports, like
  * other modules written in TypeScript, then this is fine, but if someone
- * consumes this module, that insead of this being the return value of the module,
+ * consumes this module, that instead of this being the return value of the module,
  * it will be located under Dialog.default.
  */
 export default Dialog;
