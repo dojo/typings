@@ -75,7 +75,9 @@ declare module 'dstore/Cache' {
 }
 
 declare module 'dstore/legacy/DstoreAdapter' {
-	class DstoreAdapter<T> {
+	import Store = require('dstore/Store');
+
+	interface DstoreAdapter<T> {
 		constructor(collection: dstore.Collection<T>);
 		get(id: any): any;
 		put(object: T, options?: {}): any;
@@ -83,6 +85,13 @@ declare module 'dstore/legacy/DstoreAdapter' {
 		query(query: any, options?: {}): any;
 	}
 
+	module DstoreAdapter {
+		export interface Constructor extends dojo._base.DeclareConstructor<DstoreAdapter<any>> {
+			new <T>(store: Store<T>): DstoreAdapter<Store<T>>;
+		}
+	}
+
+	const DstoreAdapter: DstoreAdapter.Constructor;
 	export = DstoreAdapter;
 }
 
