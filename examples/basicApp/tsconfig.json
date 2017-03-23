@@ -5,11 +5,13 @@
 		"outDir": "_build",
 		"removeComments": false,
 		"sourceMap": true,
-		"target": "ES5"
+		"target": "ES5",
+		"experimentalDecorators": true
 	},
+	"include": [
+		"./src/**/*.ts"
+	],
 	"files": [
-		"./src/app/main.ts",
-		"./src/app/Dialog.ts",
 		"../../dojo/1.11/modules.d.ts",
 		"../../dijit/1.11/modules.d.ts"
 	]
