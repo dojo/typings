@@ -432,7 +432,7 @@ declare namespace dojo {
 
 		/* dojo/dnd/Moveable */
 
-		interface MoveableArgs extends Evented {
+		interface MoveableArgs {
 			/**
 			 * A node (or node's id), which is used as a mouse handle.
 			 * If omitted, the node itself is used as a handle.
