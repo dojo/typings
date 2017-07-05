@@ -1084,6 +1084,7 @@ declare namespace dijit {
 			 * value on blur or form submit.
 			 */
 			filter<T>(val: T): T;
+			filter<T extends number>(value: T): T;
 
 			_setBlurValue(): void;
 

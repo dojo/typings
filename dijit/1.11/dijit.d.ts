@@ -163,7 +163,8 @@ declare namespace dijit {
 		 * not destroy it.  You can also pass in an integer indicating
 		 * the index within the container to remove (ie, removeChild(5) removes the sixth widget)
 		 */
-		removeChild<T extends _WidgetBase>(widget: T | number): void;
+		removeChild<T extends _WidgetBase>(widget: T): void;
+		removeChild<T extends number>(widget: number): void;
 
 		/**
 		 * Returns true if widget has child widgets, i.e. if this.containerNode contains widgets.

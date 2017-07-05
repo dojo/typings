@@ -1,4 +1,5 @@
 /// <reference path="dojo.d.ts" />
 
-declare var require: dojo.Require;
+interface NodeRequire extends dojo.Require {}
+declare var require: NodeRequire;
 declare var define: dojo.Define;
