@@ -9,7 +9,8 @@
 		"moduleResolution": "classic",
 		"noImplicitAny": true,
 		"noImplicitThis": true,
-		"target": "es5"
+		"target": "es5",
+		"types": []
 	},
 	"include": [
 		"./dojo/**/*.ts",
