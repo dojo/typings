@@ -346,12 +346,93 @@ declare namespace dojo {
 		/* dojo/dnd/move */
 
 		interface Move {
-			//
+			constrainedMoveable: ConstrainedMoveableConstructor;
+			boxConstrainedMoveable: BoxConstrainedMoveableConstructor;
+			parentConstrainedMoveable: ParentConstrainedMoveableConstructor;
+		}
+
+		interface ConstrainedMoveableArgs extends MoveableArgs {
+			/**
+			 * Calculates a constraint box.
+			 * It is called in a context of the moveable object.
+			 */
+			constraints?: () => DomGeometryBox;
+
+			/**
+			 * restrict move within boundaries.
+			 */
+			within?: boolean;
+		}
+
+		interface ConstrainedMoveable extends Moveable {
+			/**
+			 * Calculates a constraint box.
+			 * It is called in a context of the moveable object.
+			 */
+			constraints: () => DomGeometryBox;
+
+			/**
+			 * restrict move within boundaries.
+			 */
+			within: boolean;
+		}
+
+		interface ConstrainedMoveableConstructor {
+			/**
+			 * an object that makes a node moveable
+			 */
+			new (node: NodeOrString, params?: ConstrainedMoveableArgs): ConstrainedMoveable;
+		}
+
+		interface BoxConstrainedMoveableArgs extends ConstrainedMoveableArgs {
+			/**
+			 * a constraint box
+			 */
+			box?: DomGeometryBox;
+		}
+
+		interface BoxConstrainedMoveable extends ConstrainedMoveable {
+			/**
+			 * a constraint box
+			 */
+			box: DomGeometryBox;
+		}
+
+		interface BoxConstrainedMoveableConstructor {
+			/**
+			 * an object, which makes a node moveable
+			 */
+			new (node: NodeOrString, params?: BoxConstrainedMoveableArgs): BoxConstrainedMoveable;
+		}
+
+		type ConstraintArea = 'border' |  'content' | 'margin' | 'padding';
+
+		interface ParentConstrainedMoveableArgs extends ConstrainedMoveableArgs {
+			/**
+			 * A parent's area to restrict the move.
+			 * Can be "margin", "border", "padding", or "content".
+			 */
+			area?: ConstraintArea;
+		}
+
+		interface ParentConstrainedMoveable extends ConstrainedMoveable {
+			/**
+			 * A parent's area to restrict the move.
+			 * Can be "margin", "border", "padding", or "content".
+			 */
+			area: ConstraintArea;
+		}
+
+		interface ParentConstrainedMoveableConstructor {
+			/**
+			 * an object, which makes a node moveable
+			 */
+			new (node: NodeOrString, params?: ParentConstrainedMoveableArgs): ParentConstrainedMoveable;
 		}
 
 		/* dojo/dnd/Moveable */
 
-		interface MoveableArgs extends Evented {
+		interface MoveableArgs {
 			/**
 			 * A node (or node's id), which is used as a mouse handle.
 			 * If omitted, the node itself is used as a handle.
