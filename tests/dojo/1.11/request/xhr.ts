@@ -1,5 +1,5 @@
 /// <reference path="../typings/intern/intern.d.ts" />
-/// <reference path="../../../../dojo/1.10/modules.d.ts" />
+/// <reference path="../../../../dojo/1.11/modules.d.ts" />
 
 import * as registerSuite from 'intern!object';
 import * as assert from 'intern/chai!assert';
@@ -8,7 +8,7 @@ import * as RequestTimeoutError from 'dojo/errors/RequestTimeoutError';
 import * as CancelError from 'dojo/errors/CancelError';
 import * as all from 'dojo/promise/all';
 import * as query from 'dojo/query';
-import * as require from 'require';
+import * as dojoRequire from 'require';
 
 var hasFormData = 'FormData' in this && typeof FormData === 'function';
 var hasResponseType = typeof XMLHttpRequest !== 'undefined' &&
@@ -39,7 +39,7 @@ registerSuite({
 
 	'.get 404': function () {
 		var def = this.async(),
-			promise = xhr.get(require.toUrl('./xhr_blarg.html'), {
+			promise = xhr.get(dojoRequire.toUrl('./xhr_blarg.html'), {
 				preventCache: true
 			});
 
@@ -53,7 +53,7 @@ registerSuite({
 
 	'.get json with truthy value': function () {
 		var def = this.async(),
-			promise = xhr.get(require.toUrl('./support/truthy.json'), {
+			promise = xhr.get(dojoRequire.toUrl('./support/truthy.json'), {
 				preventCache: true,
 				handleAs: 'json'
 			});
@@ -66,7 +66,7 @@ registerSuite({
 	},
 	'.get json with falsy value': function () {
 		var def = this.async(),
-			promise = xhr.get(require.toUrl('./support/falsy.json'), {
+			promise = xhr.get(dojoRequire.toUrl('./support/falsy.json'), {
 				preventCache: true,
 				handleAs: 'json'
 			});

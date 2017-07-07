@@ -2,7 +2,7 @@
 
 import * as gfx from 'dojox/gfx';
 import * as shape from 'dojox/gfx/shape';
-import { Clip, Circle, Surface } from 'dojox/gfx/shape';
+import { Clip, Surface } from 'dojox/gfx/shape';
 import SimpleCircle = dojox.gfx.SimpleCircle;
 
 let node: Node;
