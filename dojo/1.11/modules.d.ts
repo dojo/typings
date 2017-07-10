@@ -295,6 +295,11 @@ declare module 'dojo/dnd/Manager' {
 	export = Manager;
 }
 
+declare module 'dojo/dnd/move' {
+	const Move: dojo.dnd.Move;
+	export = Move;
+}
+
 declare module 'dojo/dnd/Moveable' {
 	type Moveable = dojo.dnd.Moveable;
 	const Moveable: dojo.dnd.Moveable;
