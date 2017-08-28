@@ -78,7 +78,7 @@ declare module 'dstore/legacy/DstoreAdapter' {
 	import Store = require('dstore/Store');
 
 	interface DstoreAdapter<T> {
-		constructor(collection: dstore.Collection<T>);
+		constructor(collection: dstore.Collection<T>): DstoreAdapter<T>;
 		get(id: any): any;
 		put(object: T, options?: {}): any;
 		remove(id: any): any;

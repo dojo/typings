@@ -302,7 +302,7 @@ declare namespace dijit {
 			 */
 			_unboundedConstraints: DateTimeConstraints;
 
-			pattern: (options?: dojo.date.DateLocaleFormatOptions) => string;
+			pattern: (options?: dojo.date.DateLocaleFormatOptions | RangeBoundTextBoxConstraints) => string;
 
 			/**
 			 * JavaScript namespace to find calendar routines.	 If unspecified, uses Gregorian calendar routines
