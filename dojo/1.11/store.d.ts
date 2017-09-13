@@ -136,7 +136,7 @@ declare namespace dojo {
 				abort(): void;
 			}
 
-			interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions>{
+			interface Store<T extends Object, Q extends BaseQueryType, O extends QueryOptions> {
 
 				/**
 				 * If the store has a single primary key, this indicates the property to use as the

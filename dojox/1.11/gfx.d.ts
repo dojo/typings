@@ -244,6 +244,7 @@ declare module 'dojox/gfx' {
 	type TextPath = dojox.gfx.path.TextPath;
 	const TextPath: dojox.gfx.path.TextPathConstructor;
 
+	/* tslint:disable-next-line:variable-name */
 	const cm_in_pt: number;
 	const defaultCircle: dojox.gfx.SimpleCircle;
 	const defaultEllipse: dojox.gfx.SimpleEllipse;
@@ -261,6 +262,7 @@ declare module 'dojox/gfx' {
 	const defaultTextPath: dojox.gfx.SimpleTextPath;
 	const defaultVectorFont: dojox.gfx.VectorFont; // from dojox/gfx/VectorText
 	const defaultVectorText: dojox.gfx.VectorText; // from dojox/gfx/VectorText
+	/* tslint:disable-next-line:variable-name */
 	const mm_in_pt: number;
 	const pathSvgRegExp: RegExp;
 	const pathVmlRegExp: RegExp;
@@ -273,7 +275,7 @@ declare module 'dojox/gfx' {
 	const createSurface: dojox.gfx.CreateSurface;
 	const equalSources: (a: any, b: any) => boolean;
 	const fixTarget: dojox.gfx.FixTarget;
-	const formatNumber: (number: number, addSpace: boolean) => string;
+	const formatNumber: (value: number, addSpace: boolean) => string;
 	const getDefault: (shapeType: string) => dojox.gfx.SimpleShape;
 	const getVectorFont: (url: string) => dojox.gfx.VectorText; // from dojox/gfx/VectorText
 	const makeFontString: (font: dojox.gfx.Font) => string;
@@ -283,6 +285,7 @@ declare module 'dojox/gfx' {
 	const normalizeParameters: (target: Object, source: Object) => Object;
 	const pt2px: (points: number) => number;
 	const px2pt: (pixels: number) => number;
+	/* tslint:disable-next-line:variable-name */
 	const px_in_pt: () => number;
 	const splitFontString: (fontString: string) => dojox.gfx.Font;
 	const switchTo: (renderer: string | dojox.gfx.Renderer) => void;

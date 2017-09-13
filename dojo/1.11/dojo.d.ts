@@ -407,7 +407,7 @@ declare namespace dojo {
 		async: number| boolean;
 		has: dojo.Has;
 		isXdurl(url: string): boolean;
-		initSyncLoader(dojoRequirePlugin_: any, checkDojoRequirePlugin_: any, transformToAmd_: any): GenericObject;
+		initSyncLoader(dojoRequirePlugin: any, checkDojoRequirePlugin: any, transformToAmd: any): GenericObject;
 		getXhr(): XMLHttpRequest | ActiveXObject;
 		getText(url: string, async?: boolean, onLoad?: (responseText: string, async?: boolean) => void): string;
 		eval(text: string, hint?: string): any;

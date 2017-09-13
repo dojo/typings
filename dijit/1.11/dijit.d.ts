@@ -1441,7 +1441,7 @@ declare namespace dijit {
 		/**
 		 * Open the popup to the side of/underneath the current menu item, and optionally focus first item
 		 */
-		_openItemPopup(from_item: MenuItem, focus: boolean): void;
+		_openItemPopup(fromItem: MenuItem, focus: boolean): void;
 
 		/**
 		 * Callback when this menu is opened.
@@ -1682,6 +1682,29 @@ declare namespace dijit {
 
 	interface MenuConstructor extends _WidgetBaseConstructor<Menu> { }
 
+	/* dijit/MenuBar */
+	interface MenuBar extends _MenuBase {
+		baseClass: 'dijitMenuBar';
+		popupDelay: number;
+		_isMenuBar: true;
+		_orient: string[];
+		_moveToPopup(evt: Event): void;
+		focusChild(item: _WidgetBase): void;
+		_onChildDeselect(item: _WidgetBase): void;
+		_onLeftArrow(): void;
+		_onRightArrow(): void;
+		_onDownArrow(): void;
+		_onUpArrow(): void;
+		onItemClick(item: _WidgetBase, evt: Event): void;
+	}
+
+	interface MenuBarConstructor extends _WidgetBaseConstructor<MenuBar> { }
+
+	/* dijit/MenuBarItem */
+	interface MenuBarItem extends MenuItem { }
+
+	interface MenuBarItemConstructor extends _WidgetBaseConstructor<MenuBarItem> { }
+
 	/* dijit/MenuItem */
 	interface MenuItem extends _Widget, _TemplatedMixin, _Contained, _CssStateMixin {
 		/**
@@ -1743,6 +1766,11 @@ declare namespace dijit {
 	}
 
 	interface MenuItemConstructor extends _WidgetBaseConstructor<MenuItem> { }
+
+	/* dijit/MenuSeparator */
+	interface MenuSeparator extends _WidgetBase, _TemplatedMixin, _Contained { }
+
+	interface MenuSeparatorConstructor extends _WidgetBaseConstructor<MenuSeparator> { }
 
 	/* dijit/place */
 
@@ -1925,6 +1953,12 @@ declare namespace dijit {
 		 */
 		close(popup?: _WidgetBase): void;
 	}
+
+	/* dijit/PopupMenuBarItem */
+
+	interface PopupMenuBarItem extends PopupMenuItem { }
+
+	interface PopupMenuBarItemConstructor extends _WidgetBaseConstructor<PopupMenuBarItem> { }
 
 	/** dijit/PopupMenuItem */
 

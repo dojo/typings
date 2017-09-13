@@ -13,12 +13,12 @@ declare namespace dojox {
 				/**
 				 * Function to obtain an entity encoding for a specified character
 				 */
-				decode(string: string, map?: CharCodeAndEntityName[]): string;
+				decode(str: string, map?: CharCodeAndEntityName[]): string;
 
 				/**
 				 * Function to obtain an entity encoding for a specified character
 				 */
-				encode(string: string, map?: CharCodeAndEntityName[]): string;
+				encode(str: string, map?: CharCodeAndEntityName[]): string;
 			}
 		}
 	}
