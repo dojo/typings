@@ -1441,7 +1441,7 @@ declare namespace dijit {
 		/**
 		 * Open the popup to the side of/underneath the current menu item, and optionally focus first item
 		 */
-		_openItemPopup(from_item: MenuItem, focus: boolean): void;
+		_openItemPopup(fromItem: MenuItem, focus: boolean): void;
 
 		/**
 		 * Callback when this menu is opened.

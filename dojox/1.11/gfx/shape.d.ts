@@ -8,22 +8,22 @@ declare namespace dojox {
 				cy: number;
 				rx: number;
 				ry: number;
-			}
+			};
 
 			type PathClip = {
 				d: string;
-			}
+			};
 
 			type PolylineClip = {
 				points: Point[];
-			}
+			};
 
 			type RectangleClip = {
 				height: number;
 				width: number;
 				x: number;
 				y: number;
-			}
+			};
 
 			interface Container {
 				children: Shape[];

@@ -12,9 +12,11 @@ declare namespace dojox {
 				arcTo(
 					rx: number,
 					ry: number,
+					/* tslint:disable:variable-name */
 					x_axis_rotation: number,
 					large_arc_flag: number,
 					sweep_flag: number,
+					/* tslint:enable */
 					x: number,
 					y: number
 				): this;
