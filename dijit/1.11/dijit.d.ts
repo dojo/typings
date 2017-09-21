@@ -1632,6 +1632,18 @@ declare namespace dijit {
 
 	interface DropDownMenuConstructor extends _WidgetBaseConstructor<DropDownMenu> { }
 
+	/* dijit/Fieldset */
+
+	/**
+	 * An accessible fieldset that can be expanded or collapsed via
+	 * its legend.  Fieldset extends `dijit.TitlePane`.
+	 */
+	interface Fieldset extends TitlePane {
+		open: boolean;
+	}
+
+	interface FieldsetConstructor extends _WidgetBaseConstructor<Fieldset> { }
+
 	/* dijit/Menu */
 
 	/**
