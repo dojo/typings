@@ -102,6 +102,12 @@ declare module 'dijit/DropDownMenu' {
 	export = DropDownMenu;
 }
 
+declare module 'dijit/Fieldset' {
+	type Fieldset = dijit.Fieldset;
+	const Fieldset: dijit.FieldsetConstructor;
+	export = Fieldset;
+}
+
 declare module 'dijit/Menu' {
 	type Menu = dijit.Menu;
 	const Menu: dijit.MenuConstructor;
