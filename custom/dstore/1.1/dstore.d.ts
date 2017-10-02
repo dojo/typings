@@ -146,6 +146,24 @@ declare module 'dstore/Trackable' {
 	export = Trackable;
 }
 
+declare module 'dstore/Tree' {
+	interface Tree<T> {
+		mayHaveChildren(object: T): boolean;
+		getRootCollection(): dstore.Collection<T>;
+		getChildren(object: T): dstore.Collection<T>;
+	}
+
+	module Tree {
+		export interface Constructor extends dojo._base.DeclareConstructor<Tree<any>> {
+			new <T>(...args: any[]): Tree<T>;
+		}
+	}
+
+	const Tree: Tree.Constructor;
+
+	export = Tree;
+}
+
 declare module 'dstore/Request' {
 	import Store = require('dstore/Store');
 
