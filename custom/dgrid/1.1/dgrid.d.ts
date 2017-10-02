@@ -631,7 +631,7 @@ declare module 'dgrid/extensions/DijitRegistry' {
 	export = DijitRegistry;
 }
 
-declare module 'dgrid/extensions/Dnd' {
+declare module 'dgrid/extensions/DnD' {
 	import List = require('dgrid/List');
 
 	interface Dnd {
