@@ -164,6 +164,44 @@ declare module 'dstore/Tree' {
 	export = Tree;
 }
 
+declare module 'dstore/Promised' {
+	import * as Promise from 'dojo/promise/Promise';
+
+	interface Promised<T> {
+		get(id: any): Promise<T>;
+		put(object: T, options?: {}): Promise<T>;
+		add(object: T, options?: {}): Promise<T>;
+		remove(id: any): Promise<boolean>;
+		fetch(): dstore.FetchPromise<T>;
+		fetchRange(args: { start?: number; end?: number; }): dstore.FetchPromise<T>;
+	}
+
+	module Promised {
+		export interface Constructor extends dojo._base.DeclareConstructor<Promised<any>> {
+			new <T>(...args: any[]): Promised<T>;
+		}
+	}
+
+	const Promised: Promised.Constructor;
+
+	export = Promised;
+}
+
+declare module 'dstore/SimpleQuery' {
+	interface SimpleQuery<T> {
+	}
+
+	module SimpleQuery {
+		export interface Constructor extends dojo._base.DeclareConstructor<SimpleQuery<any>> {
+			new <T>(...args: any[]): SimpleQuery<T>;
+		}
+	}
+
+	const SimpleQuery: SimpleQuery.Constructor;
+
+	export = SimpleQuery;
+}
+
 declare module 'dstore/Request' {
 	import Store = require('dstore/Store');
 
