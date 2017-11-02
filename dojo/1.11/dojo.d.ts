@@ -1490,7 +1490,7 @@ declare namespace dojo {
 		 * returned signal object has pause() and resume() functions. Calling the
 		 * pause() method will cause the listener to not be called for future events.
 		 */
-		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): Handle;
+		pausable(target: Element | GenericObject, type: string | ExtensionEvent, listener: EventListener | Function, dontFix?: boolean): PauseHandle;
 
 		/**
 		 * This function acts the same as on(), but will only call the listener once. The
