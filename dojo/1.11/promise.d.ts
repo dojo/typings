@@ -97,6 +97,11 @@ declare namespace dojo {
 			always<U>(callbackOrErrback: PromiseCallback<T, U> | PromiseErrback<U>): Promise<U>;
 
 			/**
+			 * Add new errbacks to the promise. Follows ECMA specification naming.
+			 */
+			catch<U>(errback: PromiseErrback<U>): Promise<U>;
+
+			/**
 			 * Add new errbacks to the promise.
 			 */
 			otherwise<U>(errback: PromiseErrback<U>): Promise<U>;
