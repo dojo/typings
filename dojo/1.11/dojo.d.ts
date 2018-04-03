@@ -1040,6 +1040,8 @@ declare namespace dojo {
 		 */
 		normalize(id: string, toAbsMid: Function): string; /* TODO: Align with loader api */
 
+		normalizeLocale(locale?: string): string;
+
 		/**
 		 * Conditional loading of AMD modules based on a has feature test value.
 		 */
