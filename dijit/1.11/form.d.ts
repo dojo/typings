@@ -1164,6 +1164,7 @@ declare namespace dijit {
 		/* dijit/form/ComboBox */
 
 		interface ComboBox<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions, C extends Constraints> extends ValidationTextBox<C>, ComboBoxMixin<T, Q, O> {
+			get(name: string): any;
 			set(name: string, value: any): this;
 			set(values: Object): this;
 		}
@@ -1202,6 +1203,9 @@ declare namespace dijit {
 			cssStateNodes: CSSStateNodes;
 			postMixInProperties(): void;
 			buildRendering(): void;
+
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
 
 		interface ComboBoxMixinConstructor<T, U, V> extends _WidgetBaseConstructor<ComboBoxMixin<T, U, V>> { }
@@ -1300,6 +1304,9 @@ declare namespace dijit {
 			 * the _FormWidget mixin.
 			 */
 			isFocusable(): boolean;
+
+			set(name: string, value: any): this;
+			set(values: Object): this;
 		}
 
 		interface DropDownButtonConstructor extends _WidgetBaseConstructor<DropDownButton<any>> {
@@ -1326,6 +1333,8 @@ declare namespace dijit {
 
 			_openResultList(results: T[], query: Q, options: O): void;
 			undo(): void;
+
+			get(name: string): any;
 
 			set(name: 'displayedValue', value: string): this;
 			set(name: 'item', value: T): this;
