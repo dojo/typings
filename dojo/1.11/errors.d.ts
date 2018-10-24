@@ -20,6 +20,8 @@ declare namespace dojo {
 		interface Create {
 			<E extends Error, P extends Object>(name: string, ctor: GenericConstructor<any>, base: E, props: P): ErrorCtor<E & P>;
 			<E extends Error, P extends Object>(name: string, ctor: GenericConstructor<any>, base: E): ErrorCtor<E>;
+			<E extends Error, P extends Object>(name: string, ctor: GenericConstructor<any>): ErrorCtor<E>;
+			<E extends Error, P extends Object>(name: string): ErrorCtor<E>;
 		}
 
 		/* dojo/errors/RequestError */
