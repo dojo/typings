@@ -1682,6 +1682,102 @@ declare namespace dijit {
 
 		interface RangeBoundTextBoxConstructor extends _WidgetBaseConstructor<RangeBoundTextBox> { }
 
+		/* dijit/form/Select */
+
+		interface Select<T extends Object, Q extends dojo.store.api.BaseQueryType, O extends dojo.store.api.QueryOptions, U extends dijit._WidgetBase> extends _FormSelectWidget<T, Q, O>, _HasDropDown<U>, _KeyNavMixin {
+			baseClass: string;
+
+			/**
+			 * What to display in an "empty" drop down.
+			 */
+			emptyLabel: string;
+
+			/**
+			 * Specifies how to interpret the labelAttr in the data store items.
+			 */
+			labelType: string;
+
+			/**
+			 * Currently displayed error/prompt message
+			 */
+			message: string;
+
+			/**
+			 * Can be true or false, default is false.
+			 */
+			required: boolean;
+
+			/**
+			 * "Incomplete" if this select is required but unset (i.e. blank value), "" otherwise
+			 */
+			state: string;
+
+			/**
+			 * Order fields are traversed when user hits the tab key
+			 */
+			tabIndex: any;
+			templateString: any;
+
+			/**
+			 * See the description of dijit/Tooltip.defaultPosition for details on this parameter.
+			 */
+			tooltipPosition: any;
+
+			childSelector(node);
+			destroy(preserveDom);
+			focus();
+			
+			/**
+			 * Sets the value to the given option, used during search by letter.
+			 * @param widget Reference to option's widget
+			 */
+			focusChild(widget: dijit._WidgetBase);
+			isLoaded();
+
+			/**
+			 * Whether or not this is a valid value.
+			 * @param isFocused 
+			 */
+			isValid(isFocused: boolean);
+
+			/**
+			 * populates the menu
+			 * @param loadCallback 
+			 */
+			loadDropDown(loadCallback: () => any);
+			postCreate();
+
+			/**
+			 * set the missing message
+			 */
+			postMixInProperties();
+
+			/**
+			 * Overridden so that the state will be cleared.
+			 */
+			reset();
+			startup();
+
+			/**
+			 * Called by oninit, onblur, and onkeypress, and whenever required/disabled state changes
+			 * @param isFocused 
+			 */
+			validate(isFocused: boolean);
+
+			/**
+			 * When a key is pressed that matches a child item,
+			 * this method is called so that a widget can take
+			 * appropriate action is necessary.
+			 * @param item 
+			 * @param evt 
+			 * @param searchString 
+			 * @param numMatches 
+			 */
+			onKeyboardSearch(item: dijit._WidgetBase, evt: Event, searchString: string, numMatches: number);
+		}
+
+		interface SelectConstructor extends _WidgetBaseConstructor<Select<any, any, any, any>> { }
+
 		/* dijit/form/SimpleTextarea */
 
 		interface SimpleTextarea extends TextBox {
