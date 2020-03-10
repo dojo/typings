@@ -4,6 +4,6 @@
 	"description": "Dojo 1 Request Library",
 	"license": "BSD-3-Clause",
 	"dependencies": {
-		"dojo": "1.10.4"
+		"dojo": "1.16.2"
 	}
 }
