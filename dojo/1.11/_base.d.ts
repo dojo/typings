@@ -606,12 +606,12 @@ declare namespace dojo {
 			 * changes to mixin prototypes will not affect classes to which
 			 * they have been mixed in.
 			 */
-			createSubclass<U, V, X>(mixins: [DeclareConstructor<U>, DeclareConstructor<V>], props: X): DeclareConstructor<T & U & V & X>;
-			createSubclass<U, V>(mixins: [DeclareConstructor<U>], props: V): DeclareConstructor<T & U & V>;
-			createSubclass<U, V>(mixins: DeclareConstructor<U>, props: V): DeclareConstructor<T & U & V>;
+			createSubclass<U, V, X>(mixins: [DeclareConstructor<U>, DeclareConstructor<V>], props: X & ThisType<T & U & V & X>): DeclareConstructor<T & U & V & X>;
+			createSubclass<U, V>(mixins: [DeclareConstructor<U>], props: V & ThisType<T & U & V>): DeclareConstructor<T & U & V>;
+			createSubclass<U, V>(mixins: DeclareConstructor<U>, props: V & ThisType<T & U & V>): DeclareConstructor<T & U & V>;
 			createSubclass<U>(mixins: [DeclareConstructor<U>]): DeclareConstructor<T & U>;
 			createSubclass<U>(mixins: DeclareConstructor<U>): DeclareConstructor<T & U>;
-			createSubclass<U>(mixins: any, props: U): DeclareConstructor<T & U>;
+			createSubclass<U>(mixins: any, props: U & ThisType<T & U>): DeclareConstructor<T & U>;
 		}
 
 		/**
@@ -623,24 +623,24 @@ declare namespace dojo {
 			<A, B>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>]): DeclareConstructor<A & B>;
 			<A>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>]): DeclareConstructor<A>;
 
-			<A, B, C, D, E>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E): DeclareConstructor<A & B & C & D & E>;
-			<A, B, C, D>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D): DeclareConstructor<A & B & C & D>;
-			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
-			<A, B>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B): DeclareConstructor<A & B>;
+			<A, B, C, D, E>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E & ThisType<A & B & C & D & E>): DeclareConstructor<A & B & C & D & E>;
+			<A, B, C, D>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D & ThisType<A & B & C & D>): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C & ThisType<A & B & C>): DeclareConstructor<A & B & C>;
+			<A, B>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B & ThisType<A & B>): DeclareConstructor<A & B>;
 
 			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>]): DeclareConstructor<A & B & C & D>;
 			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>]): DeclareConstructor<A & B & C>;
 			<A, B>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>]): DeclareConstructor<A & B>;
 			<A>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>]): DeclareConstructor<A>;
 
-			<A, B, C, D, E>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E): DeclareConstructor<A & B & C & D & E>;
-			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D): DeclareConstructor<A & B & C & D>;
-			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C): DeclareConstructor<A & B & C>;
-			<A, B>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B): DeclareConstructor<A & B>;
+			<A, B, C, D, E>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E & ThisType<A & B & C & D & E>): DeclareConstructor<A & B & C & D & E>;
+			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D & ThisType<A & B & C & D>): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C & ThisType<A & B & C>): DeclareConstructor<A & B & C>;
+			<A, B>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B & ThisType<A & B>): DeclareConstructor<A & B>;
 
-			<A>(className: string, superClass: any, props: A): DeclareConstructor<A>;
+			<A>(className: string, superClass: any, props: A & ThisType<A>): DeclareConstructor<A>;
 			(className: string, superClass: any): DeclareConstructor<any>;
-			<A>(superClass: any, props: A): DeclareConstructor<A>;
+			<A>(superClass: any, props: A & ThisType<A>): DeclareConstructor<A>;
 			(superClass: any): DeclareConstructor<any>;
 
 			/**
