@@ -771,8 +771,8 @@ declare namespace dijit {
 		defer(fcn: Function, delay?: number): dojo.Handle;
 	}
 
-	interface _WidgetBaseConstructor<W> extends dojo._base.DeclareConstructor<W> {
-		new (params: Object, srcNodeRef: dojo.NodeOrString): W;
+	interface _WidgetBaseConstructor<W> extends Omit<dojo._base.DeclareConstructor<W>, 'new'> {
+		new (params?: Partial<W> & ThisType<W>, srcNodeRef?: dojo.NodeOrString): W & dojo._base.DeclareCreatedObject;
 	}
 
 	/* dijit/_WidgetsInTemplateMixin */
