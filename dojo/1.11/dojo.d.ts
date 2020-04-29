@@ -1950,6 +1950,7 @@ declare namespace dojo {
 		 * Set a property on a Stateful instance
 		 */
 		set(name: string, value: any): this;
+		set(name: string, ...values: any[]): this;
 		set(name: Object): this;
 
 		/**
