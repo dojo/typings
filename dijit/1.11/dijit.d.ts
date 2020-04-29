@@ -1,3 +1,5 @@
+type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
+
 declare namespace dijit {
 	/* Global Dijit Interface */
 	interface Dijit { }
