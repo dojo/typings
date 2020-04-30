@@ -190,7 +190,7 @@ declare namespace dojox {
 
 			/**
 			 * Over-ride of the basic widget startup function.
-			 * @param args 
+			 * @param args
 			 */
 			startup(): void;
 

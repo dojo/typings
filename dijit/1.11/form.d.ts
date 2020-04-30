@@ -1723,57 +1723,57 @@ declare namespace dijit {
 			 */
 			tooltipPosition: any;
 
-			childSelector(node);
-			destroy(preserveDom);
-			focus();
-			
+			childSelector(node: Element | Node): boolean;
+			destroy(preserveDom: boolean): void;
+			focus(): void;
+
 			/**
 			 * Sets the value to the given option, used during search by letter.
 			 * @param widget Reference to option's widget
 			 */
-			focusChild(widget: dijit._WidgetBase);
-			isLoaded();
+			focusChild(widget: dijit._WidgetBase): void;
+			isLoaded(): boolean;
 
 			/**
 			 * Whether or not this is a valid value.
-			 * @param isFocused 
+			 * @param isFocused
 			 */
-			isValid(isFocused: boolean);
+			isValid(isFocused: boolean): boolean;
 
 			/**
 			 * populates the menu
-			 * @param loadCallback 
+			 * @param loadCallback
 			 */
-			loadDropDown(loadCallback: () => any);
-			postCreate();
+			loadDropDown(loadCallback: () => any): void;
+			postCreate(): void;
 
 			/**
 			 * set the missing message
 			 */
-			postMixInProperties();
+			postMixInProperties(): void;
 
 			/**
 			 * Overridden so that the state will be cleared.
 			 */
-			reset();
-			startup();
+			reset(): void;
+			startup(): void;
 
 			/**
 			 * Called by oninit, onblur, and onkeypress, and whenever required/disabled state changes
-			 * @param isFocused 
+			 * @param isFocused
 			 */
-			validate(isFocused: boolean);
+			validate(isFocused: boolean): boolean;
 
 			/**
 			 * When a key is pressed that matches a child item,
 			 * this method is called so that a widget can take
 			 * appropriate action is necessary.
-			 * @param item 
-			 * @param evt 
-			 * @param searchString 
-			 * @param numMatches 
+			 * @param item
+			 * @param evt
+			 * @param searchString
+			 * @param numMatches
 			 */
-			onKeyboardSearch(item: dijit._WidgetBase, evt: Event, searchString: string, numMatches: number);
+			onKeyboardSearch(item: dijit._WidgetBase, evt: Event, searchString: string, numMatches: number): void;
 		}
 
 		interface SelectConstructor extends _WidgetBaseConstructor<Select<any, any, any, any>> { }
