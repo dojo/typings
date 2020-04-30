@@ -1052,8 +1052,6 @@ declare namespace dojo {
 		getL10nName(moduleName: string, bundleName: string, locale?: string): string;
 	}
 
-	type I18nBundle = { [s: string]: string | I18nBundle };
-
 	/* dojo/io-query */
 
 	interface IoQuery {
