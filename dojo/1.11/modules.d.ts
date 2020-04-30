@@ -814,7 +814,7 @@ declare module 'dojo/window' {
 }
 
 declare module 'dojo/i18n!*' {
-	const value: dojo.I18nBundle;
+	const value: any;
 	export = value;
 }
 
