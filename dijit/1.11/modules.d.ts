@@ -366,6 +366,12 @@ declare module 'dijit/form/RangeBoundTextBox' {
 	export = RangeBoundTextBox;
 }
 
+declare module 'dijit/form/Select' {
+	type Select<T, Q, O, U extends dijit._WidgetBase> = dijit.form.Select<T, Q, O, U>;
+	const Select: dijit.form.SelectConstructor;
+	export = Select;
+}
+
 declare module 'dijit/form/SimpleTextarea' {
 	type SimpleTextarea = dijit.form.SimpleTextarea;
 	const SimpleTextarea: dijit.form.SimpleTextareaConstructor;

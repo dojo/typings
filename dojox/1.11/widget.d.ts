@@ -120,5 +120,96 @@ declare namespace dojox {
 		}
 
 		interface ToasterConstructor extends dijit._WidgetBaseConstructor<Toaster> {}
+
+		interface Standby extends dijit._Widget, dijit._TemplatedMixin {
+
+			/**
+			 * Property to define if the image and its alt text should be used, or a simple Text/HTML noe should be used.
+			 */
+			centerIndicator: string;
+
+			/**
+			 * The color to set the overlay.
+			 */
+			color: string;
+
+			/**
+			 * Integer defining how long the show and hide effects should take in milliseconds.
+			 */
+			duration: number;
+
+			/**
+			 * A URL to an image to center within the blocking overlay.
+			 */
+			image: string;
+
+			/**
+			 * Text to set on the ALT tag of the image.
+			 */
+			imageText: string;
+
+			/**
+			 * The opacity to make the overlay when it is displayed/faded in.
+			 */
+			opacity: number;
+
+			/**
+			 * The target to overlay when active.
+			 */
+			target: string;
+
+			/**
+			 * The template string defining out the basics of the widget.
+			 */
+			templateString: string;
+
+			/**
+			 * Text/HTML to display in the center of the overlay This is used if image center is disabled.
+			 */
+			text: string;
+
+			/**
+			 * Control that lets you specify if the zIndex for the overlay shold be auto-computed based off parent zIndex, or should be set to a particular value.
+			 */
+			zIndex: string;
+
+			/**
+			 * Function to hide the blocking overlay and status icon or text.
+			 */
+			hide(): void;
+
+			/**
+			 * Helper function so you can test if the widget is already visible or not.
+			 */
+			isVisible(): boolean;
+
+			/**
+			 * Function to display the blocking overlay and busy/status icon or text.
+			 */
+			show(): void;
+
+			/**
+			 * Over-ride of the basic widget startup function.
+			 * @param args 
+			 */
+			startup(): void;
+
+			/**
+			 * Over-ride to hide the widget, which clears intervals, before cleanup.
+			 */
+			uninitialize(): boolean;
+
+			/**
+			 * Event that fires when the display of the Standby completes.
+			 */
+			onHide(): void;
+
+			/**
+			 * Event that fires when the display of the Standby completes.
+			 */
+			onShow(): void;
+		}
+
+		interface StandbyConstructor extends dijit._WidgetBaseConstructor<Standby> { }
 	}
 }
