@@ -47,3 +47,9 @@ declare module 'dojox/widget/Toaster' {
 	const Toaster: dojox.widget.ToasterConstructor;
 	export = Toaster;
 }
+
+declare module 'dojox/widget/Standby' {
+	type Standby = dojox.widget.Standby;
+	const Standby: dojox.widget.StandbyConstructor;
+	export = Standby;
+}
