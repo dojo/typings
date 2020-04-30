@@ -1,5 +1,3 @@
-type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>;
-
 declare namespace dijit {
 	/* Global Dijit Interface */
 	interface Dijit { }
@@ -773,7 +771,7 @@ declare namespace dijit {
 		defer(fcn: Function, delay?: number): dojo.Handle;
 	}
 
-	interface _WidgetBaseConstructor<W> extends Omit<dojo._base.DeclareConstructor<W>, 'new'> {
+	interface _WidgetBaseConstructor<W> extends Pick<dojo._base.DeclareConstructor<W>, Exclude<keyof dojo._base.DeclareConstructor<W>, 'new'>> {
 		new (params?: Partial<W> & ThisType<W>, srcNodeRef?: dojo.NodeOrString): W & dojo._base.DeclareCreatedObject;
 	}
 
