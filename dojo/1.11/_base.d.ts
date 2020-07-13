@@ -623,24 +623,24 @@ declare namespace dojo {
 			<A, B>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>]): DeclareConstructor<A & B>;
 			<A>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>]): DeclareConstructor<A>;
 
-			<A, B, C, D, E>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E & ThisType<A & B & C & D & E>): DeclareConstructor<A & B & C & D & E>;
-			<A, B, C, D>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D & ThisType<A & B & C & D>): DeclareConstructor<A & B & C & D>;
-			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C & ThisType<A & B & C>): DeclareConstructor<A & B & C>;
-			<A, B>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B & ThisType<A & B>): DeclareConstructor<A & B>;
+			<A, B, C, D, E>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E & ThisType<DeclareCreatedObject & A & B & C & D & E>): DeclareConstructor<A & B & C & D & E>;
+			<A, B, C, D>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D & ThisType<DeclareCreatedObject & A & B & C & D>): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C & ThisType<DeclareCreatedObject & A & B & C>): DeclareConstructor<A & B & C>;
+			<A, B>(superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B & ThisType<DeclareCreatedObject & A & B>): DeclareConstructor<A & B>;
 
 			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>]): DeclareConstructor<A & B & C & D>;
 			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>]): DeclareConstructor<A & B & C>;
 			<A, B>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>]): DeclareConstructor<A & B>;
 			<A>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>]): DeclareConstructor<A>;
 
-			<A, B, C, D, E>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E & ThisType<A & B & C & D & E>): DeclareConstructor<A & B & C & D & E>;
-			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D & ThisType<A & B & C & D>): DeclareConstructor<A & B & C & D>;
-			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C & ThisType<A & B & C>): DeclareConstructor<A & B & C>;
-			<A, B>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B & ThisType<A & B>): DeclareConstructor<A & B>;
+			<A, B, C, D, E>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>, DeclareConstructor<D>], props: E & ThisType<DeclareCreatedObject & A & B & C & D & E>): DeclareConstructor<A & B & C & D & E>;
+			<A, B, C, D>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>, DeclareConstructor<C>], props: D & ThisType<DeclareCreatedObject & A & B & C & D>): DeclareConstructor<A & B & C & D>;
+			<A, B, C>(className: string, superClass: [DeclareConstructor<A>, DeclareConstructor<B>], props: C & ThisType<DeclareCreatedObject & A & B & C>): DeclareConstructor<A & B & C>;
+			<A, B>(className: string, superClass: DeclareConstructor<A> | [DeclareConstructor<A>], props: B & ThisType<DeclareCreatedObject & A & B>): DeclareConstructor<A & B>;
 
-			<A>(className: string, superClass: any, props: A & ThisType<A>): DeclareConstructor<A>;
+			<A>(className: string, superClass: any, props: A & ThisType<DeclareCreatedObject & A>): DeclareConstructor<A>;
 			(className: string, superClass: any): DeclareConstructor<any>;
-			<A>(superClass: any, props: A & ThisType<A>): DeclareConstructor<A>;
+			<A>(superClass: any, props: A & ThisType<DeclareCreatedObject & A>): DeclareConstructor<A>;
 			(superClass: any): DeclareConstructor<any>;
 
 			/**
