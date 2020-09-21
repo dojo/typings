@@ -53,3 +53,9 @@ declare module 'dojox/widget/Standby' {
 	const Standby: dojox.widget.StandbyConstructor;
 	export = Standby;
 }
+
+declare module 'dojox/rpc/Service' {
+	type Service = dojox.rpc.Service;
+	const Service: dojox.rpc.ServiceConstructor;
+	export = Service;
+}
