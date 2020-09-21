@@ -789,7 +789,7 @@ declare namespace dojo {
 	}
 
 	interface EventedConstructor extends _base.DeclareConstructor<Evented> {
-		new (params?: Object): Evented;
+		new (params?: Object): Evented & _base.DeclareCreatedObject;
 	}
 
 	/* dojo/fx */
