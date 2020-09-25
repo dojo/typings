@@ -73,9 +73,6 @@ declare namespace dojox {
 
 			// Internal method
 			protected _executeMethod(method: string): dojo.Deferred<any>;
-
-			// Internal method
-			protected _getRequest(method: string, args: any): dojo.Deferred<any>;
 		}
 
 		// we did not test the ServiceConstructor yet
