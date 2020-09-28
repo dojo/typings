@@ -789,6 +789,9 @@ declare namespace dojo {
 	}
 
 	interface EventedConstructor extends _base.DeclareConstructor<Evented> {
+		// While not technically accurate, it is necessary to add `_base.DeclareCreatedObject`
+		// to avoid errors when mixing in Evented using declare
+		// see https://github.com/dojo/typings/issues/170
 		new (params?: Object): Evented & _base.DeclareCreatedObject;
 	}
 
