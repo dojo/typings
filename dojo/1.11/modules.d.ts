@@ -302,7 +302,7 @@ declare module 'dojo/dnd/move' {
 
 declare module 'dojo/dnd/Moveable' {
 	type Moveable = dojo.dnd.Moveable;
-	const Moveable: dojo.dnd.Moveable;
+	const Moveable: dojo.dnd.MoveableConstructor;
 	export = Moveable;
 }
 
