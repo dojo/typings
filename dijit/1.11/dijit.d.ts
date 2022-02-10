@@ -442,62 +442,62 @@ declare namespace dijit {
 		/**
 		 * Connect to this function to receive notifications of mouse click events.
 		 */
-		onClick(event: DocumentEvent): void;
+		onClick(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of mouse double click events.
 		 */
-		onDblClick(event: DocumentEvent): void;
+		onDblClick(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of keys being pressed down.
 		 */
-		onKeyDown(event: DocumentEvent): void;
+		onKeyDown(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of printable keys being typed.
 		 */
-		onKeyPress(event: DocumentEvent): void;
+		onKeyPress(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of keys being released.
 		 */
-		onKeyUp(event: DocumentEvent): void;
+		onKeyUp(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse button is pressed down.
 		 */
-		onMouseDown(event: DocumentEvent): void;
+		onMouseDown(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse moves over nodes contained within this widget.
 		 */
-		onMouseMove(event: DocumentEvent): void;
+		onMouseMove(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse moves off of nodes contained within this widget.
 		 */
-		onMouseOut(event: DocumentEvent): void;
+		onMouseOut(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse moves onto nodes contained within this widget.
 		 */
-		onMouseOver(event: DocumentEvent): void;
+		onMouseOver(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse moves off of this widget.
 		 */
-		onMouseLeave(event: DocumentEvent): void;
+		onMouseLeave(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse moves onto this widget.
 		 */
-		onMouseEnter(event: DocumentEvent): void;
+		onMouseEnter(event: Event): void;
 
 		/**
 		 * Connect to this function to receive notifications of when the mouse button is released.
 		 */
-		onMouseUp(event: DocumentEvent): void;
+		onMouseUp(event: Event): void;
 
 		postCreate(): void;
 

@@ -148,8 +148,8 @@ declare namespace dijit {
 			 * Callback for when button is clicked.
 			 * If type="submit", return true to perform submit, or false to cancel it.
 			 */
-			onClick(e: DocumentEvent): boolean;
-			onSetLabel(e: DocumentEvent): void;
+			onClick(e: Event): boolean;
+			onSetLabel(e: Event): void;
 		}
 
 		/* dijit/form/_CheckBoxMixin */
@@ -1070,7 +1070,7 @@ declare namespace dijit {
 			 * Note that although for historical reasons this method is called `onInput()`, it doesn't
 			 * correspond to the standard DOM "input" event, because it occurs before the input has been processed.
 			 */
-			onInput(e: DocumentEvent): void;
+			onInput(e: Event): void;
 
 			postCreate(): void;
 
@@ -1132,9 +1132,9 @@ declare namespace dijit {
 			templateString: string;
 			postCreate(): void;
 			setLabel(content: string): void;
-			onLabelSet(e: DocumentEvent): void;
+			onLabelSet(e: Event): void;
 
-			onClick(e: DocumentEvent): boolean;
+			onClick(e: Event): boolean;
 
 			set(name: 'showLabel', value: boolean): this;
 			set(name: 'value', value: string): this;
