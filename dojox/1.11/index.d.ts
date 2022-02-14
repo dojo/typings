@@ -8,3 +8,4 @@
 /// <reference path="string.d.ts" />
 /// <reference path="widget.d.ts" />
 /// <reference path="xml.d.ts" />
+/// <reference path="./rpc.d.ts" />
